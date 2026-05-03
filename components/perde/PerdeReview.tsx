@@ -145,7 +145,13 @@ export function PerdeReview({
             “{review.oz}”
           </p>
         )}
+        </div>
       </header>
+
+      {/* Backdrop hero — varsa, künye'nin hemen altında geniş şerit */}
+      {backdropUrl && (
+        <BackdropHero src={backdropUrl} alt={review.filmTitle} />
+      )}
 
       {/* Topluluk banner — sadece community ise */}
       {isCommunity && community && (
@@ -289,6 +295,44 @@ export function PerdeReview({
 }
 
 /* ---------- alt bileşenler ---------- */
+
+function BackdropHero({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div
+      className="relative w-full overflow-hidden rounded-2xl"
+      style={{
+        aspectRatio: "21 / 9",
+        border: `1px solid ${ACCENT}30`,
+      }}
+    >
+      <Image
+        src={src}
+        alt={`${alt} — backdrop`}
+        fill
+        sizes="(min-width: 1024px) 896px, 100vw"
+        className="object-cover"
+      />
+      {/* Sinematik kararma — alt+yan kısımlar */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(7,6,15,0.2) 0%, rgba(7,6,15,0.0) 30%, rgba(7,6,15,0.7) 100%)",
+        }}
+      />
+      {/* Hafif film grain */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none opacity-15"
+        style={{
+          background:
+            "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.04) 2px, rgba(255,255,255,0.04) 3px)",
+        }}
+      />
+    </div>
+  );
+}
 
 function CommunityBanner({ meta }: { meta: CommunityMeta }) {
   const askedDate = new Date(meta.askedAt);

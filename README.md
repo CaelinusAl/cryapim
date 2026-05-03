@@ -94,6 +94,30 @@ Env vars yoksa cache otomatik off mode'a düşer; uygulama her şekilde
 çalışır, sadece "Toplulukça yorumlananlar" bölümü gizlenir ve her sorgu
 OpenAI'a gider.
 
+#### TMDB kurulumu (film posterleri için)
+
+Perde'nin film kartlarında ve detay sayfalarında **gerçek film posteri +
+backdrop** göstermek için TMDB (The Movie Database) ücretsiz API kullanılır.
+
+1. https://www.themoviedb.org/signup → ücretsiz hesap
+2. https://www.themoviedb.org/settings/api → **Request an API Key** →
+   **Developer** seç → form doldur (proje adı: CR YAPIM Perde)
+3. Onay genelde anında gelir. **API Read Access Token (v4 auth)** kopyala
+   (uzun JWT, `eyJ...` ile başlar).
+4. Vercel'de env var olarak ekle: `TMDB_API_TOKEN`
+5. Lokal dev için: `vercel env pull .env.local`
+
+Env yoksa kartlar mevcut ◧/◇ sembol tasarımına düşer. Yorum içeriği
+etkilenmez.
+
+**Mimari:**
+- `lib/tmdb/poster.ts` — TMDB wrapper, in-memory 24sa cache
+- Curated arşiv: `/perde` ve `/perde/m/[slug]` server component'leri
+  build/ISR sırasında TMDB lookup yapar (poster + backdrop)
+- Topluluk yorumları: AI yanıtı cache'lenirken TMDB lookup paralel
+  çalışır, poster URL'si `CachedPerdeReview`'e yazılır
+- Open Graph + Twitter card paylaşımlarda da poster otomatik kullanılır
+
 ## Teknoloji
 
 - **Next.js 16** (App Router) + **React 19** + **TypeScript**
