@@ -1,9 +1,12 @@
 /**
- * Sanrı için basit IP bazlı rate limit (in-memory).
+ * IP başına basit in-memory rate limit.
  *
- * Tek Node prosesi içinde çalışır; serverless ortamda her instance
- * kendi sayacını tutar — demo için yeterli, prod'da Upstash/Redis'e
- * yükselir.
+ * Tek Node prosesi içinde çalışır; Vercel serverless ortamında her
+ * lambda instance'ı kendi sayacını tutar — demo/MVP için yeterli.
+ * Ciddi kullanım için Upstash/Redis sürümüne yükseltilebilir.
+ *
+ * Tüm persona'lar aynı havuzu paylaşır (key = ip). Bu yüzden bir
+ * kullanıcı persona değiştirerek toplam kotayı aşamaz.
  */
 
 const buckets = new Map<string, { count: number; reset: number }>();
@@ -11,8 +14,6 @@ const buckets = new Map<string, { count: number; reset: number }>();
 const LIMIT = 8;
 const WINDOW_MS = 60_000;
 
-// Bellek sızıntısını engellemek için zaman zaman süresi geçmiş
-// kovaları temizle (her 100 istekte bir).
 let opsSinceClean = 0;
 
 export type RateLimitResult = {

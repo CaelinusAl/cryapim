@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SanriInline } from "@/components/sanri/SanriInline";
+import { PersonaInline } from "@/components/personas/PersonaInline";
+import { ALL_PERSONAS, getPersona } from "@/lib/personas";
 
 export const metadata: Metadata = {
   title: "Caelinus AI — Sahnenin sessiz oyuncusu",
@@ -27,46 +28,59 @@ export default function CaelinusAIPage() {
         üstünde bir bellek görür.
       </p>
 
-      <ul className="mt-12 grid md:grid-cols-3 gap-5">
-        {[
-          {
-            t: "Sanrı",
-            d: "Site içi rehber. Niyetine göre bölüm önerir, arşivden seni çıkarır, sorunu rüya gibi geri çevirir.",
-            tag: "site içi",
-          },
-          {
-            t: "Zamansız Arşiv",
-            d: "Her bölümün altında ‘bu bölümü uzat’ — sana özel, kişisel bir mektup olarak.",
-            tag: "izleyici katmanı",
-          },
-          {
-            t: "Plato Modu",
-            d: "Boğaz manzaralı platonun 3D maketinde sahnenin arkasını dolaş, kameralara dokun.",
-            tag: "showcase",
-          },
-        ].map((b) => (
+      <p className="mt-12 mono-tag text-mist-500">dört yüz, tek motor</p>
+      <ul className="mt-4 grid md:grid-cols-2 gap-5">
+        {ALL_PERSONAS.map((p) => (
           <li
-            key={b.t}
-            className="rounded-2xl border border-mist-500/20 p-6 hover:border-ai-cyan/40 transition-colors"
+            key={p.id}
+            className="rounded-2xl p-6 transition-colors"
+            style={{
+              border: `1px solid ${p.accent}30`,
+              background: "rgba(7, 6, 15, 0.35)",
+            }}
           >
-            <p className="mono-tag text-mist-500">{b.tag}</p>
-            <p className="editorial text-2xl md:text-3xl text-mist-100 mt-3">{b.t}</p>
-            <p className="text-base text-mist-100/90 mt-3 leading-relaxed">{b.d}</p>
+            <div className="flex items-center gap-3">
+              <span
+                aria-hidden
+                className="w-10 h-10 rounded-full flex items-center justify-center text-xl"
+                style={{
+                  color: p.accent,
+                  border: `1px solid ${p.accent}66`,
+                  boxShadow: `0 0 18px -4px ${p.accent}`,
+                  background: `${p.accent}10`,
+                }}
+              >
+                {p.symbol}
+              </span>
+              <div>
+                <p
+                  className="editorial text-2xl text-mist-100 leading-none"
+                >
+                  {p.name}
+                </p>
+                <p className="mono-tag text-mist-500 mt-1">{p.tone}</p>
+              </div>
+            </div>
+            <p className="editorial-italic text-mist-100 text-lg mt-4 leading-snug">
+              “{p.tagline}”
+            </p>
           </li>
         ))}
       </ul>
 
       <div className="mt-14">
-        <p className="mono-tag text-mist-500 mb-4">canlı dene</p>
-        <SanriInline
-          placeholder="Sanrı'ya bir soru sor..."
-          ctaLabel="sor"
+        <p className="mono-tag text-mist-500 mb-4">canlı dene — Sanrı kapıda</p>
+        <PersonaInline
+          persona={getPersona("sanri")}
           helpers={[
             "Caelinus AI nedir?",
             "Bana bir rüya ver.",
             "Bugün hangi kelimeyi taşıyayım?",
           ]}
         />
+        <p className="mono-tag text-mist-500 mt-4">
+          diğer personalar için sağ alttaki <span style={{ color: "#b59cf0" }}>AI'a sor</span> menüsünü aç.
+        </p>
       </div>
 
       <div className="mt-16 flex flex-wrap gap-3">

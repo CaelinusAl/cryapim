@@ -358,6 +358,18 @@ body::before {
   }
 }
 
+/* Persona seçici menü — bubble'ın üstünden hafifçe kalkar */
+@keyframes persona-menu-rise {
+  from {
+    transform: translateY(8px) scale(0.97);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
 /* Saygılı geri çekiliş */
 @media (prefers-reduced-motion: reduce) {
   .crane-in,

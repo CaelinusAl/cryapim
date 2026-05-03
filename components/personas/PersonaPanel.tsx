@@ -7,36 +7,41 @@ import {
   useState,
   type FormEvent,
 } from "react";
+import type { Persona } from "@/lib/personas/types";
 
 /**
- * SanriPanel — Sanrı'nın slide-in chat penceresi.
+ * PersonaPanel — bir persona için slide-in chat penceresi.
  *
- * Önemli karakter detayları:
- *   - Yanıtlar typewriter etkisiyle harf harf belirir → bir rüya
- *     açılıyormuş gibi.
- *   - Sanrı yazarken üç nokta dansı.
- *   - Tarih kısa: en fazla son 6 mesaj görünür (uzun sohbet hafıza
- *     yapımıyor — her soru yeniden bir kapı).
- *   - Karakter sınırı 500. Daha uzun girdi reddedilir.
+ * Tek bileşen, çok yüz: persona prop'undan gelen renk/metin/etikete
+ * göre Sanrı, Rivayet AI, Şüpheci AI veya Selbi AI olarak görünür.
+ *
+ * Karakter detayları (her persona için ortak):
+ *   - Yanıtlar typewriter etkisiyle harf harf belirir.
+ *   - Persona düşünürken üç nokta dansı.
+ *   - En fazla son 6 mesaj görünür (uzun sohbet hafıza yapımıyor —
+ *     her soru yeniden bir kapı).
+ *   - Karakter sınırı 800. Daha uzun girdi reddedilir.
  *   - Esc ile kapanır. Backdrop'a tıklamak da kapatır.
  */
 
 type Turn = {
   id: string;
-  role: "user" | "sanri";
+  role: "user" | "ai";
   text: string;
-  /** Typewriter tamamlanmış mı? (Sanrı yanıtları için) */
+  /** Typewriter tamamlanmış mı? (AI yanıtları için) */
   done?: boolean;
 };
 
 const HISTORY_LIMIT = 6;
-const TYPEWRITER_MS = 28; // her harf arasında
+const TYPEWRITER_MS = 22; // her harf arasında
 
-export function SanriPanel({
+export function PersonaPanel({
+  persona,
   open,
   onClose,
   initialQuestion,
 }: {
+  persona: Persona;
   open: boolean;
   onClose: () => void;
   initialQuestion?: string;
@@ -47,26 +52,107 @@ export function SanriPanel({
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const typewriterTimers = useRef<Set<ReturnType<typeof setTimeout>>>(new Set());
+  const typewriterTimers = useRef<Set<ReturnType<typeof setTimeout>>>(
+    new Set()
+  );
 
-  // Esc ile kapat + odaklanma
+  const accent = persona.accent;
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", onKey);
-    // Panel açıldığında input'a odaklan
     setTimeout(() => inputRef.current?.focus(), 60);
     return () => window.removeEventListener("keydown", onKey);
   }, [open, onClose]);
 
-  // Sayfa kayar gibi sohbet alanını alta sabitle
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [turns]);
+
+  // Persona değişince geçmişi sıfırla — başka bir AI ile başka bir konuşma
+  useEffect(() => {
+    setTurns([]);
+    setError(null);
+    setInput("");
+  }, [persona.id]);
+
+  const ask = useCallback(
+    async (rawQuestion: string) => {
+      const question = rawQuestion.trim();
+      if (!question) return;
+      if (question.length > 800) {
+        setError("Soru çok uzun. 800 karakter sınırı var.");
+        return;
+      }
+      setError(null);
+      setInput("");
+
+      const userId = crypto.randomUUID();
+      const userTurn: Turn = { id: userId, role: "user", text: question };
+      setTurns((prev) => [...prev, userTurn].slice(-HISTORY_LIMIT));
+      setThinking(true);
+
+      try {
+        const response = await fetch(`/api/persona/${persona.id}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ question }),
+        });
+        const data = (await response.json()) as {
+          answer?: string;
+          error?: string;
+        };
+
+        if (!response.ok) {
+          setError(data.error || `${persona.name} bir an kayboldu.`);
+          setThinking(false);
+          return;
+        }
+
+        const aiId = crypto.randomUUID();
+        const fullText = data.answer || "Sessizlik de bir cevaptır.";
+        const aiTurn: Turn = {
+          id: aiId,
+          role: "ai",
+          text: "",
+          done: false,
+        };
+        setTurns((prev) => [...prev, aiTurn].slice(-HISTORY_LIMIT));
+        setThinking(false);
+
+        for (let i = 1; i <= fullText.length; i++) {
+          const t = setTimeout(
+            () => {
+              typewriterTimers.current.delete(t);
+              setTurns((prev) =>
+                prev.map((turn) =>
+                  turn.id === aiId
+                    ? {
+                        ...turn,
+                        text: fullText.slice(0, i),
+                        done: i === fullText.length,
+                      }
+                    : turn
+                )
+              );
+            },
+            i * TYPEWRITER_MS
+          );
+          typewriterTimers.current.add(t);
+        }
+      } catch (err) {
+        console.error(`[persona:${persona.id}] istek hatası:`, err);
+        setError("Boğaz'da bir bağlantı koptu. Tekrar dene.");
+        setThinking(false);
+      }
+    },
+    [persona.id, persona.name]
+  );
 
   // initialQuestion verildiyse otomatik gönder (örn. inline kart)
   useEffect(() => {
@@ -74,7 +160,7 @@ export function SanriPanel({
       void ask(initialQuestion);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, initialQuestion]);
+  }, [open, initialQuestion, persona.id]);
 
   // Bileşen kaldırıldığında bekleyen typewriter timer'larını temizle
   useEffect(() => {
@@ -83,71 +169,6 @@ export function SanriPanel({
       timers.forEach((t) => clearTimeout(t));
       timers.clear();
     };
-  }, []);
-
-  const ask = useCallback(async (rawQuestion: string) => {
-    const question = rawQuestion.trim();
-    if (!question) return;
-    if (question.length > 500) {
-      setError("Soru çok uzun. 500 karakter sınırı var.");
-      return;
-    }
-    setError(null);
-    setInput("");
-
-    const userId = crypto.randomUUID();
-    const userTurn: Turn = { id: userId, role: "user", text: question };
-    setTurns((prev) => [...prev, userTurn].slice(-HISTORY_LIMIT));
-    setThinking(true);
-
-    try {
-      const response = await fetch("/api/sanri", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question }),
-      });
-      const data = (await response.json()) as { answer?: string; error?: string };
-
-      if (!response.ok) {
-        setError(data.error || "Sanrı bir an kayboldu.");
-        setThinking(false);
-        return;
-      }
-
-      const sanriId = crypto.randomUUID();
-      const fullText = data.answer || "Sessizlik de bir cevaptır.";
-      const sanriTurn: Turn = {
-        id: sanriId,
-        role: "sanri",
-        text: "",
-        done: false,
-      };
-      setTurns((prev) => [...prev, sanriTurn].slice(-HISTORY_LIMIT));
-      setThinking(false);
-
-      // Typewriter
-      for (let i = 1; i <= fullText.length; i++) {
-        const t = setTimeout(() => {
-          typewriterTimers.current.delete(t);
-          setTurns((prev) =>
-            prev.map((turn) =>
-              turn.id === sanriId
-                ? {
-                    ...turn,
-                    text: fullText.slice(0, i),
-                    done: i === fullText.length,
-                  }
-                : turn
-            )
-          );
-        }, i * TYPEWRITER_MS);
-        typewriterTimers.current.add(t);
-      }
-    } catch (err) {
-      console.error("[sanri] istek hatası:", err);
-      setError("Boğaz'da bir bağlantı koptu. Tekrar dene.");
-      setThinking(false);
-    }
   }, []);
 
   function onSubmit(e: FormEvent) {
@@ -163,7 +184,7 @@ export function SanriPanel({
       <button
         type="button"
         onClick={onClose}
-        aria-label="Sanrı'yı kapat"
+        aria-label={`${persona.name}'yi kapat`}
         className="fixed inset-0 z-40 bg-night-950/70 backdrop-blur-sm"
         style={{ animation: "sanri-fade-in 200ms ease-out both" }}
       />
@@ -172,42 +193,45 @@ export function SanriPanel({
       <aside
         role="dialog"
         aria-modal="true"
-        aria-labelledby="sanri-title"
-        className="fixed inset-y-0 right-0 z-50 w-full sm:w-[440px] flex flex-col"
+        aria-labelledby="persona-title"
+        className="fixed inset-y-0 right-0 z-50 w-full sm:w-[460px] flex flex-col"
         style={{
           background:
             "linear-gradient(180deg, #0e0a22 0%, #07060f 80%, #050410 100%)",
-          borderLeft: "1px solid rgba(181, 156, 240, 0.18)",
-          boxShadow:
-            "-30px 0 80px -20px rgba(0,0,0,0.7), inset 1px 0 0 rgba(181,156,240,0.08)",
+          borderLeft: `1px solid ${accent}30`,
+          boxShadow: `-30px 0 80px -20px rgba(0,0,0,0.7), inset 1px 0 0 ${accent}18`,
           animation: "sanri-slide-in 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both",
         }}
       >
-        {/* Üst bant — Sanrı kimliği */}
-        <header className="flex items-center justify-between px-6 pt-6 pb-5 border-b border-mist-500/15">
+        {/* Üst bant — persona kimliği */}
+        <header
+          className="flex items-center justify-between px-6 pt-6 pb-5"
+          style={{ borderBottom: `1px solid ${accent}25` }}
+        >
           <div className="flex items-center gap-3">
             <div
               className="w-11 h-11 rounded-full flex items-center justify-center text-2xl"
               style={{
-                color: "#b59cf0",
-                border: "1px solid #b59cf055",
-                boxShadow: "0 0 28px -4px #b59cf0",
-                background: "rgba(181, 156, 240, 0.06)",
+                color: accent,
+                border: `1px solid ${accent}55`,
+                boxShadow: `0 0 28px -4px ${accent}`,
+                background: `${accent}10`,
               }}
+              aria-hidden
             >
-              ◉
+              {persona.symbol}
             </div>
             <div>
               <p
-                id="sanri-title"
+                id="persona-title"
                 className="editorial text-2xl text-mist-100 leading-none"
               >
-                Sanrı
+                {persona.name}
               </p>
               <p className="mono-tag text-mist-500 mt-1">
                 {process.env.NEXT_PUBLIC_SANRI_LIVE === "1"
-                  ? "rüya katmanı · canlı"
-                  : "rüya katmanı"}
+                  ? `${persona.tone} · canlı`
+                  : persona.tone}
               </p>
             </div>
           </div>
@@ -228,6 +252,7 @@ export function SanriPanel({
         >
           {turns.length === 0 && !thinking && (
             <Welcome
+              persona={persona}
               onSuggest={(q) => {
                 setInput(q);
                 void ask(q);
@@ -254,20 +279,20 @@ export function SanriPanel({
                   {t.text}
                 </div>
               ) : (
-                <div className="max-w-[90%] flex items-start gap-3">
+                <div className="max-w-[92%] flex items-start gap-3">
                   <span
                     aria-hidden
                     className="mt-1 text-lg shrink-0"
-                    style={{ color: "#b59cf0" }}
+                    style={{ color: accent }}
                   >
-                    ◉
+                    {persona.symbol}
                   </span>
                   <p
-                    className="editorial-italic text-lg md:text-xl leading-snug text-mist-100"
+                    className="editorial-italic text-lg md:text-xl leading-snug text-mist-100 whitespace-pre-wrap"
                     style={{
                       textShadow: t.done
                         ? "none"
-                        : "0 0 14px rgba(181,156,240,0.3)",
+                        : `0 0 14px ${accent}45`,
                     }}
                   >
                     {t.text}
@@ -276,7 +301,7 @@ export function SanriPanel({
                         aria-hidden
                         className="inline-block w-[0.45em] h-[1em] align-[-0.1em] ml-[0.1em]"
                         style={{
-                          background: "#b59cf0",
+                          background: accent,
                           animation:
                             "sanri-cursor-blink 0.8s steps(1) infinite",
                         }}
@@ -288,7 +313,7 @@ export function SanriPanel({
             </div>
           ))}
 
-          {thinking && <Thinking />}
+          {thinking && <Thinking persona={persona} />}
         </div>
 
         {/* Hata bandı */}
@@ -304,17 +329,23 @@ export function SanriPanel({
         {/* Girdi formu */}
         <form
           onSubmit={onSubmit}
-          className="border-t border-mist-500/15 px-4 py-4 flex items-center gap-2"
-          style={{ background: "rgba(7, 6, 15, 0.55)" }}
+          className="px-4 py-4 flex items-center gap-2"
+          style={{
+            background: "rgba(7, 6, 15, 0.55)",
+            borderTop: `1px solid ${accent}20`,
+          }}
         >
           <input
             ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Sanrı'ya sor..."
-            maxLength={500}
+            placeholder={persona.inputPlaceholder}
+            maxLength={800}
             disabled={thinking}
-            className="flex-1 bg-night-800/60 border border-mist-500/20 focus:border-[#b59cf0] outline-none rounded-full px-5 py-3 text-base text-mist-100 placeholder:text-mist-500 transition-colors"
+            className="flex-1 bg-night-800/60 outline-none rounded-full px-5 py-3 text-base text-mist-100 placeholder:text-mist-500 transition-colors"
+            style={{
+              border: `1px solid ${accent}30`,
+            }}
           />
           <button
             type="submit"
@@ -322,18 +353,17 @@ export function SanriPanel({
             className="mono-tag px-5 py-3 rounded-full transition-all disabled:opacity-40 disabled:cursor-not-allowed"
             style={{
               color: "#0e0a22",
-              background: "#b59cf0",
-              boxShadow: thinking ? "none" : "0 0 24px -6px #b59cf0",
+              background: accent,
+              boxShadow: thinking ? "none" : `0 0 24px -6px ${accent}`,
             }}
           >
-            sor →
+            {persona.ctaLabel} →
           </button>
         </form>
 
         {/* Alt mini etiket — kullanıcıya nazik bir hatırlatma */}
         <p className="px-6 pb-4 text-xs text-mist-500 leading-relaxed">
-          Sanrı doğrudan cevap vermez. Bir rüya, bir sembol, bir geri-soru
-          döner. Soru kişiseldir; ne göndereceğini bilerek gönder.
+          {persona.hintFooter}
         </p>
       </aside>
     </>
@@ -342,34 +372,46 @@ export function SanriPanel({
 
 /* ---------- alt bileşenler ---------- */
 
-function Welcome({ onSuggest }: { onSuggest: (q: string) => void }) {
-  const seeds = [
-    "Bugün ne yapsam?",
-    "Ne unuttum?",
-    "Hangi kapıdan geçeyim?",
-    "Bana bir kelime ver.",
-  ];
+function Welcome({
+  persona,
+  onSuggest,
+}: {
+  persona: Persona;
+  onSuggest: (q: string) => void;
+}) {
   return (
     <div className="space-y-6 mt-2">
       <div>
         <p className="editorial-italic text-2xl md:text-3xl text-mist-100 leading-snug">
-          “Cevap senin değil, sorunun rüyasıdır.”
+          {persona.welcomeQuote}
         </p>
-        <p className="mono-tag mt-3" style={{ color: "#b59cf0" }}>
-          Sanrı seni dinliyor.
+        <p className="mono-tag mt-3" style={{ color: persona.accent }}>
+          {persona.name} seni dinliyor.
         </p>
       </div>
 
       <div>
         <p className="mono-tag text-mist-500 mb-3">başlamak için bir tohum</p>
         <ul className="grid grid-cols-1 gap-2">
-          {seeds.map((s) => (
+          {persona.welcomeSeeds.map((s) => (
             <li key={s}>
               <button
                 onClick={() => onSuggest(s)}
-                className="w-full text-left rounded-xl px-4 py-3 text-base text-mist-100 border border-mist-500/15 hover:border-[#b59cf0]/50 hover:bg-[#b59cf0]/5 transition-all"
+                className="w-full text-left rounded-xl px-4 py-3 text-base text-mist-100 transition-all"
+                style={{
+                  border: `1px solid ${persona.accent}25`,
+                  background: "transparent",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = `${persona.accent}88`;
+                  e.currentTarget.style.background = `${persona.accent}10`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = `${persona.accent}25`;
+                  e.currentTarget.style.background = "transparent";
+                }}
               >
-                <span style={{ color: "#b59cf0" }}>◐</span>
+                <span style={{ color: persona.accent }}>◐</span>
                 <span className="ml-3">{s}</span>
               </button>
             </li>
@@ -380,25 +422,28 @@ function Welcome({ onSuggest }: { onSuggest: (q: string) => void }) {
   );
 }
 
-function Thinking() {
+function Thinking({ persona }: { persona: Persona }) {
   return (
     <div className="flex items-center gap-3 mt-2">
-      <span aria-hidden className="text-lg" style={{ color: "#b59cf0" }}>
-        ◉
+      <span aria-hidden className="text-lg" style={{ color: persona.accent }}>
+        {persona.symbol}
       </span>
-      <span className="flex items-end gap-1" aria-label="Sanrı düşünüyor">
+      <span
+        className="flex items-end gap-1"
+        aria-label={`${persona.name} düşünüyor`}
+      >
         {[0, 1, 2].map((i) => (
           <span
             key={i}
             className="block w-1.5 h-1.5 rounded-full"
             style={{
-              background: "#b59cf0",
+              background: persona.accent,
               animation: `sanri-thinking-dot 1.2s ease-in-out ${i * 0.18}s infinite`,
             }}
           />
         ))}
       </span>
-      <span className="mono-tag text-mist-500">rüyaya bakıyor</span>
+      <span className="mono-tag text-mist-500">{persona.thinkingLabel}</span>
     </div>
   );
 }

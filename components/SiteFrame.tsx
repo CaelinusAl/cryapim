@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { BosphorusBackdrop } from "@/components/BosphorusBackdrop";
-import { SanriBubble } from "@/components/sanri/SanriBubble";
+import { PersonaBubble } from "@/components/personas/PersonaBubble";
 
 /**
  * SiteFrame — sitenin sinematik çerçevesi.
@@ -115,8 +115,8 @@ export function SiteFrame({ children }: { children: ReactNode }) {
       </footer>
       </div>
 
-      {/* Sanrı — sağ alt köşede, tüm sayfalarda */}
-      <SanriBubble />
+      {/* Caelinus AI personalar — sağ alt köşede, tüm sayfalarda */}
+      <PersonaBubble />
     </>
   );
 }

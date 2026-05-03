@@ -3,8 +3,9 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { programBySlug, programs } from "@/data/programs";
-import { SanriInline } from "@/components/sanri/SanriInline";
-import { SanriOpenButton } from "@/components/sanri/SanriOpenButton";
+import { PersonaInline } from "@/components/personas/PersonaInline";
+import { PersonaOpenButton } from "@/components/personas/PersonaOpenButton";
+import { personaForProgram, getPersona } from "@/lib/personas";
 
 type Params = { slug: string };
 
@@ -41,6 +42,8 @@ export default async function ProgramDetailPage({
   if (!p) notFound();
 
   const others = programs.filter((x) => x.slug !== p.slug).slice(0, 3);
+  const persona = personaForProgram(p.slug); // bu programa demir atan AI varsa
+  const sanri = getPersona("sanri"); // diğer programlar için varsayılan kapı
 
   return (
     <article
@@ -118,18 +121,9 @@ export default async function ProgramDetailPage({
           </figure>
         )}
 
-        {p.slug === "sanriya-sor" && (
+        {persona && (
           <section className="mt-12 crane-in-slow">
-            <SanriInline
-              placeholder="Bir soru sor — herhangi bir şey..."
-              ctaLabel="Sanrı'ya yolla"
-              helpers={[
-                "Bana bir kelime ver.",
-                "Hangi kapıdan geçeyim?",
-                "Bugün ne unuttum?",
-                "Az kalsın inanıyordum.",
-              ]}
-            />
+            <PersonaInline persona={persona} />
           </section>
         )}
 
@@ -175,20 +169,38 @@ export default async function ProgramDetailPage({
               </Link>
             </div>
 
-            <div className="rounded-2xl border border-mist-500/20 p-6">
+            <div
+              className="rounded-2xl p-6"
+              style={{
+                border: `1px solid ${(persona ?? sanri).accent}40`,
+              }}
+            >
               <p className="mono-tag text-mist-500">caelinus AI uzantısı</p>
-              <p className="text-base text-mist-100/90 mt-3 leading-relaxed">
-                {p.slug === "sanriya-sor"
-                  ? "Sanrı şu an canlı. Sahne sende — bir soru sor, geri-soru ona kalsın."
-                  : `Bu bölümü Sanrı'nın diliyle uzat — bir kelime, bir sembol, bir geri-soru.`}
-              </p>
-              {p.slug === "sanriya-sor" ? (
-                <SanriOpenButton label="Sanrı'yı aç" />
+              {persona ? (
+                <>
+                  <p className="text-base text-mist-100/90 mt-3 leading-relaxed">
+                    Bu programın AI'ı <strong style={{ color: persona.accent }}>{persona.name}</strong>{" "}
+                    canlı. {persona.tagline}
+                  </p>
+                  <PersonaOpenButton
+                    personaId={persona.id}
+                    label={`${persona.name}'ı aç`}
+                    accent={persona.accent}
+                  />
+                </>
               ) : (
-                <SanriOpenButton
-                  question={`${p.title}: ${p.tagline}`}
-                  label="Sanrı'ya bu programı sor"
-                />
+                <>
+                  <p className="text-base text-mist-100/90 mt-3 leading-relaxed">
+                    Bu bölümü Sanrı'nın diliyle uzat — bir kelime, bir sembol,
+                    bir geri-soru.
+                  </p>
+                  <PersonaOpenButton
+                    personaId="sanri"
+                    question={`${p.title}: ${p.tagline}`}
+                    label="Sanrı'ya bu programı sor"
+                    accent={sanri.accent}
+                  />
+                </>
               )}
             </div>
 
