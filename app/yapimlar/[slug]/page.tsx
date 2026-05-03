@@ -6,6 +6,11 @@ import { programBySlug, programs } from "@/data/programs";
 import { PersonaInline } from "@/components/personas/PersonaInline";
 import { PersonaOpenButton } from "@/components/personas/PersonaOpenButton";
 import { personaForProgram, getPersona } from "@/lib/personas";
+import {
+  episodesByProgram,
+  formatDate,
+  formatDuration,
+} from "@/data/episodes";
 
 type Params = { slug: string };
 
@@ -44,6 +49,7 @@ export default async function ProgramDetailPage({
   const others = programs.filter((x) => x.slug !== p.slug).slice(0, 3);
   const persona = personaForProgram(p.slug); // bu programa demir atan AI varsa
   const sanri = getPersona("sanri"); // diğer programlar için varsayılan kapı
+  const programEpisodes = episodesByProgram(p.slug);
 
   return (
     <article
@@ -229,6 +235,135 @@ export default async function ProgramDetailPage({
             </div>
           </aside>
         </section>
+
+        {/* Bölümler — programın yayınladığı içerik. Bu bölüm asıl üründür. */}
+        {programEpisodes.length > 0 && (
+          <section className="mt-24 crane-in-slow">
+            <div className="flex items-baseline justify-between mb-8">
+              <p className="mono-tag-lg" style={{ color: p.accent }}>
+                bölümler
+              </p>
+              <p className="mono-tag text-mist-500">
+                {programEpisodes.length} bölüm · {p.cadence}
+              </p>
+            </div>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              {programEpisodes.map((e) => {
+                const placeholder = e.video.provider === "placeholder";
+                return (
+                  <li key={e.slug}>
+                    <Link
+                      href={`/yapimlar/${p.slug}/${e.slug}`}
+                      className="group block rounded-2xl overflow-hidden transition-all"
+                      style={{
+                        border: `1px solid ${p.accent}30`,
+                        background: `linear-gradient(180deg, ${p.surface}88 0%, transparent 100%)`,
+                      }}
+                    >
+                      {/* Mini thumbnail / placeholder şeridi */}
+                      <div
+                        className="relative w-full overflow-hidden"
+                        style={{
+                          aspectRatio: "16 / 9",
+                          background: `radial-gradient(ellipse 70% 60% at 50% 45%, ${p.accent}20 0%, transparent 70%), linear-gradient(180deg, #0a0719 0%, #050410 100%)`,
+                        }}
+                      >
+                        {/* Tarama çizgileri */}
+                        <div
+                          aria-hidden
+                          className="absolute inset-0 pointer-events-none opacity-25"
+                          style={{
+                            background:
+                              "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.04) 2px, rgba(255,255,255,0.04) 3px)",
+                          }}
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div
+                            className="w-16 h-16 rounded-full flex items-center justify-center text-3xl"
+                            style={{
+                              color: p.accent,
+                              border: `1px solid ${p.accent}88`,
+                              boxShadow: `0 0 40px -10px ${p.accent}`,
+                              background: `${p.accent}10`,
+                              animation: "sanri-pulse 2.6s ease-in-out infinite",
+                            }}
+                            aria-hidden
+                          >
+                            {p.symbol}
+                          </div>
+                        </div>
+                        {/* Sol üst — bölüm numarası */}
+                        <div className="absolute top-3 left-3">
+                          <span
+                            className="mono-tag-lg px-2.5 py-1 rounded-md"
+                            style={{
+                              color: p.accent,
+                              background: "rgba(7, 6, 15, 0.7)",
+                              backdropFilter: "blur(6px)",
+                            }}
+                          >
+                            B{String(e.episodeNumber).padStart(2, "0")}
+                          </span>
+                        </div>
+                        {/* Sağ üst — AI yapımı veya yakında etiketi */}
+                        <div className="absolute top-3 right-3 flex gap-2">
+                          {e.aiProduced && (
+                            <span
+                              className="mono-tag px-2.5 py-1 rounded-md"
+                              style={{
+                                color: "#0e0a22",
+                                background: p.accent,
+                              }}
+                            >
+                              AI
+                            </span>
+                          )}
+                          {placeholder && (
+                            <span
+                              className="mono-tag px-2.5 py-1 rounded-md"
+                              style={{
+                                color: p.accent,
+                                background: "rgba(7, 6, 15, 0.7)",
+                                backdropFilter: "blur(6px)",
+                              }}
+                            >
+                              yakında
+                            </span>
+                          )}
+                        </div>
+                        {/* Sağ alt — süre */}
+                        <div className="absolute bottom-3 right-3">
+                          <span
+                            className="mono-tag px-2 py-1 rounded-md"
+                            style={{
+                              color: "#e9e6dc",
+                              background: "rgba(7, 6, 15, 0.7)",
+                              backdropFilter: "blur(6px)",
+                            }}
+                          >
+                            {formatDuration(e.durationSec)}
+                          </span>
+                        </div>
+                      </div>
+                      {/* Meta */}
+                      <div className="p-5">
+                        <p className="editorial text-xl md:text-2xl text-mist-100 leading-snug group-hover:text-tower-gold transition-colors">
+                          {e.title}
+                        </p>
+                        <p className="text-base text-mist-300 mt-2 line-clamp-2 leading-relaxed">
+                          {e.description}
+                        </p>
+                        <p className="mono-tag text-mist-500 mt-3">
+                          {formatDate(e.publishedAt)}
+                        </p>
+                      </div>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        )}
 
         <section className="mt-24">
           <p className="mono-tag text-mist-500 mb-6">başka frekanslar</p>
