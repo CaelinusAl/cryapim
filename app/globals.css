@@ -1,0 +1,377 @@
+@import "tailwindcss";
+
+/*
+ * CR YAPIM — tasarım token'ları
+ *
+ * Üç gerilim üzerine kurulu:
+ *   gece (boğaz lacivertinin altındaki mor)  ← zemin
+ *   altın (Kız Kulesi'nin tek ışığı)         ← vurgu / sıcaklık
+ *   AI cyan (Caelinus'un sesi)               ← interaktif aksan
+ *
+ * Tipografi iki katmanlı:
+ *   editorial serif (başlıklar — Anadolu/sinema hissi)
+ *   grotesk (gövde — okunabilirlik)
+ *   mono (AI/teknik etiketler)
+ */
+@theme {
+  --color-night-950: #07060f;
+  --color-night-900: #0b0a1a;
+  --color-night-800: #11102a;
+  --color-bosphorus-900: #07182b;
+  --color-bosphorus-700: #0f2a44;
+  --color-bosphorus-500: #1f4a73;
+  --color-tower-gold: #d4b26a;
+  --color-tower-gold-soft: #b9985a;
+  --color-ai-cyan: #9fe7ff;
+  --color-ai-cyan-soft: #6fb8d0;
+  --color-mist-100: #e9e6dc;
+  --color-mist-300: #b9b4a3;
+  --color-mist-500: #6f6b5e;
+
+  --font-editorial: "Cormorant Garamond", "Source Serif Pro", "Times New Roman",
+    serif;
+  --font-grotesk: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+
+  --shadow-cinema: 0 30px 80px -30px rgba(0, 0, 0, 0.7),
+    0 1px 0 rgba(212, 178, 106, 0.06) inset;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: var(--color-night-950);
+  color: var(--color-mist-100);
+  font-family: var(--font-grotesk);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Boğaz ışığı — sayfanın en altında, çok hafif duran sıcak bir vurgu */
+body::before {
+  content: "";
+  position: fixed;
+  inset: auto 0 -20vh 0;
+  height: 60vh;
+  background: radial-gradient(
+    ellipse at 50% 100%,
+    rgba(212, 178, 106, 0.08),
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Sinematik letterbox — sayfanın bir film kareye oturduğunu hissettir */
+.cinema-bars::before,
+.cinema-bars::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: var(--color-night-950);
+  z-index: 60;
+  pointer-events: none;
+}
+.cinema-bars::before {
+  top: 0;
+}
+.cinema-bars::after {
+  bottom: 0;
+}
+
+/* Yumuşak film grain — sıkıcı düz dijital hissini kırar */
+.film-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  z-index: 50;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.6'/></svg>");
+}
+
+/* Hareket: vinçten plan — sayfa açılırken çok hafif yukarıdan iniş */
+@keyframes crane-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.crane-in {
+  animation: crane-in 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes crane-in-slow {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.crane-in-slow {
+  animation: crane-in-slow 2.4s 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* Editorial başlık */
+.editorial {
+  font-family: var(--font-editorial);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+.editorial-italic {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 300;
+}
+
+/* Mono etiket — küçük teknik damga
+ * Erişilebilirlik (presbyopia / yakını göremeyen kullanıcılar) için
+ * minimum 13px (0.82rem) tutulur, line-height genişletilir. */
+.mono-tag {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-mist-300);
+}
+
+@media (min-width: 768px) {
+  .mono-tag {
+    font-size: 0.86rem;
+  }
+}
+
+/* Kartlarda kullanılan büyük mono etiket — daha okunaklı */
+.mono-tag-lg {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-mist-300);
+}
+
+/* Erişilebilir gövde metni — kartlardaki tarif/açıklama için. 17–18px,
+ * geniş satır arası, hafif ince ağırlık ile presbyopia dostu. */
+.body-readable {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+}
+@media (min-width: 768px) {
+  .body-readable {
+    font-size: 1.125rem;
+  }
+}
+
+/* Hologram tarama çizgileri — denizin üstünde yukarı kayan cyan */
+@keyframes hologram-scan {
+  0% {
+    transform: translateY(40px) scaleY(0.8);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.55;
+  }
+  85% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: translateY(-180px) scaleY(1.2);
+    opacity: 0;
+  }
+}
+
+/* Köprü deck ışıklarının nefes alması */
+@keyframes deck-pulse {
+  0%,
+  100% {
+    opacity: 0.75;
+    filter: drop-shadow(0 0 6px currentColor);
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 12px currentColor);
+  }
+}
+
+/* Köprü kule tepesindeki kırmızı havacılık lambası */
+@keyframes aviation-blink {
+  0%,
+  88% {
+    opacity: 1;
+  }
+  90%,
+  100% {
+    opacity: 0.15;
+  }
+}
+
+/* Denizdeki sıvı parıltı — yana ileri geri akar */
+@keyframes liquid-shimmer {
+  0% {
+    transform: translateX(-15%);
+  }
+  100% {
+    transform: translateX(15%);
+  }
+}
+
+/* Köprünün suya düşen yansıması — yumuşak titrek */
+@keyframes bridge-reflection {
+  0%,
+  100% {
+    opacity: 0.18;
+    transform: translateY(0) scaleY(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: translateY(2px) scaleY(0.96);
+  }
+}
+
+/* Pencere / şehir ışıkları titreşimi — yavaş, düzensiz */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  30% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.75;
+  }
+}
+
+/* Deniz feneri ışını — Kız Kulesi'nden dönen kone */
+@keyframes lighthouse-beam {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Tekne / şamandıra ışığı — daha keskin yanıp söner */
+@keyframes navlight {
+  0%,
+  78%,
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 6px currentColor);
+  }
+  82%,
+  88% {
+    opacity: 0.25;
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+}
+
+/* Tekne sürüklenmesi — denizde çok yavaş yatay drift */
+@keyframes boat-drift {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(40px);
+  }
+}
+
+/* Sanrı nabzı — sağ alt köşedeki kalıcı düğmenin mor titreşimi */
+@keyframes sanri-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(181, 156, 240, 0.55),
+      0 0 24px -4px rgba(181, 156, 240, 0.6);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow:
+      0 0 0 14px rgba(181, 156, 240, 0),
+      0 0 36px -2px rgba(181, 156, 240, 0.85);
+    transform: scale(1.03);
+  }
+}
+
+/* Yazıcı imleci — Sanrı düşünürken yanıp söner */
+@keyframes sanri-cursor-blink {
+  0%,
+  60% {
+    opacity: 1;
+  }
+  61%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Panel slide-in (sağdan) */
+@keyframes sanri-slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Backdrop fade-in */
+@keyframes sanri-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Sanrı düşünüyor — üç noktanın dans ettiği nokta */
+@keyframes sanri-thinking-dot {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+/* Saygılı geri çekiliş */
+@media (prefers-reduced-motion: reduce) {
+  .crane-in,
+  .crane-in-slow {
+    animation: none;
+  }
+  body::before {
+    display: none;
+  }
+  [class*="hologram"],
+  [class*="deck-pulse"],
+  [class*="aviation"],
+  [class*="liquid"],
+  [class*="bridge-reflection"] {
+    animation: none !important;
+  }
+}
