@@ -15,6 +15,7 @@ import { PersonaBubble } from "@/components/personas/PersonaBubble";
  */
 const NAV = [
   { href: "/yapimlar", label: "Yapımlar" },
+  { href: "/perde", label: "Perde", accent: "#c95a5a" },
   { href: "/plato", label: "Plato" },
   { href: "/caelinus-ai", label: "Caelinus AI" },
   { href: "/arsiv", label: "Arşiv" },
@@ -41,12 +42,13 @@ export function SiteFrame({ children }: { children: ReactNode }) {
           </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8 mono-tag">
+        <nav className="hidden md:flex items-center gap-7 mono-tag">
           {NAV.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-mist-300 hover:text-tower-gold transition-colors"
+              className="transition-colors hover:text-tower-gold"
+              style={{ color: item.accent ?? "#a8a4b8" }}
             >
               {item.label}
             </Link>

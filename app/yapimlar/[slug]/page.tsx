@@ -132,6 +132,24 @@ export default async function ProgramDetailPage({
         {persona && (
           <section className="mt-12 crane-in-slow">
             <PersonaInline persona={persona} />
+            {p.slug === "perde" && (
+              <div className="mt-4 flex flex-wrap gap-3">
+                <Link
+                  href="/perde"
+                  className="mono-tag-lg inline-flex items-center gap-2 px-5 py-3 rounded-full transition-colors"
+                  style={{
+                    color: "#0e0a22",
+                    background: persona.accent,
+                    boxShadow: `0 0 24px -6px ${persona.accent}`,
+                  }}
+                >
+                  ◧ Perde arşivine git →
+                </Link>
+                <p className="mono-tag text-mist-500 self-center">
+                  6 film yorumu hazır · sosyal medyada paylaşılabilir
+                </p>
+              </div>
+            )}
           </section>
         )}
 
