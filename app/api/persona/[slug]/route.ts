@@ -10,6 +10,7 @@ import {
 } from "@/lib/cache/perde-cache";
 import { parsePerdeAnswer, slugifyForCache } from "@/lib/perde-parse";
 import { reviewBySlug } from "@/data/perde-archive";
+import { searchMoviePoster } from "@/lib/tmdb/poster";
 
 export const runtime = "nodejs";
 
@@ -160,6 +161,9 @@ async function tryPerdeCacheChain(question: string): Promise<SuccessBody | null>
  * AI yanıtını parse et; yapı tutuyorsa cache'e yaz, paylaşılabilir
  * URL döndür. Yapı tutmuyorsa cache'e yazma (fallback / "tanımıyorum"
  * cevapları arşive girmesin).
+ *
+ * Yan iş — TMDB lookup'ı paralel çalıştır, poster + backdrop URL'lerini
+ * cache'e ekle. TMDB env yoksa veya bulamazsa null kalır (graceful).
  */
 async function maybeCachePerdeAnswer(
   question: string,
@@ -174,12 +178,23 @@ async function maybeCachePerdeAnswer(
   // Curated arşivde varsa cache'e yazma — curated her zaman önceliklidir
   if (reviewBySlug(slug)) return `/perde/m/${slug}`;
 
+  // TMDB lookup paralel — poster ve resmi başlık için
+  const tmdb = await searchMoviePoster(question.trim()).catch((err) => {
+    console.error("[perde] TMDB lookup hata:", err);
+    return null;
+  });
+
   await setCachedReview({
     filmSlug: slug,
     filmTitleRaw: question.trim(),
     rawAnswer: answer,
     parsed,
     askedAt: Date.now(),
+    posterUrl: tmdb?.posterUrl ?? null,
+    backdropUrl: tmdb?.backdropUrl ?? null,
+    tmdbId: tmdb?.tmdbId ?? null,
+    tmdbTitle: tmdb?.title ?? null,
+    tmdbYear: tmdb?.releaseYear ?? null,
   });
 
   return `/perde/m/${slug}`;

@@ -1,17 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { perdeArchive } from "@/data/perde-archive";
+import { perdeArchive, type FilmReview } from "@/data/perde-archive";
 import { PerdeSearch } from "@/components/perde/PerdeSearch";
+import { PerdeFilmCard } from "@/components/perde/PerdeFilmCard";
 import {
   listRecentReviews,
   perdeCacheEnabled,
 } from "@/lib/cache/perde-cache";
+import { searchMoviePoster, tmdbEnabled } from "@/lib/tmdb/poster";
 
 const ACCENT = "#c95a5a";
 
 /**
  * Landing'i ISR ile yenile — 5 dakikada bir topluluk listesi tazelenir.
  * Yeni cache hit'leri böylece 5 dk içinde grid'e yansır.
+ *
+ * TMDB lookup'lar bu yenileme sırasında bir kez yapılır; in-memory cache
+ * 24 saat tuttuğu için aynı ISR cycle'ında tekrar fetch olmaz.
  */
 export const revalidate = 300;
 
@@ -27,9 +32,35 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Curated arşivi TMDB poster URL'leriyle zenginleştir. Statik tanımlı
+ * posterUrl'i (varsa) önceleyip TMDB'yi sadece eksik olanlarda kullanır.
+ */
+async function enrichCuratedWithPosters(
+  archive: FilmReview[]
+): Promise<FilmReview[]> {
+  if (!tmdbEnabled) return archive;
+
+  return Promise.all(
+    archive.map(async (r) => {
+      if (r.posterUrl) return r; // elle ayarlanmışsa dokunma
+      const lookup = await searchMoviePoster(
+        r.filmOriginalTitle ?? r.filmTitle,
+        r.filmYear
+      );
+      return lookup?.posterUrl
+        ? { ...r, posterUrl: lookup.posterUrl }
+        : r;
+    })
+  );
+}
+
 export default async function PerdeLandingPage() {
+  // Curated arşivi posterlerle zenginleştir (paralel TMDB lookup)
+  const curated = await enrichCuratedWithPosters(perdeArchive);
+
   // Topluluk yorumları — curated slugları hariç tut, ana grid'le çakışmasın
-  const curatedSlugs = perdeArchive.map((r) => r.filmSlug);
+  const curatedSlugs = curated.map((r) => r.filmSlug);
   const community = perdeCacheEnabled
     ? await listRecentReviews(9, curatedSlugs)
     : [];
@@ -98,94 +129,30 @@ export default async function PerdeLandingPage() {
             ARŞİVDEKİ FİLMLER
           </p>
           <p className="mono-tag text-mist-500">
-            {perdeArchive.length} film · daha fazlası geliyor
+            {curated.length} film · daha fazlası geliyor
           </p>
         </div>
 
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {perdeArchive.map((r) => (
+          {curated.map((r) => (
             <li key={r.filmSlug}>
-              <Link
+              <PerdeFilmCard
                 href={`/perde/m/${r.filmSlug}`}
-                className="group block rounded-2xl overflow-hidden transition-all"
-                style={{
-                  border: `1px solid ${ACCENT}30`,
-                  background: "rgba(7, 6, 15, 0.55)",
-                }}
-              >
-                {/* Mini sinematik poster — gradient + sembol */}
-                <div
-                  className="relative w-full overflow-hidden"
-                  style={{
-                    aspectRatio: "16 / 10",
-                    background: `radial-gradient(ellipse 70% 60% at 50% 45%, ${ACCENT}24 0%, transparent 70%), linear-gradient(180deg, #0a0719 0%, #050410 100%)`,
-                  }}
-                >
-                  <div
-                    aria-hidden
-                    className="absolute inset-0 pointer-events-none opacity-25"
-                    style={{
-                      background:
-                        "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.04) 2px, rgba(255,255,255,0.04) 3px)",
-                    }}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span
-                      aria-hidden
-                      className="text-5xl md:text-6xl"
-                      style={{
-                        color: ACCENT,
-                        textShadow: `0 0 36px ${ACCENT}`,
-                      }}
-                    >
-                      ◧
-                    </span>
-                  </div>
-                  {/* Üst sol — yıl */}
-                  <div className="absolute top-3 left-3">
-                    <span
-                      className="mono-tag-lg px-2.5 py-1 rounded-md"
-                      style={{
-                        color: ACCENT,
-                        background: "rgba(7, 6, 15, 0.7)",
-                        backdropFilter: "blur(6px)",
-                      }}
-                    >
-                      {r.filmYear}
-                    </span>
-                  </div>
-                  {/* Üst sağ — spoiler etiketi */}
-                  {r.spoilerLevel === "heavy" && (
-                    <div className="absolute top-3 right-3">
-                      <span
-                        className="mono-tag px-2.5 py-1 rounded-md"
-                        style={{
-                          color: ACCENT,
-                          background: "rgba(7, 6, 15, 0.7)",
-                          backdropFilter: "blur(6px)",
-                        }}
-                      >
-                        spoiler
-                      </span>
-                    </div>
-                  )}
-                </div>
-                {/* Kart içeriği */}
-                <div className="p-5">
-                  <p className="editorial text-xl md:text-2xl text-mist-100 leading-tight group-hover:text-tower-gold transition-colors">
-                    {r.filmTitle}
-                  </p>
-                  <p className="mono-tag text-mist-500 mt-1">
-                    {r.filmDirector} · {r.filmCountry}
-                  </p>
-                  <p
-                    className="editorial-italic text-base mt-3 leading-snug line-clamp-3"
-                    style={{ color: `${ACCENT}cc` }}
-                  >
-                    “{r.oz}”
-                  </p>
-                </div>
-              </Link>
+                title={r.filmTitle}
+                posterUrl={r.posterUrl}
+                topLeftLabel={r.filmYear?.toString()}
+                topRightLabel={
+                  r.spoilerLevel === "heavy" ? "spoiler" : undefined
+                }
+                byline={
+                  r.filmDirector && r.filmCountry
+                    ? `${r.filmDirector} · ${r.filmCountry}`
+                    : r.filmDirector || r.filmCountry || null
+                }
+                oz={r.oz}
+                symbol="◧"
+                variant="curated"
+              />
             </li>
           ))}
         </ul>
@@ -218,98 +185,27 @@ export default async function PerdeLandingPage() {
                 day: "numeric",
                 month: "short",
               });
-              const oz = c.parsed?.oz?.replace(/^Bu (?:film|yapım|dizi)?\s*aslında\s*/i, "").replace(/\s*anlatıyor\.?$/i, "") ?? null;
+              const oz = c.parsed?.oz
+                ?.replace(/^Bu (?:film|yapım|dizi)?\s*aslında\s*/i, "")
+                .replace(/\s*anlatıyor\.?$/i, "");
+              const displayTitle = c.tmdbTitle || c.filmTitleRaw;
+              const yearLabel = c.tmdbYear ? `${c.tmdbYear}` : null;
               return (
                 <li key={c.filmSlug}>
-                  <Link
+                  <PerdeFilmCard
                     href={`/perde/m/${c.filmSlug}`}
-                    className="group block rounded-2xl overflow-hidden transition-all"
-                    style={{
-                      border: `1px dashed ${ACCENT}40`,
-                      background: "rgba(7, 6, 15, 0.55)",
-                    }}
-                  >
-                    {/* Mini sinematik poster — community için ◇ sembolü */}
-                    <div
-                      className="relative w-full overflow-hidden"
-                      style={{
-                        aspectRatio: "16 / 10",
-                        background: `radial-gradient(ellipse 70% 60% at 50% 45%, ${ACCENT}1a 0%, transparent 70%), linear-gradient(180deg, #0a0719 0%, #050410 100%)`,
-                      }}
-                    >
-                      <div
-                        aria-hidden
-                        className="absolute inset-0 pointer-events-none opacity-25"
-                        style={{
-                          background:
-                            "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.04) 2px, rgba(255,255,255,0.04) 3px)",
-                        }}
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <span
-                          aria-hidden
-                          className="text-5xl md:text-6xl"
-                          style={{
-                            color: ACCENT,
-                            textShadow: `0 0 36px ${ACCENT}99`,
-                            opacity: 0.85,
-                          }}
-                        >
-                          ◇
-                        </span>
-                      </div>
-                      <div className="absolute top-3 left-3">
-                        <span
-                          className="mono-tag px-2.5 py-1 rounded-md"
-                          style={{
-                            color: ACCENT,
-                            background: "rgba(7, 6, 15, 0.7)",
-                            backdropFilter: "blur(6px)",
-                          }}
-                        >
-                          topluluk
-                        </span>
-                      </div>
-                      <div className="absolute top-3 right-3">
-                        <span
-                          className="mono-tag px-2.5 py-1 rounded-md text-mist-400"
-                          style={{
-                            background: "rgba(7, 6, 15, 0.7)",
-                            backdropFilter: "blur(6px)",
-                          }}
-                        >
-                          {dateLabel}
-                        </span>
-                      </div>
-                      {c.hitCount > 0 && (
-                        <div className="absolute bottom-3 right-3">
-                          <span
-                            className="mono-tag px-2.5 py-1 rounded-md"
-                            style={{
-                              color: ACCENT,
-                              background: "rgba(7, 6, 15, 0.7)",
-                              backdropFilter: "blur(6px)",
-                            }}
-                          >
-                            {c.hitCount + 1} okuma
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-5">
-                      <p className="editorial text-xl md:text-2xl text-mist-100 leading-tight group-hover:text-tower-gold transition-colors">
-                        {c.filmTitleRaw}
-                      </p>
-                      {oz && (
-                        <p
-                          className="editorial-italic text-base mt-3 leading-snug line-clamp-3"
-                          style={{ color: `${ACCENT}cc` }}
-                        >
-                          “{oz}”
-                        </p>
-                      )}
-                    </div>
-                  </Link>
+                    title={displayTitle}
+                    posterUrl={c.posterUrl}
+                    topLeftLabel={yearLabel ?? "topluluk"}
+                    topRightLabel={dateLabel}
+                    bottomRightLabel={
+                      c.hitCount > 0 ? `${c.hitCount + 1} okuma` : undefined
+                    }
+                    byline={yearLabel ? "topluluk yorumu" : null}
+                    oz={oz}
+                    symbol="◇"
+                    variant="community"
+                  />
                 </li>
               );
             })}

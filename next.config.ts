@@ -17,6 +17,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "i.ytimg.com" },
       { protocol: "https", hostname: "**.ytimg.com" },
+      // TMDB film poster + backdrop CDN'i (Perde)
+      { protocol: "https", hostname: "image.tmdb.org" },
     ],
   },
 

@@ -46,6 +46,16 @@ export type CachedPerdeReview = {
   askedAt: number;
   /** Kaç kez tekrar görüntülendiği (cache hit sayacı) */
   hitCount: number;
+  /** TMDB poster URL (w500) — varsa kart kapağında görüntülenir */
+  posterUrl?: string | null;
+  /** TMDB backdrop URL (w1280) — varsa detay sayfasında hero arka planı */
+  backdropUrl?: string | null;
+  /** TMDB film ID — gelecekte 'tmdb sayfasına git' linki vb. için */
+  tmdbId?: number | null;
+  /** TMDB'nin bulduğu resmi başlık (kullanıcı yanlış yazmış olabilir) */
+  tmdbTitle?: string | null;
+  /** TMDB'den çekilmiş yıl (UI'da görüntülenir) */
+  tmdbYear?: number | null;
 };
 
 /**
@@ -150,7 +160,10 @@ export function cachedToFilmReview(c: CachedPerdeReview): FilmReview | null {
   const p = c.parsed;
   return {
     filmSlug: c.filmSlug,
-    filmTitle: c.filmTitleRaw,
+    // TMDB başlık varsa onu kullan ("solaris" → "Solaris"), yoksa raw
+    filmTitle: c.tmdbTitle || c.filmTitleRaw,
+    filmYear: c.tmdbYear ?? undefined,
+    posterUrl: c.posterUrl ?? undefined,
     oz: p.oz ?? `Bu film aslında izleyiciyi başka bir şeyle baş başa bırakıyor.`,
     konu: p.konu ?? "",
     altindaki: p.altindaki ?? "",

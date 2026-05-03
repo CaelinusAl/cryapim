@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { FilmReview } from "@/data/perde-archive";
 import { SpoilerVeil } from "./SpoilerVeil";
 
@@ -26,18 +27,49 @@ export type CommunityMeta = {
 export function PerdeReview({
   review,
   community,
+  backdropUrl,
 }: {
   review: FilmReview;
   /** Verildiyse "topluluk yorumu" bandı görüntülenir */
   community?: CommunityMeta;
+  /** TMDB backdrop URL — varsa header'da hero arka planı */
+  backdropUrl?: string | null;
 }) {
   const isCommunity = !!community;
   const hasMeta = review.filmYear || review.filmCountry || review.filmDirector;
+  const hasPoster = !!review.posterUrl;
 
   return (
     <article className="space-y-10">
-      {/* Künye */}
-      <header className="space-y-4">
+      {/* Künye — opsiyonel poster ile yan yana */}
+      <header
+        className={
+          hasPoster
+            ? "grid grid-cols-[120px_1fr] md:grid-cols-[180px_1fr] gap-5 md:gap-8 items-start"
+            : "space-y-4"
+        }
+      >
+        {hasPoster && review.posterUrl && (
+          <div
+            className="relative w-full overflow-hidden rounded-lg"
+            style={{
+              aspectRatio: "2 / 3",
+              border: `1px solid ${ACCENT}40`,
+              boxShadow: `0 0 48px -12px ${ACCENT}80`,
+            }}
+          >
+            <Image
+              src={review.posterUrl}
+              alt={`${review.filmTitle} — film posteri`}
+              fill
+              sizes="(min-width: 768px) 180px, 120px"
+              className="object-cover"
+              priority
+            />
+          </div>
+        )}
+
+        <div className={hasPoster ? "space-y-4 min-w-0" : "space-y-4"}>
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
           <span
             className="mono-tag-lg px-3 py-1 rounded-full"
