@@ -5,12 +5,29 @@ import {
   perdeArchive,
   reviewBySlug,
   allReviewSlugs,
+  type FilmReview,
 } from "@/data/perde-archive";
 import { PerdeReview } from "@/components/perde/PerdeReview";
 import { PerdeSearch } from "@/components/perde/PerdeSearch";
+import {
+  getCachedReview,
+  cachedToFilmReview,
+  recordCacheHit,
+  perdeCacheEnabled,
+} from "@/lib/cache/perde-cache";
 
 type Params = { slug: string };
 const ACCENT = "#c95a5a";
+
+/**
+ * Curated arşiv için statik prerender. Topluluk yorumları (KV) için
+ * dynamicParams=true sayesinde talep anında SSR.
+ *
+ * Topluluk sayfasını aşırı uzun cache'lemeyiz — yeni hit count'ları
+ * yansısın diye revalidate kısa.
+ */
+export const dynamicParams = true;
+export const revalidate = 60;
 
 export function generateStaticParams() {
   return allReviewSlugs();
@@ -22,23 +39,51 @@ export async function generateMetadata({
   params: Promise<Params>;
 }): Promise<Metadata> {
   const { slug } = await params;
+
+  // Önce curated
   const r = reviewBySlug(slug);
-  if (!r) return { title: "Bulunamadı · Perde" };
-  return {
-    title: `${r.filmTitle} (${r.filmYear}) — Perde'ye göre`,
-    description: r.oz,
-    openGraph: {
-      title: `${r.filmTitle} — Perde'ye göre`,
+  if (r) {
+    return {
+      title: `${r.filmTitle} (${r.filmYear}) — Perde'ye göre`,
       description: r.oz,
-      type: "article",
-      publishedTime: r.perdedeYayindaTarih,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${r.filmTitle} — Perde'ye göre`,
-      description: r.oz,
-    },
-  };
+      openGraph: {
+        title: `${r.filmTitle} — Perde'ye göre`,
+        description: r.oz,
+        type: "article",
+        publishedTime: r.perdedeYayindaTarih,
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${r.filmTitle} — Perde'ye göre`,
+        description: r.oz,
+      },
+    };
+  }
+
+  // Sonra cache
+  const cached = await getCachedReview(slug);
+  if (cached) {
+    const fr = cachedToFilmReview(cached);
+    const description =
+      fr?.oz ?? `${cached.filmTitleRaw} — Perde'nin topluluk yorumu.`;
+    return {
+      title: `${cached.filmTitleRaw} — Perde'ye göre (topluluk)`,
+      description,
+      openGraph: {
+        title: `${cached.filmTitleRaw} — Perde'ye göre`,
+        description,
+        type: "article",
+        publishedTime: new Date(cached.askedAt).toISOString(),
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${cached.filmTitleRaw} — Perde'ye göre`,
+        description,
+      },
+    };
+  }
+
+  return { title: "Bulunamadı · Perde" };
 }
 
 export default async function PerdeReviewPage({
@@ -47,11 +92,49 @@ export default async function PerdeReviewPage({
   params: Promise<Params>;
 }) {
   const { slug } = await params;
-  const review = reviewBySlug(slug);
-  if (!review) notFound();
 
+  // 1) Curated arşivde mi?
+  const curated = reviewBySlug(slug);
+  if (curated) {
+    return <ReviewLayout review={curated} curatedSlug={curated.filmSlug} />;
+  }
+
+  // 2) KV cache'te mi?
+  if (perdeCacheEnabled) {
+    const cached = await getCachedReview(slug);
+    if (cached) {
+      const adapted = cachedToFilmReview(cached);
+      if (adapted) {
+        // Hit sayacını fire-and-forget güncelle
+        void recordCacheHit(slug);
+        return (
+          <ReviewLayout
+            review={adapted}
+            community={{
+              askedAt: cached.askedAt,
+              hitCount: cached.hitCount ?? 0,
+            }}
+          />
+        );
+      }
+    }
+  }
+
+  // 3) Hiçbir yerde yok — 404
+  notFound();
+}
+
+function ReviewLayout({
+  review,
+  curatedSlug,
+  community,
+}: {
+  review: FilmReview;
+  curatedSlug?: string;
+  community?: { askedAt: number; hitCount: number };
+}) {
   const others = perdeArchive
-    .filter((r) => r.filmSlug !== review.filmSlug)
+    .filter((r) => r.filmSlug !== (curatedSlug ?? review.filmSlug))
     .slice(0, 3);
 
   return (
@@ -79,7 +162,7 @@ export default async function PerdeReviewPage({
           </Link>
         </div>
 
-        <PerdeReview review={review} />
+        <PerdeReview review={review} community={community} />
 
         {/* Bir başka film sor */}
         <section

@@ -25,9 +25,12 @@ export type FilmReview = {
   filmTitle: string;
   /** Orijinal başlık (varsa) */
   filmOriginalTitle?: string;
-  filmYear: number;
-  filmDirector: string;
-  filmCountry: string;
+  /** Yıl — curated için bilinir, community için bilinmeyebilir */
+  filmYear?: number;
+  /** Yönetmen — curated için bilinir, community için bilinmeyebilir */
+  filmDirector?: string;
+  /** Ülke — curated için bilinir, community için bilinmeyebilir */
+  filmCountry?: string;
   /** Kart sırasında poster gibi kullanılır; opsiyonel */
   posterUrl?: string;
   /** "Bu film aslında ___ anlatıyor" — tek satır öz */

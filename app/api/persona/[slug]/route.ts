@@ -2,24 +2,42 @@ import { NextRequest, NextResponse } from "next/server";
 import { tryPersona, pickFallback } from "@/lib/personas";
 import type { AnswerSource, Persona } from "@/lib/personas/types";
 import { rateLimit } from "@/lib/personas/ratelimit";
+import {
+  getCachedReview,
+  setCachedReview,
+  recordCacheHit,
+  perdeCacheEnabled,
+} from "@/lib/cache/perde-cache";
+import { parsePerdeAnswer, slugifyForCache } from "@/lib/perde-parse";
+import { reviewBySlug } from "@/data/perde-archive";
 
 export const runtime = "nodejs";
 
 const MAX_INPUT_LEN = 800;
 const MIN_INPUT_LEN = 2;
 
-type SuccessBody = { answer: string; source: AnswerSource };
+type SuccessBody = {
+  answer: string;
+  source: AnswerSource | "cache" | "openai-cached";
+  /** Perde için: cache'lenmiş ise bu yorumun statik URL'si */
+  reviewUrl?: string;
+};
 type ErrorBody = { error: string };
 
 /**
  * Generic persona endpoint — POST /api/persona/{slug}
  *
  * Body: { question: string }
- * Slug: sanri | rivayet | supheci | selbi
+ * Slug: sanri | rivayet | supheci | selbi | perde
  *
  * Bilinmeyen slug → 404. Boş soru → 400. IP rate-limit aşılırsa → 429.
- * OPENAI_API_KEY varsa OpenAI; yoksa veya hata olursa elle yazılmış
- * fallback yanıt döner. Her durumda persona karakterinden çıkmaz.
+ *
+ * Perde özel davranışı:
+ *   1. Önce curated arşivde (data/perde-archive.ts) ara — varsa hemen reviewUrl dön.
+ *   2. Sonra KV cache'e bak — varsa cache hit, OpenAI'ye gitme.
+ *   3. Yoksa OpenAI'a sor; başarılı yanıt yapılandırılmışsa cache'e yaz.
+ *
+ * Diğer persona'lar: tek seferlik, cache yok.
  */
 export async function POST(
   req: NextRequest,
@@ -61,6 +79,12 @@ export async function POST(
   }
   const question = raw.slice(0, MAX_INPUT_LEN);
 
+  // === PERDE — cache zinciri ===
+  if (persona.id === "perde") {
+    const cached = await tryPerdeCacheChain(question);
+    if (cached) return NextResponse.json(cached);
+  }
+
   if (process.env.OPENAI_API_KEY) {
     try {
       const answer = await callOpenAI(
@@ -69,7 +93,16 @@ export async function POST(
         process.env.OPENAI_API_KEY
       );
       if (answer) {
-        return NextResponse.json({ answer, source: "openai" });
+        // Perde — cache'e yaz (yapı algılandıysa). Render aynı yanıt.
+        let reviewUrl: string | undefined;
+        if (persona.id === "perde" && perdeCacheEnabled) {
+          reviewUrl = await maybeCachePerdeAnswer(question, answer);
+        }
+        return NextResponse.json({
+          answer,
+          source: "openai",
+          ...(reviewUrl ? { reviewUrl } : {}),
+        });
       }
     } catch (err) {
       console.error(`[persona:${persona.id}] OpenAI hatası:`, err);
@@ -84,6 +117,76 @@ export async function POST(
     answer: pickFallback(persona, question),
     source: "fallback",
   });
+}
+
+/**
+ * Perde'ye gelen sorgu için cache zinciri.
+ * 1) Curated archive — varsa reviewUrl ile döndür (chat panelinde "arşivde
+ *    var, sayfaya götüreyim mi?" CTA için).
+ * 2) KV cache — varsa hit'i kaydet ve cached yanıtı döndür.
+ * 3) Hiçbiri yoksa null — caller OpenAI'a düşer.
+ */
+async function tryPerdeCacheChain(question: string): Promise<SuccessBody | null> {
+  const slug = slugifyForCache(question);
+  if (!slug) return null;
+
+  // 1) Curated archive direct hit
+  const curated = reviewBySlug(slug);
+  if (curated) {
+    return {
+      answer: buildArchiveRedirectAnswer(curated.filmTitle, curated.filmSlug),
+      source: "cache",
+      reviewUrl: `/perde/m/${curated.filmSlug}`,
+    };
+  }
+
+  // 2) KV cache hit
+  if (!perdeCacheEnabled) return null;
+  const cached = await getCachedReview(slug);
+  if (cached) {
+    // Hit sayacını fire-and-forget artır
+    void recordCacheHit(slug);
+    return {
+      answer: cached.rawAnswer,
+      source: "openai-cached",
+      reviewUrl: `/perde/m/${cached.filmSlug}`,
+    };
+  }
+
+  return null;
+}
+
+/**
+ * AI yanıtını parse et; yapı tutuyorsa cache'e yaz, paylaşılabilir
+ * URL döndür. Yapı tutmuyorsa cache'e yazma (fallback / "tanımıyorum"
+ * cevapları arşive girmesin).
+ */
+async function maybeCachePerdeAnswer(
+  question: string,
+  answer: string
+): Promise<string | undefined> {
+  const parsed = parsePerdeAnswer(answer);
+  if (!parsed) return undefined; // yapı yetersiz, cache'e koymaya değmez
+
+  const slug = slugifyForCache(question);
+  if (!slug) return undefined;
+
+  // Curated arşivde varsa cache'e yazma — curated her zaman önceliklidir
+  if (reviewBySlug(slug)) return `/perde/m/${slug}`;
+
+  await setCachedReview({
+    filmSlug: slug,
+    filmTitleRaw: question.trim(),
+    rawAnswer: answer,
+    parsed,
+    askedAt: Date.now(),
+  });
+
+  return `/perde/m/${slug}`;
+}
+
+function buildArchiveRedirectAnswer(filmTitle: string, slug: string): string {
+  return `◧ "${filmTitle}" zaten Perde arşivinde. Yorum sayfasına gidiyorum — orada KONU, ALTINDAKİ, SEMBOL ve benzer filmler tam haliyle var.\n\n→ /perde/m/${slug}`;
 }
 
 async function callOpenAI(

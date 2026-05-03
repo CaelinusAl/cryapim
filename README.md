@@ -60,6 +60,40 @@ genelinde aktif. Tıklandığında slide-in panel açılır:
 Kurulum: `OPENAI_API_KEY` set et (`.env.example` referans).
 Set edilmezse Sanrı yine konuşur, sadece statik fallback'lerle.
 
+### Üçüncü diferansiyel: Perde (AI'ın yönettiği yapım)
+
+`/perde` rotası, Caelinus AI'nın **tamamen kendi yönettiği** ilk yapım.
+Kullanıcı bir film adı yazar; Perde yüzeysel hikâyeyi ayırıp altındaki
+gerçek temayı, sembolleri, yönetmen niyetini izleyici algısından çıkarır.
+
+- **Curated arşiv** (`data/perde-archive.ts`): CR YAPIM ekibinin Perde'nin
+  sesiyle elle yazdığı 6 vitrin yorumu (Eternal Sunshine, Mulholland
+  Drive, Susuz Yaz, Parasite, Truman Show, Kış Uykusu).
+- **Statik yorum sayfaları**: `/perde/m/{film-slug}` — paylaşılabilir
+  Open Graph + Twitter card metadata, makale tarzı render.
+- **Akıllı arama**: kullanıcı film yazarsa arşivde varsa direkt yorum
+  sayfasına yönlendirir; yoksa Perde panelini canlı AI ile açar.
+- **Topluluk hafızası (Vercel KV)**: AI'ın ürettiği yapılandırılmış her
+  yorum Upstash Redis'e cache'lenir; aynı film ikinci kez sorulursa
+  cache'ten gelir (0 sn, 0 token). `/perde` landing'de "Toplulukça
+  Yorumlananlar" grid'i bu listeden otomatik beslenir, her topluluk
+  yorumu da `/perde/m/{slug}` URL'sine sahip olur.
+
+#### Vercel KV kurulumu (Perde topluluk arşivi için)
+
+1. Vercel Dashboard → cryapim project → **Storage** sekmesi
+2. **Browse Marketplace** → **Upstash for Redis** → **Connect**
+3. Plan: **Free** (10K komut/gün, 256MB)
+4. Region: **Frankfurt** (EU, en yakın)
+5. Bağlandığında otomatik env vars eklenir:
+   - `UPSTASH_REDIS_REST_URL`
+   - `UPSTASH_REDIS_REST_TOKEN`
+6. Lokal dev için: `vercel env pull .env.local`
+
+Env vars yoksa cache otomatik off mode'a düşer; uygulama her şekilde
+çalışır, sadece "Toplulukça yorumlananlar" bölümü gizlenir ve her sorgu
+OpenAI'a gider.
+
 ## Teknoloji
 
 - **Next.js 16** (App Router) + **React 19** + **TypeScript**
