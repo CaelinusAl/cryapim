@@ -78,7 +78,9 @@ export default async function ProgramDetailPage({
                   ? "YouTube programı"
                   : p.channel === "instagram"
                     ? "Instagram serisi"
-                    : "Podcast"}
+                    : p.channel === "ai-yapimi"
+                      ? "AI yapımı · Caelinus"
+                      : "Podcast"}
               </p>
               <p className="mono-tag text-mist-500">{p.cadence}</p>
             </div>

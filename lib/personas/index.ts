@@ -16,17 +16,20 @@ import { sanri } from "./sanri";
 import { rivayet } from "./rivayet";
 import { supheci } from "./supheci";
 import { selbi } from "./selbi";
+import { perde } from "./perde";
 
 const RECORDS = {
   sanri,
   rivayet,
   supheci,
   selbi,
+  perde,
 } as const satisfies Record<PersonaId, Persona>;
 
 /** Kanonik sıra — UI'da bubble menüsü ve grid'ler bu sırayı takip eder. */
 export const PERSONA_ORDER: readonly PersonaId[] = [
   "sanri",
+  "perde",
   "rivayet",
   "supheci",
   "selbi",

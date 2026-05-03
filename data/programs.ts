@@ -23,7 +23,7 @@ export type Program = {
   signature: string;
   episodes: number;
   cadence: string;
-  channel: "youtube" | "instagram" | "podcast";
+  channel: "youtube" | "instagram" | "podcast" | "ai-yapimi";
   /** Plato'da bu programın çekildiği sahne köşesi (camera target). */
   platoSeat: { x: number; y: number; z: number; label: string };
   /** Programın platodaki gerçek set fotoğrafı (opsiyonel; varsa
@@ -117,6 +117,24 @@ export const programs: Program[] = [
     channel: "instagram",
     platoSeat: { x: 4.2, y: 1.2, z: -1.4, label: "Sanrı Mihrabı" },
     realPhoto: "/plato.jpg",
+  },
+  {
+    slug: "perde",
+    title: "Perde",
+    tagline: "Filmin altındaki film.",
+    intent: "Bilinçli izleyici penceresi, AI'nın tamamen yönettiği ilk yapım.",
+    symbol: "◧",
+    accent: "#c95a5a",
+    surface: "#2a0d0d",
+    hero: "Perde aralanır. Hikâyenin altındaki hikâye konuşur.",
+    description:
+      "Caelinus AI'nın tamamen kendi yönettiği ilk yapım. İzleyici bir film veya dizi adı yazar; Perde yüzeysel hikâyeyi ayırıp altındaki temayı, sembolizmi, yönetmen niyeti ile izleyici algısı arasındaki çekişmeyi açar. Eleştirmen değil, eşlikçi. Tanımadığı filmde uydurmaz; künyeden bir parça ister. Burada bölüm sayısı yoktur — herkesin sorduğu film bir bölümdür.",
+    signature:
+      "Her sorulan film bir bölüm; arşivi izleyici topluluğunun belleği yazar.",
+    episodes: 0,
+    cadence: "Sürekli yayında · 7/24",
+    channel: "ai-yapimi",
+    platoSeat: { x: 0, y: 2.4, z: -3.6, label: "Perde Yansıması" },
   },
   {
     slug: "selbi-yemekte-ne-var",

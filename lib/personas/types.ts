@@ -6,7 +6,12 @@
  * bir persona eklemek demek sadece bir dosya açmak demektir.
  */
 
-export type PersonaId = "sanri" | "rivayet" | "supheci" | "selbi";
+export type PersonaId =
+  | "sanri"
+  | "rivayet"
+  | "supheci"
+  | "selbi"
+  | "perde";
 
 export type Persona = {
   /** URL ve API yollarında kullanılan tek kelimelik kimlik */

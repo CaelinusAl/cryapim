@@ -59,7 +59,9 @@ export default function YapimlarPage() {
                       ? "YouTube"
                       : p.channel === "instagram"
                         ? "Instagram"
-                        : "Podcast"}
+                        : p.channel === "ai-yapimi"
+                          ? "AI yapımı"
+                          : "Podcast"}
                   </span>
                 </div>
 

@@ -96,7 +96,9 @@ async function callOpenAI(
 
   // Selbi gibi liste/format üreten persona'lar daha geniş cevap yazar;
   // Sanrı gibi şiirsel persona'lar dar tutulur. Persona başına tune.
-  const tune = TUNES[persona.id];
+  // Bilinmeyen persona için güvenli varsayılana düş (ileride yeni
+  // bir persona TUNES'a eklenmemiş olursa endpoint çökmesin).
+  const tune = TUNES[persona.id] ?? DEFAULT_TUNE;
 
   try {
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -137,16 +139,15 @@ async function callOpenAI(
   }
 }
 
+type TuneParams = {
+  temperature: number;
+  maxTokens: number;
+  frequencyPenalty: number;
+  presencePenalty: number;
+};
+
 /** Persona başına model parametreleri — karakter "ses tonunu" sıkar/açar */
-const TUNES: Record<
-  string,
-  {
-    temperature: number;
-    maxTokens: number;
-    frequencyPenalty: number;
-    presencePenalty: number;
-  }
-> = {
+const TUNES: Record<string, TuneParams> = {
   sanri: {
     temperature: 0.95,
     maxTokens: 180,
@@ -171,4 +172,20 @@ const TUNES: Record<
     frequencyPenalty: 0.3,
     presencePenalty: 0.2,
   },
+  perde: {
+    // Bilinçli izleyici — yapı titiz, halüsinasyon riski yüksek.
+    // Düşük sıcaklık + geniş bütçe (8-12 cümlelik yapılandırılmış cevap)
+    temperature: 0.5,
+    maxTokens: 520,
+    frequencyPenalty: 0.25,
+    presencePenalty: 0.15,
+  },
+};
+
+/** Bilinmeyen persona için güvenli varsayılan — orta yol */
+const DEFAULT_TUNE: TuneParams = {
+  temperature: 0.7,
+  maxTokens: 300,
+  frequencyPenalty: 0.3,
+  presencePenalty: 0.2,
 };
