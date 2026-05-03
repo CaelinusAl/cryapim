@@ -96,11 +96,8 @@ export function SanriPanel({
     setInput("");
 
     const userId = crypto.randomUUID();
-    setTurns((prev) =>
-      [...prev, { id: userId, role: "user", text: question }].slice(
-        -HISTORY_LIMIT
-      )
-    );
+    const userTurn: Turn = { id: userId, role: "user", text: question };
+    setTurns((prev) => [...prev, userTurn].slice(-HISTORY_LIMIT));
     setThinking(true);
 
     try {
@@ -119,12 +116,13 @@ export function SanriPanel({
 
       const sanriId = crypto.randomUUID();
       const fullText = data.answer || "Sessizlik de bir cevaptır.";
-      // Önce boş yanıt ekle, sonra harf harf doldur
-      setTurns((prev) =>
-        [...prev, { id: sanriId, role: "sanri", text: "", done: false }].slice(
-          -HISTORY_LIMIT
-        )
-      );
+      const sanriTurn: Turn = {
+        id: sanriId,
+        role: "sanri",
+        text: "",
+        done: false,
+      };
+      setTurns((prev) => [...prev, sanriTurn].slice(-HISTORY_LIMIT));
       setThinking(false);
 
       // Typewriter
