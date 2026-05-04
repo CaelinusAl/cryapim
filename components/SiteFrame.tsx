@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { BosphorusBackdrop } from "@/components/BosphorusBackdrop";
 import { PersonaBubble } from "@/components/personas/PersonaBubble";
 import { BookCTA } from "@/components/BookCTA";
+import { CONTACT, whatsappLink, mailtoLink, telLink } from "@/lib/contact";
 
 /**
  * SiteFrame — sitenin sinematik çerçevesi.
@@ -111,31 +112,59 @@ export function SiteFrame({ children }: { children: ReactNode }) {
             </ul>
           </div>
           <div>
-            <p className="mono-tag text-mist-500">Bağlantı</p>
+            <p className="mono-tag text-mist-500">İletişim</p>
             <ul className="text-base mt-3 space-y-2">
               <li>İstanbul · Boğaz hattı</li>
               <li>
                 <a
-                  href="https://instagram.com/cryapim"
+                  href={telLink()}
                   className="hover:text-tower-gold transition-colors"
                 >
-                  Instagram
+                  📞 {CONTACT.phone}
                 </a>
               </li>
               <li>
                 <a
-                  href="https://youtube.com/@cryapim"
+                  href={whatsappLink("Footer")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-tower-gold transition-colors"
+                >
+                  💬 WhatsApp
+                </a>
+              </li>
+              <li>
+                <a
+                  href={mailtoLink("Footer")}
+                  className="hover:text-tower-gold transition-colors break-words"
+                >
+                  ✉ {CONTACT.email}
+                </a>
+              </li>
+              <li className="pt-2 flex flex-wrap gap-3 text-sm">
+                <a
+                  href={CONTACT.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-tower-gold transition-colors"
+                >
+                  Instagram
+                </a>
+                <span className="text-mist-500">·</span>
+                <a
+                  href={CONTACT.youtube}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hover:text-tower-gold transition-colors"
                 >
                   YouTube
                 </a>
-              </li>
-              <li>
+                <span className="text-mist-500">·</span>
                 <Link
                   href="/iletisim"
                   className="hover:text-tower-gold transition-colors"
                 >
-                  İletişim formu
+                  İletişim sayfası
                 </Link>
               </li>
             </ul>

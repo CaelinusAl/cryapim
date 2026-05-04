@@ -181,8 +181,8 @@ export default function HomePage() {
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           <PackageCard
             tier="BASIC"
-            price="1.000"
-            currency="USD"
+            usd="1.000"
+            tl="40.000"
             duration="1 saat"
             description="Bir sahne. Tripod alanı. Hızlı bir reels veya portre çekimi."
             features={[
@@ -193,8 +193,8 @@ export default function HomePage() {
           />
           <PackageCard
             tier="PRO"
-            price="2.000"
-            currency="USD"
+            usd="2.000"
+            tl="80.000"
             duration="3 saat"
             description="Profesyonel set: ışık + tripod ile yarım gün üretim."
             features={[
@@ -206,8 +206,8 @@ export default function HomePage() {
           />
           <PackageCard
             tier="FULL DAY"
-            price="3.000"
-            currency="USD"
+            usd="3.000"
+            tl="120.000"
             duration="8 saat"
             description="Tüm alanlar. Bir günde 10 farklı içerik."
             features={[
@@ -218,8 +218,8 @@ export default function HomePage() {
           />
           <PackageCard
             tier="EXPERIENCE"
-            price="10.000+"
-            currency="USD"
+            usd="10.000+"
+            tl="400.000+"
             duration="özel"
             description="Çekim + sanat yönetmenliği + Caelinus konsept + kısa edit."
             features={[
@@ -492,8 +492,8 @@ function SceneCard({
 
 function PackageCard({
   tier,
-  price,
-  currency,
+  usd,
+  tl,
   duration,
   description,
   features,
@@ -501,8 +501,10 @@ function PackageCard({
   accent,
 }: {
   tier: string;
-  price: string;
-  currency: string;
+  /** USD rakamı (örn. "1.000") */
+  usd: string;
+  /** TL rakamı (örn. "40.000") */
+  tl: string;
   duration: string;
   description: string;
   features: string[];
@@ -543,14 +545,18 @@ function PackageCard({
       >
         {tier}
       </p>
+      {/* Dual currency: USD üstte editorial, TL altta mono */}
       <div className="mt-4 flex items-baseline gap-1.5">
         <span className="text-mist-400 text-xl">$</span>
         <span className="editorial text-4xl md:text-5xl text-mist-100">
-          {price}
+          {usd}
         </span>
-        <span className="mono-tag text-mist-500 ml-1">{currency}</span>
+        <span className="mono-tag text-mist-500 ml-1">USD</span>
       </div>
-      <p className="mono-tag text-mist-500 mt-1">{duration}</p>
+      <p className="mono-tag text-mist-400 mt-1">
+        ≈ ₺{tl} <span className="text-mist-500">TL</span>
+      </p>
+      <p className="mono-tag text-mist-500 mt-2">{duration}</p>
       <p className="body-readable text-mist-300 mt-4">{description}</p>
 
       <ul className="mt-5 space-y-2 flex-1">

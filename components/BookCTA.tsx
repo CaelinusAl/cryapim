@@ -1,38 +1,38 @@
 "use client";
 
 import Link from "next/link";
+import { CONTACT, whatsappLink, mailtoLink } from "@/lib/contact";
 
 /**
  * BookCTA — "Randevu Al" butonu.
  *
- * Davranış sırası (env-driven, kullanıcı sonradan ekleyecek):
- *   1. NEXT_PUBLIC_BOOKING_CALENDLY varsa → Calendly linkine git (yeni sekme)
- *   2. NEXT_PUBLIC_BOOKING_WHATSAPP varsa → wa.me/{numara}?text={mesaj}
- *   3. Hiçbiri yoksa → /iletisim sayfasına yönlendir (form fallback)
+ * Davranış sırası (otomatik fallback):
+ *   1. CONTACT.calendly (env'den) varsa → Calendly link, yeni sekme
+ *   2. Yoksa varsayılan: WhatsApp linki (CONTACT.whatsapp her zaman dolu)
  *
- * Numara format: env'a uluslararası "+90555..." veya sadece "905555..." (her
- * ikisi de çalışır; kod baştaki + ve boşlukları temizler). Mesaj URL-encoded.
+ * "force" prop ile davranış override edilebilir:
+ *   force="email"    → mailto: hello@cryapim.com hazır mesaj
+ *   force="whatsapp" → wa.me/... hazır mesaj
+ *   force="calendly" → calendly URL (yoksa whatsapp'a düşer)
  *
  * Variant:
  *   - "primary" → altın dolgu (ana CTA, hero)
- *   - "ghost"   → cam çerçeve (ikincil CTA, içerik içinde)
- *   - "outline" → ince altın çerçeve, transparent (kart içi)
+ *   - "ghost"   → cam çerçeve
+ *   - "outline" → ince altın çerçeve, transparent
  */
 
 export type BookCTAProps = {
   label?: string;
-  /** WhatsApp/email mesajına eklenecek ek bağlam (örn. seçilen paket adı) */
+  /** Hazır mesaja eklenecek bağlam (örn. paket adı) */
   context?: string;
   variant?: "primary" | "ghost" | "outline";
   className?: string;
   /** Buton önündeki ikon (varsayılan: 📅) */
   icon?: string;
-  /** Yeni sekmede aç (Calendly + WhatsApp her zaman yeni sekme) */
   size?: "sm" | "md" | "lg";
+  /** Davranışı override et */
+  force?: "calendly" | "whatsapp" | "email";
 };
-
-const DEFAULT_MESSAGE =
-  "Merhaba CR Yapım! Stüdyonuzda randevu almak istiyorum.";
 
 export function BookCTA({
   label = "Randevu Al",
@@ -41,24 +41,23 @@ export function BookCTA({
   className = "",
   icon = "📅",
   size = "md",
+  force,
 }: BookCTAProps) {
-  const calendly = process.env.NEXT_PUBLIC_BOOKING_CALENDLY;
-  const whatsapp = process.env.NEXT_PUBLIC_BOOKING_WHATSAPP;
+  let href: string;
 
-  const message = context
-    ? `${DEFAULT_MESSAGE} (${context})`
-    : DEFAULT_MESSAGE;
+  const target = force ?? (CONTACT.calendly ? "calendly" : "whatsapp");
 
-  let href = "/iletisim";
-  let isExternal = false;
-
-  if (calendly) {
-    href = calendly;
-    isExternal = true;
-  } else if (whatsapp) {
-    const cleaned = whatsapp.replace(/[^\d]/g, "");
-    href = `https://wa.me/${cleaned}?text=${encodeURIComponent(message)}`;
-    isExternal = true;
+  switch (target) {
+    case "calendly":
+      href = CONTACT.calendly || whatsappLink(context);
+      break;
+    case "email":
+      href = mailtoLink(context);
+      break;
+    case "whatsapp":
+    default:
+      href = whatsappLink(context);
+      break;
   }
 
   const sizeCls =
@@ -75,8 +74,18 @@ export function BookCTA({
       ? "bg-night-900/60 backdrop-blur border border-tower-gold/40 text-tower-gold hover:bg-tower-gold/10"
       : "border border-tower-gold/50 text-tower-gold hover:bg-tower-gold/10";
 
-  const inner = (
-    <>
+  const cls = `group inline-flex items-center gap-3 mono-tag rounded-full transition-all ${sizeCls} ${variantCls} ${className}`;
+
+  // mailto: ve tel: yeni sekme açmıyor; WhatsApp ve Calendly açıyor
+  const shouldOpenInNewTab = target === "calendly" || target === "whatsapp";
+
+  return (
+    <a
+      href={href}
+      target={shouldOpenInNewTab ? "_blank" : undefined}
+      rel={shouldOpenInNewTab ? "noopener noreferrer" : undefined}
+      className={cls}
+    >
       <span aria-hidden>{icon}</span>
       <span>{label}</span>
       <span
@@ -85,28 +94,12 @@ export function BookCTA({
       >
         →
       </span>
-    </>
-  );
-
-  const cls = `group inline-flex items-center gap-3 mono-tag rounded-full transition-all ${sizeCls} ${variantCls} ${className}`;
-
-  if (isExternal) {
-    return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>
-        {inner}
-      </a>
-    );
-  }
-  return (
-    <Link href={href} className={cls}>
-      {inner}
-    </Link>
+    </a>
   );
 }
 
 /**
- * WhatsAppLink — sadece WhatsApp ikonu+link, ikincil yerlerde
- * kullanılan kompakt buton. Numara yoksa /iletisim'e düşer.
+ * WhatsAppLink — kompakt yeşil yazı linki, ikincil yerlerde.
  */
 export function WhatsAppLink({
   label = "WhatsApp",
@@ -117,30 +110,63 @@ export function WhatsAppLink({
   context?: string;
   className?: string;
 }) {
-  const whatsapp = process.env.NEXT_PUBLIC_BOOKING_WHATSAPP;
-  const message = context
-    ? `${DEFAULT_MESSAGE} (${context})`
-    : DEFAULT_MESSAGE;
-
-  if (!whatsapp) {
-    return (
-      <Link
-        href="/iletisim"
-        className={`mono-tag inline-flex items-center gap-2 text-mist-300 hover:text-tower-gold transition-colors ${className}`}
-      >
-        💬 {label}
-      </Link>
-    );
-  }
-  const cleaned = whatsapp.replace(/[^\d]/g, "");
   return (
     <a
-      href={`https://wa.me/${cleaned}?text=${encodeURIComponent(message)}`}
+      href={whatsappLink(context)}
       target="_blank"
       rel="noopener noreferrer"
       className={`mono-tag inline-flex items-center gap-2 text-mist-300 hover:text-tower-gold transition-colors ${className}`}
     >
       💬 {label}
     </a>
+  );
+}
+
+/**
+ * EmailLink — kompakt iletişim e-posta linki.
+ */
+export function EmailLink({
+  label,
+  context,
+  className = "",
+}: {
+  label?: string;
+  context?: string;
+  className?: string;
+}) {
+  return (
+    <a
+      href={mailtoLink(context)}
+      className={`mono-tag inline-flex items-center gap-2 text-mist-300 hover:text-tower-gold transition-colors ${className}`}
+    >
+      ✉ {label ?? CONTACT.email}
+    </a>
+  );
+}
+
+/**
+ * Tüm bağlantıları yan yana gösteren mini iletişim çubuğu — footer veya
+ * Stüdyo sayfası altı için.
+ */
+export function ContactStrip({
+  context,
+  className = "",
+}: {
+  context?: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`flex flex-wrap items-center gap-3 md:gap-5 ${className}`}
+    >
+      <BookCTA
+        label="Randevu Al"
+        variant="primary"
+        size="sm"
+        context={context}
+      />
+      <WhatsAppLink label={CONTACT.phone} context={context} />
+      <EmailLink context={context} />
+    </div>
   );
 }

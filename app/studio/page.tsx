@@ -144,10 +144,10 @@ export default function StudioPage() {
 
         <ul className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
-            { t: "BASIC", p: "$1.000", d: "1 saat · tek sahne · tripod alanı" },
-            { t: "PRO", p: "$2.000", d: "3 saat · ışık + tripod" },
-            { t: "FULL DAY", p: "$3.000", d: "8 saat · tüm alanlar" },
-            { t: "EXPERIENCE", p: "$10.000+", d: "çekim + yönetmen + edit" },
+            { t: "BASIC", usd: "$1.000", tl: "₺40.000", d: "1 saat · tek sahne · tripod alanı" },
+            { t: "PRO", usd: "$2.000", tl: "₺80.000", d: "3 saat · ışık + tripod" },
+            { t: "FULL DAY", usd: "$3.000", tl: "₺120.000", d: "8 saat · tüm alanlar" },
+            { t: "EXPERIENCE", usd: "$10.000+", tl: "₺400.000+", d: "çekim + yönetmen + edit" },
           ].map((p) => (
             <li
               key={p.t}
@@ -159,8 +159,9 @@ export default function StudioPage() {
               >
                 {p.t}
               </p>
-              <p className="editorial text-3xl text-mist-100 mt-2">{p.p}</p>
-              <p className="text-sm text-mist-400 mt-2">{p.d}</p>
+              <p className="editorial text-3xl text-mist-100 mt-2">{p.usd}</p>
+              <p className="mono-tag text-mist-400 mt-1">≈ {p.tl} TL</p>
+              <p className="text-sm text-mist-400 mt-3">{p.d}</p>
             </li>
           ))}
         </ul>
