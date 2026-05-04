@@ -6,6 +6,7 @@ import type { Persona } from "./types";
  */
 export const rivayet: Persona = {
   id: "rivayet",
+  voice: "onyx",
   name: "Rivayet AI",
   tone: "saha kayıtları",
   tagline: "Her rivayet, kayıp bir gerçeğin gölgesidir.",

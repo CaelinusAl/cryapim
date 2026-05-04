@@ -6,6 +6,7 @@ import type { Persona } from "./types";
  */
 export const sanri: Persona = {
   id: "sanri",
+  voice: "fable",
   name: "Sanrı",
   tone: "rüya katmanı",
   tagline: "Cevap senin değil, sorunun rüyasıdır.",

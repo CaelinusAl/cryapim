@@ -8,6 +8,7 @@ import {
   type FormEvent,
 } from "react";
 import type { Persona } from "@/lib/personas/types";
+import { useVoiceRecorder } from "./useVoiceRecorder";
 
 /**
  * PersonaPanel — bir persona için slide-in chat penceresi.
@@ -32,6 +33,11 @@ type Turn = {
   done?: boolean;
 };
 
+type VoiceState =
+  | { status: "idle" }
+  | { status: "loading"; turnId: string }
+  | { status: "playing"; turnId: string; audio: HTMLAudioElement };
+
 const HISTORY_LIMIT = 6;
 const TYPEWRITER_MS = 22; // her harf arasında
 
@@ -50,11 +56,14 @@ export function PersonaPanel({
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [transcribing, setTranscribing] = useState(false);
+  const [voice, setVoice] = useState<VoiceState>({ status: "idle" });
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const typewriterTimers = useRef<Set<ReturnType<typeof setTimeout>>>(
     new Set()
   );
+  const recorder = useVoiceRecorder();
 
   const accent = persona.accent;
 
@@ -79,7 +88,71 @@ export function PersonaPanel({
     setTurns([]);
     setError(null);
     setInput("");
+    stopVoicePlayback();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [persona.id]);
+
+  /** Çalan TTS varsa durdur (persona değişimi, panel kapanışı vs.) */
+  const stopVoicePlayback = useCallback(() => {
+    setVoice((curr) => {
+      if (curr.status === "playing") {
+        curr.audio.pause();
+        curr.audio.src = "";
+      }
+      return { status: "idle" };
+    });
+  }, []);
+
+  /** Bir AI yanıtını sesli oynat — persona kendi sesi (voice alanı) ile */
+  const playTurnVoice = useCallback(
+    async (turn: Turn) => {
+      if (turn.role !== "ai" || !turn.text.trim()) return;
+
+      // Aynı turn çalıyorsa → durdur (toggle)
+      if (voice.status === "playing" && voice.turnId === turn.id) {
+        stopVoicePlayback();
+        return;
+      }
+      // Başka bir turn çalıyorsa → onu durdur, yenisini başlat
+      stopVoicePlayback();
+      setVoice({ status: "loading", turnId: turn.id });
+
+      try {
+        const res = await fetch("/api/voice/tts", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            text: turn.text,
+            persona: persona.id,
+          }),
+        });
+        if (!res.ok) {
+          setVoice({ status: "idle" });
+          setError("Ses üretilemedi.");
+          return;
+        }
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const audio = new Audio(url);
+        audio.onended = () => {
+          URL.revokeObjectURL(url);
+          setVoice({ status: "idle" });
+        };
+        audio.onerror = () => {
+          URL.revokeObjectURL(url);
+          setVoice({ status: "idle" });
+          setError("Ses oynatılamadı.");
+        };
+        await audio.play();
+        setVoice({ status: "playing", turnId: turn.id, audio });
+      } catch (err) {
+        console.error("[persona:voice] tts hata:", err);
+        setVoice({ status: "idle" });
+        setError("Ses servisi şu an düştü.");
+      }
+    },
+    [voice, stopVoicePlayback, persona.id]
+  );
 
   const ask = useCallback(
     async (rawQuestion: string) => {
@@ -175,6 +248,75 @@ export function PersonaPanel({
     e.preventDefault();
     if (!thinking) void ask(input);
   }
+
+  /** Mikrofon toggle — başlat veya durdur+transkripsiyon+gönder */
+  const onMicClick = useCallback(async () => {
+    if (transcribing || thinking) return;
+
+    if (recorder.state.recording) {
+      // Kaydı bitir → blob al → STT → ask
+      const blob = await recorder.stop();
+      if (!blob) {
+        setError("Ses kaydı boş geldi.");
+        return;
+      }
+      setTranscribing(true);
+      try {
+        const form = new FormData();
+        form.append(
+          "audio",
+          blob,
+          blob.type.includes("mp4") ? "voice.mp4" : "voice.webm"
+        );
+        const res = await fetch("/api/voice/stt", {
+          method: "POST",
+          body: form,
+        });
+        const data = (await res.json()) as {
+          transcript?: string;
+          error?: string;
+        };
+        if (!res.ok) {
+          setError(data.error || "Ses çözümlenemedi.");
+          setTranscribing(false);
+          return;
+        }
+        const transcript = (data.transcript || "").trim();
+        setTranscribing(false);
+        if (!transcript) {
+          setError("Bir şey duyamadım. Bir daha dener misin?");
+          return;
+        }
+        // Otomatik gönder — kullanıcı zaten konuşarak sordu
+        void ask(transcript);
+      } catch (err) {
+        console.error("[persona:voice] stt hata:", err);
+        setError("Ses tanıma servisi şu an düştü.");
+        setTranscribing(false);
+      }
+      return;
+    }
+
+    // Kaydı başlat
+    setError(null);
+    await recorder.start();
+  }, [recorder, transcribing, thinking, ask]);
+
+  // Recorder hata kodlarını kullanıcı dostu hata bandına yansıt
+  useEffect(() => {
+    if (recorder.state.error === "permission_denied") {
+      setError("Mikrofon izni reddedildi. Tarayıcı ayarlarından açabilirsin.");
+    } else if (recorder.state.error === "unsupported") {
+      setError("Bu tarayıcı ses kaydını desteklemiyor.");
+    } else if (recorder.state.error === "generic") {
+      setError("Mikrofon açılamadı.");
+    }
+  }, [recorder.state.error]);
+
+  // Panel kapanırken çalan sesi durdur
+  useEffect(() => {
+    if (!open) stopVoicePlayback();
+  }, [open, stopVoicePlayback]);
 
   if (!open) return null;
 
@@ -279,7 +421,7 @@ export function PersonaPanel({
                   {t.text}
                 </div>
               ) : (
-                <div className="max-w-[92%] flex items-start gap-3">
+                <div className="max-w-[92%] flex items-start gap-3 group">
                   <span
                     aria-hidden
                     className="mt-1 text-lg shrink-0"
@@ -287,27 +429,41 @@ export function PersonaPanel({
                   >
                     {persona.symbol}
                   </span>
-                  <p
-                    className="editorial-italic text-lg md:text-xl leading-snug text-mist-100 whitespace-pre-wrap"
-                    style={{
-                      textShadow: t.done
-                        ? "none"
-                        : `0 0 14px ${accent}45`,
-                    }}
-                  >
-                    {t.text}
-                    {!t.done && (
-                      <span
-                        aria-hidden
-                        className="inline-block w-[0.45em] h-[1em] align-[-0.1em] ml-[0.1em]"
-                        style={{
-                          background: accent,
-                          animation:
-                            "sanri-cursor-blink 0.8s steps(1) infinite",
-                        }}
+                  <div className="flex-1">
+                    <p
+                      className="editorial-italic text-lg md:text-xl leading-snug text-mist-100 whitespace-pre-wrap"
+                      style={{
+                        textShadow: t.done
+                          ? "none"
+                          : `0 0 14px ${accent}45`,
+                      }}
+                    >
+                      {t.text}
+                      {!t.done && (
+                        <span
+                          aria-hidden
+                          className="inline-block w-[0.45em] h-[1em] align-[-0.1em] ml-[0.1em]"
+                          style={{
+                            background: accent,
+                            animation:
+                              "sanri-cursor-blink 0.8s steps(1) infinite",
+                          }}
+                        />
+                      )}
+                    </p>
+                    {t.done && (
+                      <ListenButton
+                        accent={accent}
+                        loading={
+                          voice.status === "loading" && voice.turnId === t.id
+                        }
+                        playing={
+                          voice.status === "playing" && voice.turnId === t.id
+                        }
+                        onClick={() => void playTurnVoice(t)}
                       />
                     )}
-                  </p>
+                  </div>
                 </div>
               )}
             </div>
@@ -335,21 +491,41 @@ export function PersonaPanel({
             borderTop: `1px solid ${accent}20`,
           }}
         >
+          <MicButton
+            accent={accent}
+            recording={recorder.state.recording}
+            initializing={recorder.state.initializing}
+            transcribing={transcribing}
+            elapsedMs={recorder.state.elapsedMs}
+            disabled={thinking}
+            onClick={onMicClick}
+          />
           <input
             ref={inputRef}
-            value={input}
+            value={
+              transcribing
+                ? "Söylediğin yazıya dönüyor…"
+                : recorder.state.recording
+                ? "Dinliyorum…"
+                : input
+            }
             onChange={(e) => setInput(e.target.value)}
             placeholder={persona.inputPlaceholder}
             maxLength={800}
-            disabled={thinking}
-            className="flex-1 bg-night-800/60 outline-none rounded-full px-5 py-3 text-base text-mist-100 placeholder:text-mist-500 transition-colors"
+            disabled={thinking || transcribing || recorder.state.recording}
+            className="flex-1 bg-night-800/60 outline-none rounded-full px-5 py-3 text-base text-mist-100 placeholder:text-mist-500 transition-colors disabled:opacity-70"
             style={{
               border: `1px solid ${accent}30`,
             }}
           />
           <button
             type="submit"
-            disabled={thinking || input.trim().length < 2}
+            disabled={
+              thinking ||
+              transcribing ||
+              recorder.state.recording ||
+              input.trim().length < 2
+            }
             className="mono-tag px-5 py-3 rounded-full transition-all disabled:opacity-40 disabled:cursor-not-allowed"
             style={{
               color: "#0e0a22",
@@ -420,6 +596,156 @@ function Welcome({
       </div>
     </div>
   );
+}
+
+function MicButton({
+  accent,
+  recording,
+  initializing,
+  transcribing,
+  elapsedMs,
+  disabled,
+  onClick,
+}: {
+  accent: string;
+  recording: boolean;
+  initializing: boolean;
+  transcribing: boolean;
+  elapsedMs: number;
+  disabled: boolean;
+  onClick: () => void;
+}) {
+  const busy = initializing || transcribing;
+  const label = recording
+    ? `Kayıt — ${formatElapsed(elapsedMs)} · durdur ve gönder`
+    : transcribing
+    ? "Yazıya dönüyor…"
+    : initializing
+    ? "Mikrofon hazırlanıyor…"
+    : "Sesli sor";
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled || busy}
+      aria-label={label}
+      title={label}
+      className="relative flex items-center justify-center w-12 h-12 rounded-full transition-all disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
+      style={{
+        border: `1px solid ${recording ? "#ff4d6d" : accent + "40"}`,
+        background: recording
+          ? "rgba(255,77,109,0.18)"
+          : busy
+          ? `${accent}10`
+          : "rgba(7,6,15,0.5)",
+        boxShadow: recording
+          ? "0 0 24px -4px rgba(255,77,109,0.55)"
+          : `0 0 0 0 transparent`,
+      }}
+    >
+      {/* Mikrofon ikonu — basit SVG, harici asset gerekmiyor */}
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke={recording ? "#ff4d6d" : accent}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
+        <rect x="9" y="2" width="6" height="12" rx="3" />
+        <path d="M5 11a7 7 0 0 0 14 0" />
+        <path d="M12 18v3" />
+      </svg>
+      {recording && (
+        <span
+          aria-hidden
+          className="absolute inset-0 rounded-full"
+          style={{
+            border: "1px solid #ff4d6d",
+            animation: "sanri-pulse-ring 1.4s ease-out infinite",
+          }}
+        />
+      )}
+      {busy && !recording && (
+        <span
+          aria-hidden
+          className="absolute -bottom-1 right-0 text-[8px] uppercase tracking-wider px-1 py-0.5 rounded-full"
+          style={{
+            color: accent,
+            background: `${accent}20`,
+            border: `1px solid ${accent}50`,
+          }}
+        >
+          •••
+        </span>
+      )}
+    </button>
+  );
+}
+
+function ListenButton({
+  accent,
+  loading,
+  playing,
+  onClick,
+}: {
+  accent: string;
+  loading: boolean;
+  playing: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={loading}
+      className="mt-3 inline-flex items-center gap-2 mono-tag px-3 py-1.5 rounded-full transition-all opacity-60 hover:opacity-100 disabled:opacity-40"
+      style={{
+        color: accent,
+        border: `1px solid ${accent}30`,
+        background: playing ? `${accent}15` : "transparent",
+      }}
+      aria-label={playing ? "Sesli yanıtı durdur" : "Sesli yanıtı oynat"}
+      title={playing ? "Durdur" : "Sesli dinle"}
+    >
+      {loading ? (
+        <span aria-hidden>•••</span>
+      ) : playing ? (
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill={accent}
+          aria-hidden
+        >
+          <rect x="6" y="5" width="4" height="14" rx="1" />
+          <rect x="14" y="5" width="4" height="14" rx="1" />
+        </svg>
+      ) : (
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill={accent}
+          aria-hidden
+        >
+          <path d="M8 5v14l11-7z" />
+        </svg>
+      )}
+      <span>{loading ? "ses üretiliyor" : playing ? "durdur" : "dinle"}</span>
+    </button>
+  );
+}
+
+function formatElapsed(ms: number): string {
+  const total = Math.floor(ms / 1000);
+  const m = Math.floor(total / 60);
+  const s = total % 60;
+  return `${m}:${s.toString().padStart(2, "0")}`;
 }
 
 function Thinking({ persona }: { persona: Persona }) {

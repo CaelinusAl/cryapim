@@ -13,6 +13,25 @@ export type PersonaId =
   | "selbi"
   | "perde";
 
+/**
+ * OpenAI TTS ses kimlikleri — her persona kendi sesini taşır.
+ *   alloy   → nötr, kararlı (varsayılan)
+ *   echo    → soğukkanlı, mesafeli (Şüpheci için)
+ *   fable   → büyülü, hikayeci (Sanrı için)
+ *   onyx    → derin, ağırbaşlı erkek (Rivayet için)
+ *   nova    → sıcak, kadınsı, samimi (Selbi için)
+ *   shimmer → yumuşak, narin (Perde için)
+ *
+ * @see https://platform.openai.com/docs/guides/text-to-speech
+ */
+export type PersonaVoice =
+  | "alloy"
+  | "echo"
+  | "fable"
+  | "onyx"
+  | "nova"
+  | "shimmer";
+
 export type Persona = {
   /** URL ve API yollarında kullanılan tek kelimelik kimlik */
   id: PersonaId;
@@ -53,6 +72,11 @@ export type Persona = {
   hintFooter: string;
   /** Hangi programa demir atıyor (programs.ts slug'ı) */
   relatedProgramSlug?: string;
+  /**
+   * Persona'nın sesi (OpenAI TTS). Tanımlı değilse "alloy" varsayılır.
+   * "Dinle" butonuna basıldığında bu ses ile mp3 üretilir.
+   */
+  voice?: PersonaVoice;
 };
 
 /** OpenAI'ye giden mesajların standart şekli */

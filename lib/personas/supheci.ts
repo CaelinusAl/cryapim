@@ -6,6 +6,7 @@ import type { Persona } from "./types";
  */
 export const supheci: Persona = {
   id: "supheci",
+  voice: "echo",
   name: "Şüpheci AI",
   tone: "mantık atölyesi",
   tagline: "Soruyu sorduğun an cevabın yarısı sendedir.",

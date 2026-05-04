@@ -13,6 +13,7 @@ import type { Persona } from "./types";
  */
 export const perde: Persona = {
   id: "perde",
+  voice: "shimmer",
   name: "Perde",
   tone: "bilinçli izleyici",
   tagline: "Filmin altındaki film.",
