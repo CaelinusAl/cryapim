@@ -5,19 +5,35 @@ import { SiteFrame } from "@/components/SiteFrame";
 export const metadata: Metadata = {
   metadataBase: new URL("https://cryapim.com"),
   title: {
-    default: "CR YAPIM — Boğaz'da bir plato, Caelinus AI sahnenin ardında",
+    default:
+      "CR YAPIM — İstanbul'un Boğaz manzaralı içerik & deneyim stüdyosu",
     template: "%s · CR YAPIM",
   },
   description:
-    "İstanbul Boğazı'nda, Kız Kulesi'nin gözü altında çekilen, Caelinus AI ile zamanı katlayan ruhsal yapımlar evi. Ruhsal Yatırım, Nasıl Yaratıyorum, Az Kalsın Bende İnanıyordum, Rivayet Avcısı, Sanrı'ya Sor, Selbi Yemekte Ne Var?",
+    "İstanbul Boğazı'na bakan profesyonel içerik stüdyosu. Manzara sahnesi, Caelinus atölye, podcast köşesi, mutfak stüdyo. Saatlik / günlük kiralama + Caelinus AI moda deneyimi + Sanrı içerik ritüeli.",
   openGraph: {
-    title: "CR YAPIM — Zamansız Yapımlar Evi",
+    title: "CR YAPIM — Boğaz manzaralı içerik & deneyim stüdyosu",
     description:
-      "Boğaz'da bir plato. Kız Kulesi tanık. Caelinus AI sufle veriyor.",
+      "Boğaz'da bir sahne. İçerik, moda, podcast, mutfak — aynı kapıda. Net fiyatlı kiralama paketleri.",
     url: "https://cryapim.com",
     siteName: "CR YAPIM",
     locale: "tr_TR",
     type: "website",
+    images: [
+      {
+        url: "/studio-manzara.jpg",
+        width: 1024,
+        height: 682,
+        alt: "CR Yapım Stüdyo — Boğaz manzaralı sahne",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CR YAPIM — Boğaz manzaralı içerik & deneyim stüdyosu",
+    description:
+      "Manzara · Atölye · Podcast · Mutfak. İstanbul Boğaz hattında çekim & deneyim.",
+    images: ["/studio-manzara.jpg"],
   },
   robots: { index: true, follow: true },
 };

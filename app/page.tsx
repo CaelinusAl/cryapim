@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { BookCTA, WhatsAppLink } from "@/components/BookCTA";
 
 /**
@@ -135,30 +136,41 @@ export default function HomePage() {
         <div className="mb-10">
           <p className="mono-tag text-mist-500">sahne alanları</p>
           <h2 className="editorial mt-3 text-3xl md:text-5xl text-mist-100 leading-tight">
-            Üç farklı doku, tek bir kapı.
+            Dört farklı doku, tek bir kapı.
           </h2>
         </div>
-        <ul className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <SceneCard
+            imageSrc="/studio-manzara.jpg"
             symbol="🌊"
             label="Manzara Sahnesi"
-            title="Boğaz, gün batımı, doğal ışık."
-            description="Minimal, güçlü, sinematik. Reels'ten editorial portreye, marka filmine kadar."
+            title="Boğaz, Kız Kulesi, gün batımı."
+            description="Minimal, güçlü, sinematik. Reels, editorial portre, marka filmi — ana sahne."
             tint="from-bosphorus-700/50"
           />
           <SceneCard
+            imageSrc="/studio-atolye.jpg"
             symbol="🧵"
-            label="Atölye Alanı"
-            title="Tasarım, üretim, moodboard."
-            description="Caelinus dünyasının fiziksel uzantısı — kıyafet, malzeme, prova, set kurulumu."
+            label="Caelinus Atölye"
+            title="Tasarım, moodboard, sanat."
+            description="Moodboard duvarı, easel, tasarım masası, sanat panosu. Caelinus dünyasının kalbi."
             tint="from-tower-gold/30"
           />
           <SceneCard
-            symbol="🕯"
-            label="Sanrı Alanı"
-            title="Ritüel, derinlik, konuşma."
-            description="Podcast, sohbet, içsel çekim. Loş ışık, kadife perde, sembol köşesi."
+            imageSrc="/studio-kose.jpg"
+            symbol="🎙"
+            label="Podcast / Sanrı Köşesi"
+            title="ON AIR. İki koltuk. Boğaz tanık."
+            description="Profesyonel mikrofon, kamera setup, geniş cam manzara. Podcast, röportaj, sohbet için."
             tint="from-purple-500/30"
+          />
+          <SceneCard
+            imageSrc="/studio-mutfak.jpg"
+            symbol="🍽"
+            label="CR Mutfak Stüdyo"
+            title="Görselin lezzeti, ilhamın adresi."
+            description="Tam donanımlı mutfak, ada masa, profesyonel ışık. Yemek, tarif, içerik üreticileri için."
+            tint="from-tower-gold/30"
           />
         </ul>
       </section>
@@ -440,42 +452,90 @@ function PillarCard({
 }
 
 function SceneCard({
+  imageSrc,
   symbol,
   label,
   title,
   description,
   tint,
 }: {
+  /** Sahne foto yolu — varsa Image, yoksa emoji fallback */
+  imageSrc?: string;
   symbol: string;
   label: string;
   title: string;
   description: string;
-  /** Tailwind from-color (gradient başlangıcı) */
+  /** Tailwind from-color (gradient başlangıcı, fallback için) */
   tint: string;
 }) {
   return (
     <li
-      className={`relative rounded-2xl overflow-hidden border border-mist-500/15 bg-gradient-to-b ${tint} to-transparent`}
+      className={`group relative rounded-2xl overflow-hidden border border-mist-500/15 bg-gradient-to-b ${tint} to-transparent`}
     >
-      {/* Üst görsel placeholder (gerçek foto eklenince Image gelir) */}
       <div
-        className="relative aspect-[4/3] flex items-center justify-center"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 70%)",
-        }}
+        className="relative aspect-[3/2] overflow-hidden"
+        style={
+          !imageSrc
+            ? {
+                background:
+                  "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 70%)",
+              }
+            : undefined
+        }
       >
-        <span className="text-6xl md:text-7xl opacity-60" aria-hidden>
-          {symbol}
-        </span>
-        <div
-          aria-hidden
-          className="absolute inset-0 pointer-events-none opacity-15"
-          style={{
-            background:
-              "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.04) 2px, rgba(255,255,255,0.04) 3px)",
-          }}
-        />
+        {imageSrc ? (
+          <>
+            <Image
+              src={imageSrc}
+              alt={`${label} — ${title}`}
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            {/* Alt karartma — başlık okunsun + sinematik his */}
+            <div
+              aria-hidden
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(7,6,15,0.10) 0%, transparent 35%, rgba(7,6,15,0.55) 100%)",
+              }}
+            />
+            {/* Hafif film grain */}
+            <div
+              aria-hidden
+              className="absolute inset-0 pointer-events-none opacity-12"
+              style={{
+                background:
+                  "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.04) 2px, rgba(255,255,255,0.04) 3px)",
+              }}
+            />
+            {/* Sembol — sol üstte minik */}
+            <span
+              className="absolute top-4 left-4 text-2xl md:text-3xl"
+              style={{
+                textShadow: "0 0 20px rgba(7,6,15,0.8)",
+              }}
+              aria-hidden
+            >
+              {symbol}
+            </span>
+          </>
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-6xl md:text-7xl opacity-60" aria-hidden>
+              {symbol}
+            </span>
+            <div
+              aria-hidden
+              className="absolute inset-0 pointer-events-none opacity-15"
+              style={{
+                background:
+                  "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.04) 2px, rgba(255,255,255,0.04) 3px)",
+              }}
+            />
+          </div>
+        )}
       </div>
       <div className="p-6">
         <p className="mono-tag text-tower-gold">{label}</p>

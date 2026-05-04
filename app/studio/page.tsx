@@ -1,16 +1,32 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { BookCTA, WhatsAppLink } from "@/components/BookCTA";
 
 export const metadata: Metadata = {
   title: "Stüdyo · CR Yapım — Boğaz manzaralı içerik stüdyosu",
   description:
-    "İstanbul Boğazı'na bakan profesyonel içerik stüdyosu. Manzara, atölye ve sanrı alanları. Saatlik, günlük ve deneyim paketleriyle çekim, reels, marka filmleri için hazır.",
+    "İstanbul Boğazı'na bakan profesyonel içerik stüdyosu. Manzara, Caelinus atölye, podcast köşesi ve mutfak stüdyo. Saatlik, günlük ve deneyim paketleriyle çekim, reels, marka filmleri için hazır.",
   openGraph: {
     title: "CR Yapım Stüdyo — Boğaz manzaralı içerik stüdyosu",
     description:
-      "Üç sahne, bir kapı: Manzara, Atölye, Sanrı. Net fiyatlı kiralama paketleri.",
+      "Dört sahne, bir kapı: Manzara, Atölye, Podcast Köşesi, Mutfak Stüdyo. Net fiyatlı kiralama paketleri.",
     type: "website",
+    images: [
+      {
+        url: "/studio-manzara.jpg",
+        width: 1024,
+        height: 682,
+        alt: "CR Yapım Stüdyo — Boğaz manzaralı sahne",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CR Yapım Stüdyo — Boğaz manzaralı içerik stüdyosu",
+    description:
+      "Dört sahne, bir kapı: Manzara, Atölye, Podcast Köşesi, Mutfak Stüdyo.",
+    images: ["/studio-manzara.jpg"],
   },
 };
 
@@ -53,49 +69,67 @@ export default function StudioPage() {
       <section className="relative px-6 md:px-10 py-12 md:py-16 max-w-6xl mx-auto">
         <p className="mono-tag text-mist-500">sahne alanları</p>
         <h2 className="editorial mt-3 text-3xl md:text-5xl text-mist-100 leading-tight">
-          Hangi dokuda çekersin?
+          Dört sahne. Tek mekân.
         </h2>
 
         <div className="mt-10 space-y-10">
           <SceneDetail
+            imageSrc="/studio-manzara.jpg"
             symbol="🌊"
             label="Manzara Sahnesi"
-            title="Boğaz, gün batımı, doğal ışık."
-            description="Sinematik, geniş camlar, doğal gün ışığı + kontre. Reels, portre, marka filmi, lookbook için ideal."
+            title="Boğaz, Kız Kulesi, gün batımı."
+            description="Sinematik, geniş camlar, doğal gün ışığı + kontre. Reels, portre, marka filmi, lookbook için ana sahne — Boğaz Köprüsü ve Kız Kulesi panoraması direkt arka planda."
             features={[
-              "≈ 25 m² açık sahne",
-              "Boğaz & Kız Kulesi gün batımı yönü",
-              "Doğal ışık + tek kontre LED",
-              "Tripod + softbox stoğu",
+              "Geniş açık lounge + manzara terası",
+              "Boğaz Köprüsü & Kız Kulesi cephesi",
+              "Doğal ışık + profesyonel softbox seti",
+              "Tripod + slider + kontre LED",
             ]}
             tint="from-bosphorus-700/40"
           />
           <SceneDetail
+            imageSrc="/studio-atolye.jpg"
             symbol="🧵"
-            label="Atölye Alanı"
-            title="Tasarım, prova, set kurulumu."
-            description="Caelinus dünyasının fiziksel uzantısı. Kıyafet, malzeme, moodboard, set construction için açık alan."
+            label="Caelinus Atölye"
+            title="Tasarım, moodboard, sanat."
+            description="Caelinus Atölye Tasarım — moodboard duvarı, easel, sanat masası, kırmızı koltuklar, 'Digital Sanat Alanı' panosu. Lookbook, kıyafet provası, set kurulumu, sanat içerik üretimi için."
             features={[
-              "Geniş çalışma masası",
-              "Prova alanı + ayna",
-              "Moodboard duvarı",
-              "Set kurulumu için boş alan",
+              "Geniş çalışma masası + tasarım istasyonu",
+              "Easel + sanat panosu (Digital Sanat)",
+              "Moodboard duvarı + foto serisi",
+              "Boğaz manzarasına bakan oturma alanı",
             ]}
             tint="from-tower-gold/25"
             reverse
           />
           <SceneDetail
-            symbol="🕯"
-            label="Sanrı Alanı"
-            title="Ritüel, derinlik, sohbet."
-            description="Loş ışık, kadife perde, sembol köşesi. Podcast, kameralı sohbet, içsel monolog veya 'ritüel' tarzı içerik için."
+            imageSrc="/studio-kose.jpg"
+            symbol="🎙"
+            label="Podcast / Sanrı Köşesi"
+            title="ON AIR. İki koltuk. Boğaz tanık."
+            description="Profesyonel podcast setup'ı: iki kırmızı kapsül koltuk, dual mikrofon kolu, ON AIR neon, kamera tripod. Geniş cam Boğaz panoraması arka planda — sıradan stüdyolarda olmayan bir sahne."
             features={[
-              "Loş + ayarlanabilir ışık",
-              "Akustik perdeleme",
-              "Sembol köşesi (mum, taş, kitap)",
-              "Tek/çift kişilik podcast düzeni",
+              "Dual mikrofon kolu (kondenser)",
+              "ON AIR neon göstergesi",
+              "Profesyonel softbox aydınlatma",
+              "Kamera tripod + canlı yayın hazır",
             ]}
             tint="from-purple-500/25"
+          />
+          <SceneDetail
+            imageSrc="/studio-mutfak.jpg"
+            symbol="🍽"
+            label="CR Mutfak Stüdyo"
+            title="Görselin lezzeti, ilhamın adresi."
+            description="Tam donanımlı mutfak: ada masa, modern beyaz dolaplar, profesyonel ışık + kamera, Boğaz manzarası. Yemek tarif YouTube'u, Reels, marka tanıtım, food styling için Türkiye'de ender bir alan."
+            features={[
+              "Tam donanımlı modern mutfak + ada masa",
+              "NANLITE softbox + kamera tripod",
+              "Doğal gün ışığı + Boğaz cephesi",
+              "Food styling için tam set",
+            ]}
+            tint="from-tower-gold/25"
+            reverse
           />
         </div>
       </section>
@@ -253,6 +287,7 @@ export default function StudioPage() {
 }
 
 function SceneDetail({
+  imageSrc,
   symbol,
   label,
   title,
@@ -261,6 +296,7 @@ function SceneDetail({
   tint,
   reverse,
 }: {
+  imageSrc?: string;
   symbol: string;
   label: string;
   title: string;
@@ -271,29 +307,61 @@ function SceneDetail({
 }) {
   return (
     <article
-      className={`grid md:grid-cols-2 gap-6 items-stretch rounded-2xl overflow-hidden border border-mist-500/15 bg-gradient-to-br ${tint} to-transparent`}
+      className={`grid md:grid-cols-2 gap-0 items-stretch rounded-2xl overflow-hidden border border-mist-500/15 bg-gradient-to-br ${tint} to-transparent`}
     >
-      {/* Görsel placeholder — gerçek foto eklenince Image */}
       <div
-        className={`relative aspect-[4/3] md:aspect-auto md:min-h-[280px] flex items-center justify-center ${
+        className={`relative aspect-[3/2] md:aspect-auto md:min-h-[320px] overflow-hidden ${
           reverse ? "md:order-2" : ""
         }`}
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 70%)",
-        }}
+        style={
+          !imageSrc
+            ? {
+                background:
+                  "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 70%)",
+              }
+            : undefined
+        }
       >
-        <span className="text-7xl md:text-8xl opacity-60" aria-hidden>
-          {symbol}
-        </span>
-        <div
-          aria-hidden
-          className="absolute inset-0 pointer-events-none opacity-15"
-          style={{
-            background:
-              "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.04) 2px, rgba(255,255,255,0.04) 3px)",
-          }}
-        />
+        {imageSrc ? (
+          <>
+            <Image
+              src={imageSrc}
+              alt={`${label} — ${title}`}
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 pointer-events-none opacity-12"
+              style={{
+                background:
+                  "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.04) 2px, rgba(255,255,255,0.04) 3px)",
+              }}
+            />
+            <span
+              className="absolute top-4 left-4 text-2xl md:text-3xl"
+              style={{ textShadow: "0 0 20px rgba(7,6,15,0.85)" }}
+              aria-hidden
+            >
+              {symbol}
+            </span>
+          </>
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-7xl md:text-8xl opacity-60" aria-hidden>
+              {symbol}
+            </span>
+            <div
+              aria-hidden
+              className="absolute inset-0 pointer-events-none opacity-15"
+              style={{
+                background:
+                  "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.04) 2px, rgba(255,255,255,0.04) 3px)",
+              }}
+            />
+          </div>
+        )}
       </div>
 
       <div className={`p-6 md:p-8 ${reverse ? "md:order-1" : ""}`}>
