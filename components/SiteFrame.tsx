@@ -3,6 +3,8 @@ import type { ReactNode } from "react";
 import { BosphorusBackdrop } from "@/components/BosphorusBackdrop";
 import { PersonaBubble } from "@/components/personas/PersonaBubble";
 import { BookCTA } from "@/components/BookCTA";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { CONTACT, whatsappLink, mailtoLink, telLink } from "@/lib/contact";
 
 /**
@@ -27,20 +29,40 @@ const NAV = [
 
 export function SiteFrame({ children }: { children: ReactNode }) {
   return (
-    <>
+    <ThemeProvider>
       {/* Site geneli sahne perdesi — viewport'a yapışık */}
       <BosphorusBackdrop />
 
       <div className="relative z-10 min-h-screen flex flex-col">
-      <header className="relative z-20 px-6 md:px-10 pt-10 pb-6 flex items-center justify-between">
+      {/* Header — yarı-saydam koyu plaka + backdrop-blur ile her arka plan üzerinde okunaklı */}
+      <header
+        className="sticky top-0 z-30 px-6 md:px-10 py-4 md:py-5 flex items-center justify-between"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(7,6,15,0.78) 0%, rgba(7,6,15,0.62) 60%, rgba(7,6,15,0.42) 100%)",
+          backdropFilter: "blur(12px) saturate(120%)",
+          WebkitBackdropFilter: "blur(12px) saturate(120%)",
+          borderBottom: "1px solid rgba(212,178,106,0.12)",
+          boxShadow: "0 4px 20px -6px rgba(0,0,0,0.45)",
+        }}
+      >
         <Link href="/" className="group flex items-center gap-3">
           <span
             aria-hidden
             className="block w-10 h-10 rounded-full border border-tower-gold/40 flex items-center justify-center text-tower-gold text-base editorial-italic"
+            style={{
+              background: "rgba(212,178,106,0.08)",
+              boxShadow: "0 0 12px -3px rgba(212,178,106,0.4)",
+            }}
           >
             ✺
           </span>
-          <span className="editorial text-2xl md:text-[1.75rem] tracking-wide text-mist-100 group-hover:text-tower-gold transition-colors">
+          <span
+            className="editorial text-2xl md:text-[1.75rem] tracking-wide text-mist-100 group-hover:text-tower-gold transition-colors"
+            style={{
+              textShadow: "0 1px 3px rgba(0,0,0,0.6), 0 0 18px rgba(0,0,0,0.4)",
+            }}
+          >
             CR <span className="text-mist-300">YAPIM</span>
           </span>
         </Link>
@@ -51,21 +73,27 @@ export function SiteFrame({ children }: { children: ReactNode }) {
               key={item.href}
               href={item.href}
               className="transition-colors hover:text-tower-gold"
-              style={{ color: item.accent ?? "#a8a4b8" }}
+              style={{
+                color: item.accent ?? "#a8a4b8",
+                textShadow: "0 1px 2px rgba(0,0,0,0.6)",
+              }}
             >
               {item.label}
             </Link>
           ))}
         </nav>
 
-        <BookCTA
-          label="Randevu Al"
-          variant="primary"
-          size="sm"
-          context="Üst menü"
-          icon="📅"
-          className="hidden md:inline-flex"
-        />
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+          <BookCTA
+            label="Randevu Al"
+            variant="primary"
+            size="sm"
+            context="Üst menü"
+            icon="📅"
+            className="hidden md:inline-flex"
+          />
+        </div>
       </header>
 
       <main className="relative z-10 flex-1">{children}</main>
@@ -179,6 +207,6 @@ export function SiteFrame({ children }: { children: ReactNode }) {
 
       {/* Caelinus AI personalar — sağ alt köşede, tüm sayfalarda */}
       <PersonaBubble />
-    </>
+    </ThemeProvider>
   );
 }

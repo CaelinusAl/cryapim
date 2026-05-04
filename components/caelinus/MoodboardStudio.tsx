@@ -23,8 +23,22 @@ import { whatsappLink } from "@/lib/contact";
 type MoodboardImage = {
   url: string;
   alt: string;
-  angle: string;
+  /** UI etiketi — "Atmosfer", "Doku", "Figür", "Nesne" */
+  label: string;
+  /** Narrative ID — etiket renkleri için */
+  narrativeId: "atmosphere" | "texture" | "figure" | "object";
   revisedPrompt?: string;
+};
+
+/**
+ * Narrative renkleri — her katman kendi sinyaliyle gelir,
+ * grid bir editöryel sayfa hissi versin.
+ */
+const NARRATIVE_COLORS: Record<MoodboardImage["narrativeId"], { bg: string; fg: string }> = {
+  atmosphere: { bg: "rgba(159,231,255,0.20)", fg: "#9fe7ff" }, // ai cyan — mekan
+  texture: { bg: "rgba(212,178,106,0.22)", fg: "#d4b26a" }, // tower gold — doku
+  figure: { bg: "rgba(241,91,181,0.18)", fg: "#f5a5d0" }, // dusk magenta — figür
+  object: { bg: "rgba(240,232,208,0.18)", fg: "#f0e8d0" }, // mist cream — nesne
 };
 
 type Result = {
@@ -34,20 +48,25 @@ type Result = {
   commentarySource: "openai" | "fallback";
 };
 
+/**
+ * Önerilen vibe'lar — CR Yapım editöryel diline uygun, İstanbul atmosferli.
+ * Caelinus AI'nın imza repertuarı: mevsim + bir nesne + bir doku/renk.
+ */
 const SUGGESTED: ReadonlyArray<string> = [
-  "kış akşamı, kahve, bordo",
-  "yaz sabahı, deniz, beyaz",
-  "sonbahar, kadife, mum",
-  "ilkbahar Boğaz, ipek, gül",
-  "Eylül tarafında bir vapur, ham keten, kül",
+  "kasım akşamı, kahve, bordo kadife",
+  "ağustos sabahı Boğaz, keten, tuz",
+  "Beyoğlu pasajı, yağmur, kül beton",
+  "Galata gece, hat, donuk altın",
+  "ilkbahar İznik, ipek, gül soğuğu",
 ];
 
 const LOADING_PHASES: ReadonlyArray<string> = [
-  "vibe çözümleniyor",
-  "ışıklar ayarlanıyor",
-  "palet seçiliyor",
-  "doku örülüyor",
-  "Caelinus okuyor",
+  "vibe okunuyor",
+  "atmosfer kuruluyor — mekan ve ışık",
+  "doku örülüyor — kumaş, kâğıt, brass",
+  "figür çağrılıyor — yarım yüz, bir nefes",
+  "nesneler diziliyor — masa hikayesi",
+  "Caelinus paleti çözüyor",
 ];
 
 export function MoodboardStudio() {
@@ -125,17 +144,22 @@ export function MoodboardStudio() {
             "linear-gradient(135deg, rgba(159,231,255,0.06) 0%, rgba(212,178,106,0.04) 100%)",
         }}
       >
-        <p className="mono-tag text-ai-cyan">caelinus stylist · moodboard</p>
+        <p className="mono-tag text-ai-cyan">caelinus stylist · ai moodboard</p>
         <h2 className="editorial mt-3 text-3xl md:text-4xl text-mist-100 leading-tight">
           Bir vibe yaz —
           <br />
           <span className="editorial-italic text-ai-cyan">
-            Caelinus paleti çözsün.
+            Caelinus dört katmanlı sayfa açsın.
           </span>
         </h2>
         <p className="body-readable text-mist-300 mt-4 max-w-2xl">
-          Bir mevsim, bir renk, bir his. Caelinus dört görsellik bir moodboard
-          üretir ve renkleri, dokuyu, atmosferi ve giyimi okur.
+          Bir mevsim, bir renk, bir his. Caelinus AI dört editöryel kare üretir
+          —{" "}
+          <span className="text-mist-100">atmosfer · doku · figür · nesne</span>{" "}
+          — ve paletten söze uzanan beş başlıklı bir okuma yazar.
+        </p>
+        <p className="mono-tag text-mist-500 mt-2 text-xs">
+          dall·e 3 hd · gpt-4o-mini · anti-stock, İstanbul imzası
         </p>
 
         <div className="mt-6 flex flex-col sm:flex-row gap-3">
@@ -267,61 +291,71 @@ function ResultBlock({ result }: { result: Result }) {
         </p>
       </div>
 
-      {/* Görsel grid */}
-      <ul className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {result.images.map((img, i) => (
-          <li
-            key={`${img.url}-${i}`}
-            className="aspect-square rounded-xl overflow-hidden border border-ai-cyan/20 relative group"
-          >
-            <Image
-              src={img.url}
-              alt={img.alt}
-              fill
-              sizes="(min-width: 768px) 25vw, 50vw"
-              className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-              unoptimized
-            />
-            <div
-              aria-hidden
-              className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"
+      {/* Görsel grid — her görsel kendi anlatım katmanıyla etiketli */}
+      <ul className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        {result.images.map((img, i) => {
+          const colors = NARRATIVE_COLORS[img.narrativeId] ?? NARRATIVE_COLORS.atmosphere;
+          return (
+            <li
+              key={`${img.url}-${i}`}
+              className="aspect-[4/5] rounded-xl overflow-hidden relative group"
               style={{
-                background:
-                  "linear-gradient(180deg, transparent 60%, rgba(7,6,15,0.7) 100%)",
-              }}
-            />
-            <a
-              href={img.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="absolute bottom-2 right-2 mono-tag rounded-full px-3 py-1 text-[10px] opacity-0 group-hover:opacity-100 transition-opacity"
-              style={{
-                color: "#0e0a22",
-                background: "#9fe7ff",
+                border: `1px solid ${colors.bg.replace("0.20", "0.45").replace("0.22", "0.45").replace("0.18", "0.45")}`,
+                boxShadow: `0 0 32px -10px ${colors.fg}55`,
               }}
             >
-              tam boy
-            </a>
-          </li>
-        ))}
+              <Image
+                src={img.url}
+                alt={img.alt}
+                fill
+                sizes="(min-width: 768px) 25vw, 50vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                unoptimized
+              />
+
+              {/* Üst sağ: katman etiketi — daima görünür */}
+              <div
+                className="absolute top-2.5 right-2.5 mono-tag rounded-full px-3 py-1 text-[10px] backdrop-blur-md"
+                style={{
+                  color: colors.fg,
+                  background: colors.bg,
+                  border: `1px solid ${colors.fg}55`,
+                }}
+              >
+                {String(i + 1).padStart(2, "0")} · {img.label}
+              </div>
+
+              {/* Alt gradient — yazılar okunsun */}
+              <div
+                aria-hidden
+                className="absolute inset-x-0 bottom-0 h-2/5 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(180deg, transparent 0%, rgba(7,6,15,0.85) 100%)",
+                }}
+              />
+
+              {/* Alt: tam boy linki (hover'da) */}
+              <a
+                href={img.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute bottom-3 right-3 mono-tag rounded-full px-3 py-1 text-[10px] opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-md"
+                style={{
+                  color: "#0e0a22",
+                  background: colors.fg,
+                }}
+              >
+                tam boy ↗
+              </a>
+            </li>
+          );
+        })}
       </ul>
 
-      {/* Caelinus 5-başlıklı yorum */}
-      <div
-        className="rounded-2xl p-6 md:p-8 border border-ai-cyan/25"
-        style={{
-          background:
-            "linear-gradient(135deg, rgba(159,231,255,0.05) 0%, rgba(7,6,15,0.4) 100%)",
-        }}
-      >
-        <p className="mono-tag text-ai-cyan">caelinus okuması</p>
-        <pre
-          className="editorial-italic text-mist-100 mt-4 whitespace-pre-wrap leading-relaxed text-base md:text-lg font-sans"
-          style={{ fontFamily: "inherit" }}
-        >
-          {result.commentary}
-        </pre>
-      </div>
+      {/* Caelinus 5-başlıklı yorum — editöryel sayfa olarak parse edilir */}
+      <CaelinusReading commentary={result.commentary} />
+
 
       {/* Aksiyon CTA — bu stil seninse stüdyoda çek */}
       <div
@@ -367,6 +401,135 @@ function ResultBlock({ result }: { result: Result }) {
           </a>
         </div>
       </div>
+    </div>
+  );
+}
+
+/* ---------- Caelinus 5-başlıklı okuma — editöryel sayfa ---------- */
+
+type ReadingSection = {
+  /** Türkçe etiket — PALET, DOKU, ATMOSFER, GİYİM, SÖZ */
+  key: "PALET" | "DOKU" | "ATMOSFER" | "GİYİM" | "SÖZ";
+  /** Türkçe alt label — kullanıcı dostu */
+  label: string;
+  /** İkon karakteri */
+  symbol: string;
+  /** Renk imzası */
+  color: string;
+};
+
+const READING_SECTIONS: ReadingSection[] = [
+  { key: "PALET", label: "Palet", symbol: "◐", color: "#9fe7ff" },
+  { key: "DOKU", label: "Doku", symbol: "▥", color: "#d4b26a" },
+  { key: "ATMOSFER", label: "Atmosfer", symbol: "✦", color: "#f5a5d0" },
+  { key: "GİYİM", label: "Giyim", symbol: "✺", color: "#f0e8d0" },
+  { key: "SÖZ", label: "Söz", symbol: "❝", color: "#c9b9ec" },
+];
+
+/**
+ * Caelinus okumasını "PALET — ...\nDOKU — ..." formatından
+ * 5 ayrı editöryel kart olarak parse eder. Format bozulursa
+ * tüm metni tek bloğa düşürür (graceful).
+ */
+function parseReading(text: string): { found: Map<ReadingSection["key"], string>; raw: string } {
+  const found = new Map<ReadingSection["key"], string>();
+  if (!text) return { found, raw: text };
+
+  // "KEY — content" satır satır eşleştir; aynı satırda olabilir veya çok satırlı
+  const pattern = /(PALET|DOKU|ATMOSFER|GİYİM|SÖZ)\s*[—–-]\s*([\s\S]*?)(?=(?:\n\s*(?:PALET|DOKU|ATMOSFER|GİYİM|SÖZ)\s*[—–-])|$)/g;
+  let match: RegExpExecArray | null;
+  while ((match = pattern.exec(text)) !== null) {
+    const key = match[1] as ReadingSection["key"];
+    const content = match[2].trim();
+    if (content) found.set(key, content);
+  }
+  return { found, raw: text };
+}
+
+function CaelinusReading({ commentary }: { commentary: string }) {
+  const { found, raw } = parseReading(commentary);
+  const hasParsed = found.size >= 3;
+
+  if (!hasParsed) {
+    // Parse başarısızsa fallback: düz blok
+    return (
+      <div
+        className="rounded-2xl p-6 md:p-8 border border-ai-cyan/25"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(159,231,255,0.05) 0%, rgba(7,6,15,0.4) 100%)",
+        }}
+      >
+        <p className="mono-tag text-ai-cyan">caelinus okuması</p>
+        <pre
+          className="editorial-italic text-mist-100 mt-4 whitespace-pre-wrap leading-relaxed text-base md:text-lg font-sans"
+          style={{ fontFamily: "inherit" }}
+        >
+          {raw}
+        </pre>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-baseline gap-3 flex-wrap">
+        <p className="mono-tag text-ai-cyan">caelinus okuması</p>
+        <p className="text-mist-500 text-sm">
+          beş başlıklı bir editöryel — paletten söze
+        </p>
+      </div>
+
+      <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+        {READING_SECTIONS.map((section, idx) => {
+          const content = found.get(section.key);
+          if (!content) return null;
+
+          // SÖZ özel: tek başına geniş kart
+          const isQuote = section.key === "SÖZ";
+
+          return (
+            <li
+              key={section.key}
+              className={`rounded-2xl p-5 md:p-6 ${
+                isQuote ? "md:col-span-2" : ""
+              }`}
+              style={{
+                background: isQuote
+                  ? "linear-gradient(135deg, rgba(201,185,236,0.08) 0%, rgba(7,6,15,0.5) 100%)"
+                  : "linear-gradient(135deg, rgba(7,6,15,0.55) 0%, rgba(7,6,15,0.30) 100%)",
+                border: `1px solid ${section.color}33`,
+                boxShadow: `0 0 28px -10px ${section.color}40`,
+              }}
+            >
+              <div className="flex items-baseline gap-2.5 mb-2">
+                <span
+                  aria-hidden
+                  className="text-base"
+                  style={{ color: section.color }}
+                >
+                  {section.symbol}
+                </span>
+                <p
+                  className="mono-tag"
+                  style={{ color: section.color, letterSpacing: "0.18em" }}
+                >
+                  {String(idx + 1).padStart(2, "0")} · {section.key}
+                </p>
+              </div>
+              <p
+                className={`${
+                  isQuote
+                    ? "editorial-italic text-mist-100 text-xl md:text-2xl leading-snug"
+                    : "body-readable text-mist-100 text-base md:text-lg leading-relaxed"
+                }`}
+              >
+                {isQuote ? <>&ldquo;{content}&rdquo;</> : content}
+              </p>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }

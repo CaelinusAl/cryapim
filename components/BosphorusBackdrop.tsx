@@ -1,56 +1,98 @@
+"use client";
+
+import { useTheme } from "@/components/theme/ThemeProvider";
+
 /**
- * BosphorusBackdrop — İstanbul Boğazı, gece, hologram ışıklı.
+ * BosphorusBackdrop — İstanbul Boğazı, gündüz veya gece.
  *
  * Site geneli sabit (fixed) arka plan: tüm sayfalarda viewport'a
  * yapışık durur, içerik üstüne scroll yapar — bir tiyatro perdesi.
  *
- * Sahne katmanları (uzaktan yakına):
- *   1) Gökyüzü gradyanı (gece moru → boğaz mavisi → ufuk)
- *   2) Yıldızlar (deterministik, hydration-safe)
- *   3) Uzak Anadolu yakası silüeti
- *   4) Yakın Avrupa yakası silüeti + sıcak pencere ışıkları
- *   5) Boğaz Köprüsü — mor/pembe LED hatlı, asma kabloları,
- *      tepelerinde kırmızı havacılık lambası
- *   6) Kız Kulesi — uzakta, sağ ön planda, küçük ama tek altın ışıkla
- *   7) Deniz — koyu mavi, yatay hologram tarama çizgileri yukarı akar
- *   8) Köprünün ve kulenin sudaki titrek yansıması
- *   9) Vinyet — kenar kararması
+ * Gece teması (default):
+ *   1) Gece moru → boğaz mavisi gökyüzü gradyanı
+ *   2) Mor/pembe atmosfer halesi (köprünün yansıması)
+ *   3) Yıldızlar
+ *   4-5) Anadolu + Avrupa silüetleri + sıcak pencere ışıkları
+ *   6) Boğaz Köprüsü — mor/pembe LED hatları + havacılık lambası
+ *   7) Deniz + hologram tarama çizgileri
+ *   8) Boat/buoy seyir ışıkları (yeşil + beyaz + kırmızı)
+ *   9) Yansımalar
+ *  10) Kız Kulesi + dönen fener ışını
  *
- * Stoğa sıfır bağımlılık — her şey SVG ve CSS animasyonu ile çiziliyor.
- * İleride gerçek plato fotoğrafları geldiğinde aynı katman slot'larına
- * doku olarak girer.
+ * Gündüz teması:
+ *   1) Açık mavi gökyüzü → soft altın ufuk
+ *   2) Sıcak altın atmosfer halesi (güneş ışığı)
+ *   3) Yıldızlar gizli, holografi sönük, LED'ler kapalı
+ *   4) Şehir silüetleri belirgin ama ışıksız
+ *   5) Kız Kulesi gündüz aydınlığında — fener çok hafif
+ *
+ * Tema kullanıcı tıklamasıyla değişir; ThemeProvider'da localStorage'a
+ * kaydedilir. Geçişler `transition` ile yumuşak.
  */
 export function BosphorusBackdrop() {
+  const { theme } = useTheme();
+  const isDay = theme === "day";
+
   return (
     <div
       aria-hidden
       className="fixed inset-0 z-0 overflow-hidden pointer-events-none"
+      style={{ transition: "background 1.2s ease" }}
     >
-      {/* 1) Gökyüzü */}
+      {/* 1) Gökyüzü — temaya göre değişir */}
       <div
         className="absolute inset-0"
         style={{
-          background:
-            "linear-gradient(180deg, #060514 0%, #0a0a22 22%, #0d1438 48%, #122550 68%, #163565 86%, #1a4178 100%)",
+          background: isDay
+            ? "linear-gradient(180deg, #cfe9f5 0%, #b9dff0 22%, #a4d3e8 48%, #c8d8e0 70%, #e8d8b0 88%, #f0d090 100%)"
+            : "linear-gradient(180deg, #060514 0%, #0a0a22 22%, #0d1438 48%, #122550 68%, #163565 86%, #1a4178 100%)",
+          transition: "background 1.4s ease",
         }}
       />
 
-      {/* Mor/pembe atmosfer halesi — köprünün ışıklarının gökyüzüne yumuşak yansıması */}
+      {/* 2) Atmosfer halesi — gece mor/pembe, gündüz altın güneş */}
       <div
         className="absolute inset-x-0"
         style={{
-          top: "32%",
-          height: "40%",
-          background:
-            "radial-gradient(ellipse 70% 60% at 50% 60%, rgba(155,93,229,0.18) 0%, rgba(241,91,181,0.10) 35%, transparent 70%)",
+          top: isDay ? "12%" : "32%",
+          height: isDay ? "55%" : "40%",
+          background: isDay
+            ? "radial-gradient(ellipse 60% 50% at 70% 30%, rgba(255,224,150,0.55) 0%, rgba(255,200,120,0.30) 35%, transparent 70%)"
+            : "radial-gradient(ellipse 70% 60% at 50% 60%, rgba(155,93,229,0.18) 0%, rgba(241,91,181,0.10) 35%, transparent 70%)",
           filter: "blur(20px)",
+          transition: "all 1.4s ease",
         }}
       />
 
-      {/* 2) Yıldızlar */}
-      <Stars />
+      {/* Gündüz güneşi — sağ üstte yumuşak halka */}
+      {isDay && (
+        <div
+          className="absolute"
+          style={{
+            top: "8%",
+            right: "14%",
+            width: "180px",
+            height: "180px",
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(255,248,210,1) 0%, rgba(255,228,160,0.7) 30%, rgba(255,200,120,0.3) 60%, transparent 80%)",
+            filter: "blur(8px)",
+            mixBlendMode: "screen",
+          }}
+        />
+      )}
 
-      {/* 3) Uzak Anadolu yakası — silüet + yüzlerce titreşen pencere */}
+      {/* 3) Yıldızlar — gündüzde gizli */}
+      <div
+        style={{
+          opacity: isDay ? 0 : 1,
+          transition: "opacity 1.2s ease",
+        }}
+      >
+        <Stars />
+      </div>
+
+      {/* 4) Uzak Anadolu yakası */}
       <svg
         viewBox="0 0 1600 600"
         preserveAspectRatio="xMidYMax slice"
@@ -58,13 +100,16 @@ export function BosphorusBackdrop() {
       >
         <path
           d="M0,420 L80,380 L140,400 L220,360 L260,380 L340,330 L420,380 L500,350 L600,390 L700,370 L820,330 L920,380 L1020,360 L1120,400 L1240,350 L1360,390 L1480,370 L1600,380 L1600,600 L0,600 Z"
-          fill="#0a1428"
-          opacity="0.55"
+          fill={isDay ? "#7a8ea5" : "#0a1428"}
+          opacity={isDay ? 0.55 : 0.55}
+          style={{ transition: "fill 1.2s ease" }}
         />
-        <ShoreLights count={70} yMin={395} yMax={485} sizeMin={0.6} sizeMax={1.2} seed={11} />
+        {!isDay && (
+          <ShoreLights count={70} yMin={395} yMax={485} sizeMin={0.6} sizeMax={1.2} seed={11} />
+        )}
       </svg>
 
-      {/* 4) Yakın Avrupa yakası — daha kalabalık ışıklı silüet */}
+      {/* 5) Yakın Avrupa yakası */}
       <svg
         viewBox="0 0 1600 600"
         preserveAspectRatio="xMidYMax slice"
@@ -72,33 +117,52 @@ export function BosphorusBackdrop() {
       >
         <path
           d="M0,440 L60,420 L120,440 L200,400 L280,430 L360,395 L440,420 L520,385 L620,425 L720,400 L820,385 L920,415 L1020,385 L1120,425 L1240,395 L1360,420 L1480,400 L1600,420 L1600,600 L0,600 Z"
-          fill="#04101a"
-          opacity="0.85"
+          fill={isDay ? "#5b6f88" : "#04101a"}
+          opacity={isDay ? 0.85 : 0.85}
+          style={{ transition: "fill 1.2s ease" }}
         />
-        <ShoreLights count={90} yMin={415} yMax={520} sizeMin={0.8} sizeMax={1.5} seed={29} />
+        {!isDay && (
+          <ShoreLights count={90} yMin={415} yMax={520} sizeMin={0.8} sizeMax={1.5} seed={29} />
+        )}
       </svg>
 
-      {/* 5) Boğaz Köprüsü — sahnenin yıldızı */}
-      <BosphorusBridge />
+      {/* 6) Boğaz Köprüsü */}
+      <BosphorusBridge isDay={isDay} />
 
       {/* 7) Deniz */}
-      <Sea />
+      <Sea isDay={isDay} />
 
-      {/* 7b) Boğazda tekneler / şamandıralar — yeşil + beyaz seyir ışıkları */}
-      <SeaLights />
+      {/* 8) Tekne / şamandıra ışıkları — gündüzde sönük */}
+      <div
+        style={{
+          opacity: isDay ? 0.15 : 1,
+          transition: "opacity 1.2s ease",
+        }}
+      >
+        <SeaLights />
+      </div>
 
-      {/* 8) Yansımalar */}
-      <Reflections />
+      {/* 9) Yansımalar — gündüzde gizli */}
+      <div
+        style={{
+          opacity: isDay ? 0 : 1,
+          transition: "opacity 1.2s ease",
+        }}
+      >
+        <Reflections />
+      </div>
 
-      {/* 6) Kız Kulesi — sağda, ışıl ışıl, dönen fener ışınlı */}
-      <MaidensTower />
+      {/* 10) Kız Kulesi */}
+      <MaidensTower isDay={isDay} />
 
-      {/* 9) Vinyet */}
+      {/* 11) Vinyet — kenar kararması, gündüzde çok yumuşak */}
       <div
         className="absolute inset-0"
         style={{
-          background:
-            "radial-gradient(ellipse at 50% 55%, transparent 45%, rgba(0,0,0,0.55) 100%)",
+          background: isDay
+            ? "radial-gradient(ellipse at 50% 55%, transparent 60%, rgba(120,90,60,0.18) 100%)"
+            : "radial-gradient(ellipse at 50% 55%, transparent 45%, rgba(0,0,0,0.55) 100%)",
+          transition: "background 1.4s ease",
         }}
       />
     </div>
@@ -106,11 +170,6 @@ export function BosphorusBackdrop() {
 }
 
 /* ---------- Şehir / yaka pencere ışıkları ---------- */
-/**
- * Deterministik dağılım — hydration mismatch olmasın diye seed bazlı.
- * Çoğunluk sıcak altın, aralarda beyaz/soğuk mavi, çok seyrek yeşil.
- * Her ışık kendi gecikmesi ve süresiyle titreşir (twinkle).
- */
 function ShoreLights({
   count,
   yMin,
@@ -127,26 +186,26 @@ function ShoreLights({
   seed: number;
 }) {
   const palette = [
-    "#e8c878", // sıcak altın (en yaygın)
+    "#e8c878",
     "#d4b26a",
     "#e8c878",
     "#f0d896",
     "#d4b26a",
     "#e8c878",
-    "#f0e8d0", // krem
-    "#e9e6dc", // soft white
-    "#ffffff", // beyaz
-    "#c9d4e0", // soğuk mavi-beyaz
+    "#f0e8d0",
+    "#e9e6dc",
+    "#ffffff",
+    "#c9d4e0",
     "#a8c8d8",
     "#e8c878",
     "#d4b26a",
-    "#9fdfa0", // yeşil — seyrek
+    "#9fdfa0",
     "#e8c878",
     "#ffffff",
     "#d4b26a",
   ];
   const lights = Array.from({ length: count }, (_, i) => {
-    const k = (i * 137 + seed * 53) % 9973; // pseudo-random
+    const k = (i * 137 + seed * 53) % 9973;
     const x = ((i + 0.5) / count) * 1600 + ((k % 30) - 15);
     const y = yMin + ((k * 7) % (yMax - yMin));
     const r = sizeMin + ((k % 100) / 100) * (sizeMax - sizeMin);
@@ -159,7 +218,6 @@ function ShoreLights({
     <g>
       {lights.map((l, i) => (
         <g key={i}>
-          {/* Çekirdek ışık */}
           <circle
             cx={l.x}
             cy={l.y}
@@ -170,7 +228,6 @@ function ShoreLights({
               animation: `twinkle ${l.dur} ease-in-out ${l.delay} infinite`,
             }}
           />
-          {/* Yumuşak hale (her 4. ışıkta — performans) */}
           {i % 4 === 0 && (
             <circle
               cx={l.x}
@@ -191,9 +248,8 @@ function ShoreLights({
 
 /* ---------- Boğazdaki tekne ve şamandıra ışıkları ---------- */
 function SeaLights() {
-  // Yeşil = sancak, beyaz = seyir/pruva, biri kırmızı (iskele) — gerçek deniz dili
   const lights = [
-    { x: 18, y: 64, color: "#5af070", size: 1.6, delay: "0s", dur: "5s" }, // yeşil şamandıra solda
+    { x: 18, y: 64, color: "#5af070", size: 1.6, delay: "0s", dur: "5s" },
     { x: 28, y: 58, color: "#ffffff", size: 1.2, delay: "0.4s", dur: "4.5s" },
     { x: 42, y: 72, color: "#5af070", size: 1.4, delay: "1.2s", dur: "6s" },
     { x: 55, y: 50, color: "#ffffff", size: 1.0, delay: "0.8s", dur: "5s" },
@@ -202,7 +258,6 @@ function SeaLights() {
     { x: 78, y: 84, color: "#5af070", size: 1.3, delay: "0.3s", dur: "5.5s" },
     { x: 85, y: 56, color: "#ffffff", size: 1.4, delay: "1.0s", dur: "5s" },
     { x: 92, y: 68, color: "#5af070", size: 1.2, delay: "1.8s", dur: "6s" },
-    // Bir kırmızı şamandıra — yanal denge için (gerçek deniz işareti)
     { x: 35, y: 80, color: "#ff5757", size: 1.3, delay: "1.4s", dur: "5s" },
     { x: 75, y: 90, color: "#ff5757", size: 1.1, delay: "0.6s", dur: "5.5s" },
   ];
@@ -219,7 +274,6 @@ function SeaLights() {
             animation: `boat-drift ${20 + i}s ease-in-out ${i * 0.3}s infinite alternate`,
           }}
         >
-          {/* Yumuşak hale */}
           <div
             style={{
               width: `${l.size * 18}px`,
@@ -231,7 +285,6 @@ function SeaLights() {
               color: l.color,
             }}
           />
-          {/* Çekirdek */}
           <div
             style={{
               width: `${l.size * 3}px`,
@@ -247,7 +300,6 @@ function SeaLights() {
               color: l.color,
             }}
           />
-          {/* Sudaki kısa yansıma kuyruğu */}
           <div
             style={{
               width: "1px",
@@ -308,16 +360,7 @@ function Stars() {
 }
 
 /* ---------- Boğaz Köprüsü ---------- */
-/**
- * Asma köprü matematiği — 1600x600 viewBox üzerinde:
- *   - Sol kule: x=400, y=tepe 110 → tabana 360 (deck seviyesi)
- *   - Sağ kule: x=1200, y=tepe 110 → tabana 360
- *   - Ana kablo parabolü: tepelerden orta sarkmaya (290), sonra geri yukarı.
- *     Quadratic bezier ile: control point (800, 470), uçlar (400,110) ve (1200,110).
- *   - Hangerlar (dikey kablolar): parabol üzerindeki noktalardan deck'e iner.
- *     y_cable(t) = 110 + 720*t*(1-t) için her t ∈ {1/24, 2/24, ..., 23/24}.
- */
-function BosphorusBridge() {
+function BosphorusBridge({ isDay }: { isDay: boolean }) {
   const leftX = 400;
   const rightX = 1200;
   const towerTop = 110;
@@ -332,12 +375,11 @@ function BosphorusBridge() {
     return { x, y };
   });
 
-  // Deck boyunca LED ışıklar — mor → magenta → pembe geçişi
+  // LED ışıklar — gündüzde çok sönük
   const DECK_LIGHTS = 80;
   const deckLights = Array.from({ length: DECK_LIGHTS }, (_, i) => {
     const t = i / (DECK_LIGHTS - 1);
-    const x = 200 + t * 1200; // deck 200'den 1400'e uzanır
-    // Mor → magenta → pembe (sinüsoidal mix)
+    const x = 200 + t * 1200;
     const r = Math.round(155 + (241 - 155) * t);
     const g = Math.round(93 + (91 - 93) * t);
     const b = Math.round(229 + (181 - 229) * t);
@@ -345,6 +387,14 @@ function BosphorusBridge() {
     const delay = (i * 0.07) % 3;
     return { x, color, delay };
   });
+
+  // Tema renkleri
+  const cableColor = isDay ? "#6a7a8e" : "url(#cable-gradient)";
+  const cableOpacity = isDay ? 0.7 : 1;
+  const hangerColor = isDay ? "#5a6a82" : "#243a5a";
+  const hangerOpacity = isDay ? 0.55 : 0.65;
+  const towerFill = isDay ? "#6c7a8c" : "#0a121e";
+  const towerCross = isDay ? "#7a8898" : "#0c1726";
 
   return (
     <svg
@@ -371,45 +421,45 @@ function BosphorusBridge() {
         </filter>
       </defs>
 
-      {/* Hangerlar (önce çizilir, deck altında kalır) */}
-      <g stroke="#243a5a" strokeWidth="0.7" opacity="0.65">
+      {/* Hangerlar */}
+      <g
+        stroke={hangerColor}
+        strokeWidth="0.7"
+        opacity={hangerOpacity}
+        style={{ transition: "stroke 1.2s ease, opacity 1.2s ease" }}
+      >
         {hangers.map((h, i) => (
           <line key={i} x1={h.x} y1={h.y} x2={h.x} y2={deckY} />
         ))}
       </g>
 
-      {/* Ana asma kablo — sol uzantı, parabol, sağ uzantı (3 segment) */}
+      {/* Ana asma kablo */}
       <g fill="none" strokeLinecap="round">
-        {/* Sol arka uzantı (kuleden sahile) */}
         <path
           d={`M 60 ${deckY + 10} Q 230 ${deckY - 80} ${leftX} ${towerTop}`}
-          stroke="url(#cable-gradient)"
+          stroke={cableColor}
           strokeWidth="1.6"
-          opacity="0.7"
+          opacity={cableOpacity * 0.7}
         />
-        {/* Ana parabol */}
         <path
           d={`M ${leftX} ${towerTop} Q 800 470 ${rightX} ${towerTop}`}
-          stroke="url(#cable-gradient)"
+          stroke={cableColor}
           strokeWidth="2"
+          opacity={cableOpacity}
         />
-        {/* Sağ arka uzantı */}
         <path
           d={`M ${rightX} ${towerTop} Q 1370 ${deckY - 80} 1540 ${deckY + 10}`}
-          stroke="url(#cable-gradient)"
+          stroke={cableColor}
           strokeWidth="1.6"
-          opacity="0.7"
+          opacity={cableOpacity * 0.7}
         />
       </g>
 
-      {/* Sol kule */}
-      <Tower x={leftX} top={towerTop} bottom={deckY + 30} />
-      {/* Sağ kule */}
-      <Tower x={rightX} top={towerTop} bottom={deckY + 30} />
+      <Tower x={leftX} top={towerTop} bottom={deckY + 30} fill={towerFill} cross={towerCross} />
+      <Tower x={rightX} top={towerTop} bottom={deckY + 30} fill={towerFill} cross={towerCross} />
 
-      {/* Deck — ince çubuk + mor-pembe glow */}
-      <g>
-        {/* Glow halesi */}
+      {/* Deck */}
+      <g style={{ opacity: isDay ? 0.2 : 1, transition: "opacity 1.2s ease" }}>
         <rect
           x="200"
           y={deckY - 1}
@@ -419,7 +469,6 @@ function BosphorusBridge() {
           filter="url(#strong-glow)"
           opacity="0.85"
         />
-        {/* Asıl deck */}
         <rect
           x="200"
           y={deckY}
@@ -428,33 +477,47 @@ function BosphorusBridge() {
           fill="url(#deck-glow)"
           filter="url(#deck-blur)"
         />
-        {/* Deck altı koyu çizgi (yapı tarafı) */}
         <rect x="200" y={deckY + 2} width="1200" height="0.8" fill="#0a1018" />
       </g>
 
-      {/* Deck LED ışıkları — her biri kendi nabzıyla */}
-      <g>
-        {deckLights.map((d, i) => (
-          <circle
-            key={i}
-            cx={d.x}
-            cy={deckY}
-            r="0.9"
-            fill={d.color}
-            style={{
-              color: d.color,
-              animation: `deck-pulse 3s ease-in-out ${d.delay}s infinite`,
-            }}
-          />
-        ))}
-      </g>
+      {/* Gündüz: gri deck siluetii */}
+      {isDay && (
+        <rect
+          x="200"
+          y={deckY - 0.5}
+          width="1200"
+          height="2.6"
+          fill="#5a6a82"
+          opacity="0.75"
+        />
+      )}
 
-      {/* Kule tepelerinde kırmızı havacılık lambası — yavaş yanıp söner */}
+      {/* Deck LED ışıkları — gündüzde gizli */}
+      {!isDay && (
+        <g>
+          {deckLights.map((d, i) => (
+            <circle
+              key={i}
+              cx={d.x}
+              cy={deckY}
+              r="0.9"
+              fill={d.color}
+              style={{
+                color: d.color,
+                animation: `deck-pulse 3s ease-in-out ${d.delay}s infinite`,
+              }}
+            />
+          ))}
+        </g>
+      )}
+
+      {/* Havacılık lambası — gündüzde de yanar (gerçek) */}
       <circle
         cx={leftX}
         cy={towerTop - 6}
         r="2"
         fill="#ff3a3a"
+        opacity={isDay ? 0.55 : 1}
         style={{
           animation: "aviation-blink 2.6s ease-in-out 0s infinite",
           filter: "drop-shadow(0 0 4px #ff3a3a)",
@@ -465,6 +528,7 @@ function BosphorusBridge() {
         cy={towerTop - 6}
         r="2"
         fill="#ff3a3a"
+        opacity={isDay ? 0.55 : 1}
         style={{
           animation: "aviation-blink 2.6s ease-in-out 1.3s infinite",
           filter: "drop-shadow(0 0 4px #ff3a3a)",
@@ -478,39 +542,30 @@ function Tower({
   x,
   top,
   bottom,
+  fill,
+  cross,
 }: {
   x: number;
   top: number;
   bottom: number;
+  fill: string;
+  cross: string;
 }) {
-  // Asma köprü kulesi: iki ince dikey direk + tepedeki yatay traverse + alt traverse
   const w = 8;
   const left = x - w / 2;
   return (
-    <g>
-      {/* Sol direk */}
-      <rect x={left - 3} y={top} width="3" height={bottom - top} fill="#0a121e" />
-      {/* Sağ direk */}
-      <rect x={left + w} y={top} width="3" height={bottom - top} fill="#0a121e" />
-      {/* Üst yatay traverse */}
-      <rect x={left - 5} y={top + 6} width={w + 10} height="2.2" fill="#0c1726" />
-      {/* Orta traverse */}
+    <g style={{ transition: "fill 1.2s ease" }}>
+      <rect x={left - 3} y={top} width="3" height={bottom - top} fill={fill} />
+      <rect x={left + w} y={top} width="3" height={bottom - top} fill={fill} />
+      <rect x={left - 5} y={top + 6} width={w + 10} height="2.2" fill={cross} />
       <rect
         x={left - 5}
         y={top + (bottom - top) * 0.5}
         width={w + 10}
         height="1.8"
-        fill="#0c1726"
+        fill={cross}
       />
-      {/* İnce kontur ışığı — kuleyi mor/pembe çerçeve halinde aydınlat */}
-      <rect
-        x={left - 3.4}
-        y={top}
-        width="0.8"
-        height={bottom - top}
-        fill="#9b5de5"
-        opacity="0.3"
-      />
+      <rect x={left - 3.4} y={top} width="0.8" height={bottom - top} fill="#9b5de5" opacity="0.3" />
       <rect
         x={left + w + 2.6}
         y={top}
@@ -524,19 +579,21 @@ function Tower({
 }
 
 /* ---------- Deniz + Hologram ---------- */
-function Sea() {
+function Sea({ isDay }: { isDay: boolean }) {
   return (
     <div className="absolute inset-x-0 bottom-0 h-[40%] overflow-hidden">
-      {/* Temel deniz gradyanı — derin lacivert → koyu mavi */}
+      {/* Temel deniz gradyanı */}
       <div
         className="absolute inset-0"
         style={{
-          background:
-            "linear-gradient(180deg, #0c2540 0%, #081930 40%, #050e1d 80%, #03070f 100%)",
+          background: isDay
+            ? "linear-gradient(180deg, #5fb7c8 0%, #3d8fa8 35%, #2c6b85 70%, #1f4d63 100%)"
+            : "linear-gradient(180deg, #0c2540 0%, #081930 40%, #050e1d 80%, #03070f 100%)",
+          transition: "background 1.4s ease",
         }}
       />
 
-      {/* Köprünün suya vuran mor/pembe yansıması — geniş yumuşak şerit */}
+      {/* Köprünün suya yansıması — gündüzde gizli */}
       <div
         className="absolute inset-x-0"
         style={{
@@ -545,23 +602,45 @@ function Sea() {
           background:
             "linear-gradient(180deg, rgba(155,93,229,0.22) 0%, rgba(241,91,181,0.16) 40%, transparent 100%)",
           filter: "blur(8px)",
-          animation:
-            "bridge-reflection 4.5s ease-in-out infinite",
+          animation: "bridge-reflection 4.5s ease-in-out infinite",
           mixBlendMode: "screen",
+          opacity: isDay ? 0 : 1,
+          transition: "opacity 1.2s ease",
         }}
       />
 
-      {/* Hologram tarama çizgileri — birkaç katman, farklı hızlarda yukarı kayar */}
-      <HologramScans />
+      {/* Gündüz: Güneşin sudaki altın yansıması */}
+      {isDay && (
+        <div
+          className="absolute inset-x-0"
+          style={{
+            top: "0%",
+            height: "60%",
+            background:
+              "radial-gradient(ellipse 30% 100% at 70% 0%, rgba(255,228,160,0.65) 0%, rgba(255,200,120,0.3) 30%, transparent 70%)",
+            mixBlendMode: "screen",
+            filter: "blur(4px)",
+          }}
+        />
+      )}
 
-      {/* Yatay sıvı parıltı — yana ileri-geri kayan cyan dalgası */}
+      {/* Hologram tarama çizgileri — gündüzde gizli */}
+      <div
+        style={{ opacity: isDay ? 0 : 1, transition: "opacity 1.2s ease" }}
+      >
+        <HologramScans />
+      </div>
+
+      {/* Yatay sıvı parıltı */}
       <div
         className="absolute inset-0"
         style={{
-          background:
-            "linear-gradient(90deg, transparent 0%, rgba(159,231,255,0.10) 35%, rgba(159,231,255,0.18) 50%, rgba(159,231,255,0.10) 65%, transparent 100%)",
+          background: isDay
+            ? "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 35%, rgba(255,255,255,0.32) 50%, rgba(255,255,255,0.18) 65%, transparent 100%)"
+            : "linear-gradient(90deg, transparent 0%, rgba(159,231,255,0.10) 35%, rgba(159,231,255,0.18) 50%, rgba(159,231,255,0.10) 65%, transparent 100%)",
           mixBlendMode: "screen",
           animation: "liquid-shimmer 8s ease-in-out infinite alternate",
+          transition: "background 1.4s ease",
         }}
       />
 
@@ -569,53 +648,57 @@ function Sea() {
       <svg
         viewBox="0 0 1600 200"
         preserveAspectRatio="xMidYMax slice"
-        className="absolute inset-x-0 bottom-0 h-[70%] w-full opacity-50"
+        className="absolute inset-x-0 bottom-0 h-[70%] w-full"
+        style={{ opacity: isDay ? 0.55 : 0.5 }}
       >
         {[20, 50, 80, 110, 140, 170].map((y, i) => (
           <path
             key={i}
             d={`M0,${y} Q200,${y - 5} 400,${y} T800,${y} T1200,${y} T1600,${y}`}
             fill="none"
-            stroke="#1f4a73"
+            stroke={isDay ? "#a8d8ec" : "#1f4a73"}
             strokeOpacity={0.45 - i * 0.06}
             strokeWidth={0.7}
           />
         ))}
-        {/* Cyan vurgu çizgisi — bir hologram okunan satır gibi */}
-        <path
-          d="M0,95 Q200,90 400,95 T800,95 T1200,95 T1600,95"
-          fill="none"
-          stroke="#9fe7ff"
-          strokeOpacity="0.35"
-          strokeWidth="0.6"
-          style={{ filter: "drop-shadow(0 0 3px #9fe7ff)" }}
-        />
+        {/* Cyan vurgu çizgisi — gündüzde gizli */}
+        {!isDay && (
+          <path
+            d="M0,95 Q200,90 400,95 T800,95 T1200,95 T1600,95"
+            fill="none"
+            stroke="#9fe7ff"
+            strokeOpacity="0.35"
+            strokeWidth="0.6"
+            style={{ filter: "drop-shadow(0 0 3px #9fe7ff)" }}
+          />
+        )}
       </svg>
 
-      {/* Hologram grid — üstten bakıldığında "veri masası" hissi */}
-      <div
-        className="absolute inset-x-0 bottom-0 h-[60%]"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(159,231,255,0.06) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(159,231,255,0.06) 1px, transparent 1px)
-          `,
-          backgroundSize: "80px 40px",
-          maskImage:
-            "linear-gradient(to top, black 0%, black 30%, transparent 90%)",
-          WebkitMaskImage:
-            "linear-gradient(to top, black 0%, black 30%, transparent 90%)",
-          transform: "perspective(600px) rotateX(58deg)",
-          transformOrigin: "bottom",
-          opacity: 0.7,
-        }}
-      />
+      {/* Hologram grid — gündüzde gizli */}
+      {!isDay && (
+        <div
+          className="absolute inset-x-0 bottom-0 h-[60%]"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(159,231,255,0.06) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(159,231,255,0.06) 1px, transparent 1px)
+            `,
+            backgroundSize: "80px 40px",
+            maskImage:
+              "linear-gradient(to top, black 0%, black 30%, transparent 90%)",
+            WebkitMaskImage:
+              "linear-gradient(to top, black 0%, black 30%, transparent 90%)",
+            transform: "perspective(600px) rotateX(58deg)",
+            transformOrigin: "bottom",
+            opacity: 0.7,
+          }}
+        />
+      )}
     </div>
   );
 }
 
 function HologramScans() {
-  // 4 farklı katman, farklı delay/duration ile yukarı kayar — sürekli akış hissi
   const scans = [
     { delay: 0, duration: 6, top: "65%", color: "rgba(159,231,255,0.45)" },
     { delay: 1.5, duration: 7, top: "75%", color: "rgba(159,231,255,0.30)" },
@@ -642,7 +725,7 @@ function HologramScans() {
   );
 }
 
-/* ---------- Yansımalar (köprü + kule sudaki) ---------- */
+/* ---------- Yansımalar (gece-özel) ---------- */
 function Reflections() {
   return (
     <svg
@@ -657,7 +740,6 @@ function Reflections() {
           <stop offset="100%" stopColor="#9b5de5" stopOpacity="0" />
         </linearGradient>
       </defs>
-      {/* Köprünün dalgalı yansıması — birkaç titrek yatay çizgi */}
       {[6, 16, 28, 42, 58, 76].map((y, i) => (
         <path
           key={i}
@@ -673,23 +755,11 @@ function Reflections() {
   );
 }
 
-/* ---------- Kız Kulesi (denizin içinde, sağ ön plan) ---------- */
-/**
- * Bu kez sahne SVG'sinin içine gömmek yerine kendi
- * konumlandırılmış konteynerinde duruyor — böylece kuleyi
- * piksel cinsinden tam istediğimiz yere (deniz seviyesinin
- * üstüne) yerleştirebiliyoruz, fener ışını da onunla
- * tutarlı. Aspect-ratio sabit, responsive ölçek `clamp`.
- *
- * Sahnedeki yeri: hero'nun sağ alt çeyreği, deniz katmanının
- * ortası. Adanın altı sea div'iyle örtüşür.
- */
-function MaidensTower() {
-  // Tower viewBox koordinatları (90 wide × 130 tall)
+/* ---------- Kız Kulesi ---------- */
+function MaidensTower({ isDay }: { isDay: boolean }) {
   const W = 90;
   const H = 130;
 
-  // Pencereler — kule gövdesinde 3 sıra
   const windows = [
     { x: 39, y: 62, c: "#f0d896" },
     { x: 45, y: 62, c: "#e8c878" },
@@ -703,22 +773,31 @@ function MaidensTower() {
     { x: 51, y: 90, c: "#d4b26a" },
   ];
 
-  // Lantern viewBox konumu (kubbenin altındaki cam oda merkezi)
   const lanternX = 45;
   const lanternY = 42;
+
+  // Tema renkleri
+  const bodyFill = isDay ? "#c8a878" : "#0e1a28";
+  const bodyStroke = isDay ? "#8a6f4a" : "#1c2c40";
+  const islandColor = isDay ? "#6a5848" : "#070d18";
+  const islandColor2 = isDay ? "#7a6852" : "#0d1620";
+  const ringColor = isDay ? "#8a6f4a" : "#142031";
+  const ringColor2 = isDay ? "#a48868" : "#22344a";
+  const lanternBox = isDay ? "#a48868" : "#1a2940";
+  const lanternBoxStroke = isDay ? "#7a5e40" : "#2a3a55";
+  const domeColor = isDay ? "#7a5e40" : "#0d1825";
+  const domeStroke = isDay ? "#a48868" : "#22344a";
 
   return (
     <div
       className="absolute pointer-events-none"
       style={{
-        // Sağ-orta, deniz seviyesinin biraz altına oturur
         right: "14%",
         bottom: "18%",
         width: "clamp(140px, 14vw, 220px)",
         aspectRatio: `${W} / ${H}`,
       }}
     >
-      {/* Tower SVG */}
       <svg
         viewBox={`0 0 ${W} ${H}`}
         className="absolute inset-0 w-full h-full"
@@ -737,68 +816,74 @@ function MaidensTower() {
           </radialGradient>
         </defs>
 
-        {/* Su altındaki halka yansıması — adanın etrafında parlak su */}
-        <ellipse cx={45} cy={117} rx={42} ry={8} fill="url(#tower-island-glow)" />
+        {/* Su altındaki halka — gündüzde sönük */}
+        {!isDay && <ellipse cx={45} cy={117} rx={42} ry={8} fill="url(#tower-island-glow)" />}
 
-        {/* Kayalık ada */}
-        <ellipse cx={45} cy={114} rx={28} ry={3.5} fill="#070d18" />
-        <ellipse cx={45} cy={112.5} rx={25} ry={3} fill="#0d1620" />
+        {/* Ada */}
+        <ellipse cx={45} cy={114} rx={28} ry={3.5} fill={islandColor} style={{ transition: "fill 1.2s ease" }} />
+        <ellipse cx={45} cy={112.5} rx={25} ry={3} fill={islandColor2} style={{ transition: "fill 1.2s ease" }} />
 
-        {/* Kuleyi tabandan yıkayan sıcak spot */}
-        <ellipse cx={45} cy={104} rx={20} ry={10} fill="#d4b26a" opacity="0.14" />
+        {/* Sıcak spot — gece-özel */}
+        {!isDay && <ellipse cx={45} cy={104} rx={20} ry={10} fill="#d4b26a" opacity="0.14" />}
 
         {/* Kule gövdesi */}
-        <rect x={32} y={50} width={26} height={62} fill="#0e1a28" />
+        <rect x={32} y={50} width={26} height={62} fill={bodyFill} style={{ transition: "fill 1.2s ease" }} />
         <rect
           x={32}
           y={50}
           width={26}
           height={62}
           fill="none"
-          stroke="#1c2c40"
+          stroke={bodyStroke}
           strokeWidth={0.5}
         />
 
-        {/* Pencereler */}
+        {/* Pencereler — gündüzde koyu, gece ışıklı */}
         {windows.map((w, i) => (
-          <g key={i}>
+          <g key={i} style={{ opacity: isDay ? 0.5 : 1, transition: "opacity 1.2s ease" }}>
             <rect
               x={w.x - 1.2}
               y={w.y - 1.6}
               width={2.4}
               height={3.2}
-              fill={w.c}
-              style={{
-                animation: `twinkle ${3 + (i % 4)}s ease-in-out ${(i * 0.4) % 3}s infinite`,
-              }}
+              fill={isDay ? "#5a4a3a" : w.c}
+              style={
+                isDay
+                  ? undefined
+                  : {
+                      animation: `twinkle ${3 + (i % 4)}s ease-in-out ${(i * 0.4) % 3}s infinite`,
+                    }
+              }
             />
-            <rect
-              x={w.x - 2.2}
-              y={w.y - 2.4}
-              width={4.4}
-              height={4.8}
-              fill={w.c}
-              opacity="0.2"
-              style={{
-                animation: `twinkle ${3 + (i % 4)}s ease-in-out ${(i * 0.4) % 3}s infinite`,
-              }}
-            />
+            {!isDay && (
+              <rect
+                x={w.x - 2.2}
+                y={w.y - 2.4}
+                width={4.4}
+                height={4.8}
+                fill={w.c}
+                opacity="0.2"
+                style={{
+                  animation: `twinkle ${3 + (i % 4)}s ease-in-out ${(i * 0.4) % 3}s infinite`,
+                }}
+              />
+            )}
           </g>
         ))}
 
         {/* Üst halka */}
-        <rect x={29} y={47} width={32} height={3.6} fill="#142031" />
-        <rect x={29} y={46.4} width={32} height={0.8} fill="#22344a" />
+        <rect x={29} y={47} width={32} height={3.6} fill={ringColor} style={{ transition: "fill 1.2s ease" }} />
+        <rect x={29} y={46.4} width={32} height={0.8} fill={ringColor2} style={{ transition: "fill 1.2s ease" }} />
 
-        {/* Fener bölmesi — kubbenin altındaki cam oda */}
-        <rect x={37} y={37} width={16} height={10} fill="#1a2940" />
+        {/* Fener bölmesi */}
+        <rect x={37} y={37} width={16} height={10} fill={lanternBox} style={{ transition: "fill 1.2s ease" }} />
         <rect
           x={37}
           y={37}
           width={16}
           height={10}
           fill="none"
-          stroke="#2a3a55"
+          stroke={lanternBoxStroke}
           strokeWidth={0.4}
         />
         {[39, 42.6, 46.2, 49.8].map((x, i) => (
@@ -808,116 +893,121 @@ function MaidensTower() {
             y={38.5}
             width={2}
             height={7}
-            fill="#fff8d0"
-            opacity="0.85"
-            style={{
-              animation: `twinkle 2.5s ease-in-out ${i * 0.2}s infinite`,
-            }}
+            fill={isDay ? "#e8d090" : "#fff8d0"}
+            opacity={isDay ? 0.6 : 0.85}
+            style={
+              isDay
+                ? undefined
+                : {
+                    animation: `twinkle 2.5s ease-in-out ${i * 0.2}s infinite`,
+                  }
+            }
           />
         ))}
 
         {/* Kubbe */}
-        <path d="M36,37 L45,24 L54,37 Z" fill="#0d1825" />
+        <path d="M36,37 L45,24 L54,37 Z" fill={domeColor} style={{ transition: "fill 1.2s ease" }} />
         <path
           d="M37.5,37 L45,26.5 L52.5,37 Z"
           fill="none"
-          stroke="#22344a"
+          stroke={domeStroke}
           strokeWidth={0.4}
         />
 
         {/* Mızrak */}
-        <line x1={45} y1={24} x2={45} y2={11} stroke="#3a4a60" strokeWidth={0.7} />
+        <line x1={45} y1={24} x2={45} y2={11} stroke={isDay ? "#6a5840" : "#3a4a60"} strokeWidth={0.7} />
         <circle cx={45} cy={11} r={1.1} fill="#d4b26a" />
         <circle cx={45} cy={11} r={3} fill="#d4b26a" opacity="0.35" />
 
-        {/* Fener glow halesi — çok katmanlı */}
-        <circle cx={lanternX} cy={lanternY} r={11} fill="url(#lantern-glow)" opacity="0.9" />
-        <circle cx={lanternX} cy={lanternY} r={22} fill="url(#lantern-glow)" opacity="0.45" />
-        <circle cx={lanternX} cy={lanternY} r={42} fill="url(#lantern-glow)" opacity="0.2" />
-        <circle cx={lanternX} cy={lanternY} r={70} fill="url(#lantern-glow)" opacity="0.08" />
+        {/* Fener glow halesi — gündüzde çok sönük */}
+        <g style={{ opacity: isDay ? 0.25 : 1, transition: "opacity 1.2s ease" }}>
+          <circle cx={lanternX} cy={lanternY} r={11} fill="url(#lantern-glow)" opacity="0.9" />
+          <circle cx={lanternX} cy={lanternY} r={22} fill="url(#lantern-glow)" opacity="0.45" />
+          <circle cx={lanternX} cy={lanternY} r={42} fill="url(#lantern-glow)" opacity="0.2" />
+          <circle cx={lanternX} cy={lanternY} r={70} fill="url(#lantern-glow)" opacity="0.08" />
+        </g>
 
-        {/* Çekirdek fener noktası */}
-        <circle cx={lanternX} cy={lanternY} r={1.8} fill="#fff8d0">
+        <circle cx={lanternX} cy={lanternY} r={1.8} fill="#fff8d0" opacity={isDay ? 0.7 : 1}>
           <animate
             attributeName="opacity"
-            values="0.92;1;0.92"
+            values={isDay ? "0.7;0.85;0.7" : "0.92;1;0.92"}
             dur="2.4s"
             repeatCount="indefinite"
           />
         </circle>
       </svg>
 
-      {/* Dönen deniz feneri ışını — fener konumuna ankrajlı (lanternX/W = %50, lanternY/H ≈ %32) */}
-      <div
-        className="absolute"
-        style={{
-          left: `${(lanternX / W) * 100}%`,
-          top: `${(lanternY / H) * 100}%`,
-          width: 0,
-          height: 0,
-        }}
-      >
-        {/* Ana ışın */}
+      {/* Dönen deniz feneri ışını — gündüzde gizli */}
+      {!isDay && (
         <div
+          className="absolute"
           style={{
-            position: "absolute",
-            left: 0,
-            top: 0,
-            width: "1px",
-            height: "1px",
-            transformOrigin: "0 0",
-            animation: "lighthouse-beam 14s linear infinite",
+            left: `${(lanternX / W) * 100}%`,
+            top: `${(lanternY / H) * 100}%`,
+            width: 0,
+            height: 0,
           }}
         >
           <div
             style={{
               position: "absolute",
               left: 0,
-              top: "-7px",
-              width: "560px",
-              height: "14px",
-              transformOrigin: "0 50%",
-              background:
-                "linear-gradient(90deg, rgba(255,248,208,0.7) 0%, rgba(240,216,150,0.35) 30%, rgba(212,178,106,0.12) 70%, transparent 100%)",
-              filter: "blur(4px)",
-              mixBlendMode: "screen",
-              clipPath: "polygon(0 45%, 100% 0%, 100% 100%, 0 55%)",
+              top: 0,
+              width: "1px",
+              height: "1px",
+              transformOrigin: "0 0",
+              animation: "lighthouse-beam 14s linear infinite",
             }}
-          />
-        </div>
-        {/* Karşı ışın */}
-        <div
-          style={{
-            position: "absolute",
-            left: 0,
-            top: 0,
-            width: "1px",
-            height: "1px",
-            transformOrigin: "0 0",
-            animation: "lighthouse-beam 14s linear infinite",
-            animationDelay: "-7s",
-          }}
-        >
+          >
+            <div
+              style={{
+                position: "absolute",
+                left: 0,
+                top: "-7px",
+                width: "560px",
+                height: "14px",
+                transformOrigin: "0 50%",
+                background:
+                  "linear-gradient(90deg, rgba(255,248,208,0.7) 0%, rgba(240,216,150,0.35) 30%, rgba(212,178,106,0.12) 70%, transparent 100%)",
+                filter: "blur(4px)",
+                mixBlendMode: "screen",
+                clipPath: "polygon(0 45%, 100% 0%, 100% 100%, 0 55%)",
+              }}
+            />
+          </div>
           <div
             style={{
               position: "absolute",
               left: 0,
-              top: "-5px",
-              width: "440px",
-              height: "10px",
-              transformOrigin: "0 50%",
-              background:
-                "linear-gradient(90deg, rgba(255,248,208,0.4) 0%, rgba(240,216,150,0.16) 40%, transparent 100%)",
-              filter: "blur(5px)",
-              mixBlendMode: "screen",
-              clipPath: "polygon(0 45%, 100% 0%, 100% 100%, 0 55%)",
-              opacity: 0.7,
+              top: 0,
+              width: "1px",
+              height: "1px",
+              transformOrigin: "0 0",
+              animation: "lighthouse-beam 14s linear infinite",
+              animationDelay: "-7s",
             }}
-          />
+          >
+            <div
+              style={{
+                position: "absolute",
+                left: 0,
+                top: "-5px",
+                width: "440px",
+                height: "10px",
+                transformOrigin: "0 50%",
+                background:
+                  "linear-gradient(90deg, rgba(255,248,208,0.4) 0%, rgba(240,216,150,0.16) 40%, transparent 100%)",
+                filter: "blur(5px)",
+                mixBlendMode: "screen",
+                clipPath: "polygon(0 45%, 100% 0%, 100% 100%, 0 55%)",
+                opacity: 0.7,
+              }}
+            />
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Sudaki uzun titrek altın yansıma — adanın altından aşağı sarkar */}
+      {/* Sudaki uzun titrek altın yansıma — gündüzde sönük */}
       <div
         className="absolute"
         style={{
@@ -927,6 +1017,8 @@ function MaidensTower() {
           height: "30%",
           transform: "translateX(-50%)",
           mixBlendMode: "screen",
+          opacity: isDay ? 0.35 : 1,
+          transition: "opacity 1.2s ease",
         }}
       >
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full">
