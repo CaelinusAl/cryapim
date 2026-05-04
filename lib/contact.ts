@@ -10,8 +10,8 @@
  *   Vercel Settings → Environment Variables → aynısı
  */
 
-const HARDCODED_PHONE = "+90 533 222 22 21";
-const HARDCODED_WHATSAPP = "905332222221"; // sadece rakam, intl kod dahil
+const HARDCODED_PHONE = "+90 533 022 22 21";
+const HARDCODED_WHATSAPP = "905330222221"; // sadece rakam, intl kod dahil
 const HARDCODED_EMAIL = "hello@cryapim.com";
 const HARDCODED_INSTAGRAM = "https://instagram.com/cryapim";
 const HARDCODED_YOUTUBE = "https://youtube.com/@cryapim";
