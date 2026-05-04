@@ -17,12 +17,12 @@ import { BookCTA, WhatsAppLink } from "@/components/BookCTA";
 export default function HomePage() {
   return (
     <div>
-      {/* ===== HERO — sol metin / sağ teras (alttan ışık parıldar) ===== */}
+      {/* ===== HERO — sol teras / sağ metin (alttan ışık parıldar) ===== */}
       <section className="relative min-h-[88vh] flex items-end px-6 md:px-10 pb-16 md:pb-20 overflow-hidden">
-        {/* Sağ taraftaki 2D teras görseli — md+ */}
+        {/* Sol taraftaki 2D teras görseli — md+ */}
         <div
           aria-hidden
-          className="hidden md:block absolute inset-y-0 right-0 w-[58%] lg:w-[55%] z-0 pointer-events-none"
+          className="hidden md:block absolute inset-y-0 left-0 w-[58%] lg:w-[55%] z-0 pointer-events-none"
         >
           {/* Alt katmandan parıldayan ışık halesi — Boğaz Köprüsü ışıkları sızıntısı */}
           <div
@@ -30,8 +30,8 @@ export default function HomePage() {
             style={{
               background: `
                 radial-gradient(ellipse 70% 35% at 50% 95%, rgba(159,231,255,0.22), transparent 65%),
-                radial-gradient(ellipse 35% 25% at 80% 60%, rgba(212,178,106,0.18), transparent 70%),
-                radial-gradient(ellipse 30% 20% at 25% 75%, rgba(159,231,255,0.14), transparent 75%)
+                radial-gradient(ellipse 35% 25% at 75% 60%, rgba(212,178,106,0.18), transparent 70%),
+                radial-gradient(ellipse 30% 20% at 22% 75%, rgba(159,231,255,0.14), transparent 75%)
               `,
               filter: "blur(8px)",
               animation:
@@ -52,12 +52,12 @@ export default function HomePage() {
               mixBlendMode: "normal",
             }}
           />
-          {/* Sol kenardan içe doğru fade — metnin okunabilmesi için */}
+          {/* Sağ kenardan içe doğru fade — sağdaki metin okunabilsin */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(90deg, rgba(7,6,15,0.95) 0%, rgba(7,6,15,0.55) 18%, transparent 35%)",
+                "linear-gradient(270deg, rgba(7,6,15,0.95) 0%, rgba(7,6,15,0.55) 18%, transparent 35%)",
             }}
           />
           {/* Alt kenardan içe — backdrop ışıkları üst katmana sızar */}
@@ -71,7 +71,7 @@ export default function HomePage() {
         </div>
 
         {/* Mobil: hero text üstte, altta teras görseli (yatay) */}
-        <div className="relative w-full md:max-w-3xl crane-in z-10">
+        <div className="relative w-full md:max-w-3xl md:ml-auto crane-in z-10">
           <p className="mono-tag text-tower-gold/80">
             cr yapım · istanbul boğaz hattı
           </p>
