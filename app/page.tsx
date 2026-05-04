@@ -17,9 +17,61 @@ import { BookCTA, WhatsAppLink } from "@/components/BookCTA";
 export default function HomePage() {
   return (
     <div>
-      {/* ===== HERO ===== */}
-      <section className="relative min-h-[88vh] flex items-end px-6 md:px-10 pb-16 md:pb-20">
-        <div className="relative max-w-5xl crane-in">
+      {/* ===== HERO — sol metin / sağ teras (alttan ışık parıldar) ===== */}
+      <section className="relative min-h-[88vh] flex items-end px-6 md:px-10 pb-16 md:pb-20 overflow-hidden">
+        {/* Sağ taraftaki 2D teras görseli — md+ */}
+        <div
+          aria-hidden
+          className="hidden md:block absolute inset-y-0 right-0 w-[58%] lg:w-[55%] z-0 pointer-events-none"
+        >
+          {/* Alt katmandan parıldayan ışık halesi — Boğaz Köprüsü ışıkları sızıntısı */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `
+                radial-gradient(ellipse 70% 35% at 50% 95%, rgba(159,231,255,0.22), transparent 65%),
+                radial-gradient(ellipse 35% 25% at 80% 60%, rgba(212,178,106,0.18), transparent 70%),
+                radial-gradient(ellipse 30% 20% at 25% 75%, rgba(159,231,255,0.14), transparent 75%)
+              `,
+              filter: "blur(8px)",
+              animation:
+                "hero-light-pulse 7s ease-in-out infinite alternate",
+            }}
+          />
+          {/* Görsel */}
+          <Image
+            src="/teras.png"
+            alt="CR Yapım terası — Boğaz Köprüsü, Kız Kulesi, Caelinus sembolleri"
+            fill
+            priority
+            sizes="(min-width: 1024px) 55vw, 58vw"
+            className="object-contain object-bottom"
+            style={{
+              filter:
+                "drop-shadow(0 20px 60px rgba(7,6,15,0.55)) drop-shadow(0 0 40px rgba(159,231,255,0.10))",
+              mixBlendMode: "normal",
+            }}
+          />
+          {/* Sol kenardan içe doğru fade — metnin okunabilmesi için */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(7,6,15,0.95) 0%, rgba(7,6,15,0.55) 18%, transparent 35%)",
+            }}
+          />
+          {/* Alt kenardan içe — backdrop ışıkları üst katmana sızar */}
+          <div
+            className="absolute inset-x-0 bottom-0 h-32"
+            style={{
+              background:
+                "linear-gradient(180deg, transparent, rgba(7,6,15,0.85))",
+            }}
+          />
+        </div>
+
+        {/* Mobil: hero text üstte, altta teras görseli (yatay) */}
+        <div className="relative w-full md:max-w-3xl crane-in z-10">
           <p className="mono-tag text-tower-gold/80">
             cr yapım · istanbul boğaz hattı
           </p>
@@ -51,7 +103,10 @@ export default function HomePage() {
               className="group inline-flex items-center gap-3 mono-tag border border-ai-cyan/40 text-ai-cyan hover:bg-ai-cyan/10 px-7 py-4 rounded-full transition-colors"
             >
               Stüdyoyu Keşfet
-              <span aria-hidden className="transition-transform group-hover:translate-x-1">
+              <span
+                aria-hidden
+                className="transition-transform group-hover:translate-x-1"
+              >
                 →
               </span>
             </Link>
@@ -60,6 +115,29 @@ export default function HomePage() {
           <p className="mono-tag text-mist-500 mt-8 crane-in-slow">
             ◉ ışık hazır. sahne senin.
           </p>
+
+          {/* Mobil için teras görseli — hero text'in altında küçük */}
+          <div className="md:hidden mt-10 relative aspect-[4/3] rounded-2xl overflow-hidden">
+            <div
+              aria-hidden
+              className="absolute inset-0 z-0"
+              style={{
+                background:
+                  "radial-gradient(ellipse 80% 40% at 50% 95%, rgba(159,231,255,0.25), transparent 60%)",
+              }}
+            />
+            <Image
+              src="/teras.png"
+              alt="CR Yapım terası — Boğaz manzarası"
+              fill
+              sizes="100vw"
+              className="object-contain object-bottom relative z-10"
+              style={{
+                filter:
+                  "drop-shadow(0 16px 40px rgba(7,6,15,0.55))",
+              }}
+            />
+          </div>
         </div>
       </section>
 
@@ -157,11 +235,11 @@ export default function HomePage() {
             tint="from-tower-gold/30"
           />
           <SceneCard
-            imageSrc="/studio-kose.jpg"
+            imageSrc="/sanri-kose.png"
             symbol="🎙"
             label="Podcast / Sanrı Köşesi"
-            title="ON AIR. İki koltuk. Boğaz tanık."
-            description="Profesyonel mikrofon, kamera setup, geniş cam manzara. Podcast, röportaj, sohbet için."
+            title="İki koltuk. Boğaz tanık."
+            description="İki kapsül koltuk, dual mikrofon kolu, çift softbox aydınlatma. Podcast, röportaj, sohbet için Boğaz panoraması."
             tint="from-purple-500/30"
           />
           <SceneCard

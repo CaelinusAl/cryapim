@@ -344,6 +344,18 @@ body::before {
   }
 }
 
+/* Hero teras altından parıldayan Boğaz ışık halesi — yumuşak nefes */
+@keyframes hero-light-pulse {
+  0% {
+    opacity: 0.55;
+    transform: translateY(2px);
+  }
+  100% {
+    opacity: 0.95;
+    transform: translateY(-2px);
+  }
+}
+
 /* Caelinus moodboard yüklenirken — shimmer dalgası */
 @keyframes moodboard-shimmer {
   0% {

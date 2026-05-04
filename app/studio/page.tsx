@@ -103,7 +103,7 @@ export default function StudioPage() {
             reverse
           />
           <SceneDetail
-            imageSrc="/studio-kose.jpg"
+            imageSrc="/sanri-kose.png"
             symbol="🎙"
             label="Podcast / Sanrı Köşesi"
             title="ON AIR. İki koltuk. Boğaz tanık."
