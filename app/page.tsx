@@ -175,6 +175,56 @@ export default function HomePage() {
         </ul>
       </section>
 
+      {/* ===== ALT MARKA TEASER · BELLA · COCO · JOI ===== */}
+      <section className="relative px-6 md:px-10 py-12 md:py-16 max-w-6xl mx-auto">
+        <Link
+          href="/bella-coco-joi"
+          className="group block rounded-2xl overflow-hidden border border-pink-300/25 hover:border-pink-300/55 transition-colors"
+          style={{
+            background:
+              "linear-gradient(135deg, rgba(244,114,182,0.08) 0%, rgba(212,175,55,0.05) 100%)",
+          }}
+        >
+          <div className="grid md:grid-cols-5 items-stretch">
+            <div className="relative md:col-span-3 aspect-[4/3] md:aspect-auto md:min-h-[320px] overflow-hidden">
+              <Image
+                src="/bella-coco-joi/sahne-3-defile.jpg"
+                alt="Bella, Coco ve Joi — pembe runway, Boğaz manzarası"
+                fill
+                sizes="(min-width: 768px) 60vw, 100vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              />
+              <div
+                aria-hidden
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(90deg, transparent 50%, rgba(7,6,15,0.55) 100%)",
+                }}
+              />
+            </div>
+            <div className="md:col-span-2 p-6 md:p-8 flex flex-col justify-center">
+              <p className="mono-tag text-pink-300">yeni · cr alt marka</p>
+              <p className="editorial text-3xl md:text-4xl text-mist-100 mt-3 leading-tight">
+                Bella<span className="text-pink-300"> · </span>Coco
+                <span className="text-pink-300"> · </span>Joi
+              </p>
+              <p className="editorial italic text-pink-100 mt-2 text-lg">
+                Bir hikâye başlıyor.
+              </p>
+              <p className="body-readable text-mist-300 mt-4">
+                CR Pet Collection’ın AI destekli kısa dizisi. Boğaz manzaralı
+                stüdyomuzun ilk pilot içeriği — pembe ışıkta üç köpek, bir
+                marka.
+              </p>
+              <span className="mono-tag text-tower-gold mt-5 inline-flex items-center gap-2">
+                Pilot bölümü izle <span aria-hidden>→</span>
+              </span>
+            </div>
+          </div>
+        </Link>
+      </section>
+
       {/* ===== PAKETLER ===== */}
       <section
         id="paketler"
