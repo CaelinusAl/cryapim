@@ -19,6 +19,12 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "**.ytimg.com" },
       // TMDB film poster + backdrop CDN'i (Perde)
       { protocol: "https", hostname: "image.tmdb.org" },
+      // DALL·E 3 üretim çıktıları (Caelinus moodboard) — Azure Blob.
+      // URL'ler 1 saatlik geçerli; ileride Vercel Blob'a kalıcılaştırılacak.
+      {
+        protocol: "https",
+        hostname: "oaidalleapiprodscus.blob.core.windows.net",
+      },
     ],
   },
 

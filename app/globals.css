@@ -344,6 +344,16 @@ body::before {
   }
 }
 
+/* Caelinus moodboard yüklenirken — shimmer dalgası */
+@keyframes moodboard-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
 /* Mikrofon kayıtta — kırmızı pulse halkası */
 @keyframes sanri-pulse-ring {
   0% {

@@ -8,6 +8,7 @@
 
 export type PersonaId =
   | "sanri"
+  | "caelinus"
   | "rivayet"
   | "supheci"
   | "selbi"

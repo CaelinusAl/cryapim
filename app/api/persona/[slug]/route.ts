@@ -272,6 +272,14 @@ const TUNES: Record<string, TuneParams> = {
     frequencyPenalty: 0.4,
     presencePenalty: 0.3,
   },
+  caelinus: {
+    // Stylist — palet/doku okumasında tutarlı kalmalı, fazla
+    // şiirsel kaymasın. 5-başlıklı yapı sıkı. Orta ölçek bütçe.
+    temperature: 0.65,
+    maxTokens: 260,
+    frequencyPenalty: 0.3,
+    presencePenalty: 0.15,
+  },
   rivayet: {
     temperature: 0.7,
     maxTokens: 240,
