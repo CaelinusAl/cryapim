@@ -20,7 +20,7 @@ const MIN_PROMPT_LEN = 3;
  *   3) FİGÜR    → editöryel portre (modern İstanbul kadını, Vogue Türkiye)
  *   4) NESNE    → curated still life / flat-lay (hat, çini, kandil, kitap)
  *
- * Her katmanın kendi DALL·E 3 prompt template'i var; vibe içeri
+ * Her katmanın kendi gpt-image-1 prompt template'i var; vibe içeri
  * harmanlanır, sonuç editöryel İstanbul-imzalı bir moodboard.
  */
 type NarrativeId = "atmosphere" | "texture" | "figure" | "object";
@@ -31,13 +31,13 @@ type Narrative = {
   label: string;
   /** alt text için kısa Türkçe sıfat */
   altLabel: string;
-  /** DALL·E 3'e gönderilecek prompt template — `{vibe}` placeholder'ı doldurulur */
+  /** gpt-image-1'e gönderilecek prompt template — `{vibe}` placeholder'ı doldurulur */
   promptTemplate: (vibe: string) => string;
 };
 
 /* ---------- Caelinus imza tarifi (her promptun temelinde) ---------- */
 /**
- * DALL·E 3 referansları. Bu cümleler hem stilistik düzey
+ * Görsel model referansları. Bu cümleler hem stilistik düzey
  * hem de Caelinus AI'nın markasını öğretiyor — sıradan AI
  * çıktısından net bir kopuş.
  */
@@ -163,12 +163,12 @@ type ErrorBody = { error: string };
  *
  * Akış:
  *   1) Rate-limit + giriş doğrulama
- *   2) 4 paralel DALL·E 3 çağrısı (n=1, dört farklı NARRATIVE)
+ *   2) 4 paralel gpt-image-1 çağrısı (n=1, dört farklı NARRATIVE)
  *   3) Aynı zamanda Caelinus persona'sıyla yorum üret (paralel)
  *   4) Görseller veya yorum patlasa bile graceful: yorum yoksa fallback
  *
  * Maliyet:
- *   ~ $0.08 × 4 = $0.32 / istek (DALL·E 3 HD 1024x1024) — kalite artıyor
+ *   ~ gpt-image-1 high 1024x1024 × 4 = ~$0.32 / istek — kalite artıyor
  *   + ~$0.001 yorum (gpt-4o-mini)
  *
  * Bu yüzden rate-limit sıkı kalmaya devam eder.
@@ -247,7 +247,7 @@ export async function POST(
 }
 
 /**
- * 4 paralel DALL·E 3 çağrısı — her biri farklı NARRATIVE.
+ * 4 paralel gpt-image-1 çağrısı — her biri farklı NARRATIVE.
  * Birinin patlaması diğerlerini bozmaz (Promise.allSettled).
  */
 async function generateMoodboardImages(
@@ -279,22 +279,21 @@ async function generateOneImage(
       },
       signal: controller.signal,
       body: JSON.stringify({
-        model: "dall-e-3",
+        // gpt-image-1: DALL·E 3 sonrası OpenAI'nın resmi görsel modeli.
+        // Yalnızca base64 (b64_json) döner — response_format ve style
+        // parametreleri desteklenmez; quality "high|medium|low|auto".
+        model: "gpt-image-1",
         prompt,
         n: 1,
         size: "1024x1024",
-        // HD modu — Caelinus için kalite > maliyet
-        quality: "hd",
-        // "natural" stili: anti-stock, painterly, sinematik
-        style: "natural",
-        response_format: "url",
+        quality: "high",
       }),
     });
 
     if (!res.ok) {
       const text = await res.text().catch(() => "");
       console.error(
-        "[caelinus/dalle] hata:",
+        "[caelinus/gpt-image] hata:",
         res.status,
         narrative.id,
         text.slice(0, 200)
@@ -303,20 +302,20 @@ async function generateOneImage(
     }
 
     const data = (await res.json()) as {
-      data?: Array<{ url?: string; revised_prompt?: string }>;
+      data?: Array<{ b64_json?: string; url?: string }>;
     };
     const item = data.data?.[0];
-    if (!item?.url) return null;
+    const b64 = item?.b64_json;
+    if (!b64) return null;
 
     return {
-      url: item.url,
+      url: `data:image/png;base64,${b64}`,
       alt: `Caelinus moodboard — ${vibe} (${narrative.altLabel})`,
       label: narrative.label,
       narrativeId: narrative.id,
-      revisedPrompt: item.revised_prompt,
     };
   } catch (err) {
-    console.error("[caelinus/dalle] çağrı hata:", narrative.id, err);
+    console.error("[caelinus/gpt-image] çağrı hata:", narrative.id, err);
     return null;
   } finally {
     clearTimeout(timeout);
