@@ -23,9 +23,9 @@ export type Program = {
   signature: string;
   episodes: number;
   cadence: string;
-  channel: "youtube" | "instagram" | "podcast" | "ai-yapimi";
-  /** Plato'da bu programın çekildiği sahne köşesi (camera target). */
-  platoSeat: { x: number; y: number; z: number; label: string };
+  channel: "youtube" | "instagram" | "podcast";
+  /** Programın platodaki (set) köşesinin adı — detay sayfasında gösterilir. */
+  setLabel: string;
   /** Programın platodaki gerçek set fotoğrafı (opsiyonel; varsa
    *  detay sayfasının hero'su olarak kullanılır). */
   realPhoto?: string;
@@ -47,7 +47,7 @@ export const programs: Program[] = [
     episodes: 24,
     cadence: "Haftalık · Pazartesi 21:00",
     channel: "youtube",
-    platoSeat: { x: -3.8, y: 1.2, z: -1.4, label: "Yatırım Masası" },
+    setLabel: "Yatırım Masası",
   },
   {
     slug: "nasil-yaratiyorum",
@@ -64,7 +64,7 @@ export const programs: Program[] = [
     episodes: 18,
     cadence: "İki haftada bir · Perşembe 20:00",
     channel: "youtube",
-    platoSeat: { x: -1.4, y: 1.2, z: -2.4, label: "Atölye Köşesi" },
+    setLabel: "Atölye Köşesi",
   },
   {
     slug: "az-kalsin-bende-inaniyordum",
@@ -81,7 +81,7 @@ export const programs: Program[] = [
     episodes: 12,
     cadence: "Aylık · Ayın son Cuması",
     channel: "youtube",
-    platoSeat: { x: 0.6, y: 1.2, z: -2.6, label: "Şüphe Sahnesi" },
+    setLabel: "Şüphe Sahnesi",
   },
   {
     slug: "rivayet-avcisi",
@@ -98,43 +98,42 @@ export const programs: Program[] = [
     episodes: 9,
     cadence: "Mevsimlik · 4 bölüm",
     channel: "youtube",
-    platoSeat: { x: 2.6, y: 1.2, z: -2.4, label: "Arşiv Masası" },
+    setLabel: "Arşiv Masası",
   },
   {
     slug: "sanriya-sor",
     title: "Sanrı'ya Sor",
     tagline: "Cevap senin değil, sorunun rüyasıdır.",
-    intent: "Bilinçaltı diyalog, yapay zekâ ile sezgi.",
+    intent: "Bilinçaltı diyalog, sezgi ve sembol.",
     symbol: "◉",
     accent: "#b59cf0",
     surface: "#150c2a",
-    hero: "Sanrı, Caelinus AI'ın sesi. İzleyici sorar; sahne dinler.",
+    hero: "İzleyici sorar; sahne dinler.",
     description:
-      "İzleyicilerin gönderdiği soruların Caelinus AI üzerinden — Sanrı kişiliğinde — cevaplandığı, ama cevabın asla doğrudan olmadığı, hep bir rüya, bir sembol, bir geri-soru olarak döndüğü interaktif yapım.",
+      "İzleyicilerin gönderdiği soruların doğrudan değil, hep bir rüya, bir sembol, bir geri-soru olarak yanıtlandığı diyalog yapımı. Burada amaç cevap vermek değil, soruyu derinleştirmek.",
     signature: "Her bölüm izleyiciden gelen tek bir soruyla açılır.",
     episodes: 32,
     cadence: "Haftalık · Çarşamba 22:22",
     channel: "instagram",
-    platoSeat: { x: 4.2, y: 1.2, z: -1.4, label: "Sanrı Mihrabı" },
+    setLabel: "Sanrı Köşesi",
     realPhoto: "/plato.jpg",
   },
   {
     slug: "perde",
     title: "Perde",
     tagline: "Filmin altındaki film.",
-    intent: "Bilinçli izleyici penceresi, AI'nın tamamen yönettiği ilk yapım.",
+    intent: "Bilinçli izleyici penceresi, sinema okuması.",
     symbol: "◧",
     accent: "#c95a5a",
     surface: "#2a0d0d",
     hero: "Perde aralanır. Hikâyenin altındaki hikâye konuşur.",
     description:
-      "Caelinus AI'nın tamamen kendi yönettiği ilk yapım. İzleyici bir film veya dizi adı yazar; Perde yüzeysel hikâyeyi ayırıp altındaki temayı, sembolizmi, yönetmen niyeti ile izleyici algısı arasındaki çekişmeyi açar. Eleştirmen değil, eşlikçi. Tanımadığı filmde uydurmaz; künyeden bir parça ister. Burada bölüm sayısı yoktur — herkesin sorduğu film bir bölümdür.",
-    signature:
-      "Her sorulan film bir bölüm; arşivi izleyici topluluğunun belleği yazar.",
-    episodes: 0,
-    cadence: "Sürekli yayında · 7/24",
-    channel: "ai-yapimi",
-    platoSeat: { x: 0, y: 2.4, z: -3.6, label: "Perde Yansıması" },
+      "Bir film ya da dizinin yüzeysel hikâyesini ayırıp altındaki temayı, sembolizmi, yönetmen niyeti ile izleyici algısı arasındaki çekişmeyi açan sinema yorumu programı. Eleştirmen değil, eşlikçi — her bölüm bir filmi katman katman okur.",
+    signature: "Her bölüm bir filmi yüzeyinden değil, derininden anlatır.",
+    episodes: 16,
+    cadence: "Haftalık · Cuma 20:00",
+    channel: "youtube",
+    setLabel: "Perde Sahnesi",
   },
   {
     slug: "selbi-yemekte-ne-var",
@@ -151,7 +150,7 @@ export const programs: Program[] = [
     episodes: 41,
     cadence: "Haftalık · Pazar 13:00",
     channel: "youtube",
-    platoSeat: { x: 5.8, y: 1.2, z: 0.4, label: "Açık Mutfak" },
+    setLabel: "Açık Mutfak",
   },
 ];
 

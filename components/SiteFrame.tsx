@@ -1,19 +1,16 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { BosphorusBackdrop } from "@/components/BosphorusBackdrop";
-import { PersonaBubble } from "@/components/personas/PersonaBubble";
 import { BookCTA } from "@/components/BookCTA";
-import { ThemeProvider } from "@/components/theme/ThemeProvider";
-import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { CONTACT, whatsappLink, mailtoLink, telLink } from "@/lib/contact";
 
 /**
  * SiteFrame — sitenin sinematik çerçevesi.
  *
- * Üst menü hiyerarşisi (vizyon kararı):
- *   Ön kapı     → Stüdyo (satış, ana CTA olarak parla)
- *   Derinlik    → Caelinus AI · Perde · Yapımlar (alt markalar/içerik)
- *   Hakkında    → Biz (footer'a kayar)
+ * Üst menü hiyerarşisi:
+ *   Ön kapı     → Stüdyo (kiralama, ana CTA olarak parla)
+ *   İçerik      → Yapımlar (programlar)
+ *   Hakkında    → Biz · İletişim
  * "Randevu Al" sağ üstte sabit altın CTA olarak duruyor.
  *
  * Boğaz arka planı tüm sayfalara hizmet eden tek bir sabit
@@ -21,15 +18,14 @@ import { CONTACT, whatsappLink, mailtoLink, telLink } from "@/lib/contact";
  */
 const NAV = [
   { href: "/studio", label: "Stüdyo", accent: "#d4b26a" },
-  { href: "/caelinus-ai", label: "Caelinus", accent: "#9fe7ff" },
-  { href: "/perde", label: "Perde", accent: "#c95a5a" },
   { href: "/yapimlar", label: "Yapımlar" },
   { href: "/biz", label: "Biz" },
+  { href: "/iletisim", label: "İletişim" },
 ];
 
 export function SiteFrame({ children }: { children: ReactNode }) {
   return (
-    <ThemeProvider>
+    <>
       {/* Site geneli sahne perdesi — viewport'a yapışık */}
       <BosphorusBackdrop />
 
@@ -84,7 +80,6 @@ export function SiteFrame({ children }: { children: ReactNode }) {
         </nav>
 
         <div className="flex items-center gap-3">
-          <ThemeToggle />
           <BookCTA
             label="Randevu Al"
             variant="primary"
@@ -123,18 +118,18 @@ export function SiteFrame({ children }: { children: ReactNode }) {
                 </Link>
               </li>
               <li>
-                <Link href="/caelinus-ai" className="hover:text-tower-gold transition-colors">
-                  Caelinus · deneyim
-                </Link>
-              </li>
-              <li>
-                <Link href="/perde" className="hover:text-tower-gold transition-colors">
-                  Perde · film yorumu
-                </Link>
-              </li>
-              <li>
                 <Link href="/yapimlar" className="hover:text-tower-gold transition-colors">
                   Yapımlar
+                </Link>
+              </li>
+              <li>
+                <Link href="/biz" className="hover:text-tower-gold transition-colors">
+                  Biz
+                </Link>
+              </li>
+              <li>
+                <Link href="/iletisim" className="hover:text-tower-gold transition-colors">
+                  İletişim
                 </Link>
               </li>
             </ul>
@@ -199,14 +194,11 @@ export function SiteFrame({ children }: { children: ReactNode }) {
           </div>
         </div>
         <div className="max-w-6xl mx-auto mt-10 flex flex-col md:flex-row md:items-center md:justify-between gap-2 text-sm text-mist-500">
-          <p>© {new Date().getFullYear()} CR YAPIM · Caelinus AI ailesidir.</p>
+          <p>© {new Date().getFullYear()} CR YAPIM · Boğaz manzaralı içerik stüdyosu.</p>
           <p className="mono-tag">cryapim.com</p>
         </div>
       </footer>
       </div>
-
-      {/* Caelinus AI personalar — sağ alt köşede, tüm sayfalarda */}
-      <PersonaBubble />
-    </ThemeProvider>
+    </>
   );
 }

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Biz — CR YAPIM",
-  description: "Caelinus AI ailesinin yapım kolu. Boğaz'da bir plato.",
+  description:
+    "CR YAPIM, İstanbul Boğazı'nda Kız Kulesi manzaralı bir içerik ve yapım stüdyosu. Programlar üretir, stüdyosunu markalara ve içerik üreticilerine açar.",
 };
 
 export default function BizPage() {
@@ -19,10 +20,9 @@ export default function BizPage() {
 
       <div className="mt-12 space-y-6 body-readable text-mist-100">
         <p>
-          CR YAPIM, Caelinus AI ailesinin yapım koludur. Dijital olarak
-          ürettiğimizi fiziksel sahnede çekiyor; sahnede çektiğimizi tekrar
-          yapay zekâya geri okutuyoruz. Bu döngü bizim için bir araç değil,
-          bir ritüel.
+          CR YAPIM, İstanbul Boğazı'nın kıyısında kurulmuş bir içerik ve yapım
+          stüdyosudur. Bir yandan kendi programlarımızı çekiyor, bir yandan da
+          stüdyomuzu markalara ve içerik üreticilerine açıyoruz.
         </p>
         <p>
           Programlarımız ortak bir niyet etrafında durur: zamanı yavaşlatmak,
@@ -31,7 +31,7 @@ export default function BizPage() {
         <p>
           Plato İstanbul Boğazı'nda, Kız Kulesi'nin görüş açısında. Adresi
           paylaşmıyoruz; mahremiyet yapımın bir parçası. İş birliği ve sahne
-          ziyaretleri için iletişim formundan ulaşabilirsin.
+          ziyaretleri için iletişim sayfasından ulaşabilirsin.
         </p>
       </div>
 
@@ -39,7 +39,7 @@ export default function BizPage() {
         <div className="rounded-2xl border border-mist-500/20 p-7">
           <p className="mono-tag text-mist-500">marka</p>
           <p className="editorial-italic text-mist-100 mt-3 text-2xl">
-            Caelinus AI · cryapim.com
+            CR YAPIM · cryapim.com
           </p>
         </div>
         <div className="rounded-2xl border border-mist-500/20 p-7">

@@ -1,14 +1,10 @@
-"use client";
-
-import { useTheme } from "@/components/theme/ThemeProvider";
-
 /**
- * BosphorusBackdrop — İstanbul Boğazı, gündüz veya gece.
+ * BosphorusBackdrop — İstanbul Boğazı, gece silüeti.
  *
  * Site geneli sabit (fixed) arka plan: tüm sayfalarda viewport'a
  * yapışık durur, içerik üstüne scroll yapar — bir tiyatro perdesi.
+ * Saf sunum (SVG/CSS); state veya etkileşim yok, server component.
  *
- * Gece teması (default):
  *   1) Gece moru → boğaz mavisi gökyüzü gradyanı
  *   2) Mor/pembe atmosfer halesi (köprünün yansıması)
  *   3) Yıldızlar
@@ -18,20 +14,9 @@ import { useTheme } from "@/components/theme/ThemeProvider";
  *   8) Boat/buoy seyir ışıkları (yeşil + beyaz + kırmızı)
  *   9) Yansımalar
  *  10) Kız Kulesi + dönen fener ışını
- *
- * Gündüz teması:
- *   1) Açık mavi gökyüzü → soft altın ufuk
- *   2) Sıcak altın atmosfer halesi (güneş ışığı)
- *   3) Yıldızlar gizli, holografi sönük, LED'ler kapalı
- *   4) Şehir silüetleri belirgin ama ışıksız
- *   5) Kız Kulesi gündüz aydınlığında — fener çok hafif
- *
- * Tema kullanıcı tıklamasıyla değişir; ThemeProvider'da localStorage'a
- * kaydedilir. Geçişler `transition` ile yumuşak.
  */
 export function BosphorusBackdrop() {
-  const { theme } = useTheme();
-  const isDay = theme === "day";
+  const isDay = false;
 
   return (
     <div

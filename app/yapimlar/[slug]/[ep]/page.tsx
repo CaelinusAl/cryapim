@@ -9,9 +9,7 @@ import {
   formatDate,
   formatDuration,
 } from "@/data/episodes";
-import { personaForProgram } from "@/lib/personas";
 import { VideoPlayer } from "@/components/video/VideoPlayer";
-import { PersonaOpenButton } from "@/components/personas/PersonaOpenButton";
 
 type Params = { slug: string; ep: string };
 
@@ -50,7 +48,6 @@ export default async function EpisodePage({
   const episode = episodeBySlug(slug, ep);
   if (!program || !episode) notFound();
 
-  const persona = personaForProgram(program.slug);
   const siblings = episodesByProgram(program.slug)
     .filter((e) => e.slug !== episode.slug)
     .slice(0, 5);
@@ -98,18 +95,6 @@ export default async function EpisodePage({
             <span className="mono-tag text-mist-500">
               · {formatDuration(episode.durationSec)}
             </span>
-            {episode.aiProduced && (
-              <span
-                className="mono-tag inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full"
-                style={{
-                  color: "#0e0a22",
-                  background: program.accent,
-                  letterSpacing: "0.08em",
-                }}
-              >
-                ◧ AI YAPIMI
-              </span>
-            )}
             {isComingSoon && (
               <span
                 className="mono-tag px-2.5 py-1 rounded-full border"
@@ -135,49 +120,6 @@ export default async function EpisodePage({
         {/* AI uzantı + diğer bölümler — yan yana */}
         <section className="mt-16 grid md:grid-cols-3 gap-10">
           <aside className="space-y-6 md:col-span-1">
-            {/* AI uzantı kartı — programın persona'sı varsa */}
-            {persona ? (
-              <div
-                className="rounded-2xl p-6"
-                style={{ border: `1px solid ${persona.accent}55` }}
-              >
-                <p className="mono-tag text-mist-500">caelinus AI uzantısı</p>
-                <p
-                  className="editorial text-2xl mt-3"
-                  style={{ color: persona.accent }}
-                >
-                  {persona.symbol} {persona.name}
-                </p>
-                <p className="text-base text-mist-100/90 mt-3 leading-relaxed">
-                  Bu bölümü {persona.name} ile derinleştir — bir soru sor, bir
-                  yorum iste, bir bağlantı kurdur.
-                </p>
-                <PersonaOpenButton
-                  personaId={persona.id}
-                  question={`${program.title} — Bölüm ${episode.episodeNumber}: ${episode.title}\n\n${episode.description}\n\nBu bölüme dair bir yorum yap veya bir geri-soru sor.`}
-                  label={`${persona.name}'a bu bölümü sor`}
-                  accent={persona.accent}
-                />
-              </div>
-            ) : (
-              <div
-                className="rounded-2xl p-6"
-                style={{ border: `1px solid ${program.accent}40` }}
-              >
-                <p className="mono-tag text-mist-500">sanrı'ya köprü</p>
-                <p className="text-base text-mist-100/90 mt-3 leading-relaxed">
-                  Bu bölümü Sanrı'nın diliyle uzat — bir kelime, bir sembol,
-                  bir geri-soru.
-                </p>
-                <PersonaOpenButton
-                  personaId="sanri"
-                  question={`${program.title}: ${episode.title}`}
-                  label="Sanrı'ya bu bölümü sor"
-                  accent="#b59cf0"
-                />
-              </div>
-            )}
-
             {/* Programa dön */}
             <div
               className="rounded-2xl p-6"
@@ -243,17 +185,6 @@ export default async function EpisodePage({
                           <span className="mono-tag text-mist-500">
                             {formatDate(s.publishedAt)}
                           </span>
-                          {s.aiProduced && (
-                            <span
-                              className="mono-tag px-2 py-0.5 rounded-full"
-                              style={{
-                                color: "#0e0a22",
-                                background: program.accent,
-                              }}
-                            >
-                              AI
-                            </span>
-                          )}
                           {placeholder && (
                             <span className="mono-tag text-mist-500">
                               · yakında

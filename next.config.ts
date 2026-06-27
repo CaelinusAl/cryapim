@@ -3,24 +3,24 @@ import type { NextConfig } from "next";
 /**
  * CR YAPIM — cryapim.com
  *
- * Caelinus stack'iyle aynı dilde, ama bu site bir yapım evinin
- * vitrini olduğu için ayrı bir Next.js uygulaması olarak kuruldu.
- * İleride paylaşılan paketlere (frequency, three-scenes) çıkartılabilir.
+ * Boğaz manzaralı içerik & yapım stüdyosunun kurumsal vitrini.
+ * Tek bir Next.js (App Router) uygulaması.
  */
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   compress: true,
 
+  // Workspace kökünü bu projeye sabitle — üst dizinlerdeki alakasız
+  // lockfile'ların "inferred root" uyarısını ve yanlış kök seçimini önler.
+  turbopack: { root: __dirname },
+
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
+      // YouTube küçük resimleri (yapım bölümleri ileride YouTube'a bağlanırsa)
       { protocol: "https", hostname: "i.ytimg.com" },
       { protocol: "https", hostname: "**.ytimg.com" },
-      // TMDB film poster + backdrop CDN'i (Perde)
-      { protocol: "https", hostname: "image.tmdb.org" },
-      // Not: Caelinus moodboard artık gpt-image-1 (base64 → data URL)
-      // döndürüyor; ayrı bir görsel CDN host'una gerek kalmadı.
     ],
   },
 

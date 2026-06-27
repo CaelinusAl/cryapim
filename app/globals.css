@@ -293,8 +293,8 @@ body::before {
   }
 }
 
-/* Sanrı nabzı — sağ alt köşedeki kalıcı düğmenin mor titreşimi */
-@keyframes sanri-pulse {
+/* Sembol nabzı — yapım sembolünün yumuşak titreşimi (placeholder, kartlar) */
+@keyframes symbol-pulse {
   0%,
   100% {
     box-shadow:
@@ -310,40 +310,6 @@ body::before {
   }
 }
 
-/* Yazıcı imleci — Sanrı düşünürken yanıp söner */
-@keyframes sanri-cursor-blink {
-  0%,
-  60% {
-    opacity: 1;
-  }
-  61%,
-  100% {
-    opacity: 0;
-  }
-}
-
-/* Panel slide-in (sağdan) */
-@keyframes sanri-slide-in {
-  from {
-    transform: translateX(100%);
-    opacity: 0.4;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-/* Backdrop fade-in */
-@keyframes sanri-fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 /* Hero teras altından parıldayan Boğaz ışık halesi — yumuşak nefes */
 @keyframes hero-light-pulse {
   0% {
@@ -353,58 +319,6 @@ body::before {
   100% {
     opacity: 0.95;
     transform: translateY(-2px);
-  }
-}
-
-/* Caelinus moodboard yüklenirken — shimmer dalgası */
-@keyframes moodboard-shimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
-/* Mikrofon kayıtta — kırmızı pulse halkası */
-@keyframes sanri-pulse-ring {
-  0% {
-    transform: scale(1);
-    opacity: 0.7;
-  }
-  70% {
-    transform: scale(1.45);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1.45);
-    opacity: 0;
-  }
-}
-
-/* Sanrı düşünüyor — üç noktanın dans ettiği nokta */
-@keyframes sanri-thinking-dot {
-  0%,
-  60%,
-  100% {
-    transform: translateY(0);
-    opacity: 0.4;
-  }
-  30% {
-    transform: translateY(-4px);
-    opacity: 1;
-  }
-}
-
-/* Persona seçici menü — bubble'ın üstünden hafifçe kalkar */
-@keyframes persona-menu-rise {
-  from {
-    transform: translateY(8px) scale(0.97);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0) scale(1);
-    opacity: 1;
   }
 }
 

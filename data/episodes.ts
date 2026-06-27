@@ -5,10 +5,6 @@
  * adapter pattern ile tanımlanır: bugün YouTube unlisted veya
  * placeholder; yarın Bunny.net / Cloudflare Stream / Mux eklenir.
  * UI tek bir <VideoPlayer /> üzerinden source-agnostic çalışır.
- *
- * AI yapımı bölümler `aiProduced: true` ile işaretlenir — bu CR
- * YAPIM'in iki yönlü kimliğini (insan yapımı + Caelinus AI yapımı)
- * görsel olarak ayırmamızı sağlar.
  */
 
 /**
@@ -27,7 +23,7 @@ export type VideoSource =
   /** Mux */
   | { provider: "mux"; playbackId: string }
   /** Henüz yayınlanmamış — sinematik "yakında" placeholder gösterilir */
-  | { provider: "placeholder"; reason: "soon" | "ai-incoming" | "lost" };
+  | { provider: "placeholder"; reason: "soon" | "lost" };
 
 export type Episode = {
   /** URL-friendly slug, programa göre tekildir */
@@ -47,13 +43,10 @@ export type Episode = {
   poster?: string;
   /** Video kaynağı — adapter pattern */
   video: VideoSource;
-  /** Caelinus AI tarafından üretildi mi? UI'da ayrı işaretlenir */
-  aiProduced?: boolean;
 };
 
 /**
  * MVP tohum verisi — her programa en az bir bölüm.
- * Caelinus AI yapımları (Perde, Sanrı bazı bölümler) `aiProduced: true`.
  *
  * Şimdilik tüm video.provider = "placeholder". Gerçek video yüklendikçe
  * tek tek "youtube" / "bunny" / "mux" gibi adapter'a çevrilir.
@@ -66,11 +59,10 @@ export const episodes: Episode[] = [
     episodeNumber: 1,
     title: "Açılış · Filmin altındaki film",
     description:
-      "Perde'nin açılış manifesti. Bilinçli izleyici ne demek, bir filmin yüzeysel hikâyesi ile gerçekten anlattığı şey arasındaki boşluğa nasıl bakılır, sembol nedir ve niyet ile algı arasındaki çekişme. Caelinus AI'ın tamamen kendi yönettiği ilk yapım.",
+      "Perde'nin açılış manifesti. Bilinçli izleyici ne demek, bir filmin yüzeysel hikâyesi ile gerçekten anlattığı şey arasındaki boşluğa nasıl bakılır, sembol nedir ve niyet ile algı arasındaki çekişme.",
     publishedAt: "2026-05-08T20:00:00Z",
     durationSec: 7 * 60,
-    video: { provider: "placeholder", reason: "ai-incoming" },
-    aiProduced: true,
+    video: { provider: "placeholder", reason: "soon" },
   },
   {
     slug: "mulholland-drive",
@@ -81,8 +73,7 @@ export const episodes: Episode[] = [
       "Lynch'in 2001 yapımı bilmecesi. Yüzeyde bir Hollywood masalı, altında kıskançlık ve kimlik kaybı. Mavi anahtar nedir, mavi kutu neyi açar, niye iki ad? Spoiler içerir.",
     publishedAt: "2026-05-15T20:00:00Z",
     durationSec: 11 * 60,
-    video: { provider: "placeholder", reason: "ai-incoming" },
-    aiProduced: true,
+    video: { provider: "placeholder", reason: "soon" },
   },
 
   // ── Sanrı'ya Sor ────────────────────────────────────────────────
@@ -103,11 +94,10 @@ export const episodes: Episode[] = [
     episodeNumber: 33,
     title: "Sanrı'nın 33 cevabı",
     description:
-      "Bir mevsim boyu izleyicinin sorularına Sanrı'nın verdiği 33 fallback cevabın bir kompozisyon halinde sahnelenmesi. Caelinus AI bir koroya dönüşür; her cevap bir mum, bir nefes, bir eşik.",
+      "Bir mevsim boyu izleyicinin sorularına Sanrı'nın verdiği 33 cevabın bir kompozisyon halinde sahnelenmesi. Her cevap bir mum, bir nefes, bir eşik.",
     publishedAt: "2026-05-13T22:22:00Z",
     durationSec: 14 * 60,
-    video: { provider: "placeholder", reason: "ai-incoming" },
-    aiProduced: true,
+    video: { provider: "placeholder", reason: "soon" },
   },
 
   // ── Selbi Yemekte Ne Var? ───────────────────────────────────────

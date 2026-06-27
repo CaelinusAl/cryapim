@@ -201,7 +201,7 @@ function Placeholder({
   programTitle,
   episodeTitle,
 }: {
-  reason: "soon" | "ai-incoming" | "lost";
+  reason: "soon" | "lost";
   accent: string;
   symbol: string;
   programTitle: string;
@@ -211,10 +211,6 @@ function Placeholder({
     soon: {
       tag: "yakında yayında",
       line: "Bu bölümün perdesi şu sıralar açılıyor.",
-    },
-    "ai-incoming": {
-      tag: "caelinus üretiyor",
-      line: "AI yapımı — perde aralanmak üzere.",
     },
     lost: {
       tag: "kayıt arşivde",
@@ -248,7 +244,7 @@ function Placeholder({
           border: `1px solid ${accent}88`,
           boxShadow: `0 0 60px -10px ${accent}, inset 0 0 30px -10px ${accent}55`,
           background: `${accent}14`,
-          animation: "sanri-pulse 2.6s ease-in-out infinite",
+          animation: "symbol-pulse 2.6s ease-in-out infinite",
         }}
         aria-hidden
       >

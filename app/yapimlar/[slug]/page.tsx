@@ -3,9 +3,6 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { programBySlug, programs } from "@/data/programs";
-import { PersonaInline } from "@/components/personas/PersonaInline";
-import { PersonaOpenButton } from "@/components/personas/PersonaOpenButton";
-import { personaForProgram, getPersona } from "@/lib/personas";
 import {
   episodesByProgram,
   formatDate,
@@ -47,8 +44,6 @@ export default async function ProgramDetailPage({
   if (!p) notFound();
 
   const others = programs.filter((x) => x.slug !== p.slug).slice(0, 3);
-  const persona = personaForProgram(p.slug); // bu programa demir atan AI varsa
-  const sanri = getPersona("sanri"); // diğer programlar için varsayılan kapı
   const programEpisodes = episodesByProgram(p.slug);
 
   return (
@@ -84,9 +79,7 @@ export default async function ProgramDetailPage({
                   ? "YouTube programı"
                   : p.channel === "instagram"
                     ? "Instagram serisi"
-                    : p.channel === "ai-yapimi"
-                      ? "AI yapımı · Caelinus"
-                      : "Podcast"}
+                    : "Podcast"}
               </p>
               <p className="mono-tag text-mist-500">{p.cadence}</p>
             </div>
@@ -119,7 +112,7 @@ export default async function ProgramDetailPage({
               <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-night-950/85 via-night-950/40 to-transparent" />
               <figcaption className="absolute inset-x-0 bottom-0 p-6 md:p-9">
                 <p className="mono-tag" style={{ color: p.accent }}>
-                  set · {p.platoSeat.label}
+                  set · {p.setLabel}
                 </p>
                 <p className="editorial mt-2 text-xl md:text-3xl text-mist-100 leading-tight max-w-2xl">
                   Bu sahne burada çekiliyor.
@@ -127,30 +120,6 @@ export default async function ProgramDetailPage({
               </figcaption>
             </div>
           </figure>
-        )}
-
-        {persona && (
-          <section className="mt-12 crane-in-slow">
-            <PersonaInline persona={persona} />
-            {p.slug === "perde" && (
-              <div className="mt-4 flex flex-wrap gap-3">
-                <Link
-                  href="/perde"
-                  className="mono-tag-lg inline-flex items-center gap-2 px-5 py-3 rounded-full transition-colors"
-                  style={{
-                    color: "#0e0a22",
-                    background: persona.accent,
-                    boxShadow: `0 0 24px -6px ${persona.accent}`,
-                  }}
-                >
-                  ◧ Perde arşivine git →
-                </Link>
-                <p className="mono-tag text-mist-500 self-center">
-                  6 film yorumu hazır · sosyal medyada paylaşılabilir
-                </p>
-              </div>
-            )}
-          </section>
         )}
 
         <section className="mt-16 grid md:grid-cols-3 gap-12 crane-in-slow">
@@ -182,52 +151,11 @@ export default async function ProgramDetailPage({
                 className="editorial text-2xl mt-3"
                 style={{ color: p.accent }}
               >
-                {p.platoSeat.label}
+                {p.setLabel}
               </p>
               <p className="text-base text-mist-300 mt-3 leading-relaxed">
-                Plato sahnesinde tıklanabilir bir kamera olarak yer alır.
+                Bu program platomuzun bu köşesinde çekiliyor.
               </p>
-              <Link
-                href="/plato"
-                className="mono-tag mt-5 inline-flex items-center gap-2 text-ai-cyan hover:text-mist-100 transition-colors"
-              >
-                Plato'da gör →
-              </Link>
-            </div>
-
-            <div
-              className="rounded-2xl p-6"
-              style={{
-                border: `1px solid ${(persona ?? sanri).accent}40`,
-              }}
-            >
-              <p className="mono-tag text-mist-500">caelinus AI uzantısı</p>
-              {persona ? (
-                <>
-                  <p className="text-base text-mist-100/90 mt-3 leading-relaxed">
-                    Bu programın AI'ı <strong style={{ color: persona.accent }}>{persona.name}</strong>{" "}
-                    canlı. {persona.tagline}
-                  </p>
-                  <PersonaOpenButton
-                    personaId={persona.id}
-                    label={`${persona.name}'ı aç`}
-                    accent={persona.accent}
-                  />
-                </>
-              ) : (
-                <>
-                  <p className="text-base text-mist-100/90 mt-3 leading-relaxed">
-                    Bu bölümü Sanrı'nın diliyle uzat — bir kelime, bir sembol,
-                    bir geri-soru.
-                  </p>
-                  <PersonaOpenButton
-                    personaId="sanri"
-                    question={`${p.title}: ${p.tagline}`}
-                    label="Sanrı'ya bu programı sor"
-                    accent={sanri.accent}
-                  />
-                </>
-              )}
             </div>
 
             <div className="rounded-2xl border border-mist-500/20 p-6">
@@ -303,7 +231,7 @@ export default async function ProgramDetailPage({
                               border: `1px solid ${p.accent}88`,
                               boxShadow: `0 0 40px -10px ${p.accent}`,
                               background: `${p.accent}10`,
-                              animation: "sanri-pulse 2.6s ease-in-out infinite",
+                              animation: "symbol-pulse 2.6s ease-in-out infinite",
                             }}
                             aria-hidden
                           >
@@ -323,19 +251,8 @@ export default async function ProgramDetailPage({
                             B{String(e.episodeNumber).padStart(2, "0")}
                           </span>
                         </div>
-                        {/* Sağ üst — AI yapımı veya yakında etiketi */}
+                        {/* Sağ üst — yakında etiketi */}
                         <div className="absolute top-3 right-3 flex gap-2">
-                          {e.aiProduced && (
-                            <span
-                              className="mono-tag px-2.5 py-1 rounded-md"
-                              style={{
-                                color: "#0e0a22",
-                                background: p.accent,
-                              }}
-                            >
-                              AI
-                            </span>
-                          )}
                           {placeholder && (
                             <span
                               className="mono-tag px-2.5 py-1 rounded-md"

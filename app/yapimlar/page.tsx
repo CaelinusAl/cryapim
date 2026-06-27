@@ -59,9 +59,7 @@ export default function YapimlarPage() {
                       ? "YouTube"
                       : p.channel === "instagram"
                         ? "Instagram"
-                        : p.channel === "ai-yapimi"
-                          ? "AI yapımı"
-                          : "Podcast"}
+                        : "Podcast"}
                   </span>
                 </div>
 
@@ -99,11 +97,11 @@ export default function YapimlarPage() {
 
       <div className="mt-20 text-center">
         <Link
-          href="/plato"
+          href="/studio"
           className="mono-tag inline-flex items-center gap-3 border border-ai-cyan/40 text-ai-cyan hover:bg-ai-cyan/10 px-5 py-3 rounded-full transition-colors"
         >
-          Hepsi nerede çekiliyor? Plato'yu dolaş
-          <span aria-hidden>◐</span>
+          Hepsi nerede çekiliyor? Stüdyoyu keşfet
+          <span aria-hidden>→</span>
         </Link>
       </div>
     </div>

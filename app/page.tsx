@@ -7,11 +7,10 @@ import { BookCTA, WhatsAppLink } from "@/components/BookCTA";
  *
  * Mantık:
  *   Ön kapı = Studio (kiralama, paketler, randevu)
- *   Derinlik = Caelinus (moda/AI deneyim) + Sanrı (içerik/ritüel) + Perde (yorum)
+ *   Derinlik = Yapımlar (programlar) + İletişim (randevu)
  *
  * Sayfanın amacı: ziyaretçiyi 60 saniyede "Randevu Al" butonuna götürmek.
- * Manifesto/sanat dili tamamen alt sayfalara bırakıldı; burada net teklif:
- * sahne, paket, fiyat, süreç, kanıt.
+ * Net teklif: sahne, paket, fiyat, süreç, kanıt.
  */
 
 export default function HomePage() {
@@ -79,16 +78,16 @@ export default function HomePage() {
             Boğaz'da bir stüdyo.
             <br />
             <span className="editorial-italic text-tower-gold">
-              İçerik, moda ve bilinç
+              İçerik, marka ve hikâye
             </span>{" "}
             aynı sahnede.
           </h1>
           <p className="mt-8 max-w-2xl text-lg md:text-xl text-mist-300 leading-relaxed crane-in-slow">
             CR Yapım, İstanbul'un en güçlü manzarasında{" "}
             <span className="text-mist-100">çekim yapmak</span>,{" "}
-            <span className="text-mist-100">moda deneyimlemek</span> ve{" "}
+            <span className="text-mist-100">moda çekmek</span> ve{" "}
             <span className="text-mist-100">içerik üretmek</span> için
-            tasarlanmış çok katmanlı bir yaratım alanıdır.
+            tasarlanmış çok katmanlı bir profesyonel stüdyodur.
           </p>
 
           <div className="mt-10 md:mt-12 flex flex-wrap gap-3 crane-in-slow">
@@ -146,7 +145,7 @@ export default function HomePage() {
         <div className="mb-10 md:mb-12">
           <p className="mono-tag text-mist-500">üç sahne · tek mekân</p>
           <h2 className="editorial mt-3 text-3xl md:text-5xl text-mist-100 leading-tight">
-            Hangi yüzü açmak istersin?
+            Nereden başlamak istersin?
           </h2>
         </div>
 
@@ -161,22 +160,22 @@ export default function HomePage() {
             accent="#d4b26a"
           />
           <PillarCard
-            href="/caelinus-ai"
-            symbol="👗"
-            label="CAELINUS AI"
-            title="Stilini yarat. Hisset. Satın al."
-            description="Dijital moda deneyimi. Kendi avatarında dene, yönlendirilmiş bir konseptle satın al."
-            cta="Deneyimi Aç"
+            href="/yapimlar"
+            symbol="🎬"
+            label="YAPIMLAR"
+            title="Programlarımızı keşfet."
+            description="CR Yapım imzalı içerik programları. Sohbet, mutfak, mit ve yaratım — Boğaz kıyısında çekilen yapımlar."
+            cta="Yapımları Gör"
             accent="#9fe7ff"
           />
           <PillarCard
-            href="/yapimlar/sanriya-sor"
-            symbol="🔮"
-            label="SANRI"
-            title="Soru sor. Farkındalık al."
-            description="Cevap değil, geri-soru. İçeriğin ruhu burada başlar — ritüel ve sembol katmanı."
-            cta="Sanrı'ya Sor"
-            accent="#b8a2ff"
+            href="/iletisim"
+            symbol="📅"
+            label="RANDEVU"
+            title="Tarihini al, sahneyi kur."
+            description="Stüdyo randevusu, paket bilgisi veya marka iş birliği. En hızlı yol WhatsApp; genelde aynı gün dönüyoruz."
+            cta="İletişime Geç"
+            accent="#d4b26a"
           />
         </ul>
       </section>
@@ -237,7 +236,7 @@ export default function HomePage() {
           <SceneCard
             imageSrc="/sanri-kose.png"
             symbol="🎙"
-            label="Podcast / Sanrı Köşesi"
+            label="Podcast Köşesi"
             title="İki koltuk. Boğaz tanık."
             description="İki kapsül koltuk, dual mikrofon kolu, çift softbox aydınlatma. Podcast, röportaj, sohbet için Boğaz panoraması."
             tint="from-purple-500/30"
@@ -251,56 +250,6 @@ export default function HomePage() {
             tint="from-tower-gold/30"
           />
         </ul>
-      </section>
-
-      {/* ===== ALT MARKA TEASER · BELLA · COCO · JOI ===== */}
-      <section className="relative px-6 md:px-10 py-12 md:py-16 max-w-6xl mx-auto">
-        <Link
-          href="/bella-coco-joi"
-          className="group block rounded-2xl overflow-hidden border border-pink-300/25 hover:border-pink-300/55 transition-colors"
-          style={{
-            background:
-              "linear-gradient(135deg, rgba(244,114,182,0.08) 0%, rgba(212,175,55,0.05) 100%)",
-          }}
-        >
-          <div className="grid md:grid-cols-5 items-stretch">
-            <div className="relative md:col-span-3 aspect-[4/3] md:aspect-auto md:min-h-[320px] overflow-hidden">
-              <Image
-                src="/bella-coco-joi/sahne-3-defile.jpg"
-                alt="Bella, Coco ve Joi — pembe runway, Boğaz manzarası"
-                fill
-                sizes="(min-width: 768px) 60vw, 100vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-              />
-              <div
-                aria-hidden
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background:
-                    "linear-gradient(90deg, transparent 50%, rgba(7,6,15,0.55) 100%)",
-                }}
-              />
-            </div>
-            <div className="md:col-span-2 p-6 md:p-8 flex flex-col justify-center">
-              <p className="mono-tag text-pink-300">yeni · cr alt marka</p>
-              <p className="editorial text-3xl md:text-4xl text-mist-100 mt-3 leading-tight">
-                Bella<span className="text-pink-300"> · </span>Coco
-                <span className="text-pink-300"> · </span>Joi
-              </p>
-              <p className="editorial italic text-pink-100 mt-2 text-lg">
-                Bir hikâye başlıyor.
-              </p>
-              <p className="body-readable text-mist-300 mt-4">
-                CR Pet Collection’ın AI destekli kısa dizisi. Boğaz manzaralı
-                stüdyomuzun ilk pilot içeriği — pembe ışıkta üç köpek, bir
-                marka.
-              </p>
-              <span className="mono-tag text-tower-gold mt-5 inline-flex items-center gap-2">
-                Pilot bölümü izle <span aria-hidden>→</span>
-              </span>
-            </div>
-          </div>
-        </Link>
       </section>
 
       {/* ===== PAKETLER ===== */}
@@ -352,7 +301,7 @@ export default function HomePage() {
             description="Tüm alanlar. Bir günde 10 farklı içerik."
             features={[
               "8 saat tüm alanlara erişim",
-              "Manzara + Atölye + Sanrı",
+              "Manzara + Atölye + Podcast + Mutfak",
               "Profesyonel ışık seti",
             ]}
           />
@@ -361,10 +310,10 @@ export default function HomePage() {
             usd="10.000+"
             tl="400.000+"
             duration="özel"
-            description="Çekim + sanat yönetmenliği + Caelinus konsept + kısa edit."
+            description="Çekim + sanat yönetmenliği + konsept tasarım + kısa edit."
             features={[
               "Sanat yönetmeni eşliğinde",
-              "Caelinus konsept yönlendirme",
+              "Konsept yönlendirme",
               "Kısa edit + teslim",
             ]}
             accent
@@ -392,9 +341,9 @@ export default function HomePage() {
         <ol className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             { n: "01", t: "Randevu al", d: "WhatsApp veya form ile sahneyi rezerve et." },
-            { n: "02", t: "Sahneni seç", d: "Manzara, Atölye, Sanrı veya hepsi." },
+            { n: "02", t: "Sahneni seç", d: "Manzara, Atölye, Podcast, Mutfak veya hepsi." },
             { n: "03", t: "Çekimini yap", d: "Işık hazır, ekipman hazır, kahve hazır." },
-            { n: "04", t: "Yayınla", d: "İstersen Caelinus ile editle, Sanrı ile içerik kur." },
+            { n: "04", t: "Yayınla", d: "İstersen sanat yönetmeni eşliğinde editleyip teslim al." },
           ].map((s) => (
             <li
               key={s.n}
