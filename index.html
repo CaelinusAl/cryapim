@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CR YAPIM — İçerik & Yapım Stüdyosu · İstanbul</title>
+    <meta
+      name="description"
+      content="İstanbul Boğazı'na bakan içerik ve yapım stüdyosu. Marka filmi, içerik programı, post-prodüksiyon ve stüdyo & plato kiralama. Fikirden teslime tek çatı altında."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!-- Topographic contour watermark — first child, fixed behind everything -->
+    <svg class="contour-bg" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M 0 50.0 L 20 53.3 L 40 56.5 L 60 59.4 L 80 61.9 L 100 64.0 L 120 65.5 L 140 66.5 L 160 67.0 L 180 66.9 L 200 66.3 L 220 65.3 L 240 64.0 L 260 62.5 L 280 60.9 L 300 59.3 L 320 57.8 L 340 56.5 L 360 55.3 L 380 54.5 L 400 53.9 L 420 53.5 L 440 53.4 L 460 53.3 L 480 53.3 L 500 53.3 L 520 53.2 L 540 52.9 L 560 52.3 L 580 51.3 L 600 50.1 L 620 48.5 L 640 46.6 L 660 44.5 L 680 42.2 L 700 39.8 L 720 37.5 L 740 35.3 L 760 33.4 L 780 31.9 L 800 30.8 L 820 30.4 L 840 30.5 L 860 31.2 L 880 32.5 L 900 34.4 L 920 36.7 L 940 39.5 L 960 42.5 L 980 45.6 L 1000 48.7 L 1020 51.8 L 1040 54.5 L 1060 57.0 L 1080 59.0 L 1100 60.6 L 1120 61.7 L 1140 62.3 L 1160 62.5 L 1180 62.3 L 1200 61.8" />
+      <path d="M 0 116.4 L 20 127.3 L 40 127.5 L 60 126.6 L 80 124.6 L 100 121.9 L 120 118.7 L 140 115.2 L 160 111.6 L 180 108.4 L 200 105.5 L 220 103.1 L 240 101.3 L 260 100.1 L 280 99.4 L 300 99.0 L 320 98.8 L 340 98.5 L 360 98.0 L 380 97.2 L 400 95.9 L 420 94.0 L 440 91.6 L 460 88.8 L 480 85.7 L 500 82.5 L 520 79.4 L 540 76.8 L 560 74.8 L 580 73.7 L 600 73.6 L 620 74.7 L 640 77.0 L 660 80.5 L 680 84.9 L 700 90.1 L 720 95.8 L 740 101.7 L 760 107.5 L 780 112.8 L 800 117.4 L 820 121.1 L 840 123.7 L 860 125.2 L 880 125.5 L 900 124.7 L 920 123.1 L 940 120.8 L 960 118.0 L 980 115.1 L 1000 112.2 L 1020 109.6 L 1040 107.4 L 1060 105.7 L 1080 104.5 L 1100 103.8 L 1120 103.4 L 1140 103.2 L 1160 103.0 L 1180 102.6 L 1200 101.9" />
+      <path d="M 0 177.3 L 20 172.5 L 40 166.3 L 60 160.3 L 80 154.9 L 100 150.4 L 120 147.0 L 140 144.7 L 160 143.3 L 180 142.7 L 200 142.4 L 220 142.1 L 240 141.4 L 260 140.1 L 280 138.1 L 300 135.3 L 320 131.9 L 340 128.2 L 360 124.6 L 380 121.6 L 400 119.6 L 420 119.0 L 440 120.2 L 460 123.3 L 480 128.3 L 500 135.0 L 520 143.0 L 540 151.8 L 560 160.7 L 580 169.2 L 600 176.7 L 620 182.6 L 640 186.4 L 660 188.2 L 680 187.7 L 700 185.2 L 720 181.0 L 740 175.7 L 760 169.6 L 780 163.5 L 800 157.7 L 820 152.7 L 840 148.7 L 860 145.8 L 880 143.9 L 900 142.9 L 920 142.5 L 940 142.2 L 960 141.8 L 980 140.9 L 1000 139.3 L 1020 136.9 L 1040 133.8 L 1060 130.2 L 1080 126.5 L 1100 123.1 L 1120 120.5 L 1140 119.1 L 1160 119.4 L 1180 121.4 L 1200 125.4" />
+      <path d="M 0 215.0 L 20 192.8 L 40 187.1 L 60 182.2 L 80 178.4 L 100 175.7 L 120 174.1 L 140 173.6 L 160 174.1 L 180 175.4 L 200 177.4 L 220 180.0 L 240 182.9 L 260 186.0 L 280 189.3 L 300 192.5 L 320 195.7 L 340 198.8 L 360 201.8 L 380 204.6 L 400 207.3 L 420 209.8 L 440 212.2 L 460 214.5 L 480 216.7 L 500 218.6 L 520 220.2 L 540 221.5 L 560 222.3 L 580 222.5 L 600 222.0 L 620 220.7 L 640 218.6 L 660 215.6 L 680 211.7 L 700 207.1 L 720 201.7 L 740 195.9 L 760 189.8 L 780 183.7 L 800 177.8 L 820 172.5 L 840 168.1 L 860 164.9 L 880 163.0 L 900 162.7 L 920 164.2 L 940 167.3 L 960 172.2 L 980 178.5 L 1000 186.2 L 1020 194.8 L 1040 204.0 L 1060 213.3 L 1080 222.3 L 1100 230.5 L 1120 237.5 L 1140 243.0 L 1160 246.5 L 1180 247.9 L 1200 247.0" />
+      <path d="M 0 231.4 L 20 229.7 L 40 231.1 L 60 232.1 L 80 232.5 L 100 231.8 L 120 230.0 L 140 227.1 L 160 223.2 L 180 218.5 L 200 213.5 L 220 208.6 L 240 204.3 L 260 201.1 L 280 199.5 L 300 199.8 L 320 202.1 L 340 206.5 L 360 213.0 L 380 221.2 L 400 230.8 L 420 241.2 L 440 251.9 L 460 262.3 L 480 271.8 L 500 280.0 L 520 286.4 L 540 290.9 L 560 293.4 L 580 294.0 L 600 292.9 L 620 290.4 L 640 287.0 L 660 283.2 L 680 279.5 L 700 276.2 L 720 273.8 L 740 272.4 L 760 272.1 L 780 272.9 L 800 274.5 L 820 276.6 L 840 278.8 L 860 280.7 L 880 281.8 L 900 281.6 L 920 279.9 L 940 276.5 L 960 271.3 L 980 264.3 L 1000 255.9 L 1020 246.3 L 1040 236.2 L 1060 226.0 L 1080 216.4 L 1100 207.9 L 1120 200.9 L 1140 195.9 L 1160 193.1 L 1180 192.5 L 1200 194.1" />
+      <path d="M 0 286.3 L 20 292.3 L 40 291.6 L 60 290.6 L 80 289.4 L 100 288.2 L 120 287.2 L 140 286.6 L 160 286.7 L 180 287.6 L 200 289.3 L 220 291.8 L 240 295.1 L 260 298.9 L 280 303.0 L 300 307.1 L 320 310.8 L 340 314.1 L 360 316.5 L 380 318.0 L 400 318.5 L 420 318.1 L 440 316.8 L 460 314.9 L 480 312.6 L 500 310.1 L 520 307.8 L 540 305.7 L 560 304.1 L 580 303.0 L 600 302.4 L 620 302.2 L 640 302.3 L 660 302.4 L 680 302.5 L 700 302.1 L 720 301.3 L 740 299.9 L 760 297.8 L 780 295.3 L 800 292.4 L 820 289.3 L 840 286.2 L 860 283.6 L 880 281.5 L 900 280.3 L 920 280.1 L 940 280.8 L 960 282.6 L 980 285.2 L 1000 288.5 L 1020 292.2 L 1040 296.1 L 1060 299.8 L 1080 303.1 L 1100 305.7 L 1120 307.7 L 1140 308.9 L 1160 309.4 L 1180 309.3 L 1200 308.9" />
+      <path d="M 0 333.8 L 20 336.1 L 40 336.6 L 60 337.6 L 80 339.2 L 100 341.3 L 120 344.0 L 140 347.2 L 160 350.8 L 180 354.8 L 200 358.9 L 220 363.0 L 240 366.9 L 260 370.4 L 280 373.3 L 300 375.5 L 320 376.7 L 340 376.8 L 360 375.9 L 380 373.9 L 400 370.8 L 420 366.7 L 440 361.8 L 460 356.4 L 480 350.5 L 500 344.6 L 520 338.7 L 540 333.3 L 560 328.6 L 580 324.7 L 600 321.9 L 620 320.3 L 640 319.9 L 660 320.7 L 680 322.7 L 700 325.8 L 720 329.7 L 740 334.4 L 760 339.6 L 780 345.0 L 800 350.4 L 820 355.5 L 840 360.2 L 860 364.2 L 880 367.5 L 900 369.9 L 920 371.4 L 940 371.9 L 960 371.7 L 980 370.7 L 1000 369.0 L 1020 366.9 L 1040 364.4 L 1060 361.7 L 1080 359.0 L 1100 356.3 L 1120 353.8 L 1140 351.6 L 1160 349.6 L 1180 347.9 L 1200 346.5" />
+      <path d="M 0 400.5 L 20 393.4 L 40 399.3 L 60 405.8 L 80 412.6 L 100 419.4 L 120 425.6 L 140 430.8 L 160 434.7 L 180 436.8 L 200 437.1 L 220 435.3 L 240 431.4 L 260 425.7 L 280 418.4 L 300 410.0 L 320 400.9 L 340 391.6 L 360 382.7 L 380 374.8 L 400 368.4 L 420 363.7 L 440 361.0 L 460 360.6 L 480 362.2 L 500 365.9 L 520 371.2 L 540 377.9 L 560 385.4 L 580 393.3 L 600 401.1 L 620 408.3 L 640 414.5 L 660 419.6 L 680 423.3 L 700 425.5 L 720 426.3 L 740 425.8 L 760 424.2 L 780 421.8 L 800 418.9 L 820 415.7 L 840 412.4 L 860 409.3 L 880 406.5 L 900 404.1 L 920 401.9 L 940 400.0 L 960 398.2 L 980 396.5 L 1000 394.7 L 1020 392.6 L 1040 390.4 L 1060 387.8 L 1080 385.1 L 1100 382.4 L 1120 379.8 L 1140 377.6 L 1160 376.1 L 1180 375.5 L 1200 376.0" />
+      <path d="M 0 477.8 L 20 480.4 L 40 487.6 L 60 493.7 L 80 498.1 L 100 500.5 L 120 500.5 L 140 498.1 L 160 493.7 L 180 487.6 L 200 480.4 L 220 472.6 L 240 465.1 L 260 458.3 L 280 452.8 L 300 448.8 L 320 446.4 L 340 445.6 L 360 445.9 L 380 446.9 L 400 448.1 L 420 448.9 L 440 448.8 L 460 447.3 L 480 444.4 L 500 439.9 L 520 434.1 L 540 427.3 L 560 420.1 L 580 413.2 L 600 407.2 L 620 402.6 L 640 400.1 L 660 399.7 L 680 401.7 L 700 406.0 L 720 412.0 L 740 419.4 L 760 427.5 L 780 435.7 L 800 443.2 L 820 449.6 L 840 454.5 L 860 457.7 L 880 459.3 L 900 459.5 L 920 458.6 L 940 457.4 L 960 456.2 L 980 455.7 L 1000 456.2 L 1020 458.2 L 1040 461.7 L 1060 466.6 L 1080 472.5 L 1100 479.0 L 1120 485.6 L 1140 491.4 L 1160 496.0 L 1180 498.8 L 1200 499.5" />
+      <path d="M 0 540.7 L 20 557.6 L 40 554.7 L 60 549.9 L 80 543.1 L 100 534.8 L 120 525.2 L 140 514.7 L 160 503.9 L 180 493.1 L 200 482.7 L 220 473.3 L 240 465.1 L 260 458.5 L 280 453.6 L 300 450.6 L 320 449.4 L 340 450.0 L 360 452.1 L 380 455.7 L 400 460.3 L 420 465.6 L 440 471.4 L 460 477.2 L 480 482.9 L 500 488.1 L 520 492.7 L 540 496.6 L 560 499.8 L 580 502.2 L 600 504.1 L 620 505.5 L 640 506.7 L 660 507.8 L 680 509.1 L 700 510.7 L 720 512.7 L 740 515.2 L 760 518.2 L 780 521.8 L 800 525.7 L 820 529.7 L 840 533.7 L 860 537.4 L 880 540.4 L 900 542.4 L 920 543.3 L 940 542.8 L 960 540.7 L 980 537.0 L 1000 531.6 L 1020 524.7 L 1040 516.4 L 1060 507.1 L 1080 497.0 L 1100 486.6 L 1120 476.4 L 1140 466.6 L 1160 457.9 L 1180 450.5 L 1200 444.8" />
+      <path d="M 0 555.8 L 20 554.2 L 40 549.9 L 60 545.7 L 80 541.8 L 100 538.5 L 120 535.8 L 140 533.9 L 160 532.9 L 180 532.7 L 200 533.3 L 220 534.7 L 240 536.5 L 260 538.7 L 280 541.1 L 300 543.6 L 320 545.9 L 340 547.9 L 360 549.6 L 380 551.0 L 400 552.1 L 420 552.8 L 440 553.3 L 460 553.7 L 480 554.1 L 500 554.6 L 520 555.2 L 540 556.1 L 560 557.1 L 580 558.3 L 600 559.6 L 620 560.9 L 640 562.0 L 660 562.9 L 680 563.3 L 700 563.1 L 720 562.3 L 740 560.9 L 760 558.7 L 780 555.9 L 800 552.5 L 820 548.8 L 840 544.9 L 860 541.0 L 880 537.4 L 900 534.3 L 920 531.9 L 940 530.3 L 960 529.7 L 980 530.1 L 1000 531.4 L 1020 533.5 L 1040 536.5 L 1060 539.9 L 1080 543.7 L 1100 547.7 L 1120 551.5 L 1140 555.0 L 1160 558.0 L 1180 560.4 L 1200 562.1" />
+      <path d="M 0 590.4 L 20 577.5 L 40 574.8 L 60 573.7 L 80 574.3 L 100 576.3 L 120 579.5 L 140 583.5 L 160 587.8 L 180 592.1 L 200 596.0 L 220 599.4 L 240 602.1 L 260 604.1 L 280 605.4 L 300 606.3 L 320 606.9 L 340 607.5 L 360 608.3 L 380 609.4 L 400 610.9 L 420 612.6 L 440 614.5 L 460 616.4 L 480 617.8 L 500 618.7 L 520 618.5 L 540 617.2 L 560 614.7 L 580 610.8 L 600 605.8 L 620 599.8 L 640 593.4 L 660 586.9 L 680 580.9 L 700 575.8 L 720 572.0 L 740 570.0 L 760 569.8 L 780 571.5 L 800 575.1 L 820 580.1 L 840 586.3 L 860 593.1 L 880 600.0 L 900 606.5 L 920 612.2 L 940 616.8 L 960 619.9 L 980 621.6 L 1000 621.8 L 1020 620.9 L 1040 619.0 L 1060 616.4 L 1080 613.6 L 1100 610.8 L 1120 608.3 L 1140 606.1 L 1160 604.5 L 1180 603.2 L 1200 602.3" />
+      <path d="M 0 622.5 L 20 619.2 L 40 622.4 L 60 626.0 L 80 629.7 L 100 633.4 L 120 636.8 L 140 639.9 L 160 642.4 L 180 644.4 L 200 645.8 L 220 646.7 L 240 647.2 L 260 647.4 L 280 647.5 L 300 647.6 L 320 647.9 L 340 648.6 L 360 649.8 L 380 651.6 L 400 654.0 L 420 657.0 L 440 660.5 L 460 664.5 L 480 668.7 L 500 673.0 L 520 677.2 L 540 681.0 L 560 684.1 L 580 686.5 L 600 687.8 L 620 688.1 L 640 687.1 L 660 685.0 L 680 681.7 L 700 677.4 L 720 672.2 L 740 666.3 L 760 660.0 L 780 653.5 L 800 647.1 L 820 641.1 L 840 635.7 L 860 631.0 L 880 627.2 L 900 624.5 L 920 622.7 L 940 621.9 L 960 622.1 L 980 623.0 L 1000 624.4 L 1020 626.3 L 1040 628.4 L 1060 630.5 L 1080 632.5 L 1100 634.1 L 1120 635.4 L 1140 636.2 L 1160 636.5 L 1180 636.4 L 1200 636.1" />
+      <path d="M 0 673.3 L 20 692.3 L 40 696.7 L 60 700.1 L 80 702.5 L 100 704.0 L 120 704.8 L 140 705.2 L 160 705.5 L 180 706.0 L 200 707.1 L 220 708.8 L 240 711.4 L 260 714.8 L 280 719.0 L 300 723.6 L 320 728.5 L 340 733.3 L 360 737.4 L 380 740.5 L 400 742.3 L 420 742.3 L 440 740.5 L 460 736.8 L 480 731.2 L 500 723.9 L 520 715.4 L 540 705.9 L 560 696.1 L 580 686.4 L 600 677.4 L 620 669.6 L 640 663.3 L 660 658.9 L 680 656.4 L 700 655.9 L 720 657.2 L 740 660.1 L 760 664.2 L 780 669.2 L 800 674.5 L 820 679.8 L 840 684.6 L 860 688.9 L 880 692.2 L 900 694.7 L 920 696.3 L 940 697.3 L 960 697.8 L 980 698.1 L 1000 698.6 L 1020 699.7 L 1040 701.4 L 1060 704.1 L 1080 707.7 L 1100 712.3 L 1120 717.6 L 1140 723.4 L 1160 729.3 L 1180 734.9 L 1200 739.8" />
+      <path d="M 0 751.4 L 20 762.8 L 40 763.3 L 60 763.5 L 80 764.1 L 100 765.5 L 120 767.9 L 140 771.5 L 160 776.0 L 180 781.1 L 200 786.2 L 220 790.7 L 240 793.9 L 260 795.2 L 280 793.9 L 300 789.9 L 320 783.1 L 340 773.7 L 360 762.1 L 380 749.2 L 400 735.8 L 420 722.9 L 440 711.3 L 460 702.0 L 480 695.6 L 500 692.4 L 520 692.5 L 540 695.7 L 560 701.7 L 580 709.6 L 600 718.8 L 620 728.4 L 640 737.5 L 660 745.7 L 680 752.3 L 700 757.3 L 720 760.5 L 740 762.3 L 760 763.1 L 780 763.4 L 800 763.7 L 820 764.6 L 840 766.5 L 860 769.4 L 880 773.5 L 900 778.3 L 920 783.5 L 940 788.5 L 960 792.4 L 980 794.8 L 1000 794.9 L 1020 792.4 L 1040 787.0 L 1060 778.9 L 1080 768.5 L 1100 756.2 L 1120 742.9 L 1140 729.6 L 1160 717.2 L 1180 706.7 L 1200 698.6" />
+    </svg>
+
+    <!-- NAV -->
+    <nav class="nav">
+      <a class="nav__brand" href="#top">CR YAPIM</a>
+      <div class="nav__right">
+        <div class="lang-switch" role="group" aria-label="Dil / Language">
+          <button type="button" class="lang-switch__btn" data-lang-btn="tr" aria-pressed="true">TR</button>
+          <span class="lang-switch__sep" aria-hidden="true">/</span>
+          <button type="button" class="lang-switch__btn" data-lang-btn="en" aria-pressed="false">EN</button>
+        </div>
+        <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+          <span data-i18n="nav.menu">Menü</span>
+          <span class="nav__glyph" aria-hidden="true"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- SLIDE-DOWN MENU -->
+    <div class="site-menu" id="site-menu" role="dialog" aria-label="Index">
+      <a class="site-menu__row" href="#about"><span class="folio">01</span> <span data-i18n="menu.1">Hakkımızda</span></a>
+      <a class="site-menu__row" href="#works"><span class="folio">02</span> <span data-i18n="menu.2">Projeler</span></a>
+      <a class="site-menu__row" href="#capabilities"><span class="folio">03</span> <span data-i18n="menu.3">Hizmetler</span></a>
+      <a class="site-menu__row" href="#process"><span class="folio">04</span> <span data-i18n="menu.4">Süreç</span></a>
+      <a class="site-menu__row" href="#archive"><span class="folio">05</span> <span data-i18n="menu.5">Arşiv</span></a>
+      <a class="site-menu__row" href="#commission"><span class="folio">06</span> <span data-i18n="menu.6">İletişim</span></a>
+    </div>
+
+    <!-- HERO -->
+    <header class="hero" id="top">
+      <canvas></canvas>
+      <div class="hero__overlay">
+        <h1 class="hero__title">
+          <span data-i18n="hero.titleL1">Boğaza Bakan</span>
+          <em data-i18n="hero.titleL2">bir yapım stüdyosu</em>
+        </h1>
+        <div class="hero__meta">
+          <span class="meta"><span class="status-dot"></span><span data-i18n="hero.status">Yeni projelere açık</span></span>
+          <span class="meta" data-i18n="hero.role">İçerik & yapım stüdyosu · İstanbul</span>
+        </div>
+      </div>
+      <span class="hero__hint" data-i18n="hero.hint">Yüzeyi sür / ardındakini gör</span>
+    </header>
+
+    <main class="main">
+      <!-- [0] MARQUEE -->
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span class="marquee__item" data-i18n="marquee.0">CR YAPIM</span>
+          <span class="marquee__item" data-i18n="marquee.1">İçerik Yapımı</span>
+          <span class="marquee__item" data-i18n="marquee.2">Reklam & Marka Filmi</span>
+          <span class="marquee__item" data-i18n="marquee.3">Post-Prodüksiyon</span>
+          <span class="marquee__item" data-i18n="marquee.4">Stüdyo & Plato Kiralama</span>
+          <span class="marquee__item" data-i18n="marquee.0">CR YAPIM</span>
+          <span class="marquee__item" data-i18n="marquee.1">İçerik Yapımı</span>
+          <span class="marquee__item" data-i18n="marquee.2">Reklam & Marka Filmi</span>
+          <span class="marquee__item" data-i18n="marquee.3">Post-Prodüksiyon</span>
+          <span class="marquee__item" data-i18n="marquee.4">Stüdyo & Plato Kiralama</span>
+        </div>
+      </div>
+
+      <!-- RUNNING INDEX STRIP -->
+      <div class="index-strip">
+        <span>N — 01</span>
+        <span class="hr"></span>
+        <span data-i18n="footer.col4a">Edisyon 001</span>
+        <span class="hr"></span>
+        <span data-i18n="footer.col4b">2025 / 2026</span>
+        <span class="hr"></span>
+        <span data-i18n="footer.col4c">Yayında</span>
+      </div>
+
+      <!-- [1] ABOUT -->
+      <section class="section" id="about" data-reveal>
+        <div class="section-head">
+          <div class="section-head__label">
+            <span class="folio">01</span>
+            <h2 class="section-title" data-i18n="about.label">Hakkımızda</h2>
+          </div>
+          <span class="folio">p. 014</span>
+        </div>
+        <div class="about-grid">
+          <h3 class="about__headline">
+            <span data-i18n="about.headlineL1">İçeriği baştan sona</span><br />
+            <em data-i18n="about.headlineL2">tek bir çatı altında</em><br />
+            <span data-i18n="about.headlineL3">kuruyor, çekiyor, kurguluyoruz.</span>
+          </h3>
+          <div class="about__body">
+            <p data-i18n="about.body1">CR YAPIM, İstanbul Boğazı'na bakan bir içerik ve yapım stüdyosu. Kendi programlarımızı ve yapımlarımızı çekiyor, aynı platoda markaların ve içerik üreticilerinin işlerine de alan açıyoruz.</p>
+            <p data-i18n="about.body2">Fikrin ilk halinden teslim edilen kurguya kadar her aşamayı kendi ekibimizle yürütüyoruz. Sade bir üretim akışı, sinematik bir bakış ve gününde teslim üzerine kurulu bir çalışma biçimimiz var.</p>
+            <dl class="about__meta">
+              <div><dt data-i18n="about.m1label">Tür</dt><dd data-i18n="about.m1value">İçerik & yapım stüdyosu</dd></div>
+              <div><dt data-i18n="about.m2label">Konum</dt><dd data-i18n="about.m2value">İstanbul · Boğaz</dd></div>
+              <div><dt data-i18n="about.m3label">Odak</dt><dd data-i18n="about.m3value">Yapım · Çekim · Post</dd></div>
+              <div><dt data-i18n="about.m4label">Durum</dt><dd><span class="accent">●</span> <span data-i18n="about.m4value">Yeni projelere açık</span></dd></div>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <!-- [2] SELECTED WORKS -->
+      <section class="section" id="works" data-reveal>
+        <div class="section-head">
+          <div class="section-head__label">
+            <span class="folio">02</span>
+            <h2 class="section-title" data-i18n="works.label">Projeler</h2>
+          </div>
+          <span class="folio">p. 021</span>
+        </div>
+        <ol class="works">
+          <li class="work" data-reveal>
+            <div class="work__visual">
+              <span class="work__badge" data-i18n="work1.badge">MF</span>
+              <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <ellipse cx="200" cy="150" rx="40" ry="30" stroke="" />
+                <ellipse cx="200" cy="150" rx="80" ry="60" stroke="" />
+                <ellipse cx="200" cy="150" rx="120" ry="90" stroke="" />
+                <ellipse cx="200" cy="150" rx="160" ry="120" stroke="" />
+                <ellipse cx="200" cy="150" rx="200" ry="150" stroke="" />
+              </svg>
+              <span class="work__title-on display" data-i18n="work1.titleOn">Marka Filmi</span>
+            </div>
+            <div class="work__info">
+              <div class="work__metarow"><span data-i18n="work1.metaIndex">(01 / 03)</span><span data-i18n="work1.year">2025</span></div>
+              <h3 class="work__name" data-i18n="work1.name">Marka Filmi</h3>
+              <p data-i18n="work1.desc">Bir kahve markası için Boğaz manzaralı stüdyoda çekilen, kurgu ve renk düzenlemesiyle tamamlanan 60 saniyelik marka filmi.</p>
+              <div class="work__tags"><span data-i18n="work1.tags">Reklam · Kurgu · Renk</span></div>
+              <a class="work__cta" href="#commission" data-i18n="work1.cta">İncele →</a>
+            </div>
+          </li>
+
+          <li class="work" data-reveal>
+            <div class="work__visual">
+              <span class="work__badge" data-i18n="work2.badge">İP</span>
+              <svg viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M0 60 C 120 20, 280 100, 400 60" stroke="" />
+                <path d="M0 110 C 120 70, 280 150, 400 110" stroke="" />
+                <path d="M0 160 C 120 120, 280 200, 400 160" stroke="" />
+                <path d="M0 210 C 120 170, 280 250, 400 210" stroke="" />
+                <path d="M0 260 C 120 220, 280 300, 400 260" stroke="" />
+              </svg>
+              <span class="work__title-on display" data-i18n="work2.titleOn">İçerik Programı</span>
+            </div>
+            <div class="work__info">
+              <div class="work__metarow"><span data-i18n="work2.metaIndex">(02 / 03)</span><span data-i18n="work2.year">2025</span></div>
+              <h3 class="work__name" data-i18n="work2.name">İçerik Programı</h3>
+              <p data-i18n="work2.desc">Formatı, çekimi ve seri kurgusu stüdyo içinde geliştirilen, sekiz bölümlük söyleşi temelli içerik programı.</p>
+              <div class="work__tags"><span data-i18n="work2.tags">Format · Çekim · Seri</span></div>
+              <a class="work__cta" href="#commission" data-i18n="work2.cta">İncele →</a>
+            </div>
+          </li>
+
+          <li class="work" data-reveal>
+            <div class="work__visual">
+              <span class="work__badge" data-i18n="work3.badge">SÇ</span>
+              <svg viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M50 0 V300 M130 0 V300 M210 0 V300 M290 0 V300 M370 0 V300" stroke="" />
+                <path d="M0 75 H400 M0 150 H400 M0 225 H400" stroke="" />
+                <circle cx="210" cy="150" r="50" stroke="" />
+                <circle cx="210" cy="150" r="90" stroke="" />
+              </svg>
+              <span class="work__title-on display" data-i18n="work3.titleOn">Stüdyo Çekimi</span>
+            </div>
+            <div class="work__info">
+              <div class="work__metarow"><span data-i18n="work3.metaIndex">(03 / 03)</span><span data-i18n="work3.year">2026</span></div>
+              <h3 class="work__name" data-i18n="work3.name">Stüdyo Çekimi</h3>
+              <p data-i18n="work3.desc">Bir moda kapsülü için platoda kurulan ışık ve sanat düzeniyle gerçekleştirilen, ürün ve kampanya görselleri çekimi.</p>
+              <div class="work__tags"><span data-i18n="work3.tags">Plato · Işık · Sanat</span></div>
+              <a class="work__cta" href="#commission" data-i18n="work3.cta">İncele →</a>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- [3] CAPABILITIES -->
+      <section class="section" id="capabilities" data-reveal>
+        <div class="section-head">
+          <div class="section-head__label">
+            <span class="folio">03</span>
+            <h2 class="section-title" data-i18n="cap.label">Hizmetler</h2>
+          </div>
+          <span class="folio">p. 033</span>
+        </div>
+        <div class="cap-grid">
+          <article class="cap-card" data-reveal>
+            <span class="cap-card__idx">↳ 01</span>
+            <h3 class="cap-card__title" data-i18n="cap.c1title">Yapım & Çekim</h3>
+            <p data-i18n="cap.c1body">Reklam filmi, marka içeriği ve program çekimlerini planlamadan sete kadar yönetiyoruz. Kamera, ışık ve set ekibi tek elden.</p>
+            <div class="cap-card__tags" data-i18n="cap.c1tags">Set · Kamera · Yönetim</div>
+          </article>
+          <article class="cap-card" data-reveal>
+            <span class="cap-card__idx">↳ 02</span>
+            <h3 class="cap-card__title" data-i18n="cap.c2title">Post-Prodüksiyon</h3>
+            <p data-i18n="cap.c2body">Kurgu, renk ve ses tasarımını aynı çatı altında topluyoruz. Çekilen görüntüyü teslime hazır, bütünlüklü bir işe dönüştürüyoruz.</p>
+            <div class="cap-card__tags" data-i18n="cap.c2tags">Kurgu · Renk · Ses</div>
+          </article>
+          <article class="cap-card" data-reveal>
+            <span class="cap-card__idx">↳ 03</span>
+            <h3 class="cap-card__title" data-i18n="cap.c3title">Stüdyo & Plato Kiralama</h3>
+            <p data-i18n="cap.c3body">Boğaz manzaralı platomuzu markalara ve içerik üreticilerine kiralıyoruz. Işık altyapısı ve ekipmanla birlikte, kullanıma hazır bir set.</p>
+            <div class="cap-card__tags" data-i18n="cap.c3tags">Plato · Işık · Ekipman</div>
+          </article>
+          <article class="cap-card" data-reveal>
+            <span class="cap-card__idx">↳ 04</span>
+            <h3 class="cap-card__title" data-i18n="cap.c4title">Sanat Yönetmenliği</h3>
+            <p data-i18n="cap.c4body">Markanın diline uygun konsept ve görsel dünya kuruyoruz. İçeriğin çekimden önce nasıl görüneceğini birlikte tasarlıyoruz.</p>
+            <div class="cap-card__tags" data-i18n="cap.c4tags">Konsept · Marka · İçerik</div>
+          </article>
+        </div>
+      </section>
+
+      <!-- [4] PROCESS -->
+      <section class="section" id="process" data-reveal>
+        <div class="section-head">
+          <div class="section-head__label">
+            <span class="folio">04</span>
+            <h2 class="section-title" data-i18n="proc.label">Süreç</h2>
+          </div>
+          <span class="folio">p. 041</span>
+        </div>
+        <div class="process">
+          <div class="process__step">
+            <div class="process__num display">01</div>
+            <div class="process__title" data-i18n="proc.s1title">Brief</div>
+            <p data-i18n="proc.s1body">İşi, hedefi ve tonu birlikte netleştiriyoruz. Çıkış noktasını tek bir sayfada toparlıyoruz.</p>
+          </div>
+          <div class="process__step">
+            <div class="process__num display">02</div>
+            <div class="process__title" data-i18n="proc.s2title">Konsept</div>
+            <p data-i18n="proc.s2body">Görsel dili, akışı ve çekim planını kuruyoruz. Sete girmeden önce işi kafamızda bitiriyoruz.</p>
+          </div>
+          <div class="process__step">
+            <div class="process__num display">03</div>
+            <div class="process__title" data-i18n="proc.s3title">Çekim</div>
+            <p data-i18n="proc.s3body">Platoda planı hayata geçiriyoruz. Kamera, ışık ve yönetim tek ekipte.</p>
+          </div>
+          <div class="process__step">
+            <div class="process__num display">04</div>
+            <div class="process__title" data-i18n="proc.s4title">Teslim</div>
+            <p data-i18n="proc.s4body">Kurgu, renk ve sesle işi tamamlıyoruz. Yayına hazır formatlarda, gününde teslim ediyoruz.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- [5] EXPERIMENTS / ARCHIVE -->
+      <section class="section" id="archive" data-reveal>
+        <div class="section-head">
+          <div class="section-head__label">
+            <span class="folio">05</span>
+            <h2 class="section-title" data-i18n="arch.label">Arşiv</h2>
+          </div>
+          <span class="folio">p. 052</span>
+        </div>
+        <div class="archive-grid">
+          <figure class="study" data-pattern="lines" data-reveal>
+            <div class="study__visual"></div>
+            <figcaption class="study__cap"><strong data-i18n="arch.s1label">Kayıt #001</strong><span data-i18n="arch.s1tag">Doku · Kimlik</span></figcaption>
+          </figure>
+          <figure class="study" data-pattern="rings" data-reveal>
+            <div class="study__visual"></div>
+            <figcaption class="study__cap"><strong data-i18n="arch.s2label">Kayıt #002</strong><span data-i18n="arch.s2tag">Alan · Hareket</span></figcaption>
+          </figure>
+          <figure class="study" data-pattern="grid" data-reveal>
+            <div class="study__visual"></div>
+            <figcaption class="study__cap"><strong data-i18n="arch.s3label">Kayıt #003</strong><span data-i18n="arch.s3tag">Izgara · Sistem</span></figcaption>
+          </figure>
+          <figure class="study" data-pattern="waves" data-reveal>
+            <div class="study__visual"></div>
+            <figcaption class="study__cap"><strong data-i18n="arch.s4label">Kayıt #004</strong><span data-i18n="arch.s4tag">Dalga · Kurgu</span></figcaption>
+          </figure>
+          <figure class="study" data-pattern="diag" data-reveal>
+            <div class="study__visual"></div>
+            <figcaption class="study__cap"><strong data-i18n="arch.s5label">Kayıt #005</strong><span data-i18n="arch.s5tag">Çapraz · Tip</span></figcaption>
+          </figure>
+          <figure class="study" data-pattern="dots" data-reveal>
+            <div class="study__visual"></div>
+            <figcaption class="study__cap"><strong data-i18n="arch.s6label">Kayıt #006</strong><span data-i18n="arch.s6tag">Tram · Yüzey</span></figcaption>
+          </figure>
+        </div>
+        <a class="archive__open" href="#commission" data-i18n="arch.open">Tüm arşivi aç ↗</a>
+      </section>
+
+      <!-- [6] CTA -->
+      <section class="cta" id="commission" data-reveal>
+        <div class="cta__inner">
+          <h2 class="cta__heading">
+            <span data-i18n="cta.headingPre">Bir sonraki</span> <em data-i18n="cta.headingEm">yapımı</em> <span data-i18n="cta.headingPost">birlikte çekelim.</span>
+          </h2>
+          <p class="cta__sub" data-i18n="cta.sub">
+            Brief'i siz getirin, gerisini biz çekelim. Yapımdan post-prodüksiyona, fikirden teslime kadar tek bir stüdyoda.
+          </p>
+          <a class="cta__btn" href="mailto:merhaba@cryapim.com">
+            <span data-i18n="cta.btn">İletişime geç</span>
+            <span class="glyph" aria-hidden="true">→</span>
+          </a>
+          <div class="cta__row">
+            <span data-i18n="cta.email">merhaba@cryapim.com</span>
+            <span class="hr"></span>
+            <span data-i18n="cta.loc">İstanbul · Boğaz</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer__top">
+        <div class="footer__mark display">CR YAPIM</div>
+        <div class="footer__tagline" data-i18n="footer.tagline">Görüntü / Yapım</div>
+      </div>
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4 data-i18n="footer.col1">Bölümler</h4>
+          <a href="#about">01 <span data-i18n="menu.1">Hakkımızda</span></a>
+          <a href="#works">02 <span data-i18n="menu.2">Projeler</span></a>
+          <a href="#capabilities">03 <span data-i18n="menu.3">Hizmetler</span></a>
+          <a href="#process">04 <span data-i18n="menu.4">Süreç</span></a>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer.col2">Kanallar</h4>
+          <a href="#archive" data-i18n="footer.col2a">Arşiv</a>
+          <a href="#commission" data-i18n="footer.col2b">İletişim</a>
+          <a href="#top" data-i18n="footer.col2c">Sayfa başı</a>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer.col3">İletişim</h4>
+          <a href="mailto:merhaba@cryapim.com" data-i18n="footer.col3a">merhaba@cryapim.com</a>
+          <li data-i18n="footer.col3b">İstanbul · Boğaz</li>
+          <li><span class="accent">●</span> <span data-i18n="footer.col3c">Yeni projelere açık</span></li>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer.col4">Künye</h4>
+          <li data-i18n="footer.col4a">Edisyon 001</li>
+          <li data-i18n="footer.col4b">2025 / 2026</li>
+          <li data-i18n="footer.col4c">Yayında</li>
+        </div>
+      </div>
+      <div class="footer__lockup display">CR YAPIM</div>
+      <div class="footer__base">
+        <span data-i18n="footer.base1">© 2026 CR YAPIM — İçerik & Yapım Stüdyosu</span>
+        <span data-i18n="footer.base2">İstanbul · Boğaz</span>
+      </div>
+    </footer>
+
+    <!-- Hero engine (module) -->
+    <script type="module" src="./script.js"></script>
+
+    <!-- Dil yönetimi: TR (varsayılan) / EN -->
+    <script type="module" src="./i18n.js"></script>
+
+    <!-- Tiny inline block: menu toggle + scroll-reveal observer ONLY -->
+    <script>
+      (function () {
+        // ---- Slide-down menu ----
+        var toggle = document.querySelector('.nav__toggle');
+        var menu = document.getElementById('site-menu');
+        var html = document.documentElement;
+        var hideTimer = null;
+
+        function openMenu() {
+          clearTimeout(hideTimer);
+          menu.classList.add('is-open');
+          html.classList.add('menu-open');
+          toggle.setAttribute('aria-expanded', 'true');
+        }
+        function closeMenu() {
+          menu.classList.remove('is-open');
+          html.classList.remove('menu-open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+        toggle.addEventListener('click', function () {
+          if (menu.classList.contains('is-open')) closeMenu();
+          else openMenu();
+        });
+        menu.addEventListener('click', function (e) {
+          if (e.target.closest('a')) closeMenu();
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && menu.classList.contains('is-open')) closeMenu();
+        });
+
+        // ---- Scroll reveal ----
+        var targets = document.querySelectorAll('[data-reveal]');
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce || !('IntersectionObserver' in window)) {
+          targets.forEach(function (el) { el.classList.add('is-visible'); });
+        } else {
+          var io = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('is-visible');
+                  io.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+          );
+          targets.forEach(function (el) { io.observe(el); });
+        }
+      })();
+    </script>
+  </body>
+</html>
