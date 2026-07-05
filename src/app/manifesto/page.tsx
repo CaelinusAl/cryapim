@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import pages from "@/content/pages.tr.json";
 import { getContent } from "@/lib/content";
@@ -38,41 +39,52 @@ export default function ManifestoPage() {
 
       <main className="px-6 pb-[clamp(5rem,9vw,9rem)] sm:px-12 lg:px-20">
         {/* Manifesto — birebir metin, sahneli akış */}
-        <section className="mx-auto max-w-3xl py-[clamp(5rem,9vw,8rem)] text-center">
-          <Reveal>
-            <p className="mx-auto mb-[clamp(4rem,7vw,6rem)] max-w-2xl font-serif text-[clamp(1.4rem,3vw,2rem)] italic leading-[1.4] text-ink/85">
-              {manifesto.lead}
-            </p>
-          </Reveal>
+        <section className="relative isolate overflow-hidden bg-[radial-gradient(ellipse_140%_100%_at_50%_40%,#190b22_0%,#0a0610_45%,transparent_100%)] mx-auto max-w-3xl py-[clamp(5rem,9vw,8rem)] text-center">
+          <Image
+            src="/brand/egg-atmospheric-1600.webp"
+            alt=""
+            aria-hidden="true"
+            fill
+            sizes="100vw"
+            className="pointer-events-none select-none object-cover object-center opacity-[0.1] mix-blend-screen"
+            loading="lazy"
+          />
+          <div className="relative">
+            <Reveal>
+              <p className="mx-auto mb-[clamp(4rem,7vw,6rem)] max-w-2xl font-serif text-[clamp(1.4rem,3vw,2rem)] italic leading-[1.4] text-ink/85">
+                {manifesto.lead}
+              </p>
+            </Reveal>
 
-          <div className="space-y-[clamp(3rem,5vw,4.5rem)]">
-            {manifesto.lines.map((line, i) => (
-              <Reveal key={line.a} delay={0.1 + i * 0.12}>
-                <p className="font-serif text-[clamp(1.7rem,4vw,2.8rem)] leading-[1.2] text-ink">
-                  {line.a}
-                </p>
-                <p className="mt-3 font-serif text-[clamp(1.2rem,2.6vw,1.8rem)] italic leading-[1.3] text-muted">
-                  {line.b}
-                </p>
-              </Reveal>
-            ))}
+            <div className="space-y-[clamp(3rem,5vw,4.5rem)]">
+              {manifesto.lines.map((line, i) => (
+                <Reveal key={line.a} delay={0.1 + i * 0.12}>
+                  <p className="font-serif text-[clamp(1.7rem,4vw,2.8rem)] leading-[1.2] text-ink">
+                    {line.a}
+                  </p>
+                  <p className="mt-3 font-serif text-[clamp(1.2rem,2.6vw,1.8rem)] italic leading-[1.3] text-muted">
+                    {line.b}
+                  </p>
+                </Reveal>
+              ))}
+            </div>
+
+            <Reveal delay={0.2}>
+              <div
+                className="mx-auto my-[clamp(4rem,7vw,6rem)] h-px w-24 bg-gold/40"
+                aria-hidden="true"
+              />
+              <p className="font-serif text-[clamp(2rem,5vw,3.4rem)] leading-[1.15] text-gold">
+                {manifesto.close}
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.25}>
+              <p className="mx-auto mt-[clamp(4rem,7vw,6rem)] max-w-xl text-[0.78rem] leading-relaxed tracking-[0.08em] text-dim">
+                {manifesto.sig}
+              </p>
+            </Reveal>
           </div>
-
-          <Reveal delay={0.2}>
-            <div
-              className="mx-auto my-[clamp(4rem,7vw,6rem)] h-px w-24 bg-gold/40"
-              aria-hidden="true"
-            />
-            <p className="font-serif text-[clamp(2rem,5vw,3.4rem)] leading-[1.15] text-gold">
-              {manifesto.close}
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.25}>
-            <p className="mx-auto mt-[clamp(4rem,7vw,6rem)] max-w-xl text-[0.78rem] leading-relaxed tracking-[0.08em] text-dim">
-              {manifesto.sig}
-            </p>
-          </Reveal>
         </section>
 
         {/* Bu sizin için ne demek */}

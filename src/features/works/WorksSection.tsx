@@ -1,23 +1,49 @@
+import Image from "next/image";
 import { SectionHeading } from "@/components/section-heading";
 import { Reveal } from "@/components/reveal";
 import type { Content } from "@/lib/content";
+
+const CARD_IMAGES = [
+  {
+    src: "/brand/egg-alt-800.webp",
+    alt: "CR YAPIM — altın ve mor fırça darbeli seramik yumurta, proje sembolü",
+  },
+  {
+    src: "/brand/egg-icon-swirl-800.webp",
+    alt: "CR YAPIM marka amblemi — spiral altın-mor doku",
+  },
+  {
+    src: "/brand/egg-landscape-800.webp",
+    alt: "CR YAPIM kimlik görseli — CR YAPIM wordmark ile yumurta formu",
+  },
+];
 
 export function WorksSection({ content }: { content: Content["works"] }) {
   return (
     <section
       id="works"
-      className="px-6 py-[clamp(5rem,9vw,9rem)] sm:px-12 lg:px-20"
+      className="relative isolate overflow-hidden bg-[radial-gradient(ellipse_120%_80%_at_85%_100%,#1a1006_0%,#0d0a05_55%,#000_100%)] px-6 py-[clamp(5rem,9vw,9rem)] sm:px-12 lg:px-20"
     >
       <div className="mx-auto max-w-6xl">
         <SectionHeading index="02" label={content.label} />
 
         <ol className="space-y-24">
-          {content.items.map((work) => (
+          {content.items.map((work, i) => {
+            const image = CARD_IMAGES[i % CARD_IMAGES.length];
+            return (
             <li key={work.name}>
               <Reveal>
                 <div className="grid items-center gap-10 lg:grid-cols-[1.3fr_1fr]">
                   <div className="group relative flex aspect-[4/3] items-center justify-center overflow-hidden border border-gold/15 bg-black transition-colors duration-500 hover:border-gold/50">
-                    <span className="absolute left-6 top-6 text-[0.62rem] tracking-[0.4em] text-dim">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      sizes="(min-width: 1024px) 55vw, 100vw"
+                      className="object-cover opacity-45 transition-opacity duration-700 group-hover:opacity-65"
+                      loading="lazy"
+                    />
+                    <span className="absolute left-6 top-6 z-10 text-[0.62rem] tracking-[0.4em] text-dim">
                       {work.badge}
                     </span>
                     <svg
@@ -61,7 +87,8 @@ export function WorksSection({ content }: { content: Content["works"] }) {
                 </div>
               </Reveal>
             </li>
-          ))}
+            );
+          })}
         </ol>
       </div>
     </section>

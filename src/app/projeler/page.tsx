@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import pages from "@/content/pages.tr.json";
 import { PageHero } from "@/components/page-hero";
@@ -6,6 +7,21 @@ import { BreadcrumbJsonLd } from "@/components/breadcrumb-jsonld";
 import { Reveal } from "@/components/reveal";
 
 const t = pages.projeler;
+
+const CASE_IMAGES = [
+  {
+    src: "/brand/egg-alt-800.webp",
+    alt: "CR YAPIM — altın ve mor fırça darbeli seramik yumurta, proje sembolü",
+  },
+  {
+    src: "/brand/egg-icon-swirl-800.webp",
+    alt: "CR YAPIM marka amblemi — spiral altın-mor doku",
+  },
+  {
+    src: "/brand/egg-landscape-800.webp",
+    alt: "CR YAPIM kimlik görseli — CR YAPIM wordmark ile yumurta formu",
+  },
+];
 
 export const metadata: Metadata = {
   title: t.meta.title,
@@ -54,7 +70,9 @@ export default function ProjelerPage() {
 
       <main className="px-6 pb-[clamp(5rem,9vw,9rem)] sm:px-12 lg:px-20">
         <div className="mx-auto max-w-4xl">
-          {t.cases.map((work, i) => (
+          {t.cases.map((work, i) => {
+            const image = CASE_IMAGES[i % CASE_IMAGES.length];
+            return (
             <article
               key={work.name}
               className={`py-[clamp(4rem,7vw,6rem)] ${
@@ -62,7 +80,17 @@ export default function ProjelerPage() {
               }`}
             >
               <Reveal>
-                <div className="mb-10 flex items-baseline justify-between gap-6">
+                <div className="mb-10 grid gap-8 sm:grid-cols-[auto_1fr_auto] sm:items-center">
+                  <div className="relative hidden aspect-square w-20 shrink-0 overflow-hidden border border-gold/25 sm:block">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      sizes="80px"
+                      className="object-cover"
+                      loading="lazy"
+                    />
+                  </div>
                   <div className="flex items-baseline gap-5">
                     <span
                       aria-hidden="true"
@@ -96,7 +124,8 @@ export default function ProjelerPage() {
                 </div>
               </Reveal>
             </article>
-          ))}
+            );
+          })}
 
           {/* CTA */}
           <section className="border-t border-gold/20 pt-[clamp(4rem,7vw,6rem)] text-center">

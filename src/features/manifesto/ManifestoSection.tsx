@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { SectionHeading } from "@/components/section-heading";
 import type { Content } from "@/lib/content";
@@ -26,9 +27,18 @@ export function ManifestoSection({
   return (
     <section
       id="manifesto"
-      className="px-6 py-[clamp(5rem,9vw,9rem)] sm:px-12 lg:px-20"
+      className="relative isolate overflow-hidden bg-[radial-gradient(ellipse_140%_100%_at_50%_50%,#190b22_0%,#0a0610_45%,#000_100%)] px-6 py-[clamp(5rem,9vw,9rem)] sm:px-12 lg:px-20"
     >
-      <div className="mx-auto max-w-6xl">
+      <Image
+        src="/brand/egg-atmospheric-1600.webp"
+        alt=""
+        aria-hidden="true"
+        fill
+        sizes="100vw"
+        className="pointer-events-none select-none object-cover object-center opacity-[0.12] mix-blend-screen"
+        loading="lazy"
+      />
+      <div className="relative mx-auto max-w-6xl">
         <SectionHeading index="05" label={content.label} />
 
         <div className="mx-auto max-w-3xl py-8 text-center">

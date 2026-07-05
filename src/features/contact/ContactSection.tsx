@@ -51,7 +51,7 @@ export function ContactSection({ content }: { content: Content["cta"] }) {
   return (
     <section
       id="commission"
-      className="border-t border-gold/20 px-6 py-[clamp(5rem,9vw,9rem)] sm:px-12 lg:px-20"
+      className="border-t border-gold/20 bg-[radial-gradient(ellipse_120%_90%_at_50%_100%,#1c150a_0%,#0d0a05_55%,#000_100%)] px-6 py-[clamp(5rem,9vw,9rem)] sm:px-12 lg:px-20"
     >
       <div className="mx-auto max-w-3xl text-center">
         <Reveal>

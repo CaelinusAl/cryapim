@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { getAllPosts, formatDateTr } from "@/lib/blog";
 import { SITE_URL } from "@/lib/routes";
@@ -48,17 +49,30 @@ export default function BlogIndexPage() {
   };
 
   return (
-    <main className="mx-auto w-full max-w-4xl px-6 pt-36 pb-28 md:px-10">
+    <main className="relative mx-auto w-full max-w-4xl px-6 pt-36 pb-28 md:px-10">
       {/* Sayfa girişi */}
-      <header className="mb-20">
+      <header className="relative isolate mb-20 overflow-hidden">
+        <div
+          className="pointer-events-none absolute -right-16 -top-24 h-[26rem] w-[20rem] opacity-[0.16] mix-blend-screen sm:-right-10"
+          aria-hidden="true"
+        >
+          <Image
+            src="/brand/egg-landscape-800.webp"
+            alt=""
+            fill
+            sizes="320px"
+            className="object-cover object-left"
+            loading="lazy"
+          />
+        </div>
         <p className="mb-6 text-[0.62rem] font-medium uppercase tracking-[0.45em] text-gold">
           Günlük / Blog
         </p>
-        <h1 className="font-serif text-4xl leading-tight text-ink md:text-6xl">
+        <h1 className="relative font-serif text-4xl leading-tight text-ink md:text-6xl">
           Teknoloji, tasarım ve{" "}
           <em className="italic text-gold">hikâye</em> üzerine.
         </h1>
-        <p className="mt-6 max-w-xl text-sm leading-relaxed text-muted">
+        <p className="relative mt-6 max-w-xl text-sm leading-relaxed text-muted">
           Dijital evrenler kurarken öğrendiklerimiz. Az söz, güçlü söz.
         </p>
       </header>
