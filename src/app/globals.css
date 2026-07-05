@@ -28,6 +28,20 @@
     scroll-behavior: smooth;
   }
 
+  /* Lenis aktifken native smooth scroll devre dışı kalır */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
   body {
     background: #000;
     color: var(--color-ink);

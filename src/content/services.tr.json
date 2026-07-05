@@ -1,0 +1,594 @@
+{
+  "services": [
+    {
+      "slug": "yapay-zeka-cozumleri",
+      "title": "Yapay Zekâ Çözümleri",
+      "short": "Markalara özel yapay zekâ ürünleri, asistanlar ve otomasyonlar; fikirden çalışan modele kadar uçtan uca.",
+      "tags": "Model · Otomasyon · Ürün",
+      "seoTitle": "Yapay Zeka Çözümleri | CR YAPIM",
+      "seoDescription": "Markalara özel yapay zeka çözümleri: asistanlar, otomasyonlar ve AI destekli ürünler. Fikirden çalışan modele, İstanbul merkezli uçtan uca geliştirme.",
+      "lead": "Yapay zekâ bir özellik değil; markanızın düşünen katmanı. Biz o katmanı sıfırdan kuruyoruz.",
+      "what": [
+        "Yapay zekâ çözümleri denince çoğu ekip hazır bir araca abone olur. Biz öyle çalışmıyoruz. Markanızın gerçek problemini alıyor, ona özel bir yapay zekâ ürünü tasarlıyoruz: müşteri sorularını anlayan asistanlar, tekrar eden işleri sessizce devralan otomasyonlar, verinizden anlam çıkaran sistemler.",
+        "Süreç fikirle başlar, çalışan modelle biter. Doğru modeli seçiyor, markanızın bilgisiyle eğitiyor ve mevcut sistemlerinize bağlıyoruz. Arayüzünden altyapısına kadar her katman tek elden çıkıyor; çünkü yapay zekâ ancak iyi tasarlanmış bir ürünün içinde değer üretir.",
+        "Sonuç bir demo değil, her gün iş yapan bir sistem. Ölçüyor, iyileştiriyor ve büyüdükçe yanında duruyoruz."
+      ],
+      "approach": [
+        {
+          "title": "Problemi netleştiriyoruz",
+          "body": "Hangi işi yapay zekâya devredeceğinizi birlikte tanımlıyoruz. Teknoloji değil, sonuç konuşulur."
+        },
+        {
+          "title": "Modeli ve mimariyi seçiyoruz",
+          "body": "İhtiyaca göre doğru model, doğru veri stratejisi ve doğru maliyet dengesi kurulur."
+        },
+        {
+          "title": "Prototipi hızla ayağa kaldırıyoruz",
+          "body": "Haftalar içinde elle tutulur bir ilk sürüm çıkar. Gerçek kullanıcıyla, gerçek veriyle test edilir."
+        },
+        {
+          "title": "Ürünleştirip yayına alıyoruz",
+          "body": "Arayüz, güvenlik ve entegrasyonlar tamamlanır. Sistem yayına alınır, performansı izlenir."
+        }
+      ],
+      "benefits": [
+        "Ekibinizin saatlerini yiyen tekrar işlerin otomasyonu",
+        "7/24 çalışan, markanızın diliyle konuşan yapay zekâ asistanları",
+        "Verinizden karar üreten, tahmin ve analiz yapan sistemler",
+        "Hazır araçlara değil, size ait bir ürüne yatırım",
+        "Mevcut yazılımlarınızla sorunsuz entegrasyon",
+        "Ölçülebilir sonuç: zaman, maliyet ve dönüşüm metrikleri"
+      ],
+      "audience": "Operasyonunu hızlandırmak isteyen KOBİ'ler, yapay zekâ destekli ürün kurmak isteyen girişimler ve müşteri deneyimini otomatikleştirmek isteyen markalar için.",
+      "faq": [
+        {
+          "q": "Hazır yapay zekâ araçları varken neden özel çözüm?",
+          "a": "Hazır araçlar herkese aynı şeyi verir. Özel çözüm ise sizin verinizi, sürecinizi ve markanızın dilini bilir. Rekabet avantajı buradan doğar."
+        },
+        {
+          "q": "Bir yapay zekâ projesi ne kadar sürer?",
+          "a": "Kapsama göre değişir; çalışan bir ilk sürüm genellikle 4-8 hafta içinde hazır olur. Prototip aşamasında elle tutulur bir sonuç görürsünüz."
+        },
+        {
+          "q": "Verilerimiz güvende olur mu?",
+          "a": "Evet. Veri işleme mimarisini KVKK'ya uygun kuruyoruz; hassas veriler gerektiğinde kendi altyapınızda kalır ve üçüncü taraflarla paylaşılmaz."
+        },
+        {
+          "q": "Teknik ekibimiz yok, sorun olur mu?",
+          "a": "Hayır. Kurulumdan bakıma kadar süreci biz yürütürüz. Size sadece sistemin ürettiği sonuçları kullanmak kalır."
+        }
+      ]
+    },
+    {
+      "slug": "mobil-uygulama-gelistirme",
+      "title": "Mobil Uygulama Geliştirme",
+      "short": "iOS ve Android için tasarımdan yayına kadar uçtan uca mobil uygulama geliştirme.",
+      "tags": "iOS · Android · Ürün",
+      "seoTitle": "Mobil Uygulama Geliştirme | CR YAPIM",
+      "seoDescription": "iOS ve Android mobil uygulama geliştirme: tasarımdan App Store ve Google Play yayınına uçtan uca. İstanbul merkezli stüdyo, tek ekip, tek çatı altında.",
+      "lead": "Bir uygulama, markanızın cebe giren hâlidir. Her ekranı buna yakışır şekilde kuruyoruz.",
+      "what": [
+        "Mobil uygulama geliştirme bizde kod yazmakla başlamaz; kullanıcının o uygulamayı neden açacağı sorusuyla başlar. Fikrinizi alıyor, akışını tasarlıyor, arayüzünü kuruyor ve iOS ile Android için tek kod tabanında geliştiriyoruz. App Store ve Google Play yayın sürecini de biz yönetiyoruz.",
+        "İstanbul merkezli stüdyomuzda tasarımcı ve geliştirici aynı masada oturur. Bu yüzden tasarımda söz verilen deneyim, telefonda birebir yaşanır. Performans, erişilebilirlik ve mağaza kurallarına uyum baştan planlanır; sona bırakılmaz.",
+        "Yayın günü bizim için bitiş değil, başlangıçtır. Analitik kurulumundan sürüm güncellemelerine kadar uygulamanızın yanında kalırız."
+      ],
+      "approach": [
+        {
+          "title": "Keşif ve kurgu",
+          "body": "Hedef kitleyi, temel akışları ve ilk sürümün kapsamını netleştiriyoruz. Gereksiz özellik listesi değil, odaklı bir ürün tanımı çıkar."
+        },
+        {
+          "title": "Deneyim tasarımı",
+          "body": "Ekran ekran akışları çiziyor, etkileşimleri prototipliyoruz. Kod yazılmadan önce uygulama elinizde gezinir."
+        },
+        {
+          "title": "Geliştirme ve test",
+          "body": "iOS ve Android için modern teknolojilerle geliştiriyor, gerçek cihazlarda test ediyoruz."
+        },
+        {
+          "title": "Yayın ve büyüme",
+          "body": "Mağaza süreçlerini yönetiyor, yayın sonrası ölçüm ve güncelleme döngüsünü kuruyoruz."
+        }
+      ],
+      "benefits": [
+        "iOS ve Android'de aynı anda, tek ekiple yayın",
+        "Tasarım ve yazılımın tek çatıda buluşması; kayıpsız aktarım",
+        "Mağaza onay süreçlerinde deneyimli rehberlik",
+        "Ölçeklenebilir mimari: kullanıcı sayısı büyüdükçe uygulama yavaşlamaz",
+        "Yayın sonrası bakım, analitik ve sürüm yönetimi",
+        "Fikirden mağazaya net bir zaman planı"
+      ],
+      "audience": "Ürününü mobile taşımak isteyen girişimler, müşterisine cepten ulaşmak isteyen markalar ve iç süreçlerini uygulamayla yönetmek isteyen şirketler için.",
+      "faq": [
+        {
+          "q": "iOS ve Android için ayrı ayrı mı geliştiriyorsunuz?",
+          "a": "Çoğu projede tek kod tabanıyla her iki platforma da çıkıyoruz. Bu, süreyi ve maliyeti düşürür. Platforma özel ihtiyaçlar varsa native geliştirme de yapıyoruz."
+        },
+        {
+          "q": "Bir mobil uygulama ne kadar sürede yayına çıkar?",
+          "a": "Odaklı bir ilk sürüm genellikle 8-14 hafta sürer. Kapsam netleştiğinde size hafta hafta bir yol haritası sunuyoruz."
+        },
+        {
+          "q": "Uygulama mağaza onayından geçmezse ne olur?",
+          "a": "Mağaza kurallarını geliştirme boyunca gözetiyoruz; ret riski baştan azaltılır. Bir sorun çıkarsa düzeltme ve yeniden başvuru sürecini biz yürütürüz."
+        },
+        {
+          "q": "Yayından sonra güncellemeleri kim yapar?",
+          "a": "İsterseniz biz. Bakım anlaşmasıyla hata düzeltmeleri, işletim sistemi uyumluluğu ve yeni özellikler bizim sorumluluğumuzda kalır."
+        }
+      ]
+    },
+    {
+      "slug": "web-tasarim-ve-yazilim",
+      "title": "Web Sitesi Tasarımı ve Yazılımı",
+      "short": "Hızlı, modern ve ölçeklenebilir web siteleri ve uygulamaları; tasarım ve yazılım bir arada.",
+      "tags": "Tasarım · Yazılım · Web",
+      "seoTitle": "Web Sitesi Tasarımı ve Yazılımı | CR YAPIM",
+      "seoDescription": "Modern web sitesi tasarımı ve yazılım geliştirme: hızlı, SEO uyumlu, ölçeklenebilir kurumsal siteler ve web uygulamaları. Tasarım ve kod tek çatı altında.",
+      "lead": "Web siteniz bir broşür değil; markanızın dijital evrenine açılan kapı. Biz o kapıyı inşa ediyoruz.",
+      "what": [
+        "Web sitesi tasarımı ve yazılımını iki ayrı iş olarak görmüyoruz. Tasarımcı ile geliştirici aynı ekipte çalışır; bu yüzden ekranda gördüğünüz her detay, kodda aynı hassasiyetle yaşar. Kurumsal sitelerden e-ticaret altyapılarına, tanıtım sayfalarından karmaşık web uygulamalarına kadar geniş bir yelpazede üretiyoruz.",
+        "Modern teknolojilerle çalışıyoruz: hızlı açılan, arama motorlarında görünür, her cihazda kusursuz duran siteler. SEO uyumlu mimari, erişilebilirlik ve performans bizde sonradan eklenen bir katman değil, ilk günden kurulan temeldir.",
+        "Her site markanın hikâyesini taşır. Tipografiden animasyona her karar, sizi rakiplerinizden ayıran o sesi güçlendirmek için verilir."
+      ],
+      "approach": [
+        {
+          "title": "Keşif ve içerik mimarisi",
+          "body": "Hedefinizi ve kullanıcınızı anlıyoruz. Sayfa yapısı ve içerik hiyerarşisi bu zeminde kurulur."
+        },
+        {
+          "title": "Tasarım dili",
+          "body": "Markanıza özgü bir görsel dil geliştiriyoruz. Şablon değil; size ait bir kompozisyon."
+        },
+        {
+          "title": "Geliştirme",
+          "body": "Hız, SEO ve ölçeklenebilirlik gözetilerek modern altyapıyla kodluyoruz. Her ekran gerçek cihazlarda test edilir."
+        },
+        {
+          "title": "Yayın ve ölçüm",
+          "body": "Siteyi yayına alıyor, analitiği kuruyor ve performansı izlemeye devam ediyoruz."
+        }
+      ],
+      "benefits": [
+        "Saniyeler değil, milisaniyelerle ölçülen açılış hızı",
+        "Arama motorlarında görünürlük: teknik SEO baştan kurulur",
+        "Her cihazda ve ekran boyutunda kusursuz görünüm",
+        "İçeriğinizi kendiniz yönetebileceğiniz altyapı seçenekleri",
+        "Büyüdükçe genişleyen, sizi kilitlemeyen mimari",
+        "Markanıza özgü, şablondan uzak bir tasarım dili"
+      ],
+      "audience": "Dijital vitrinini yenilemek isteyen kurumlar, ilk web sitesini doğru kurmak isteyen girişimler ve web uygulamasına ihtiyaç duyan ürün ekipleri için.",
+      "faq": [
+        {
+          "q": "Hazır tema mı kullanıyorsunuz, özel tasarım mı yapıyorsunuz?",
+          "a": "Özel tasarım. Her site markanın kendi görsel dilinden doğar. Hazır temaların taşıdığı gereksiz yük ve tekdüzelik bizim işimizde yer almaz."
+        },
+        {
+          "q": "Site içeriğini kendimiz güncelleyebilir miyiz?",
+          "a": "Evet. İhtiyacınıza göre içerik yönetim sistemi kuruyoruz; metin, görsel ve sayfa güncellemelerini teknik bilgi olmadan yapabilirsiniz."
+        },
+        {
+          "q": "SEO çalışması fiyata dâhil mi?",
+          "a": "Teknik SEO — hız, yapılandırılmış veri, meta düzeni, sitemap — her projede standarttır. İçerik odaklı SEO stratejisi ayrıca planlanabilir."
+        },
+        {
+          "q": "Mevcut sitemizi taşıyabilir misiniz?",
+          "a": "Evet. İçerik ve SEO değerini koruyarak yeni altyapıya taşırız; yönlendirmeler doğru kurulur, arama sıralamanız zarar görmez."
+        }
+      ]
+    },
+    {
+      "slug": "oyun-gelistirme",
+      "title": "Oyun Geliştirme",
+      "short": "Markalar ve girişimler için oyunlaştırılmış deneyimler ve özgün oyunlar.",
+      "tags": "Mekanik · 3D · Etkileşim",
+      "seoTitle": "Oyun Geliştirme | CR YAPIM",
+      "seoDescription": "Markalar ve girişimler için oyun geliştirme: özgün oyunlar, oyunlaştırılmış kampanya deneyimleri ve etkileşimli 3D mekanikler. Fikirden yayına tek stüdyo.",
+      "lead": "İnsanlar izlediklerini unutur; oynadıklarını hatırlar. Markanız için hatırlanacak deneyimler kuruyoruz.",
+      "what": [
+        "Oyun geliştirme bizim için iki ayrı dünyayı kapsar: kendi ayakları üzerinde duran özgün oyunlar ve markaların kampanyalarına can veren oyunlaştırılmış deneyimler. Her ikisinde de aynı soruyu sorarız: oyuncu neden ikinci kez oynasın?",
+        "Mekanik tasarımından 3D sahnelere, ses tasarımından skor sistemlerine kadar tüm katmanları stüdyo içinde üretiyoruz. Web tabanlı mini oyunlar, mobil oyunlar ve etkileşimli kampanya deneyimleri; hepsi aynı zanaat anlayışıyla kurulur.",
+        "Bir oyun, markanın hikâyesini pasif bir izleyiciye değil, aktif bir katılımcıya anlatır. Bu yüzden oyunlaştırma, doğru kurulduğunda en güçlü pazarlama aracına dönüşür."
+      ],
+      "approach": [
+        {
+          "title": "Çekirdek mekaniği buluyoruz",
+          "body": "Oyunu taşıyacak tek bir güçlü fikir aranır. Eğlenceli olmayan hiçbir mekanik güzelleştirmeyle kurtulmaz."
+        },
+        {
+          "title": "Prototip ve oynanış testi",
+          "body": "Hızlı bir prototiple mekaniği gerçek oyuncularda deniyoruz. Veriler kurguyu şekillendirir."
+        },
+        {
+          "title": "Sanat ve ses dünyası",
+          "body": "Görsel dil, 3D sahneler ve ses tasarımı oyunun ruhuna göre üretilir."
+        },
+        {
+          "title": "Yayın ve canlı operasyon",
+          "body": "Oyunu yayına alıyor, metrikleri izliyor ve içerik güncellemeleriyle canlı tutuyoruz."
+        }
+      ],
+      "benefits": [
+        "Reklamdan kat kat uzun etkileşim süresi",
+        "Markanızla oyun üzerinden duygusal bağ kuran kullanıcılar",
+        "Kampanyalara ölçülebilir katılım ve paylaşım verisi",
+        "Web, mobil ve sosyal platformlarda çalışan esnek yapı",
+        "Mekanikten sanata tek stüdyodan çıkan bütünlüklü deneyim",
+        "Skor, ödül ve seviye sistemleriyle geri dönen kullanıcı"
+      ],
+      "audience": "Kampanyasına etkileşim katmak isteyen markalar, oyun fikrini ürüne dönüştürmek isteyen girişimler ve eğitim ya da iç iletişimi oyunlaştırmak isteyen kurumlar için.",
+      "faq": [
+        {
+          "q": "Markamız için küçük bir kampanya oyunu yaptırabilir miyiz?",
+          "a": "Evet. Web üzerinde çalışan, indirme gerektirmeyen kampanya oyunları en sık ürettiğimiz işlerden. Birkaç hafta içinde yayına alınabilir."
+        },
+        {
+          "q": "Hangi platformlar için oyun geliştiriyorsunuz?",
+          "a": "Web (tarayıcı), iOS ve Android. Projenin hedefine göre en doğru platformu birlikte seçiyoruz."
+        },
+        {
+          "q": "Oyunlaştırma ile oyun geliştirme arasındaki fark ne?",
+          "a": "Oyun kendi başına bir üründür; oyunlaştırma ise mevcut bir deneyime — kampanya, uygulama, eğitim — oyun mekanikleri eklemektir. İkisini de yapıyoruz."
+        },
+        {
+          "q": "Oyunun başarısını nasıl ölçüyorsunuz?",
+          "a": "Oturum süresi, geri dönüş oranı, tamamlama ve paylaşım metrikleriyle. Kampanya oyunlarında bu veriler pazarlama raporunuza doğrudan bağlanır."
+        }
+      ]
+    },
+    {
+      "slug": "dijital-urun-tasarimi-ui-ux",
+      "title": "Dijital Ürün Tasarımı (UI/UX)",
+      "short": "Kullanıcının ürünle kurduğu her anı tasarlıyoruz; arayüz, akış ve deneyim.",
+      "tags": "UI · UX · Ürün",
+      "seoTitle": "Dijital Ürün Tasarımı — UI/UX | CR YAPIM",
+      "seoDescription": "UI/UX ve dijital ürün tasarımı: kullanıcı araştırması, akış tasarımı, arayüz ve tasarım sistemi. Ürününüzün her anını kullanıcı için tasarlıyoruz.",
+      "lead": "İyi tasarım fark edilmez; yalnızca çalışır. Kullanıcı ile ürün arasındaki her anı kuruyoruz.",
+      "what": [
+        "Dijital ürün tasarımı bizde ekran çizmekten önce anlamakla başlar. Kullanıcı kim, ne yapmaya çalışıyor, nerede takılıyor? UI/UX tasarım sürecimiz bu sorulara verilen dürüst cevaplar üzerine kurulur. Araştırma, akış tasarımı, arayüz ve etkileşim; hepsi tek bir hedefi besler: kullanıcının işini zahmetsiz kılmak.",
+        "Web uygulamaları, mobil ürünler ve karmaşık paneller için arayüz tasarlıyoruz. Her projede ölçeklenebilir bir tasarım sistemi kuruyoruz; böylece ürün büyüdükçe tasarım dağılmaz, güçlenir.",
+        "Tasarımı teslim edip gitmiyoruz. Geliştirme ekibiyle — çoğu zaman kendi ekibimizle — birlikte çalışıp tasarlananın ekranda birebir yaşamasını sağlıyoruz."
+      ],
+      "approach": [
+        {
+          "title": "Araştırma ve keşif",
+          "body": "Kullanıcıyı, rakipleri ve iş hedeflerini inceliyoruz. Varsayım değil, gözlem üzerine tasarlıyoruz."
+        },
+        {
+          "title": "Akış ve yapı",
+          "body": "Kullanıcı yolculukları ve bilgi mimarisi kurulur. Ürünün iskeleti ekranlardan önce netleşir."
+        },
+        {
+          "title": "Arayüz ve etkileşim",
+          "body": "Görsel dil, bileşenler ve mikro etkileşimler tasarlanır. Prototiple test edilir."
+        },
+        {
+          "title": "Tasarım sistemi ve teslim",
+          "body": "Tekrar kullanılabilir bileşen kütüphanesi ve geliştirici dokümantasyonu ile teslim ederiz."
+        }
+      ],
+      "benefits": [
+        "Kullanıcının ilk denemede yolunu bulduğu akışlar",
+        "Düşen terk oranları, artan dönüşüm",
+        "Ürün büyüdükçe tutarlı kalan tasarım sistemi",
+        "Geliştirmeye hazır, net dokümante edilmiş teslim",
+        "Prototiple erken test: pahalı hatalar kod yazılmadan yakalanır",
+        "Markanızın karakterini taşıyan özgün arayüz dili"
+      ],
+      "audience": "Ürününün deneyimini baştan kurmak isteyen girişimler, mevcut arayüzünü iyileştirmek isteyen ürün ekipleri ve dijital ürün fikrini görselleştirmek isteyen kurucular için.",
+      "faq": [
+        {
+          "q": "Sadece tasarım alıp geliştirmeyi başka ekibe yaptırabilir miyiz?",
+          "a": "Evet. Tasarım sistemini ve dokümantasyonu geliştirici ekibinizin doğrudan çalışabileceği netlikte teslim ediyoruz. İstenirse geliştirme sürecinde danışmanlık da veriyoruz."
+        },
+        {
+          "q": "Mevcut ürünümüzün sadece bir bölümünü yeniletebilir miyiz?",
+          "a": "Evet. Deneyim denetimiyle en kritik sorunları tespit eder, öncelikli akışlardan başlayarak kademeli iyileştirme planı kurarız."
+        },
+        {
+          "q": "UI ile UX arasındaki fark nedir?",
+          "a": "UX, kullanıcının üründeki tüm yolculuğudur; UI ise o yolculuğun görünen yüzü. Biri yapıyı, diğeri ifadeyi kurar. Biz ikisini birlikte tasarlarız."
+        },
+        {
+          "q": "Kullanıcı testi yapıyor musunuz?",
+          "a": "Evet. Prototip aşamasında gerçek kullanıcılarla test yapıyor, bulguları tasarıma geri işliyoruz. Karar süreçlerimiz gözleme dayanır."
+        }
+      ]
+    },
+    {
+      "slug": "marka-kimligi-ve-stratejisi",
+      "title": "Marka Kimliği ve Stratejisi",
+      "short": "Bir markanın sesini, görünümünü ve duruşunu baştan kuruyoruz.",
+      "tags": "Kimlik · Strateji · Ses",
+      "seoTitle": "Marka Kimliği ve Stratejisi | CR YAPIM",
+      "seoDescription": "Marka kimliği tasarımı ve marka stratejisi: logo, görsel dil, ses tonu ve konumlandırma. Markanızın duruşunu tek bir bütün olarak baştan kuruyoruz.",
+      "lead": "Logo bir imzadır; marka ise o imzanın arkasındaki karakter. Biz karakteri kuruyoruz.",
+      "what": [
+        "Marka kimliği tasarımını bir logo teslimatına indirgeyen anlayışın karşısındayız. Bir marka; sesi, görünümü, duruşu ve vaadiyle bir bütündür. Biz bu bütünü strateji katmanından başlayarak kuruyoruz: kime konuşuyorsunuz, ne vadediyorsunuz, neden siz?",
+        "Konumlandırma netleştikten sonra görsel dünya inşa edilir: logo, renk paleti, tipografi, görsel dil ve kullanım kuralları. Aynı özenle sözel kimlik de kurulur; markanın ses tonu, sloganı ve anlatı çerçevesi. Sonuçta elinize dağınık dosyalar değil, yaşayan bir marka rehberi geçer.",
+        "Yeni kurulan girişimlerde kimliği sıfırdan yaratıyor; köklü markalarda ise mevcut değeri koruyarak yeniliyoruz."
+      ],
+      "approach": [
+        {
+          "title": "Strateji ve konumlandırma",
+          "body": "Pazarı, rakipleri ve hedef kitleyi analiz ediyoruz. Markanın tek cümlelik güçlü vaadi burada doğar."
+        },
+        {
+          "title": "Sözel kimlik",
+          "body": "Ses tonu, isimlendirme ve anlatı çerçevesi kurulur. Marka nasıl konuşacağını öğrenir."
+        },
+        {
+          "title": "Görsel kimlik",
+          "body": "Logo, renk, tipografi ve görsel dil tasarlanır. Her karar stratejiye bağlanır."
+        },
+        {
+          "title": "Marka rehberi ve uygulama",
+          "body": "Kullanım kuralları tek rehberde toplanır; kimlik web'den karta tüm yüzeylere uygulanır."
+        }
+      ],
+      "benefits": [
+        "Her kanalda aynı sesle konuşan tutarlı bir marka",
+        "Rakiplerinizden ayrışan net bir konumlandırma",
+        "Logo, renk, tipografi ve kullanım kurallarını içeren eksiksiz kimlik seti",
+        "Ekibinizin ve ajanslarınızın başvuracağı yaşayan marka rehberi",
+        "Dijital öncelikli tasarım: kimlik her ekranda çalışır",
+        "Yatırımcı ve müşteri karşısında güven veren profesyonel duruş"
+      ],
+      "audience": "Sıfırdan marka kuran girişimler, kimliğini yenilemek isteyen köklü şirketler ve dağınık görünümünü toparlamak isteyen markalar için.",
+      "faq": [
+        {
+          "q": "Sadece logo yaptırabilir miyiz?",
+          "a": "Yapabilirsiniz; ancak önermiyoruz. Stratejiden kopuk bir logo, cevabı bilinmeyen bir sorunun imzasıdır. En küçük paketimiz bile konumlandırma çalışması içerir."
+        },
+        {
+          "q": "Mevcut logomuzu koruyarak kimliğimizi yenileyebilir misiniz?",
+          "a": "Evet. Markanın birikmiş değerini koruyarak görsel dili, tipografiyi ve ses tonunu güncelleyen kademeli yenileme sık yaptığımız bir iştir."
+        },
+        {
+          "q": "Marka kimliği süreci ne kadar sürer?",
+          "a": "Kapsama göre 4-8 hafta. Strateji ve araştırma aşamasına zaman ayırıyoruz; çünkü aceleyle kurulan kimlik, aceleyle terk edilir."
+        },
+        {
+          "q": "Teslimatta neler yer alır?",
+          "a": "Konumlandırma dokümanı, logo dosyaları (tüm formatlarda), renk ve tipografi sistemi, kullanım kuralları ve dijital-basılı uygulama örneklerini içeren marka rehberi."
+        }
+      ]
+    },
+    {
+      "slug": "hikaye-ve-evren-tasarimi",
+      "title": "Hikâye ve Evren Tasarımı",
+      "short": "Markaların içine girilebilen dünyalarını ve anlatılarını kurguluyoruz.",
+      "tags": "Hikâye · Evren · Anlatı",
+      "seoTitle": "Hikâye ve Evren Tasarımı | CR YAPIM",
+      "seoDescription": "Marka hikâyesi ve evren tasarımı: anlatı mimarisi, dünya kurma ve hikâye odaklı marka deneyimi. İnsanların içine girebildiği marka dünyaları kurguluyoruz.",
+      "lead": "İnsanlar ürün satın almıyor; içine girebildikleri dünyaları seçiyor. O dünyayı birlikte kuralım.",
+      "what": [
+        "Her büyük marka, aslında iyi anlatılmış bir hikâyedir. Hikâye ve evren tasarımı, CR YAPIM'ın kalbindeki disiplindir: markanızın nereden geldiğini, neye inandığını ve insanları hangi dünyaya davet ettiğini katman katman kurguluyoruz.",
+        "Evren tasarımı hikâyeden bir adım öteye gider. Karakterler, mekânlar, semboller ve kurallar; markanızın etrafında tutarlı bir dünya oluşturur. Bu dünya web sitenizde, sosyal medyanızda, ürününüzde ve kampanyalarınızda aynı nefesle yaşar.",
+        "Sonuç, bir slogan değil; insanların bağ kurabileceği bir anlatı mimarisidir. Bu mimari kurulduğunda, ürettiğiniz her içerik aynı evrenin bir parçası olur ve marka her temasta derinleşir."
+      ],
+      "approach": [
+        {
+          "title": "Öz'ü buluyoruz",
+          "body": "Markanın çekirdek inancını ve gerilimini ortaya çıkarıyoruz. Hikâye buradan filizlenir."
+        },
+        {
+          "title": "Anlatı mimarisini kuruyoruz",
+          "body": "Ana hikâye, karakterler, semboller ve anlatı yayı tasarlanır. Evrenin kuralları yazılır."
+        },
+        {
+          "title": "Dünyayı görselleştiriyoruz",
+          "body": "Evrenin atmosferi; görsel dil, mekân ve ton olarak somutlaşır. Hikâye görünür hâle gelir."
+        },
+        {
+          "title": "Kanallara yayıyoruz",
+          "body": "Evren; web, sosyal medya, içerik ve kampanyalara tutarlı biçimde uyarlanır."
+        }
+      ],
+      "benefits": [
+        "Reklamla değil, anlatıyla hatırlanan bir marka",
+        "Tüm kanallarda aynı dünyayı yaşatan tutarlılık",
+        "İçerik üretimini yıllarca besleyen anlatı altyapısı",
+        "Kampanyaların tek seferlik değil, birikimli çalışması",
+        "Topluluğun kendini ait hissettiği bir marka dünyası",
+        "Rakiplerin kopyalayamayacağı özgün bir derinlik"
+      ],
+      "audience": "Sıradan iletişimin ötesine geçmek isteyen markalar, dünyasını kurarak lansmana çıkmak isteyen girişimler ve içerik evreni oluşturmak isteyen yaratıcı projeler için.",
+      "faq": [
+        {
+          "q": "Evren tasarımı sadece büyük markalar için mi?",
+          "a": "Hayır. Küçük bir girişim için kurulan tutarlı bir dünya, büyük bütçeli ama dağınık iletişimden daha güçlü iz bırakır. Ölçek değil, tutarlılık belirleyicidir."
+        },
+        {
+          "q": "Hikâye tasarımı somut olarak ne teslim eder?",
+          "a": "Anlatı dokümanı: markanın ana hikâyesi, karakter ve sembol sistemi, ton rehberi ve kanal bazlı anlatı uyarlamaları. İsteğe göre görsel evren tasarımı da eklenir."
+        },
+        {
+          "q": "Mevcut marka kimliğimizle çelişir mi?",
+          "a": "Çelişmez; derinleştirir. Kimlik markanın görünümünü, hikâye ise anlamını kurar. Mevcut kimliğinizin üzerine anlatı katmanını inşa ederiz."
+        },
+        {
+          "q": "Bu hizmetin dönüşü nasıl ölçülür?",
+          "a": "Marka hatırlanırlığı, içerik etkileşim oranları ve topluluk büyümesiyle. Hikâyesi güçlü markaların içerikleri ölçülebilir biçimde daha uzun yaşar."
+        }
+      ]
+    },
+    {
+      "slug": "icerik-uretimi",
+      "title": "İçerik Üretimi",
+      "short": "Metinden görsele, videodan sosyal içeriğe kadar markanın tüm içeriği.",
+      "tags": "Metin · Görsel · Video",
+      "seoTitle": "İçerik Üretimi | CR YAPIM",
+      "seoDescription": "Marka içerik üretimi: metin yazarlığı, görsel tasarım, video ve sosyal medya içeriği tek çatı altında. Markanızın sesiyle konuşan içerikler üretiyoruz.",
+      "lead": "İçerik, markanın günlük sesidir. O ses her gün aynı karakterle konuşmalı.",
+      "what": [
+        "İçerik üretimi bizde bir paylaşım takvimi doldurma işi değildir. Metin, görsel, video ve sosyal içerik; hepsi markanızın hikâyesinden beslenir ve aynı sese hizmet eder. Web sitesi metinlerinden kampanya görsellerine, tanıtım videolarından sosyal medya serilerine kadar üretimin tamamı stüdyo içinde yapılır.",
+        "Her içeriğin bir görevi vardır: anlatmak, dönüştürmek ya da bağ kurmak. Üretime başlamadan önce içerik stratejisi kurulur; hangi kanalda, hangi formatta, kime ve neden. Böylece içerik rastgele değil, birikimli çalışır.",
+        "Yapay zekâ destekli üretim akışlarımızla hızı, editoryal gözümüzle kaliteyi koruyoruz. Çok içerik değil; doğru içerik üretiyoruz."
+      ],
+      "approach": [
+        {
+          "title": "İçerik stratejisi",
+          "body": "Markanın sesi, kanalları ve içerik sütunları tanımlanır. Ne üretileceği kadar ne üretilmeyeceği de netleşir."
+        },
+        {
+          "title": "Üretim",
+          "body": "Metin, görsel ve video tek elden üretilir. Her parça marka evreninin diliyle konuşur."
+        },
+        {
+          "title": "Yayın ve ritim",
+          "body": "İçerik takvimi kurulur; yayın ritmi markanın nefesine göre ayarlanır."
+        },
+        {
+          "title": "Ölçüm ve iyileştirme",
+          "body": "Performans verileri okunur; işleyen format derinleştirilir, işlemeyen bırakılır."
+        }
+      ],
+      "benefits": [
+        "Metin, görsel ve video için tek muhatap, tek kalite çizgisi",
+        "Markanızın sesiyle konuşan, ayırt edilir içerik dili",
+        "Stratejiye bağlı üretim: her içeriğin bir görevi var",
+        "Düzenli yayın ritmiyle canlı kalan marka varlığı",
+        "SEO'yu besleyen, uzun ömürlü web içerikleri",
+        "Veriyle yönetilen, sürekli iyileşen içerik programı"
+      ],
+      "audience": "Düzenli ve nitelikli içerik akışına ihtiyaç duyan markalar, lansman öncesi içerik altyapısı kuran girişimler ve iç ekibini üretimde desteklemek isteyen pazarlama departmanları için.",
+      "faq": [
+        {
+          "q": "Aylık kaç içerik üretiyorsunuz?",
+          "a": "Sayı stratejiden sonra belirlenir. Amaç takvim doldurmak değil; markaya iş yapan içerik üretmek. Tipik programlar aylık 8-30 parça arasında değişir."
+        },
+        {
+          "q": "Video prodüksiyonu da yapıyor musunuz?",
+          "a": "Evet. Tanıtım videoları, sosyal medya videoları ve motion graphics üretiyoruz. Yapay zekâ destekli üretim araçlarıyla klasik prodüksiyona göre daha hızlı ve esnek çalışıyoruz."
+        },
+        {
+          "q": "İçerikler bize mi ait olur?",
+          "a": "Evet. Üretilen tüm içeriklerin kullanım hakları size devredilir; kaynak dosyalar teslim edilir."
+        },
+        {
+          "q": "Sadece metin yazarlığı hizmeti alabilir miyiz?",
+          "a": "Evet. Web sitesi metinleri, blog yazıları ve kampanya metinleri için ayrı çalışabiliyoruz. Markanızın ses tonunu öğrenerek başlarız."
+        }
+      ]
+    },
+    {
+      "slug": "sosyal-medya-yonetimi",
+      "title": "Sosyal Medya Yönetimi",
+      "short": "Toplulukların büyüdüğü, markanın konuştuğu sosyal medya stratejisi ve yönetimi.",
+      "tags": "Strateji · Topluluk · Büyüme",
+      "seoTitle": "Sosyal Medya Yönetimi | CR YAPIM",
+      "seoDescription": "Sosyal medya yönetimi ve stratejisi: içerik planı, topluluk yönetimi, büyüme ve raporlama. Markanızın sosyal medyada kendi sesiyle konuşmasını sağlıyoruz.",
+      "lead": "Sosyal medya bir duyuru panosu değil; markanızın her gün sahneye çıktığı yer. Sahneyi biz kuruyoruz.",
+      "what": [
+        "Sosyal medya yönetimini paylaşım planlamaktan ibaret görmüyoruz. Önce markanın o platformdaki rolünü tanımlıyoruz: ne anlatacak, kiminle konuşacak, hangi duyguyu bırakacak? Strateji kurulunca içerik, tasarım ve metin aynı evrenden beslenir; hesabınız bir arşive değil, bir dünyaya dönüşür.",
+        "Instagram, LinkedIn, X ve TikTok başta olmak üzere markanız için doğru platformlara odaklanıyoruz. Her yerde olmak yerine, doğru yerde güçlü olmak. Topluluk yönetimi de işin parçası: yorumlara, mesajlara ve gündeme markanın sesiyle, zamanında cevap verilir.",
+        "Ay sonunda ne kadar paylaşım yaptığımızı değil, neyi değiştirdiğimizi raporluyoruz: erişim, etkileşim, takipçi kalitesi ve dönüşüm."
+      ],
+      "approach": [
+        {
+          "title": "Platform stratejisi",
+          "body": "Markanız için doğru kanallar seçilir; her kanalın rolü ve ses tonu tanımlanır."
+        },
+        {
+          "title": "İçerik evreni",
+          "body": "İçerik sütunları, seriler ve görsel dil kurulur. Hesap tek bakışta markayı anlatır."
+        },
+        {
+          "title": "Yayın ve topluluk",
+          "body": "Takvim işler, içerikler yayınlanır; yorum ve mesajlar markanın sesiyle yönetilir."
+        },
+        {
+          "title": "Ölçüm ve büyüme",
+          "body": "Aylık raporlarla neyin işlediği okunur; strateji veriye göre keskinleştirilir."
+        }
+      ],
+      "benefits": [
+        "Markanızın karakterini taşıyan tutarlı bir sosyal medya varlığı",
+        "Takipçi sayısı değil, topluluk kalitesi odaklı büyüme",
+        "Strateji, tasarım, metin ve yönetimin tek elden yürümesi",
+        "Gündeme hızlı ve markaya yakışır tepkiler",
+        "Şeffaf aylık raporlama: neyin işlediğini birlikte görürüz",
+        "Reklam bütçenizin doğru içerik ve kitleyle buluşması"
+      ],
+      "audience": "Sosyal medyasını profesyonelleştirmek isteyen markalar, lansmanla birlikte topluluk kurmak isteyen girişimler ve iç ekibinin yükünü stratejik bir ortakla paylaşmak isteyen şirketler için.",
+      "faq": [
+        {
+          "q": "Hangi platformları yönetiyorsunuz?",
+          "a": "Instagram, LinkedIn, X, TikTok ve YouTube. Ancak her markaya hepsini önermiyoruz; hedef kitlenizin gerçekten yaşadığı platformlara odaklanıyoruz."
+        },
+        {
+          "q": "İçerikleri kim üretiyor?",
+          "a": "Stüdyomuz. Metin, görsel ve video üretimi içeride yapılır; içerik üretimi hizmetimizle aynı ekip ve aynı kalite çizgisi."
+        },
+        {
+          "q": "Reklam yönetimi de dâhil mi?",
+          "a": "İsteğe bağlı. Organik yönetimin yanında sosyal medya reklam kampanyalarını da kurgulayıp yönetebiliyoruz; bütçe ve hedefe göre planlanır."
+        },
+        {
+          "q": "Sonuçları ne zaman görmeye başlarız?",
+          "a": "İlk ay temel ve düzen kurulur; anlamlı büyüme sinyalleri genellikle 2-3. aydan itibaren netleşir. Sosyal medya sprint değil, ritim işidir."
+        }
+      ]
+    },
+    {
+      "slug": "3d-deneyimler-ve-dijital-sunumlar",
+      "title": "3D Deneyimler ve Dijital Sunumlar",
+      "short": "Ürünleri ve fikirleri 3B sahneler ve etkileşimli sunumlarla hayata geçiriyoruz.",
+      "tags": "3D · Etkileşim · Sunum",
+      "seoTitle": "3D Deneyimler ve Dijital Sunumlar | CR YAPIM",
+      "seoDescription": "Etkileşimli 3D web deneyimleri ve dijital sunumlar: ürün görselleştirme, 3B sahneler ve tarayıcıda çalışan deneyimler. Fikrinizi elle tutulur hâle getiriyoruz.",
+      "lead": "Bazı fikirler anlatılmaz; gösterilir. Ürününüzü tarayıcının içinde döndürülebilir bir gerçekliğe çeviriyoruz.",
+      "what": [
+        "3D deneyimler, düz bir sayfanın anlatamayacağını tek sahnede anlatır. Ürün görselleştirmeden etkileşimli marka dünyalarına, lansman sahnelerinden veri odaklı sunumlara kadar üç boyutlu içeriği tarayıcıda yaşatıyoruz. İndirme yok, kurulum yok; bir bağlantı yeter.",
+        "WebGL ve Three.js tabanlı sahnelerimiz web sitenizin içinde çalışır: ziyaretçi ürünü döndürür, yaklaşır, keşfeder. Dijital sunumlarda ise slaytların ötesine geçiyoruz; yatırımcı sunumları ve lansmanlar için sahnelenmiş, sinematik anlatılar kuruyoruz.",
+        "Her sahnede aynı disiplin geçerli: merkezde tek güçlü obje, bol nefes alanı ve akıcı performans. Gösteriş için değil, anlatı için 3D."
+      ],
+      "approach": [
+        {
+          "title": "Anlatıyı kuruyoruz",
+          "body": "Sahnenin neyi anlatacağı netleşir. 3D bir süs değil, hikâyenin taşıyıcısı olarak kurgulanır."
+        },
+        {
+          "title": "Sahne ve stil tasarımı",
+          "body": "Modelleme, ışık, malzeme ve kamera dili tasarlanır. Atmosfer markaya göre kurulur."
+        },
+        {
+          "title": "Etkileşim ve geliştirme",
+          "body": "Sahne web'e taşınır; kaydırma, döndürme ve geçişler akıcı performansla kodlanır."
+        },
+        {
+          "title": "Optimizasyon ve yayın",
+          "body": "Her cihazda hızlı açılması için sahne optimize edilir; deneyim yayına alınır."
+        }
+      ],
+      "benefits": [
+        "Ürününüzü fotoğraftan çok daha güçlü anlatan etkileşimli sahneler",
+        "İndirme gerektirmeyen, tarayıcıda çalışan 3D deneyim",
+        "Lansman ve yatırımcı sunumlarında akılda kalan fark",
+        "Web sitenizde ortalama kalış süresini uzatan etkileşim",
+        "Mobil dâhil her cihazda akıcı performans",
+        "Marka evreninizi somutlaştıran sinematik atmosfer"
+      ],
+      "audience": "Ürününü etkileyici biçimde sergilemek isteyen markalar, lansmana güçlü bir dijital sahneyle çıkmak isteyen girişimler ve sunumlarını sıradanlıktan kurtarmak isteyen ekipler için.",
+      "faq": [
+        {
+          "q": "3D deneyim web sitemizi yavaşlatır mı?",
+          "a": "Doğru kurulmazsa yavaşlatır; biz doğru kuruyoruz. Modeller optimize edilir, sahne kademeli yüklenir ve deneyim mobil cihazlarda da akıcı çalışır."
+        },
+        {
+          "q": "Elimizde 3D model yok, sıfırdan üretebilir misiniz?",
+          "a": "Evet. Ürün fotoğraflarından veya teknik çizimlerden modelleme yapıyoruz. Mevcut CAD dosyalarınız varsa onları da web için optimize ederiz."
+        },
+        {
+          "q": "Dijital sunum ile klasik sunum arasındaki fark ne?",
+          "a": "Klasik sunum slayttır; dijital sunum sahnelenmiş bir deneyimdir. Kaydırdıkça akan, 3B sahnelerle anlatan ve izleyicide iz bırakan bir kurgu tasarlıyoruz."
+        },
+        {
+          "q": "3D deneyim mevcut sitemize entegre edilebilir mi?",
+          "a": "Evet. Sahneler mevcut web sitenizin içine gömülebilir ya da kampanyaya özel bağımsız bir sayfa olarak yayınlanabilir."
+        }
+      ]
+    }
+  ]
+}

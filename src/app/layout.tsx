@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { DM_Mono, Instrument_Serif } from "next/font/google";
 import { getContent } from "@/lib/content";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { SmoothScroll } from "@/components/smooth-scroll";
 import "./globals.css";
 
 const instrumentSerif = Instrument_Serif({
@@ -78,7 +81,11 @@ export default function RootLayout({
       className={`${instrumentSerif.variable} ${dmMono.variable} antialiased`}
     >
       <body className="bg-black text-ink">
-        {children}
+        <SmoothScroll>
+          <SiteHeader />
+          {children}
+          <SiteFooter content={content.footer} />
+        </SmoothScroll>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

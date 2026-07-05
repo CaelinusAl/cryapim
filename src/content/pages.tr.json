@@ -1,0 +1,395 @@
+{
+  "hakkimizda": {
+    "meta": {
+      "title": "Hakkımızda — Yaratıcı Teknoloji Stüdyosu | CR YAPIM",
+      "description": "CR YAPIM, İstanbul merkezli yaratıcı teknoloji stüdyosu. Hikâye, marka kimliği, tasarım, yazılım, yapay zekâ ve içeriği tek çatı altında buluşturuyoruz."
+    },
+    "hero": {
+      "label": "Hakkımızda",
+      "titlePre": "Bir fikrin bütün",
+      "titleEm": "dijital evrenini",
+      "titlePost": "kuruyoruz.",
+      "lead": "CR YAPIM; teknolojiyi estetikle, yazılımı hikâyeyle ve yapay zekâyı insan yaratıcılığıyla buluşturan yeni nesil dijital yaratım stüdyosudur."
+    },
+    "who": {
+      "label": "Kimiz",
+      "headline": "Biz bir web sitesi yapan ajans değiliz.",
+      "body": [
+        "CR YAPIM; markaların, girişimlerin ve yaratıcı fikirlerin yalnızca görünmesini değil, kendi dijital evrenlerini kurmasını sağlar. Bir fikrin hikâyesini kurar, marka kimliğini oluşturur, dijital ürününü tasarlar ve yazılımını geliştiririz.",
+        "Yapay zekâ çözümlerini üretir, mobil uygulamasını hayata geçirir, oyunlaştırır, içeriklerini üretir ve sosyal medyada büyümesini destekleriz. Teknoloji, tasarım ve hikâye anlatıcılığını tek çatı altında buluşturuyoruz. Çünkü gelecekte insanlar sadece ürün satın almayacak; içine girebildikleri dünyaları seçecekler.",
+        "İstanbul'da kurulan stüdyomuz, CR Yapım Teknoloji çatısı altında çalışır. Küçük ve odaklı bir ekibiz; her projeye bir yapım gibi yaklaşırız. Senaryosu yazılır, dünyası tasarlanır, teknolojisi inşa edilir, sahneye konur. Bu yüzden adımızda \"yapım\" var.",
+        "Yapay zekâ çözümlerinden mobil uygulamalara, web tasarımından oyun geliştirmeye, marka kimliğinden içerik üretimine kadar on ayrı disiplinde çalışıyoruz. Ama bu disiplinler bizim için ayrı servisler değil; aynı evrenin farklı katmanlarıdır. Bir projeye hangi kapıdan girerseniz girin, diğer katmanlar da sizinle birlikte düşünülür."
+      ]
+    },
+    "vision": {
+      "label": "Vizyon",
+      "body": "Gelecekte insanlar sadece ürün satın almayacak; içine girebildikleri dünyaları seçecekler. CR YAPIM bu dünyaları kuran stüdyodur."
+    },
+    "mission": {
+      "label": "Misyon",
+      "body": "Markaların, girişimlerin ve yaratıcı fikirlerin yalnızca görünmesini değil, kendi dijital evrenlerini kurmasını sağlamak: hikâye + kimlik + tasarım + yazılım + yapay zekâ + içerik, tek çatı altında."
+    },
+    "different": {
+      "label": "Bizi Farklı Kılan",
+      "headline": "Parçaları değil, bütünü kuruyoruz.",
+      "body": [
+        "Çoğu ekip bir parçayı iyi yapar: biri yazılımı, biri tasarımı, biri içeriği. Parçalar ayrı ellerde büyüdüğünde ortaya çıkan şey bir bütün değil, bir yamalı bohçadır. Biz baştan sona tek bir anlatının içinde çalışırız; kod, arayüz, kimlik ve içerik aynı hikâyeden beslenir.",
+        "Yapay zekâyı bir süs olarak değil, bir yapım aracı olarak kullanırız. Modelden arayüze, otomasyondan içeriğe kadar yapay zekâ bizim için üretimin doğal bir parçasıdır — ama son sözü her zaman insan yaratıcılığı söyler.",
+        "Ve az söz, güçlü söz deriz. Kalabalık kompozisyonlardan, gürültülü mesajlardan kaçınırız. Bir markanın dijital evreni sade, kendinden emin ve unutulmaz olmalıdır.",
+        "Bu yaklaşımın somut bir karşılığı var: tek muhatap, tek takvim, tek anlatı. Ajanslar arasında kaybolan brief'ler, birbirini tutmayan teslimler ve \"o bizim işimiz değil\" cümlesi bizim sözlüğümüzde yoktur. Fikrin sahibi sizsiniz; evreni birlikte kurarız."
+      ]
+    },
+    "values": {
+      "label": "Değerler",
+      "items": [
+        {
+          "title": "Zanaat",
+          "body": "Her satır kod, her piksel, her cümle elden geçer. İşin görünmeyen yerine gösterdiğimiz özen, görünen yerini taşır. Hızlı üretmek için değil, kalıcı olmak için çalışırız."
+        },
+        {
+          "title": "Hikâye",
+          "body": "Teknoloji unutulur; hikâye kalır. Her projenin önce anlatısını kurarız. Bir ürünün ne yaptığından önce, insanlara ne hissettirdiğini tasarlarız."
+        },
+        {
+          "title": "Teknoloji–Estetik Dengesi",
+          "body": "Ne güzel ama çalışmayan, ne de çalışan ama ruhsuz. Mühendisliği estetikten, estetiği mühendislikten ayırmayız. İkisi aynı masada, aynı anda kurulur."
+        }
+      ]
+    },
+    "meta_rows": [
+      { "label": "Tür", "value": "Yaratıcı teknoloji stüdyosu" },
+      { "label": "Konum", "value": "İstanbul" },
+      { "label": "Odak", "value": "Teknoloji · Tasarım · Hikâye" },
+      { "label": "Durum", "value": "Yeni projelere açık" }
+    ],
+    "cta": {
+      "pre": "Ne yaptığımızı merak ediyorsanız",
+      "links": [
+        { "href": "/hizmetler", "label": "Hizmetlerimize göz atın" },
+        { "href": "/projeler", "label": "Projelerimizi inceleyin" },
+        { "href": "/iletisim", "label": "Bize yazın" }
+      ]
+    }
+  },
+
+  "projeler": {
+    "meta": {
+      "title": "Projeler — Seçili İşler | CR YAPIM",
+      "description": "CR YAPIM'ın seçili işleri: bir markanın dijital evreni, uçtan uca bir yapay zekâ ürünü ve oyunlaştırılmış bir mobil deneyim. Zorluk, yaklaşım, sonuç."
+    },
+    "hero": {
+      "label": "Projeler",
+      "titlePre": "Her iş bir",
+      "titleEm": "evrenin",
+      "titlePost": "ilk sahnesidir.",
+      "lead": "Seçili işlerimiz; bir fikrin hikâyesinden yazılımına kadar nasıl bir bütüne dönüştüğünü gösterir. Üç iş, üç farklı evren."
+    },
+    "cases": [
+      {
+        "badge": "DE",
+        "index": "01 / 03",
+        "year": "2025",
+        "name": "Dijital Evren",
+        "tags": "Hikâye · Marka · Web",
+        "summary": "Bir markanın hikâyesi, kimliği ve web deneyimi tek bir dijital evrende birleştirildi; kullanıcıların içine girip gezebildiği bir marka dünyası kuruldu.",
+        "challenge": "Marka her kanalda vardı ama hiçbirinde kendisi değildi. Logosu, sitesi ve içeriği ayrı ellerden çıkmış; ortada bir kimlik değil, bir koleksiyon vardı. İnsanların hatırlayacağı tek bir dünya yoktu.",
+        "approach": "İşe kod yazarak değil, hikâyeyi yazarak başladık. Markanın anlatısını tek bir cümleye indirdik, o cümleden bir görsel dil türettik ve web deneyimini bu dünyanın içinde gezilen bir sahne gibi tasarladık. Kimlik, içerik ve yazılım aynı masada, aynı anlatıdan kuruldu.",
+        "outcome": "Ortaya bir web sitesi değil, girilebilen bir marka dünyası çıktı. Ziyaretçiler sayfalar arasında değil, bir hikâyenin sahneleri arasında geziyor. Marka artık her kanalda aynı sesle konuşuyor."
+      },
+      {
+        "badge": "YZ",
+        "index": "02 / 03",
+        "year": "2025",
+        "name": "Yapay Zekâ Ürünü",
+        "tags": "Yapay Zekâ · Ürün · Yazılım",
+        "summary": "Bir girişim için tasarlanan, kullanıcı sorularını anlayıp yanıtlayan yapay zekâ destekli ürün; arayüzden modele kadar uçtan uca geliştirildi.",
+        "challenge": "Girişimin elinde güçlü bir fikir ve dağınık bir bilgi birikimi vardı; ama bu bilgiyi kullanıcının diliyle konuşan, güven veren bir ürüne dönüştürecek köprü yoktu. Yapay zekâ bir vaat olarak duruyordu, bir deneyim olarak değil.",
+        "approach": "Modeli değil, konuşmayı tasarlayarak başladık. Kullanıcının soru sorma biçimini inceledik, ürünün ses tonunu markanın kimliğinden türettik. Ardından model katmanını, veri akışını ve arayüzü tek bir ekip olarak kurduk — yapay zekâ arka planda çalışır, öne çıkan her zaman cevabın kendisidir.",
+        "outcome": "Kullanıcı sorularını anlayan, markanın sesiyle yanıtlayan ve öğrendikçe iyileşen bir ürün yayına alındı. Girişim, teknik bir demo yerine elinde yaşayan bir ürünle yatırımcı karşısına çıktı."
+      },
+      {
+        "badge": "OY",
+        "index": "03 / 03",
+        "year": "2026",
+        "name": "Oyun & Mobil Deneyim",
+        "tags": "Oyun · Mobil · 3D",
+        "summary": "Bir markanın kampanyası için kurgulanan, oyunlaştırılmış mobil deneyim; etkileşimli mekanikler ve 3B sahnelerle hayata geçirildi.",
+        "challenge": "Marka, kampanyasında bir banner'dan fazlasını istiyordu: insanların izlemekle kalmayıp içinde vakit geçireceği bir şey. Ama elde ne bir oyun stüdyosunun altyapısı ne de aylarca sürecek bir üretim takvimi vardı.",
+        "approach": "Kampanyanın mesajını bir oyun mekaniğine çevirdik: markanın vaadi, oyuncunun hedefine dönüştü. 3B sahneleri mobil performansa göre optimize ettik, mekanikleri saniyeler içinde kavranacak kadar sade tuttuk. Tasarım, geliştirme ve içerik tek takvimde ilerledi.",
+        "outcome": "Kampanya bir reklamdan bir deneyime dönüştü. Kullanıcılar markanın dünyasında oynayarak vakit geçirdi; kampanya mesajı izlenmedi, yaşandı."
+      }
+    ],
+    "cta": {
+      "headingPre": "Sıradaki evren",
+      "headingEm": "sizinki",
+      "headingPost": "olabilir.",
+      "sub": "Fikrinizi getirin; zorluğu birlikte tanımlayalım, yaklaşımı birlikte kuralım.",
+      "href": "/iletisim",
+      "label": "İletişime geç"
+    }
+  },
+
+  "surec": {
+    "meta": {
+      "title": "Süreç — Nasıl Çalışıyoruz | CR YAPIM",
+      "description": "CR YAPIM'da bir proje dört perdede ilerler: Keşif, Tasarım, Geliştirme, Lansman. Her adımda ne olur, ne teslim edilir? Sık sorulan sorularla birlikte."
+    },
+    "hero": {
+      "label": "Süreç",
+      "titlePre": "Dört perdelik",
+      "titleEm": "bir yapım",
+      "titlePost": "gibi çalışırız.",
+      "lead": "Her proje bir yapımdır: önce senaryo, sonra sahne tasarımı, sonra çekim, en sonunda gösterim. Sürecimiz de aynı disiplinle ilerler."
+    },
+    "steps": [
+      {
+        "num": "01",
+        "title": "Keşif",
+        "body": "Fikri, hedefi ve hikâyeyi birlikte netleştiriyoruz. Projenin çıkış noktasını kuruyoruz.",
+        "detail": "İlk perde dinlemekle geçer. Fikrinizi, hedef kitlenizi, rakiplerinizi ve asıl derdinizi anlamak için sorular sorarız. Bu aşamada güzel görseller yoktur; keskin sorular ve dürüst cevaplar vardır. Projenin kapsamını, önceliklerini ve başarı ölçütlerini birlikte tanımlarız.",
+        "deliverable": "Elinize geçen: proje özeti (brief), kapsam ve yol haritası, hikâye çekirdeği. Yaklaşık 1–2 hafta."
+      },
+      {
+        "num": "02",
+        "title": "Tasarım",
+        "body": "Marka dilini, deneyimi ve görsel dünyayı kuruyoruz. İşi geliştirmeden önce tasarlıyoruz.",
+        "detail": "İkinci perdede dünya kurulur. Marka dili, tipografi, renk, kompozisyon ve deneyim akışı bu aşamada şekillenir. Statik taslaklarla yetinmeyiz; deneyimin nasıl hissettireceğini prototiplerle gösteririz. Siz onaylamadan tek satır üretim kodu yazılmaz.",
+        "deliverable": "Elinize geçen: görsel kimlik ve tasarım sistemi, etkileşimli prototip, ekran tasarımları. Yaklaşık 2–4 hafta."
+      },
+      {
+        "num": "03",
+        "title": "Geliştirme",
+        "body": "Yazılımı, uygulamayı veya ürünü hayata geçiriyoruz. Tasarım ve teknoloji tek ekipte.",
+        "detail": "Üçüncü perdede dünya inşa edilir. Web, mobil, oyun veya yapay zekâ — hangisi gerekiyorsa, tasarımın ruhunu bozmadan koda dökeriz. Tasarımcı ile geliştirici aynı masada oturur; \"tasarımda öyleydi ama kodda böyle oldu\" cümlesi bizde kurulmaz. Düzenli aralıklarla çalışan sürümler görürsünüz.",
+        "deliverable": "Elinize geçen: düzenli önizleme sürümleri, test edilmiş ve çalışan ürün, teknik dokümantasyon. Yaklaşık 4–8 hafta, kapsama göre."
+      },
+      {
+        "num": "04",
+        "title": "Lansman",
+        "body": "Ürünü yayına alıyor, içerik ve sosyal medyayla büyümesini destekliyoruz.",
+        "detail": "Son perde gösterimdir. Ürünü yayına alır, performansını izler ve ilk kullanıcı tepkilerine göre ince ayar yaparız. İstenirse lansman içeriklerini üretir, sosyal medya stratejisini kurar ve büyümeyi birlikte takip ederiz. Perde kapanmaz; evren yaşamaya devam eder.",
+        "deliverable": "Elinize geçen: yayında bir ürün, lansman içerik paketi, ölçüm ve bakım planı. Yayın sonrası destek sürer."
+      }
+    ],
+    "faq": {
+      "label": "Sık Sorulan Sorular",
+      "items": [
+        {
+          "q": "Bir proje ne kadar sürer?",
+          "a": "Kapsama bağlıdır. Odaklı bir web sitesi 4–6 haftada, uçtan uca bir dijital ürün veya mobil uygulama 2–4 ayda yayına alınabilir. Keşif aşamasının sonunda size net bir takvim sunarız ve o takvime sadık kalırız."
+        },
+        {
+          "q": "Fiyatlandırma nasıl işliyor?",
+          "a": "Saat satmayız; sonuç taahhüt ederiz. Keşif aşamasında kapsamı birlikte netleştirir, ardından projeye özel sabit bir teklif sunarız. Ödeme genellikle aşamalara bağlı dilimler hâlinde ilerler; sürpriz fatura bizde yoktur."
+        },
+        {
+          "q": "Süreç boyunca iletişim nasıl olur?",
+          "a": "Her projenin tek bir muhatabı olur ve düzenli aralıklarla ilerleme paylaşırız. Çalışan önizleme sürümlerini erkenden görürsünüz; geri bildiriminiz bir sonraki adımı şekillendirir. Aylarca sessizlik, sonra büyük sürpriz — bu bizim tarzımız değil."
+        },
+        {
+          "q": "Teslimden sonra ne olur?",
+          "a": "Lansman bir bitiş değil, bir başlangıçtır. Yayın sonrası bakım, içerik üretimi ve sosyal medya desteği sunarız. Ürününüzün büyümesini istiyorsanız yol arkadaşlığımız devam eder; kendi ekibinizle devralmak isterseniz düzenli bir devir teslim yaparız."
+        },
+        {
+          "q": "Uzaktan çalışıyor musunuz?",
+          "a": "Evet. Stüdyomuz İstanbul'da; ama süreçlerimiz baştan sona uzaktan çalışmaya göre kurulmuştur. Türkiye'nin ve dünyanın her yerinden müşterilerle çalışırız. Gerekli olduğunda İstanbul'da yüz yüze de buluşuruz."
+        }
+      ]
+    },
+    "cta": {
+      "pre": "İlk perdeyi birlikte açalım.",
+      "href": "/iletisim",
+      "label": "Keşif görüşmesi planla"
+    }
+  },
+
+  "manifesto": {
+    "meta": {
+      "title": "Manifesto | CR YAPIM",
+      "description": "Biz kod yazıyoruz; ama sadece yazılım üretmiyoruz. Biz, insanların bağ kurabileceği dijital evrenler inşa ediyoruz. CR YAPIM'ın manifestosu."
+    },
+    "hero": {
+      "label": "Manifesto",
+      "titlePre": "Az söz,",
+      "titleEm": "güçlü söz.",
+      "titlePost": "",
+      "lead": ""
+    },
+    "clients": {
+      "label": "Bu Sizin İçin Ne Demek",
+      "headline": "Manifesto bizim sözümüz; sonuçları sizin olur.",
+      "body": [
+        "Bu satırlar bir duvar süsü değil, bir çalışma biçimidir. Bizimle çalıştığınızda yalnızca bir web sitesi, bir uygulama ya da bir kampanya almazsınız; markanızın içine girilebilen bir dünyasını alırsınız.",
+        "Kodunuz hikâyenizden, tasarımınız kimliğinizden, içeriğiniz sesinizden beslenir. Parçalar ayrı ayrı güzel olduğu için değil, aynı evrene ait olduğu için işler.",
+        "Ve o evren yaşadıkça — her yeni sayfa, her yeni özellik, her yeni içerik — aynı bütünün parçası olarak büyür."
+      ],
+      "links": [
+        { "href": "/hakkimizda", "label": "Stüdyoyu tanıyın" },
+        { "href": "/surec", "label": "Nasıl çalıştığımızı görün" },
+        { "href": "/iletisim", "label": "Bize yazın" }
+      ]
+    }
+  },
+
+  "iletisim": {
+    "meta": {
+      "title": "İletişim — Birlikte Kuralım | CR YAPIM",
+      "description": "Fikrinizi getirin; hikâyesinden yazılımına kadar gerisini birlikte kuralım. CR Yapım Teknoloji — İstanbul. merhaba@cryapim.com adresinden bize ulaşın."
+    },
+    "hero": {
+      "label": "İletişim",
+      "titlePre": "Her evren bir",
+      "titleEm": "merhaba",
+      "titlePost": "ile başlar.",
+      "lead": "Bir fikriniz mi var? Bir sorunuz mu? Kısa bir mesaj yeterli — en kısa sürede dönüş yaparız."
+    },
+    "address": {
+      "label": "Stüdyo",
+      "company": "CR Yapım Teknoloji",
+      "city": "İstanbul, Türkiye",
+      "email": "merhaba@cryapim.com",
+      "note": "Yeni projelere açığız. Görüşmelerimizi çevrim içi veya İstanbul'da yüz yüze yapabiliriz."
+    },
+    "explore": {
+      "pre": "Yazmadan önce göz atmak isterseniz",
+      "links": [
+        { "href": "/hizmetler", "label": "Hizmetler" },
+        { "href": "/projeler", "label": "Projeler" },
+        { "href": "/surec", "label": "Süreç" }
+      ]
+    }
+  },
+
+  "gizlilik": {
+    "meta": {
+      "title": "Gizlilik Politikası | CR YAPIM",
+      "description": "CR Yapım Teknoloji gizlilik politikası: hangi verileri topluyoruz, çerezler ve analitik araçlar, üçüncü taraf hizmetler, veri güvenliği ve haklarınız."
+    },
+    "hero": {
+      "label": "Gizlilik Politikası",
+      "titlePre": "Verinize,",
+      "titleEm": "size davrandığımız",
+      "titlePost": "gibi davranırız.",
+      "lead": "Bu politika, cryapim.com'u ziyaret ettiğinizde hangi verilerin, hangi amaçla ve nasıl işlendiğini açıklar. Son güncelleme: Temmuz 2026."
+    },
+    "sections": [
+      {
+        "title": "1. Kapsam ve Veri Sorumlusu",
+        "body": [
+          "Bu gizlilik politikası, CR Yapım Teknoloji (\"CR YAPIM\", \"biz\") tarafından işletilen cryapim.com alan adlı web sitesi için geçerlidir. Veri sorumlusu, İstanbul'da yerleşik CR Yapım Teknoloji'dir.",
+          "Sitemizi kullanarak bu politikada açıklanan uygulamaları kabul etmiş sayılırsınız. Kişisel verilerin işlenmesine ilişkin ayrıntılı yasal bilgilendirme için KVKK Aydınlatma Metni sayfamıza bakabilirsiniz."
+        ]
+      },
+      {
+        "title": "2. Topladığımız Veriler",
+        "body": [
+          "İletişim formu: Bize mesaj gönderdiğinizde adınızı, e-posta adresinizi ve mesaj içeriğinizi işleriz. Bu veriler yalnızca talebinize yanıt vermek amacıyla kullanılır.",
+          "Teknik veriler: Sitenin güvenli ve performanslı çalışması için barındırma sağlayıcımız tarafından IP adresi, tarayıcı türü ve erişim zamanı gibi standart sunucu kayıtları tutulabilir."
+        ]
+      },
+      {
+        "title": "3. Çerezler ve Analitik",
+        "body": [
+          "Sitemiz şu anda zorunlu (teknik) çerezler dışında çerez kullanmamaktadır.",
+          "İleride site kullanımını anlamak amacıyla Google Analytics 4 ve Microsoft Clarity analitik araçlarını devreye almayı planlıyoruz. Bu araçlar devreye alındığında, çerez tercihi bandı üzerinden onayınız alınacak ve bu politika güncellenecektir. Analitik veriler toplu ve anonimleştirilmiş biçimde değerlendirilir; kimliğinizi belirlemek amacıyla kullanılmaz."
+        ]
+      },
+      {
+        "title": "4. Üçüncü Taraf Hizmetler",
+        "body": [
+          "Barındırma: Sitemiz Vercel Inc. altyapısında barındırılmaktadır. Sunucular yurt dışında bulunabilir; Vercel, kendi gizlilik politikası çerçevesinde standart sunucu kayıtları tutar.",
+          "E-posta iletimi: İletişim formu üzerinden gönderilen mesajlar, Resend Inc. e-posta altyapısı aracılığıyla bize iletilir.",
+          "Bu hizmet sağlayıcılar, verilerinizi yalnızca bize hizmet sunmak amacıyla ve talimatlarımız doğrultusunda işler. Verileriniz üçüncü taraflara satılmaz, kiralanmaz veya pazarlama amacıyla paylaşılmaz."
+        ]
+      },
+      {
+        "title": "5. Veri Güvenliği ve Saklama",
+        "body": [
+          "Verilerinizin güvenliği için güncel teknik önlemler uygularız: site trafiği TLS ile şifrelenir, verilere erişim yalnızca yetkili kişilerle sınırlıdır.",
+          "İletişim formu verileri, talebinizin sonuçlandırılması ve olası bir iş ilişkisinin yürütülmesi için gerekli süre boyunca; her hâlükârda ilgili mevzuatta öngörülen azami süreleri aşmayacak şekilde saklanır ve sonrasında silinir."
+        ]
+      },
+      {
+        "title": "6. Haklarınız",
+        "body": [
+          "Kişisel verilerinize ilişkin olarak; verilerinize erişme, düzeltilmesini veya silinmesini isteme, işlemeye itiraz etme haklarına sahipsiniz. Ayrıntılı haklarınız için KVKK Aydınlatma Metni sayfamıza bakabilirsiniz.",
+          "Tüm talepleriniz için merhaba@cryapim.com adresine yazabilirsiniz."
+        ]
+      },
+      {
+        "title": "7. Değişiklikler",
+        "body": [
+          "Bu politikayı zaman zaman güncelleyebiliriz. Önemli değişikliklerde sayfanın başındaki güncelleme tarihi yenilenir. Sorularınız için: merhaba@cryapim.com — CR Yapım Teknoloji, İstanbul."
+        ]
+      }
+    ]
+  },
+
+  "kvkk": {
+    "meta": {
+      "title": "KVKK Aydınlatma Metni | CR YAPIM",
+      "description": "6698 sayılı KVKK kapsamında aydınlatma metni: veri sorumlusu CR Yapım Teknoloji, işlenen veriler, işleme amaçları, saklama süreleri ve madde 11 haklarınız."
+    },
+    "hero": {
+      "label": "KVKK Aydınlatma Metni",
+      "titlePre": "Kişisel verileriniz,",
+      "titleEm": "açıkça",
+      "titlePost": "ve özenle.",
+      "lead": "6698 sayılı Kişisel Verilerin Korunması Kanunu (\"KVKK\") madde 10 uyarınca hazırlanan bu metin, kişisel verilerinizin nasıl işlendiğini açıklar."
+    },
+    "sections": [
+      {
+        "title": "1. Veri Sorumlusu",
+        "body": [
+          "KVKK uyarınca kişisel verileriniz; veri sorumlusu sıfatıyla İstanbul'da yerleşik CR Yapım Teknoloji (\"Şirket\") tarafından, aşağıda açıklanan kapsamda işlenmektedir. İletişim: merhaba@cryapim.com."
+        ]
+      },
+      {
+        "title": "2. İşlenen Kişisel Veriler",
+        "body": [
+          "cryapim.com üzerindeki iletişim formunu kullandığınızda şu kişisel verileriniz işlenir: ad-soyad, e-posta adresi ve mesaj içeriğinde paylaşmayı tercih ettiğiniz bilgiler.",
+          "Ayrıca sitenin güvenli çalışması kapsamında IP adresi ve erişim kayıtları gibi işlem güvenliği verileri, barındırma altyapısı tarafından otomatik olarak tutulabilir."
+        ]
+      },
+      {
+        "title": "3. İşleme Amaçları ve Hukuki Sebepler",
+        "body": [
+          "Kişisel verileriniz; iletişim taleplerinizin alınması ve yanıtlanması, talep ettiğiniz hizmetlere ilişkin teklif süreçlerinin yürütülmesi, olası bir sözleşme ilişkisinin kurulması ve yürütülmesi ile sitenin güvenliğinin sağlanması amaçlarıyla işlenir.",
+          "Bu işleme faaliyetleri; KVKK madde 5/2(c) uyarınca bir sözleşmenin kurulması veya ifasıyla doğrudan ilgili olması, madde 5/2(f) uyarınca temel hak ve özgürlüklerinize zarar vermemek kaydıyla meşru menfaatlerimiz için zorunlu olması hukuki sebeplerine dayanır."
+        ]
+      },
+      {
+        "title": "4. Verilerin Aktarılması",
+        "body": [
+          "Kişisel verileriniz; sitenin barındırılması amacıyla Vercel Inc. ve form iletilerinin e-posta olarak tarafımıza ulaştırılması amacıyla Resend Inc. hizmet sağlayıcılarına, yalnızca hizmetin gerektirdiği ölçüde aktarılır. Bu sağlayıcıların sunucuları yurt dışında bulunabilir; aktarımlar KVKK'nın yurt dışına aktarım hükümlerine uygun olarak gerçekleştirilir.",
+          "Verileriniz bunun dışında, yasal bir zorunluluk bulunmadıkça hiçbir üçüncü kişiyle paylaşılmaz; hiçbir koşulda satılmaz veya pazarlama amacıyla aktarılmaz."
+        ]
+      },
+      {
+        "title": "5. Toplama Yöntemi",
+        "body": [
+          "Kişisel verileriniz; web sitemizdeki iletişim formu aracılığıyla elektronik ortamda, otomatik yollarla toplanır."
+        ]
+      },
+      {
+        "title": "6. Saklama Süresi",
+        "body": [
+          "Kişisel verileriniz, işleme amaçlarının gerektirdiği süre boyunca saklanır. İletişim talepleri, talebin sonuçlanmasından itibaren makul bir süre; sözleşme ilişkisi kurulması hâlinde ilgili mevzuatta öngörülen yasal saklama süreleri boyunca muhafaza edilir. Sürelerin dolmasıyla verileriniz silinir, yok edilir veya anonim hâle getirilir."
+        ]
+      },
+      {
+        "title": "7. KVKK Madde 11 Kapsamındaki Haklarınız",
+        "body": [
+          "KVKK madde 11 uyarınca; kişisel verilerinizin işlenip işlenmediğini öğrenme, işlenmişse buna ilişkin bilgi talep etme, işlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme, yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme, eksik veya yanlış işlenmişse düzeltilmesini isteme, KVKK madde 7'de öngörülen şartlar çerçevesinde silinmesini veya yok edilmesini isteme, bu işlemlerin verilerin aktarıldığı üçüncü kişilere bildirilmesini isteme, münhasıran otomatik sistemlerle analiz edilmesi suretiyle aleyhinize bir sonucun ortaya çıkmasına itiraz etme ve kanuna aykırı işleme sebebiyle zarara uğramanız hâlinde zararın giderilmesini talep etme haklarına sahipsiniz."
+        ]
+      },
+      {
+        "title": "8. Başvuru Yöntemi",
+        "body": [
+          "Yukarıda sayılan haklarınıza ilişkin taleplerinizi, Veri Sorumlusuna Başvuru Usul ve Esasları Hakkında Tebliğ'e uygun olarak merhaba@cryapim.com adresine iletebilirsiniz. Başvurunuz, niteliğine göre en kısa sürede ve en geç otuz gün içinde ücretsiz olarak sonuçlandırılır.",
+          "CR Yapım Teknoloji — İstanbul. Bu metin gerektiğinde güncellenebilir; güncel sürüm her zaman bu sayfada yayımlanır."
+        ]
+      }
+    ]
+  }
+}
