@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -32,9 +33,17 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 sm:px-12 lg:px-20">
         <Link
           href="/"
-          className="text-[0.78rem] font-medium tracking-[0.4em] text-ink transition-colors hover:text-gold"
+          aria-label="CR YAPIM — Ana sayfa"
+          className="flex items-center py-2 transition-opacity hover:opacity-80"
         >
-          CR YAPIM
+          <Image
+            src="/brand/logo-wordmark.png"
+            alt="CR YAPIM"
+            width={126}
+            height={96}
+            priority
+            className="h-10 w-auto sm:h-11"
+          />
         </Link>
 
         <nav aria-label="Ana menü" className="hidden items-center gap-7 lg:flex">

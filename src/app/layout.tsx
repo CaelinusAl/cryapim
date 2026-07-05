@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Mono, Instrument_Serif } from "next/font/google";
 import { getContent } from "@/lib/content";
 import { SiteFooter } from "@/components/site-footer";
@@ -20,6 +20,13 @@ const dmMono = DM_Mono({
 });
 
 const content = getContent("tr");
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#000000",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://cryapim.com"),

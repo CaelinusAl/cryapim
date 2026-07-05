@@ -18,7 +18,8 @@ type ContactValues = z.infer<typeof contactSchema>;
 type Status = "idle" | "sending" | "success" | "error";
 
 const inputClass =
-  "w-full border border-gold/20 bg-black px-4 py-3 text-[0.85rem] text-ink placeholder:text-dim focus:border-gold focus:outline-none transition-colors";
+  // text-base (16px) mobilde: iOS focus'ta otomatik zoom yapmasın diye
+  "w-full border border-gold/20 bg-black px-4 py-3 text-base text-ink placeholder:text-dim focus:border-gold focus:outline-none transition-colors sm:text-[0.85rem]";
 
 export function ContactSection({ content }: { content: Content["cta"] }) {
   const [status, setStatus] = useState<Status>("idle");

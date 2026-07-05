@@ -306,6 +306,7 @@ export default function UniverseHero({
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [formName, setFormName] = useState('CELL');
+  const [webglFailed, setWebglFailed] = useState(false);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -315,12 +316,31 @@ export default function UniverseHero({
     const prefersReducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     ).matches;
+    // İnce imleçli (mouse) cihaz: dokunmatikte parallax kaydırmayla çakışıp
+    // her telefonda farklı his verdiği için yalnızca masaüstünde aktif.
+    const hasFinePointer = window.matchMedia(
+      '(hover: hover) and (pointer: fine)'
+    ).matches;
 
     const forms = buildForms();
 
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, MAX_PIXEL_RATIO));
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+    } catch {
+      setWebglFailed(true);
+      return;
+    }
+    // Küçük ekranlarda fill-rate'i sınırla: her telefonda aynı akıcılık.
+    const pixelRatioCap = window.innerWidth < 768 ? 1.5 : MAX_PIXEL_RATIO;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, pixelRatioCap));
     renderer.setClearColor(0x000000, 1);
+
+    const onContextLost = (event: Event) => {
+      event.preventDefault();
+      setWebglFailed(true);
+    };
+    canvas.addEventListener('webglcontextlost', onContextLost);
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
@@ -395,7 +415,7 @@ export default function UniverseHero({
       pointerTargetX = event.clientX / window.innerWidth - 0.5;
       pointerTargetY = event.clientY / window.innerHeight - 0.5;
     };
-    if (!prefersReducedMotion) {
+    if (!prefersReducedMotion && hasFinePointer) {
       window.addEventListener('pointermove', onPointerMove);
     }
 
@@ -468,6 +488,7 @@ export default function UniverseHero({
       cancelAnimationFrame(animationFrameId);
       resizeObserver.disconnect();
       window.removeEventListener('pointermove', onPointerMove);
+      canvas.removeEventListener('webglcontextlost', onContextLost);
       particleGeometry.dispose();
       particleMaterial.dispose();
       starGeometry.dispose();
@@ -476,6 +497,20 @@ export default function UniverseHero({
       renderer.dispose();
     };
   }, []);
+
+  if (webglFailed) {
+    // WebGL yoksa/çöktüyse: markanın altın-mor nefesini taşıyan statik zemin.
+    return (
+      <div
+        ref={containerRef}
+        className={className ?? 'absolute inset-0'}
+        style={{
+          background:
+            'radial-gradient(ellipse 70% 55% at 50% 45%, rgba(160,107,212,0.18) 0%, rgba(201,169,106,0.10) 40%, #000 75%)',
+        }}
+      />
+    );
+  }
 
   return (
     <div ref={containerRef} className={className ?? 'absolute inset-0'}>

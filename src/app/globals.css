@@ -26,6 +26,9 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Mobil tarayıcılar yatay moda geçişte metni büyütmesin */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   /* Lenis aktifken native smooth scroll devre dışı kalır */
@@ -47,6 +50,15 @@
     color: var(--color-ink);
     font-family: var(--font-mono);
     -webkit-font-smoothing: antialiased;
+    /* Scale animasyonları ve marquee hiçbir cihazda yatay kaydırma yaratmasın */
+    overflow-x: clip;
+  }
+
+  a,
+  button {
+    /* Mobilde çift dokunma zoom gecikmesini kaldırır */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 
   ::selection {
