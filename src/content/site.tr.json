@@ -1,0 +1,230 @@
+{
+  "meta": {
+    "title": "CR YAPIM — Yaratıcı Teknoloji Stüdyosu · İstanbul",
+    "description": "Fikirleri yaşayan dijital deneyimlere dönüştüren yaratıcı teknoloji stüdyosu. Yapay zekâ, mobil ve web geliştirme, oyun, UI/UX, marka kimliği, hikâye ve evren tasarımı, içerik ve sosyal medya."
+  },
+  "nav": {
+    "menu": "Menü",
+    "items": [
+      { "href": "#about", "label": "Hakkımızda" },
+      { "href": "#works", "label": "Projeler" },
+      { "href": "#capabilities", "label": "Hizmetler" },
+      { "href": "#process", "label": "Süreç" },
+      { "href": "#manifesto", "label": "Manifesto" },
+      { "href": "#commission", "label": "İletişim" }
+    ]
+  },
+  "hero": {
+    "titleL1": "Fikirleri yaşayan",
+    "titleL2": "dijital deneyimlere dönüştürüyoruz",
+    "brand": "CR YAPIM",
+    "status": "Yeni projelere açık",
+    "role": "Yaratıcı teknoloji stüdyosu · İstanbul",
+    "hint": "Yüzeyi sür / ardındakini gör"
+  },
+  "marquee": {
+    "items": [
+      "CR YAPIM",
+      "Yapay Zekâ Çözümleri",
+      "Mobil & Web Geliştirme",
+      "Oyun & 3D Deneyimler",
+      "Marka & Hikâye Tasarımı"
+    ]
+  },
+  "about": {
+    "label": "Hakkımızda",
+    "headlineL1": "Biz bir web sitesi yapan",
+    "headlineL2": "ajans değiliz.",
+    "headlineL3": "Bir fikrin bütün dijital evrenini kuruyoruz.",
+    "body": [
+      "CR YAPIM; markaların, girişimlerin ve yaratıcı fikirlerin yalnızca görünmesini değil, kendi dijital evrenlerini kurmasını sağlar. Bir fikrin hikâyesini kurar, marka kimliğini oluşturur, dijital ürününü tasarlar ve yazılımını geliştiririz.",
+      "Yapay zekâ çözümlerini üretir, mobil uygulamasını hayata geçirir, oyunlaştırır, içeriklerini üretir ve sosyal medyada büyümesini destekleriz. Teknoloji, tasarım ve hikâye anlatıcılığını tek çatı altında buluşturuyoruz. Çünkü gelecekte insanlar sadece ürün satın almayacak; içine girebildikleri dünyaları seçecekler."
+    ],
+    "meta": [
+      { "label": "Tür", "value": "Yaratıcı teknoloji stüdyosu" },
+      { "label": "Konum", "value": "İstanbul" },
+      { "label": "Odak", "value": "Teknoloji · Tasarım · Hikâye" },
+      { "label": "Durum", "value": "Yeni projelere açık", "accent": true }
+    ]
+  },
+  "services": {
+    "label": "Hizmetler",
+    "items": [
+      {
+        "title": "Yapay Zekâ Çözümleri",
+        "body": "Markalara özel yapay zekâ ürünleri, asistanlar ve otomasyonlar; fikirden çalışan modele kadar uçtan uca.",
+        "tags": "Model · Otomasyon · Ürün"
+      },
+      {
+        "title": "Mobil Uygulama Geliştirme",
+        "body": "iOS ve Android için tasarımdan yayına kadar uçtan uca mobil uygulama geliştirme.",
+        "tags": "iOS · Android · Ürün"
+      },
+      {
+        "title": "Web Sitesi Tasarımı ve Yazılımı",
+        "body": "Hızlı, modern ve ölçeklenebilir web siteleri ve uygulamaları; tasarım ve yazılım bir arada.",
+        "tags": "Tasarım · Yazılım · Web"
+      },
+      {
+        "title": "Oyun Geliştirme",
+        "body": "Markalar ve girişimler için oyunlaştırılmış deneyimler ve özgün oyunlar.",
+        "tags": "Mekanik · 3D · Etkileşim"
+      },
+      {
+        "title": "Dijital Ürün Tasarımı (UI/UX)",
+        "body": "Kullanıcının ürünle kurduğu her anı tasarlıyoruz; arayüz, akış ve deneyim.",
+        "tags": "UI · UX · Ürün"
+      },
+      {
+        "title": "Marka Kimliği ve Stratejisi",
+        "body": "Bir markanın sesini, görünümünü ve duruşunu baştan kuruyoruz.",
+        "tags": "Kimlik · Strateji · Ses"
+      },
+      {
+        "title": "Hikâye ve Evren Tasarımı",
+        "body": "Markaların içine girilebilen dünyalarını ve anlatılarını kurguluyoruz.",
+        "tags": "Hikâye · Evren · Anlatı"
+      },
+      {
+        "title": "İçerik Üretimi",
+        "body": "Metinden görsele, videodan sosyal içeriğe kadar markanın tüm içeriği.",
+        "tags": "Metin · Görsel · Video"
+      },
+      {
+        "title": "Sosyal Medya Yönetimi",
+        "body": "Toplulukların büyüdüğü, markanın konuştuğu sosyal medya stratejisi ve yönetimi.",
+        "tags": "Strateji · Topluluk · Büyüme"
+      },
+      {
+        "title": "3D Deneyimler ve Dijital Sunumlar",
+        "body": "Ürünleri ve fikirleri 3B sahneler ve etkileşimli sunumlarla hayata geçiriyoruz.",
+        "tags": "3D · Etkileşim · Sunum"
+      }
+    ]
+  },
+  "works": {
+    "label": "Projeler",
+    "items": [
+      {
+        "badge": "DE",
+        "titleOn": "Dijital Evren",
+        "metaIndex": "(01 / 03)",
+        "year": "2025",
+        "name": "Dijital Evren",
+        "desc": "Bir markanın hikâyesi, kimliği ve web deneyimi tek bir dijital evrende birleştirildi; kullanıcıların içine girip gezebildiği bir marka dünyası kuruldu.",
+        "tags": "Hikâye · Marka · Web",
+        "cta": "İncele →"
+      },
+      {
+        "badge": "YZ",
+        "titleOn": "Yapay Zekâ Ürünü",
+        "metaIndex": "(02 / 03)",
+        "year": "2025",
+        "name": "Yapay Zekâ Ürünü",
+        "desc": "Bir girişim için tasarlanan, kullanıcı sorularını anlayıp yanıtlayan yapay zekâ destekli ürün; arayüzden modele kadar uçtan uca geliştirildi.",
+        "tags": "Yapay Zekâ · Ürün · Yazılım",
+        "cta": "İncele →"
+      },
+      {
+        "badge": "OY",
+        "titleOn": "Oyun & Mobil",
+        "metaIndex": "(03 / 03)",
+        "year": "2026",
+        "name": "Oyun & Mobil Deneyim",
+        "desc": "Bir markanın kampanyası için kurgulanan, oyunlaştırılmış mobil deneyim; etkileşimli mekanikler ve 3B sahnelerle hayata geçirildi.",
+        "tags": "Oyun · Mobil · 3D",
+        "cta": "İncele →"
+      }
+    ]
+  },
+  "process": {
+    "label": "Süreç",
+    "steps": [
+      {
+        "title": "Keşif",
+        "body": "Fikri, hedefi ve hikâyeyi birlikte netleştiriyoruz. Projenin çıkış noktasını kuruyoruz."
+      },
+      {
+        "title": "Tasarım",
+        "body": "Marka dilini, deneyimi ve görsel dünyayı kuruyoruz. İşi geliştirmeden önce tasarlıyoruz."
+      },
+      {
+        "title": "Geliştirme",
+        "body": "Yazılımı, uygulamayı veya ürünü hayata geçiriyoruz. Tasarım ve teknoloji tek ekipte."
+      },
+      {
+        "title": "Lansman",
+        "body": "Ürünü yayına alıyor, içerik ve sosyal medyayla büyümesini destekliyoruz."
+      }
+    ]
+  },
+  "manifesto": {
+    "label": "Manifesto",
+    "lead": "Her büyük proje bir fikirle başlar. Her fikir ise anlatılmayı bekleyen bir hikâyedir.",
+    "lines": [
+      { "a": "Biz kod yazıyoruz.", "b": "Ama sadece yazılım üretmiyoruz." },
+      { "a": "Biz tasarlıyoruz.", "b": "Ama sadece arayüz çizmiyoruz." },
+      { "a": "Biz içerik üretiyoruz.", "b": "Ama sadece paylaşım hazırlamıyoruz." }
+    ],
+    "close": "Biz, insanların bağ kurabileceği dijital evrenler inşa ediyoruz.",
+    "sig": "CR YAPIM — teknolojiyi estetikle, yazılımı hikâyeyle ve yapay zekâyı insan yaratıcılığıyla buluşturan yeni nesil dijital yaratım stüdyosu."
+  },
+  "cta": {
+    "headingPre": "Bir sonraki",
+    "headingEm": "dijital evreni",
+    "headingPost": "birlikte kuralım.",
+    "sub": "Fikrinizi getirin; hikâyesinden yazılımına, tasarımından yapay zekâsına kadar gerisini birlikte kuralım.",
+    "btn": "İletişime geç",
+    "email": "merhaba@cryapim.com",
+    "loc": "İstanbul",
+    "form": {
+      "name": "İsim",
+      "email": "E-posta",
+      "message": "Mesaj",
+      "submit": "Gönder",
+      "sending": "Gönderiliyor…",
+      "success": "Mesajınız ulaştı. En kısa sürede dönüş yapacağız.",
+      "error": "Bir şeyler ters gitti. Lütfen tekrar deneyin veya merhaba@cryapim.com adresine yazın."
+    }
+  },
+  "footer": {
+    "tagline": "Teknoloji × Tasarım × Hikâye",
+    "columns": [
+      {
+        "heading": "Bölümler",
+        "links": [
+          { "href": "#about", "label": "01 Hakkımızda" },
+          { "href": "#works", "label": "02 Projeler" },
+          { "href": "#capabilities", "label": "03 Hizmetler" },
+          { "href": "#process", "label": "04 Süreç" }
+        ]
+      },
+      {
+        "heading": "Kanallar",
+        "links": [
+          { "href": "#manifesto", "label": "Manifesto" },
+          { "href": "#commission", "label": "İletişim" },
+          { "href": "#top", "label": "Sayfa başı" }
+        ]
+      },
+      {
+        "heading": "İletişim",
+        "links": [
+          { "href": "mailto:merhaba@cryapim.com", "label": "merhaba@cryapim.com" },
+          { "label": "İstanbul" },
+          { "label": "Yeni projelere açık", "accent": true }
+        ]
+      },
+      {
+        "heading": "Künye",
+        "links": [
+          { "label": "Edisyon 001" },
+          { "label": "2025 / 2026" },
+          { "label": "Yayında" }
+        ]
+      }
+    ],
+    "base1": "© 2026 CR YAPIM — Yaratıcı Teknoloji Stüdyosu",
+    "base2": "İstanbul"
+  }
+}

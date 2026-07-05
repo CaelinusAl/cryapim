@@ -1,0 +1,230 @@
+{
+  "meta": {
+    "title": "CR YAPIM — Creative Technology Studio · Istanbul",
+    "description": "A creative technology studio turning ideas into living digital experiences. AI, mobile and web, games, UI/UX, brand identity, story & universe design, content and social media."
+  },
+  "nav": {
+    "menu": "Menu",
+    "items": [
+      { "href": "#about", "label": "About" },
+      { "href": "#works", "label": "Projects" },
+      { "href": "#capabilities", "label": "Services" },
+      { "href": "#process", "label": "Process" },
+      { "href": "#manifesto", "label": "Manifesto" },
+      { "href": "#commission", "label": "Contact" }
+    ]
+  },
+  "hero": {
+    "titleL1": "We turn ideas into",
+    "titleL2": "living digital experiences",
+    "brand": "CR YAPIM",
+    "status": "Open to new projects",
+    "role": "Creative technology studio · Istanbul",
+    "hint": "Drag the surface / see beneath"
+  },
+  "marquee": {
+    "items": [
+      "CR YAPIM",
+      "AI Solutions",
+      "Mobile & Web",
+      "Games & 3D Experiences",
+      "Brand & Story Design"
+    ]
+  },
+  "about": {
+    "label": "About",
+    "headlineL1": "We are not an agency",
+    "headlineL2": "that just builds websites.",
+    "headlineL3": "We build a whole digital world for an idea.",
+    "body": [
+      "CR YAPIM helps brands, startups and creative ideas not just become visible, but build their own digital universes. We craft an idea's story, shape its brand identity, design its digital product and develop its software.",
+      "We build its AI solutions, bring its mobile app to life, gamify it, produce its content and grow it on social media. We bring technology, design and storytelling under one roof — because in the future, people won't just buy products; they'll choose the worlds they can step into."
+    ],
+    "meta": [
+      { "label": "Type", "value": "Creative technology studio" },
+      { "label": "Location", "value": "Istanbul" },
+      { "label": "Focus", "value": "Technology · Design · Story" },
+      { "label": "Status", "value": "Open to new projects", "accent": true }
+    ]
+  },
+  "services": {
+    "label": "Services",
+    "items": [
+      {
+        "title": "AI Solutions",
+        "body": "Custom AI products, assistants and automations — end to end, from idea to a working model.",
+        "tags": "Model · Automation · Product"
+      },
+      {
+        "title": "Mobile App Development",
+        "body": "End-to-end mobile apps for iOS and Android, from design to release.",
+        "tags": "iOS · Android · Product"
+      },
+      {
+        "title": "Web Design & Engineering",
+        "body": "Fast, modern, scalable websites and apps — design and engineering together.",
+        "tags": "Design · Code · Web"
+      },
+      {
+        "title": "Game Development",
+        "body": "Gamified experiences and original games for brands and startups.",
+        "tags": "Mechanics · 3D · Interaction"
+      },
+      {
+        "title": "Digital Product Design (UI/UX)",
+        "body": "We design every moment a user spends with a product — interface, flow and experience.",
+        "tags": "UI · UX · Product"
+      },
+      {
+        "title": "Brand Identity & Strategy",
+        "body": "We build a brand's voice, look and stance from the ground up.",
+        "tags": "Identity · Strategy · Voice"
+      },
+      {
+        "title": "Story & Universe Design",
+        "body": "We craft the worlds and narratives a brand can be stepped into.",
+        "tags": "Story · Universe · Narrative"
+      },
+      {
+        "title": "Content Production",
+        "body": "From copy to visuals to video and social content — all of a brand's content.",
+        "tags": "Copy · Visual · Video"
+      },
+      {
+        "title": "Social Media Management",
+        "body": "Strategy and management where communities grow and brands speak.",
+        "tags": "Strategy · Community · Growth"
+      },
+      {
+        "title": "3D Experiences & Digital Presentations",
+        "body": "We bring products and ideas to life with 3D scenes and interactive presentations.",
+        "tags": "3D · Interaction · Deck"
+      }
+    ]
+  },
+  "works": {
+    "label": "Work",
+    "items": [
+      {
+        "badge": "DW",
+        "titleOn": "Digital World",
+        "metaIndex": "(01 / 03)",
+        "year": "2025",
+        "name": "Digital World",
+        "desc": "A brand's story, identity and web experience merged into a single digital universe — a brand world users can step into and explore.",
+        "tags": "Story · Brand · Web",
+        "cta": "View →"
+      },
+      {
+        "badge": "AI",
+        "titleOn": "AI Product",
+        "metaIndex": "(02 / 03)",
+        "year": "2025",
+        "name": "AI Product",
+        "desc": "An AI-powered product for a startup that understands and answers user questions — built end to end, from interface to model.",
+        "tags": "AI · Product · Code",
+        "cta": "View →"
+      },
+      {
+        "badge": "GM",
+        "titleOn": "Game & Mobile",
+        "metaIndex": "(03 / 03)",
+        "year": "2026",
+        "name": "Game & Mobile Experience",
+        "desc": "A gamified mobile experience built for a brand campaign, brought to life with interactive mechanics and 3D scenes.",
+        "tags": "Game · Mobile · 3D",
+        "cta": "View →"
+      }
+    ]
+  },
+  "process": {
+    "label": "Process",
+    "steps": [
+      {
+        "title": "Discovery",
+        "body": "We clarify the idea, the goal and the story together, and set the project's starting point."
+      },
+      {
+        "title": "Design",
+        "body": "We build the brand language, the experience and the visual world before development begins."
+      },
+      {
+        "title": "Development",
+        "body": "We bring the software, app or product to life. Design and technology in one crew."
+      },
+      {
+        "title": "Launch",
+        "body": "We ship the product and support its growth with content and social media."
+      }
+    ]
+  },
+  "manifesto": {
+    "label": "Manifesto",
+    "lead": "Every great project begins with an idea. And every idea is a story waiting to be told.",
+    "lines": [
+      { "a": "We write code.", "b": "But we don't just build software." },
+      { "a": "We design.", "b": "But we don't just draw interfaces." },
+      { "a": "We make content.", "b": "But we don't just prepare posts." }
+    ],
+    "close": "We build digital universes people can connect with.",
+    "sig": "CR YAPIM — a new-generation digital creation studio where technology meets aesthetics, software meets story, and AI meets human creativity."
+  },
+  "cta": {
+    "headingPre": "Let's build the next",
+    "headingEm": "digital universe",
+    "headingPost": "together.",
+    "sub": "Bring your idea — from its story to its software, its design to its AI, we'll build the rest together.",
+    "btn": "Get in touch",
+    "email": "merhaba@cryapim.com",
+    "loc": "Istanbul",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Send",
+      "sending": "Sending…",
+      "success": "Your message has arrived. We'll get back to you shortly.",
+      "error": "Something went wrong. Please try again or write to merhaba@cryapim.com."
+    }
+  },
+  "footer": {
+    "tagline": "Technology × Design × Story",
+    "columns": [
+      {
+        "heading": "Sections",
+        "links": [
+          { "href": "#about", "label": "01 About" },
+          { "href": "#works", "label": "02 Projects" },
+          { "href": "#capabilities", "label": "03 Services" },
+          { "href": "#process", "label": "04 Process" }
+        ]
+      },
+      {
+        "heading": "Channels",
+        "links": [
+          { "href": "#manifesto", "label": "Manifesto" },
+          { "href": "#commission", "label": "Contact" },
+          { "href": "#top", "label": "Back to top" }
+        ]
+      },
+      {
+        "heading": "Contact",
+        "links": [
+          { "href": "mailto:merhaba@cryapim.com", "label": "merhaba@cryapim.com" },
+          { "label": "Istanbul" },
+          { "label": "Open to new projects", "accent": true }
+        ]
+      },
+      {
+        "heading": "Imprint",
+        "links": [
+          { "label": "Edition 001" },
+          { "label": "2025 / 2026" },
+          { "label": "Live" }
+        ]
+      }
+    ],
+    "base1": "© 2026 CR YAPIM — Creative Technology Studio",
+    "base2": "Istanbul"
+  }
+}
