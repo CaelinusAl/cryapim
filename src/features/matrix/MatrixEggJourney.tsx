@@ -13,13 +13,13 @@ import { useRef, useState } from "react";
 import type { MatrixContent } from "@/lib/matrix";
 
 /**
- * Scroll fazları (örtüşmesiz):
- * 0.00–0.10  intro
- * 0.10–0.88  8 katman (her biri ~0.0975)
- * 0.88–1.00  outro
+ * Scroll fazları (örtüşmesiz) — kısa track (~480vh) ile hızlı geçiş:
+ * 0.00–0.08  intro
+ * 0.08–0.90  8 katman
+ * 0.90–1.00  outro
  */
-const INTRO_END = 0.1;
-const LAYERS_END = 0.88;
+const INTRO_END = 0.08;
+const LAYERS_END = 0.9;
 const LAYER_SPAN = (LAYERS_END - INTRO_END) / 8;
 
 function layerWindow(i: number): [number, number] {
@@ -373,17 +373,17 @@ export function MatrixEggJourney({ content }: { content: MatrixContent }) {
 
   const introOpacity = useTransform(
     scrollYProgress,
-    [0, 0.06, INTRO_END],
+    [0, 0.045, INTRO_END],
     [1, 1, 0],
   );
   const layerPanelOpacity = useTransform(
     scrollYProgress,
-    [INTRO_END - 0.02, INTRO_END + 0.02, LAYERS_END - 0.02, LAYERS_END],
+    [INTRO_END - 0.015, INTRO_END + 0.015, LAYERS_END - 0.02, LAYERS_END],
     [0, 1, 1, 0],
   );
   const outroOpacity = useTransform(
     scrollYProgress,
-    [LAYERS_END - 0.01, LAYERS_END + 0.03, 1],
+    [LAYERS_END - 0.01, LAYERS_END + 0.025, 1],
     [0, 1, 1],
   );
   const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
@@ -393,7 +393,7 @@ export function MatrixEggJourney({ content }: { content: MatrixContent }) {
   return (
     <div
       ref={containerRef}
-      className="matrix-journey relative h-[820vh]"
+      className="matrix-journey relative h-[480vh]"
       data-phase={phase}
     >
       <div className="sticky top-0 flex h-svh w-full overflow-hidden">

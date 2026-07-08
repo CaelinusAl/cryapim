@@ -4,8 +4,8 @@ import Lenis from "lenis";
 import { useEffect, type ReactNode } from "react";
 
 /**
- * Lenis tabanlı yumuşak kaydırma sağlayıcısı.
- * prefers-reduced-motion aktifse hiç devreye girmez.
+ * Lenis — yumuşak ama canlı kaydırma.
+ * Ana sayfa Matrix yolculuğu için düşük duration + yüksök wheel çarpanı.
  */
 export function SmoothScroll({ children }: { children: ReactNode }) {
   useEffect(() => {
@@ -13,8 +13,11 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     if (media.matches) return;
 
     const lenis = new Lenis({
-      duration: 1.1,
+      duration: 0.55,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      wheelMultiplier: 1.35,
+      touchMultiplier: 1.2,
+      smoothWheel: true,
     });
 
     let rafId = requestAnimationFrame(function loop(time: number) {
