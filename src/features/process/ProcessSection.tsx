@@ -10,7 +10,7 @@ export function ProcessSection({
   return (
     <section
       id="process"
-      className="px-6 py-[clamp(5rem,9vw,9rem)] sm:px-12 lg:px-20"
+      className="relative isolate overflow-hidden bg-[radial-gradient(ellipse_90%_70%_at_85%_50%,#151008_0%,#0a0805_55%,#000_100%)] px-6 py-[clamp(5rem,9vw,9rem)] sm:px-12 lg:px-20"
     >
       <div className="mx-auto max-w-6xl">
         <SectionHeading index="04" label={content.label} />

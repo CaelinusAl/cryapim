@@ -26,11 +26,11 @@ export function SiteHeader() {
     <header
       className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-500 ${
         scrolled
-          ? "border-gold/25 bg-black/70 backdrop-blur-md"
+          ? "border-gold/15 bg-black/40 backdrop-blur-sm"
           : "border-transparent bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 sm:px-12 lg:px-20">
+      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6 sm:px-12 lg:px-20">
         <Link
           href="/"
           aria-label="CR YAPIM — Ana sayfa"
@@ -42,11 +42,11 @@ export function SiteHeader() {
             width={126}
             height={96}
             priority
-            className="h-10 w-auto sm:h-11"
+            className="h-8 w-auto opacity-90 sm:h-9"
           />
         </Link>
 
-        <nav aria-label="Ana menü" className="hidden items-center gap-7 lg:flex">
+        <nav aria-label="Ana menü" className="hidden items-center gap-8 lg:flex">
           {NAV_ROUTES.map((route) => {
             const active = isActiveRoute(pathname, route.href);
             return (
@@ -54,17 +54,11 @@ export function SiteHeader() {
                 key={route.href}
                 href={route.href}
                 aria-current={active ? "page" : undefined}
-                className={`group relative text-[0.6rem] uppercase tracking-[0.28em] transition-colors duration-300 ${
-                  active ? "text-ink" : "text-muted hover:text-ink"
+                className={`font-serif text-[0.78rem] tracking-[0.12em] transition-colors duration-300 ${
+                  active ? "text-gold" : "text-ink/55 hover:text-gold"
                 }`}
               >
                 {route.label}
-                <span
-                  aria-hidden
-                  className={`absolute -bottom-1.5 left-0 h-px w-full origin-left bg-gold transition-transform duration-300 ease-out ${
-                    active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                  }`}
-                />
               </Link>
             );
           })}

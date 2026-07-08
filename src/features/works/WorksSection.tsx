@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { SectionHeading } from "@/components/section-heading";
 import { Reveal } from "@/components/reveal";
 import type { Content } from "@/lib/content";
@@ -77,12 +78,12 @@ export function WorksSection({ content }: { content: Content["works"] }) {
                     <div className="mb-8 text-[0.62rem] uppercase tracking-[0.3em] text-gold/80">
                       {work.tags}
                     </div>
-                    <a
-                      href="#commission"
+                    <Link
+                      href="/projeler"
                       className="inline-block border-b border-gold/40 pb-1 text-[0.72rem] uppercase tracking-[0.3em] text-ink transition-colors hover:border-gold hover:text-gold"
                     >
                       {work.cta}
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </Reveal>

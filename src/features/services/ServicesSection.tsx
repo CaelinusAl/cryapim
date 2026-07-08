@@ -10,7 +10,7 @@ export function ServicesSection({
   return (
     <section
       id="capabilities"
-      className="px-6 py-[clamp(5rem,9vw,9rem)] sm:px-12 lg:px-20"
+      className="relative isolate overflow-hidden bg-[radial-gradient(ellipse_100%_80%_at_50%_0%,#120e18_0%,#08060a_55%,#000_100%)] px-6 py-[clamp(5rem,9vw,9rem)] sm:px-12 lg:px-20"
     >
       <div className="mx-auto max-w-6xl">
         <SectionHeading index="03" label={content.label} />

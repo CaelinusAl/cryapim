@@ -35,10 +35,16 @@ export function HeroSection({ content }: { content: Content["hero"] }) {
         </div>
       </div>
 
-      <div className="pointer-events-none absolute bottom-[max(env(safe-area-inset-bottom),clamp(1rem,3vw,2rem))] left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-[0.6rem] uppercase tracking-[0.4em] text-dim">
+      <a
+        href="#world-gateway"
+        className="absolute bottom-[max(env(safe-area-inset-bottom),clamp(1rem,3vw,2rem))] left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-[0.6rem] uppercase tracking-[0.4em] text-dim transition-colors hover:text-gold"
+      >
         <span>{content.hint}</span>
-        <span className="hero-scroll-line h-[34px] w-px bg-gradient-to-b from-dim to-transparent" />
-      </div>
+        <span
+          aria-hidden
+          className="h-[34px] w-px bg-gradient-to-b from-dim to-transparent"
+        />
+      </a>
     </header>
   );
 }

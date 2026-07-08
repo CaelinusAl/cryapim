@@ -6,12 +6,12 @@
   "nav": {
     "menu": "Menü",
     "items": [
-      { "href": "#about", "label": "Hakkımızda" },
-      { "href": "#works", "label": "Projeler" },
-      { "href": "#capabilities", "label": "Hizmetler" },
-      { "href": "#process", "label": "Süreç" },
-      { "href": "#manifesto", "label": "Manifesto" },
-      { "href": "#commission", "label": "İletişim" }
+      { "href": "/hakkimizda", "label": "Hakkımızda" },
+      { "href": "/projeler", "label": "Projeler" },
+      { "href": "/hizmetler", "label": "Hizmetler" },
+      { "href": "/surec", "label": "Süreç" },
+      { "href": "/manifesto", "label": "Manifesto" },
+      { "href": "/iletisim", "label": "İletişim" }
     ]
   },
   "hero": {
@@ -20,7 +20,24 @@
     "brand": "CR YAPIM",
     "status": "Yeni projelere açık",
     "role": "Yaratıcı teknoloji stüdyosu · İstanbul",
-    "hint": "Yüzeyi sür / ardındakini gör"
+    "hint": "Evrene gir"
+  },
+  "world": {
+    "gatewayLabel": "Dijital Evren",
+    "gatewayTitlePre": "İçeride",
+    "gatewayTitleEm": "bir dünya",
+    "gatewayTitlePost": "var.",
+    "gatewayLead": "Her bölüm ayrı bir alemdir — tam içerik burada, derinlemesine okumak için tam sayfaya geçebilirsiniz.",
+    "fullPage": "Tam sayfaya git →",
+    "nextRealm": "Sonraki alem",
+    "realms": [
+      { "id": "about", "tagline": "Kim olduğumuz" },
+      { "id": "works", "tagline": "Kurduğumuz dünyalar" },
+      { "id": "capabilities", "tagline": "Yeteneklerimiz" },
+      { "id": "process", "tagline": "Nasıl ilerliyoruz" },
+      { "id": "manifesto", "tagline": "Neye inanıyoruz" },
+      { "id": "commission", "tagline": "Kapı burada" }
+    ]
   },
   "marquee": {
     "items": [
@@ -190,23 +207,6 @@
   "footer": {
     "tagline": "Teknoloji × Tasarım × Hikâye",
     "columns": [
-      {
-        "heading": "Bölümler",
-        "links": [
-          { "href": "#about", "label": "01 Hakkımızda" },
-          { "href": "#works", "label": "02 Projeler" },
-          { "href": "#capabilities", "label": "03 Hizmetler" },
-          { "href": "#process", "label": "04 Süreç" }
-        ]
-      },
-      {
-        "heading": "Kanallar",
-        "links": [
-          { "href": "#manifesto", "label": "Manifesto" },
-          { "href": "#commission", "label": "İletişim" },
-          { "href": "#top", "label": "Sayfa başı" }
-        ]
-      },
       {
         "heading": "İletişim",
         "links": [

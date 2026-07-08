@@ -1,0 +1,90 @@
+{
+  "meta": {
+    "title": "CR YAPIM — Matrix Yumurta · Dijital Evren",
+    "description": "Her yumurta bir evren taşır. CR YAPIM'ın marka sembolü Matrix Yumurta'nın 8 katmanı — yaşamın, bilincin ve yaratımın kozmik şifresi."
+  },
+  "intro": {
+    "eyebrow": "Marka Sembolü",
+    "title": "Matrix Yumurta",
+    "titleAccent": "8 Katmanı",
+    "subtitle": "Yaşamın, bilincin ve evrenin kozmik şifresi",
+    "quote": "Her yumurta bir evren taşır.\nHer evren bir bilinç doğurur.",
+    "hint": "Aşağı kaydır — katmanlar birleşsin"
+  },
+  "layers": [
+    {
+      "id": "kabuk",
+      "index": "01",
+      "title": "Kabuk",
+      "subtitle": "Shell",
+      "body": "Fiziksel beden. Dış dünya ile temas kuran, koruyan yapı. Sert ama geçirgendir. Markanın dışarıdan görünen yüzü; ilk izlenim, kimlik kabuğu.",
+      "studio": "Kurumsal kimlik · Görünür yüzey"
+    },
+    {
+      "id": "zarlar",
+      "index": "02",
+      "title": "Kabuk Zarları",
+      "subtitle": "Shell Membranes",
+      "body": "Enerji filtreleri. Görünmeyen ince sınırlar; dengeler, korur, ayırır. Markanın filtreleri: ne içeri girer, ne dışarı çıkar — ses tonu, sınırlar, etik.",
+      "studio": "Strateji · Ton · Sınırlar"
+    },
+    {
+      "id": "hava",
+      "index": "03",
+      "title": "Hava Boşluğu",
+      "subtitle": "Air Space",
+      "body": "Nefes alanı. Boşluk gibi görünür ama yaşam için zorunludur. Potansiyel alanıdır. Negatif alan, sessizlik, bekleyiş — yaratımın boşluğu.",
+      "studio": "Alan · Ritim · Bekleyiş"
+    },
+    {
+      "id": "ak",
+      "index": "04",
+      "title": "Yumurta Akı",
+      "subtitle": "Albumen",
+      "body": "Bilinç alanı. Duygular, düşünceler, inançlar ve bilgiler burada taşınır, korunur, akar. Markanın anlatı akışı; içerik, hikâye, deneyim.",
+      "studio": "Hikâye · İçerik · Deneyim"
+    },
+    {
+      "id": "salaza",
+      "index": "05",
+      "title": "Şalaza",
+      "subtitle": "Chalaza",
+      "body": "Bağlantı iplikleri. Merkez ile dış dünya arasında görünmez bağlar kurar. Köklerimiz, rehber çizgilerimiz. Kullanıcı yolculuğu, etkileşim, köprüler.",
+      "studio": "Etkileşim · Ürün · Köprüler"
+    },
+    {
+      "id": "sari",
+      "index": "06",
+      "title": "Yumurta Sarısı",
+      "subtitle": "Vitellus",
+      "body": "Özümüz. Yaşam kaynağı; saf enerji, yaratım, potansiyel ve hafıza. Gerçek benliğin çekirdeği. Markanın özü — vizyon, misyon, neden varız.",
+      "studio": "Vizyon · Misyon · Öz"
+    },
+    {
+      "id": "vitellin",
+      "index": "07",
+      "title": "Vitellin Zarı",
+      "subtitle": "Vitelline Membrane",
+      "body": "İnce koruyucu zar. Özümüzü çevreleyen son savunma hattı. Kimliğin sınırı. Teknoloji ve estetik dengesi; özü bozmadan koruyan çerçeve.",
+      "studio": "Teknoloji · Estetik · Çerçeve"
+    },
+    {
+      "id": "germinal",
+      "index": "08",
+      "title": "Germinal Disk",
+      "subtitle": "Embryo Disc",
+      "body": "Yaşam tohumu. Yeni bir yaşamın başladığı nokta. İlahi kıvılcımın dünyayla buluştuğu yer. Fikirlerin doğduğu an — her proje bir yumurta kırılışıdır.",
+      "studio": "Fikir · Doğuş · Yapım"
+    }
+  ],
+  "outro": {
+    "lead": "İnsan da bir yumurtadır. Dışarıdan kabuğu görürsün; içeride görünmeyen katmanlar vardır.",
+    "close": "Kabuk kırılınca yaşam başlar. Biz kırılmayı değil — katmanların bir araya gelip bir evren doğurmasını kurarız.",
+    "visionLabel": "Vizyon",
+    "vision": "Gelecekte insanlar sadece ürün satın almayacak; içine girebildikleri dünyaları seçecekler. CR YAPIM bu dünyaları kuran stüdyodur.",
+    "missionLabel": "Misyon",
+    "mission": "Markaların kendi dijital evrenlerini kurmasını sağlamak: hikâye + kimlik + tasarım + yazılım + yapay zekâ + içerik, tek çatı altında.",
+    "cta": "Kurumsal kimliğimizi keşfet",
+    "ctaHint": "Üst menüden sayfalarımıza geçebilirsiniz."
+  }
+}

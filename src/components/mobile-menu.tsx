@@ -89,8 +89,8 @@ export function MobileMenu() {
                       href={route.href}
                       aria-current={active ? "page" : undefined}
                       onClick={() => setOpen(false)}
-                      className={`font-serif text-4xl tracking-[0.02em] transition-colors ${
-                        active ? "text-gold" : "text-ink hover:text-gold"
+                      className={`font-serif text-3xl tracking-[0.08em] transition-colors ${
+                        active ? "text-gold" : "text-ink/80 hover:text-gold"
                       }`}
                     >
                       {route.label}

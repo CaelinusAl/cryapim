@@ -69,6 +69,16 @@ export interface Content {
     role: string;
     hint: string;
   };
+  world: {
+    gatewayLabel: string;
+    gatewayTitlePre: string;
+    gatewayTitleEm: string;
+    gatewayTitlePost: string;
+    gatewayLead: string;
+    fullPage: string;
+    nextRealm: string;
+    realms: Array<{ id: string; tagline: string }>;
+  };
   marquee: {
     items: string[];
   };

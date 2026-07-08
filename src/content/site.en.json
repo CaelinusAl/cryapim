@@ -6,12 +6,12 @@
   "nav": {
     "menu": "Menu",
     "items": [
-      { "href": "#about", "label": "About" },
-      { "href": "#works", "label": "Projects" },
-      { "href": "#capabilities", "label": "Services" },
-      { "href": "#process", "label": "Process" },
-      { "href": "#manifesto", "label": "Manifesto" },
-      { "href": "#commission", "label": "Contact" }
+      { "href": "/hakkimizda", "label": "About" },
+      { "href": "/projeler", "label": "Projects" },
+      { "href": "/hizmetler", "label": "Services" },
+      { "href": "/surec", "label": "Process" },
+      { "href": "/manifesto", "label": "Manifesto" },
+      { "href": "/iletisim", "label": "Contact" }
     ]
   },
   "hero": {
@@ -20,7 +20,24 @@
     "brand": "CR YAPIM",
     "status": "Open to new projects",
     "role": "Creative technology studio · Istanbul",
-    "hint": "Drag the surface / see beneath"
+    "hint": "Enter the universe"
+  },
+  "world": {
+    "gatewayLabel": "Digital Universe",
+    "gatewayTitlePre": "Inside, there is",
+    "gatewayTitleEm": "a world",
+    "gatewayTitlePost": ".",
+    "gatewayLead": "Each section is its own realm — full content lives here; go deeper on the dedicated page anytime.",
+    "fullPage": "Open full page →",
+    "nextRealm": "Next realm",
+    "realms": [
+      { "id": "about", "tagline": "Who we are" },
+      { "id": "works", "tagline": "Worlds we built" },
+      { "id": "capabilities", "tagline": "What we do" },
+      { "id": "process", "tagline": "How we move" },
+      { "id": "manifesto", "tagline": "What we believe" },
+      { "id": "commission", "tagline": "The door is here" }
+    ]
   },
   "marquee": {
     "items": [
@@ -190,23 +207,6 @@
   "footer": {
     "tagline": "Technology × Design × Story",
     "columns": [
-      {
-        "heading": "Sections",
-        "links": [
-          { "href": "#about", "label": "01 About" },
-          { "href": "#works", "label": "02 Projects" },
-          { "href": "#capabilities", "label": "03 Services" },
-          { "href": "#process", "label": "04 Process" }
-        ]
-      },
-      {
-        "heading": "Channels",
-        "links": [
-          { "href": "#manifesto", "label": "Manifesto" },
-          { "href": "#commission", "label": "Contact" },
-          { "href": "#top", "label": "Back to top" }
-        ]
-      },
       {
         "heading": "Contact",
         "links": [
