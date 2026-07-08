@@ -15,18 +15,18 @@ export function MatrixOutro({ content }: { content: MatrixContent }) {
         <Reveal>
           <div className="grid gap-10 sm:grid-cols-2">
             <div>
-              <p className="mb-3 text-[0.62rem] uppercase tracking-[0.4em] text-gold">
+              <p className="mb-3 text-[0.7rem] font-medium uppercase tracking-[0.35em] text-gold">
                 {content.outro.visionLabel}
               </p>
-              <p className="font-serif text-[1.15rem] leading-relaxed text-ink">
+              <p className="font-serif text-[1.3rem] leading-relaxed text-ink">
                 {content.outro.vision}
               </p>
             </div>
             <div>
-              <p className="mb-3 text-[0.62rem] uppercase tracking-[0.4em] text-gold">
+              <p className="mb-3 text-[0.7rem] font-medium uppercase tracking-[0.35em] text-gold">
                 {content.outro.missionLabel}
               </p>
-              <p className="font-serif text-[1.15rem] leading-relaxed text-ink">
+              <p className="font-serif text-[1.3rem] leading-relaxed text-ink">
                 {content.outro.mission}
               </p>
             </div>
@@ -38,7 +38,7 @@ export function MatrixOutro({ content }: { content: MatrixContent }) {
             <p className="mb-2 text-[0.62rem] uppercase tracking-[0.4em] text-dim">
               {content.outro.ctaHint}
             </p>
-            <h2 className="mb-10 font-serif text-[clamp(1.5rem,3vw,2.2rem)] text-ink">
+            <h2 className="mb-10 font-serif text-[clamp(1.65rem,3.2vw,2.4rem)] text-ink">
               {content.outro.cta}
             </h2>
             <ul className="flex flex-wrap items-center justify-center gap-3">
@@ -46,7 +46,7 @@ export function MatrixOutro({ content }: { content: MatrixContent }) {
                 <li key={route.href}>
                   <Link
                     href={route.href}
-                    className="inline-block border border-gold/25 px-4 py-2.5 font-serif text-[0.85rem] tracking-[0.06em] text-ink/80 transition-colors hover:border-gold hover:text-gold"
+                    className="inline-block border border-gold/30 px-5 py-3 font-serif text-[0.95rem] tracking-[0.06em] text-ink transition-colors hover:border-gold hover:text-gold"
                   >
                     {route.label}
                   </Link>
