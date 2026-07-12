@@ -42,7 +42,7 @@ export const selectedWorlds: Project[] = [
     summary:
       "İçeriğin ruhu: ritüel ve sembolle kurulan, kullanıcıyı düşünmeye çağıran bir persona dünyası.",
     status: "geliştiriliyor",
-    media: { poster: "/sanri-hero.png", alt: "Sanrı — farkındalık ve ritüel dünyası" },
+    media: { poster: "/worlds/sanri.png", alt: "Sanrı — farkındalık ve ritüel dünyası" },
     tags: ["Persona", "Ritüel"],
     href: "/sanri",
     accent: "#b4a6c6",

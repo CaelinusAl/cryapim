@@ -15,7 +15,6 @@ import {
   recordCacheHit,
   perdeCacheEnabled,
 } from "@/lib/cache/perde-cache";
-import { searchMoviePoster, tmdbEnabled } from "@/lib/tmdb/poster";
 
 type Params = { slug: string };
 const ACCENT = "#c95a5a";
@@ -35,29 +34,12 @@ export function generateStaticParams() {
 }
 
 /**
- * Curated bir film için TMDB lookup yap (poster + backdrop). Statik
- * posterUrl tanımlıysa onu kullanır; backdrop her zaman TMDB'den gelir
- * (curated archive backdrop tutmuyor). In-memory 24 saat cache sayesinde
- * aynı build içinde tekrar fetch olmaz.
+ * Telif notu: gerçek film posteri/backdrop'u KULLANILMAZ. Perde yorumu
+ * yalnızca film adı + metin üzerine kuruludur; görsel olarak hiçbir
+ * telifli film karesi ya da posteri gösterilmez.
  */
-async function enrichCurated(r: FilmReview): Promise<{
-  review: FilmReview;
-  backdropUrl: string | null;
-}> {
-  if (!tmdbEnabled) {
-    return { review: r, backdropUrl: null };
-  }
-  const lookup = await searchMoviePoster(
-    r.filmOriginalTitle ?? r.filmTitle,
-    r.filmYear
-  );
-  return {
-    review: {
-      ...r,
-      posterUrl: r.posterUrl ?? lookup?.posterUrl ?? undefined,
-    },
-    backdropUrl: lookup?.backdropUrl ?? null,
-  };
+function stripFilmImagery(r: FilmReview): FilmReview {
+  return { ...r, posterUrl: undefined };
 }
 
 export async function generateMetadata({
@@ -69,11 +51,7 @@ export async function generateMetadata({
 
   const r = reviewBySlug(slug);
   if (r) {
-    // TMDB poster URL varsa OG image olarak kullan — paylaşımda görünür
-    const enriched = await enrichCurated(r);
-    const ogImages = enriched.review.posterUrl
-      ? [enriched.review.posterUrl]
-      : undefined;
+    // Telif: gerçek film posteri OG görseli olarak kullanılmaz.
     return {
       title: `${r.filmTitle} (${r.filmYear}) — Perde'ye göre`,
       description: r.oz,
@@ -82,13 +60,11 @@ export async function generateMetadata({
         description: r.oz,
         type: "article",
         publishedTime: r.perdedeYayindaTarih,
-        ...(ogImages ? { images: ogImages } : {}),
       },
       twitter: {
         card: "summary_large_image",
         title: `${r.filmTitle} — Perde'ye göre`,
         description: r.oz,
-        ...(ogImages ? { images: ogImages } : {}),
       },
     };
   }
@@ -99,7 +75,6 @@ export async function generateMetadata({
     const description =
       fr?.oz ?? `${cached.filmTitleRaw} — Perde'nin topluluk yorumu.`;
     const displayTitle = cached.tmdbTitle || cached.filmTitleRaw;
-    const ogImages = cached.posterUrl ? [cached.posterUrl] : undefined;
     return {
       title: `${displayTitle} — Perde'ye göre (topluluk)`,
       description,
@@ -108,13 +83,11 @@ export async function generateMetadata({
         description,
         type: "article",
         publishedTime: new Date(cached.askedAt).toISOString(),
-        ...(ogImages ? { images: ogImages } : {}),
       },
       twitter: {
         card: "summary_large_image",
         title: `${displayTitle} — Perde'ye göre`,
         description,
-        ...(ogImages ? { images: ogImages } : {}),
       },
     };
   }
@@ -132,12 +105,10 @@ export default async function PerdeReviewPage({
   // 1) Curated arşivde mi?
   const curated = reviewBySlug(slug);
   if (curated) {
-    const { review, backdropUrl } = await enrichCurated(curated);
     return (
       <ReviewLayout
-        review={review}
+        review={stripFilmImagery(curated)}
         curatedSlug={curated.filmSlug}
-        backdropUrl={backdropUrl}
       />
     );
   }
@@ -152,8 +123,7 @@ export default async function PerdeReviewPage({
         void recordCacheHit(slug);
         return (
           <ReviewLayout
-            review={adapted}
-            backdropUrl={cached.backdropUrl ?? null}
+            review={stripFilmImagery(adapted)}
             community={{
               askedAt: cached.askedAt,
               hitCount: cached.hitCount ?? 0,
@@ -172,12 +142,10 @@ function ReviewLayout({
   review,
   curatedSlug,
   community,
-  backdropUrl,
 }: {
   review: FilmReview;
   curatedSlug?: string;
   community?: { askedAt: number; hitCount: number };
-  backdropUrl?: string | null;
 }) {
   const others = perdeArchive
     .filter((r) => r.filmSlug !== (curatedSlug ?? review.filmSlug))
@@ -208,11 +176,7 @@ function ReviewLayout({
           </Link>
         </div>
 
-        <PerdeReview
-          review={review}
-          community={community}
-          backdropUrl={backdropUrl}
-        />
+        <PerdeReview review={review} community={community} />
 
         {/* Bir başka film sor */}
         <section

@@ -4,6 +4,7 @@ import { AppBackdrop, AppPersonaBubble } from "@/components/chrome/SiteChrome";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { MobileNav } from "@/components/nav/MobileNav";
+import { LogoLink, Logo } from "@/components/brand/Logo";
 import { CtaButton } from "@/components/ui/CtaButton";
 import { primaryNav, primaryCta, footerGroups } from "@/content/navigation";
 import { CONTACT, whatsappLink, mailtoLink, telLink } from "@/lib/contact";
@@ -32,24 +33,7 @@ export function SiteFrame({ children }: { children: ReactNode }) {
             boxShadow: "0 4px 20px -6px rgba(0,0,0,0.45)",
           }}
         >
-          <Link href="/" className="group flex items-center gap-3" aria-label="CR Yapım ana sayfa">
-            <span
-              aria-hidden
-              className="block w-10 h-10 rounded-full border border-tower-gold/40 flex items-center justify-center text-tower-gold text-base editorial-italic"
-              style={{
-                background: "rgba(201,169,106,0.08)",
-                boxShadow: "0 0 12px -3px rgba(201,169,106,0.4)",
-              }}
-            >
-              ✺
-            </span>
-            <span
-              className="editorial text-2xl md:text-[1.75rem] tracking-wide text-mist-100 group-hover:text-tower-gold transition-colors"
-              style={{ textShadow: "0 1px 3px rgba(0,0,0,0.6), 0 0 18px rgba(0,0,0,0.4)" }}
-            >
-              CR <span className="text-mist-300">YAPIM</span>
-            </span>
-          </Link>
+          <LogoLink markSize={42} />
 
           <nav className="hidden md:flex items-center gap-7 mono-tag" aria-label="Ana menü">
             {primaryNav.map((item) => (
@@ -76,8 +60,8 @@ export function SiteFrame({ children }: { children: ReactNode }) {
         <footer className="relative z-10 mt-24 border-t border-border-subtle px-6 md:px-10 py-12">
           <div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-10 text-mist-300">
             <div className="md:col-span-2">
-              <p className="mono-tag text-mist-500">CR YAPIM</p>
-              <p className="editorial-italic text-mist-100 text-xl md:text-2xl mt-3 leading-snug">
+              <Logo variant="image" width={240} />
+              <p className="editorial-italic text-mist-100 text-xl md:text-2xl mt-6 leading-snug">
                 Fikirleri dijital dünyalara dönüştüren yaratıcı teknoloji stüdyosu.
               </p>
               <div className="mt-6">

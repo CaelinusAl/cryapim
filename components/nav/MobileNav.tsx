@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { CrMark } from "@/components/brand/Logo";
 import type { CTA, NavItem } from "@/content/types";
 
 /**
@@ -60,7 +61,18 @@ export function MobileNav({ items, cta }: Props) {
             animation: "sanri-fade-in var(--duration-normal) var(--ease-soft) both",
           }}
         >
-          <div className="flex items-center justify-end px-6 py-4">
+          <div className="flex items-center justify-between px-6 py-4">
+            <Link
+              href="/"
+              onClick={() => setOpen(false)}
+              aria-label="CR Yapım ana sayfa"
+              className="flex items-center gap-2"
+            >
+              <CrMark size={36} />
+              <span className="editorial text-xl tracking-wide text-mist-100">
+                CR <span className="text-mist-300">YAPIM</span>
+              </span>
+            </Link>
             <button
               type="button"
               aria-label="Menüyü kapat"

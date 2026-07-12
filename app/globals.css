@@ -533,6 +533,87 @@ body::before {
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+ * PERDE — "anlatı laboratuvarı" · kendine ait görsel dil
+ * Palet: mürekkep siyahı + koyu ceviz + taş + eskitilmiş altın; kırmızı
+ * yalnızca nadir işaret. Tipografi Cormorant Garamond + Inter (perde/layout).
+ * ═══════════════════════════════════════════════════════════════════ */
+.perde-theme {
+  --font-editorial: var(--font-perde-display), "Cormorant Garamond", "Didot",
+    Georgia, serif;
+  --font-display: var(--font-editorial);
+  --font-accent: var(--font-editorial);
+  --font-body: var(--font-perde-body), -apple-system, "Segoe UI", system-ui,
+    sans-serif;
+  --font-grotesk: var(--font-body);
+
+  --perde-ink: #0b0a08;
+  --perde-walnut: #241a11;
+  --perde-stone: #a89a86;
+  --perde-gold: #b98f4e;
+  --perde-amber: #e7a94f;
+  --perde-red: #8e2b24;
+  --perde-paper: #ece5d5;
+
+  font-family: var(--font-body);
+}
+/* Cormorant zarif ama zayıf gövdeli — başlıklar biraz daha dolu ağırlıkta */
+.perde-theme .editorial {
+  font-weight: 500;
+}
+.perde-theme .editorial-italic {
+  font-weight: 400;
+}
+.perde-theme .body-readable {
+  font-family: var(--font-body);
+}
+/* Perde'de "mono etiket" teknik değil, bir damga — Inter, geniş harf aralığı */
+.perde-theme .mono-tag,
+.perde-theme .mono-tag-lg {
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
+/* Projektör titremesi — ışık huzmesinde çok ince, düzensiz kırpışma */
+@keyframes perde-flicker {
+  0%,
+  88%,
+  100% {
+    opacity: 0.92;
+  }
+  90% {
+    opacity: 0.62;
+  }
+  92% {
+    opacity: 1;
+  }
+  94% {
+    opacity: 0.75;
+  }
+  96% {
+    opacity: 0.98;
+  }
+}
+.perde-flicker {
+  animation: perde-flicker 7s steps(1, end) infinite;
+}
+
+/* Analiz posteri duvarı — odak değişimi (rack focus):
+ * bir postere gelince diğerleri hafifçe söner ve netliğini yitirir. */
+.perde-poster {
+  transition: transform var(--duration-normal) var(--ease-soft),
+    opacity var(--duration-normal) var(--ease-soft),
+    filter var(--duration-normal) var(--ease-soft),
+    box-shadow var(--duration-normal) var(--ease-soft);
+}
+.perde-poster-wall:has(.perde-poster:hover) .perde-poster:not(:hover) {
+  opacity: 0.42;
+  filter: saturate(0.65) brightness(0.7);
+}
+.perde-poster:hover {
+  transform: translateY(-6px);
+}
+
 /* Saygılı geri çekiliş */
 @media (prefers-reduced-motion: reduce) {
   .crane-in,
@@ -540,8 +621,16 @@ body::before {
   .scroll-cue,
   .hero-screen-glow,
   .hero-dust,
+  .perde-flicker,
   .ken-burns {
     animation: none;
+  }
+  .perde-poster-wall:has(.perde-poster:hover) .perde-poster:not(:hover) {
+    opacity: 1;
+    filter: none;
+  }
+  .perde-poster:hover {
+    transform: none;
   }
   .ken-burns {
     transform: scale(1.04);
