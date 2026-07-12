@@ -14,27 +14,76 @@
  *   mono (AI/teknik etiketler)
  */
 @theme {
-  --color-night-950: #07060f;
-  --color-night-900: #0b0a1a;
-  --color-night-800: #11102a;
-  --color-bosphorus-900: #07182b;
-  --color-bosphorus-700: #0f2a44;
-  --color-bosphorus-500: #1f4a73;
-  --color-tower-gold: #d4b26a;
-  --color-tower-gold-soft: #b9985a;
+  /* ── Zemin / metin (DESIGN-TOKENS.md · tek kaynak) ──
+   * night-* = antrasit zemin ailesi; mist-* = fildişi→sönük metin.
+   * İsimler mevcut component'lerle uyumlu kalır, DEĞERLER yeni palete taşınır
+   * → tek dosyada tüm site yeni dile geçer. */
+  --color-night-950: #12100c; /* cr-ink · koyu antrasit (warm near-black) */
+  --color-night-900: #191712; /* cr-surface · kart / yüzey */
+  --color-night-800: #201d16; /* biraz açık yüzey */
+  --color-mist-100: #ece5d5; /* cr-ivory · ana metin */
+  --color-mist-300: #928c7f; /* cr-muted · ikincil metin */
+  --color-mist-500: #6b665b; /* daha sönük / dipnot */
+
+  /* ── İmza · mat altın (YALNIZCA tek an / CTA) ── */
+  --color-tower-gold: #c9a96a; /* cr-gold */
+  --color-tower-gold-soft: #93702f; /* cr-gold-deep */
+
+  /* ── Boğaz mavisi (ikincil, kontrollü) ── */
+  --color-bosphorus-500: #3e6b8c; /* cr-blue */
+  --color-bosphorus-700: #2c5a73; /* cr-blue-deep */
+  --color-bosphorus-900: #1c3b4d;
+
+  /* ── Destek (çok az, seçili anlar) ── */
+  --color-rose: #c79ba4; /* toz pembe */
+  --color-lavender: #b4a6c6;
+  --color-purple: #5a4a70;
+
+  /* ── ai-cyan: alt sayfaların (Caelinus/persona) KENDİ kimliği; korunur.
+   *    Kurumsal ana akışta kullanılmaz. ── */
   --color-ai-cyan: #9fe7ff;
   --color-ai-cyan-soft: #6fb8d0;
-  --color-mist-100: #e9e6dc;
-  --color-mist-300: #b9b4a3;
-  --color-mist-500: #6f6b5e;
 
-  --font-editorial: "Cormorant Garamond", "Source Serif Pro", "Times New Roman",
-    serif;
-  --font-grotesk: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+  /* ── Semantik / uyum alias'ları ── */
+  --color-ivory: #ece5d5;
+  --color-muted-gold: #c9a96a;
+  --color-bosphorus-blue: #3e6b8c;
+  --color-dusty-pink: #c79ba4;
+  --color-border-subtle: rgba(236, 229, 213, 0.12); /* cr-line */
+  --color-text-primary: #ece5d5;
+  --color-text-secondary: #928c7f;
+
+  /* ── Tipografi (Didone başlık · system sans gövde · CDN YOK) ──
+   * Inter kullanılmaz. Font gömülü/sistem → FOUT yok, ilk kare < 1sn. */
+  --font-editorial: "Didot", "Bodoni MT", "Baskerville", "Hoefler Text",
+    "Big Caslon", "Palatino Linotype", Georgia, serif;
+  --font-grotesk: -apple-system, "Segoe UI", system-ui, "Helvetica Neue", Arial,
+    sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "Menlo", "Consolas", monospace;
+  --font-display: var(--font-editorial);
+  --font-body: var(--font-grotesk);
+  --font-accent: var(--font-editorial);
+
+  /* ── Akışkan tip ölçeği (DESIGN-TOKENS.md) ── */
+  --step--1: clamp(0.78rem, 0.76rem + 0.1vw, 0.85rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.12rem);
+  --step-1: clamp(1.2rem, 1.1rem + 0.5vw, 1.5rem);
+  --step-2: clamp(1.6rem, 1.4rem + 1vw, 2.3rem);
+  --step-3: clamp(2.2rem, 1.7rem + 2.4vw, 4rem);
+  --step-4: clamp(3rem, 2rem + 4.5vw, 6.5rem);
+
+  /* ── Bölüm ritmi ── */
+  --space-section: clamp(4rem, 9vw, 8rem);
 
   --shadow-cinema: 0 30px 80px -30px rgba(0, 0, 0, 0.7),
-    0 1px 0 rgba(212, 178, 106, 0.06) inset;
+    0 1px 0 rgba(201, 169, 106, 0.06) inset;
+
+  /* Hareket token'ları — tüm geçişler tek kaynaktan (bkz. config/experience.config.ts) */
+  --duration-fast: 200ms;
+  --duration-normal: 500ms;
+  --duration-slow: 1100ms;
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-reveal: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 :root {
@@ -58,7 +107,7 @@ body::before {
   height: 60vh;
   background: radial-gradient(
     ellipse at 50% 100%,
-    rgba(212, 178, 106, 0.08),
+    rgba(201, 169, 106, 0.07),
     transparent 60%
   );
   pointer-events: none;
@@ -122,6 +171,82 @@ body::before {
 }
 .crane-in-slow {
   animation: crane-in-slow 2.4s 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* Hero "aşağı" daveti — ince dikey çizgi, sakin nabız (gösteri değil, çağrı) */
+@keyframes scroll-cue {
+  0%,
+  100% {
+    transform: scaleY(0.4);
+    opacity: 0.25;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 0.6;
+  }
+}
+.scroll-cue {
+  animation: scroll-cue 2.2s var(--ease-soft) infinite;
+}
+
+/* Hero laptop ekranı — "bir şey çalışıyor" sakin nabzı (gösteri değil) */
+@keyframes hero-screen-glow {
+  0%,
+  100% {
+    opacity: 0.62;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.hero-screen-glow {
+  animation: hero-screen-glow 4.5s var(--ease-soft) infinite;
+}
+
+/* Ken Burns — full-bleed kapak görselinde çok yavaş sinematik zoom/pan */
+@keyframes ken-burns {
+  0% {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.12) translate3d(-1.5%, -1%, 0);
+  }
+}
+.ken-burns {
+  animation: ken-burns 32s var(--ease-soft, ease-in-out) infinite alternate;
+  will-change: transform;
+}
+
+/* Hero toz tanecikleri — güneş ışığında çok yavaş süzülür */
+@keyframes hero-dust {
+  0% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(-14px);
+    opacity: 0.5;
+  }
+}
+.hero-dust {
+  animation: hero-dust 16s ease-in-out infinite;
+}
+
+/* Scroll-reveal — IntersectionObserver ile .is-visible eklenir (Reveal.tsx).
+ * Süre/easing hareket token'larından gelir. reduced-motion'da anında görünür. */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--duration-slow) var(--ease-reveal),
+    transform var(--duration-slow) var(--ease-reveal);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
 }
 
 /* Editorial başlık */
@@ -411,8 +536,21 @@ body::before {
 /* Saygılı geri çekiliş */
 @media (prefers-reduced-motion: reduce) {
   .crane-in,
-  .crane-in-slow {
+  .crane-in-slow,
+  .scroll-cue,
+  .hero-screen-glow,
+  .hero-dust,
+  .ken-burns {
     animation: none;
+  }
+  .ken-burns {
+    transform: scale(1.04);
+  }
+  /* Reveal: hareket yok, içerik anında ve tam görünür */
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
   body::before {
     display: none;

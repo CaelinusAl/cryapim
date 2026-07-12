@@ -11,6 +11,8 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   compress: true,
+  // Sol-alttaki "N" geliştirme göstergesini kapat (daldırıcı sayfalarda dikkat dağıtır).
+  devIndicators: false,
 
   images: {
     formats: ["image/avif", "image/webp"],
